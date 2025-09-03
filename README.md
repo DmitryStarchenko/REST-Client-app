@@ -1,2 +1,1 @@
-# REST-Client
-React course. Final task
+REST CLIENT APP ...
