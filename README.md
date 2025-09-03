@@ -71,14 +71,15 @@ To run the unit tests:
 
 |   Technology    |                                                                             Version                                                                              |
 | :-------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------: |
-|   **NextJS**    |                          [![NextJS](https://img.shields.io/badge/React-^15.5.2-61DAFB?logo=react&logoColor=white)](https://nextjs.org/)                          |
+|   **NextJS**    |                       [![NextJS](https://img.shields.io/badge/NextJS-^15.5.2-61DAFB?logo=nextdotjs&logoColor=white)](https://nextjs.org/)                        |
 |    **React**    |                           [![React](https://img.shields.io/badge/React-^19.1.0-61DAFB?logo=react&logoColor=white)](https://react.dev/)                           |
 | **TypeScript**  |             [![TypeScript](https://img.shields.io/badge/TypeScript-~5.7.2-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)              |
 | **Material UI** |                      [![Material-UI](https://img.shields.io/badge/Material--UI-v7.3.2-blue.svg?logo=mui&logoColor=white)](https://mui.com/)                      |
 |     **CSS**     |                     [![CSS](https://img.shields.io/badge/CSS-v3-639?logo=css&logoColor=fff)](https://www.w3.org/Style/CSS/Overview.en.html)                      |
-|   **Vitest**    |                           [![Vitest](https://img.shields.io/badge/Jest-^3.2.4-C21325?logo=jest&logoColor=white)](https://vitest.dev/)                            |
-|    **Jotai**    |                            [![Jotai](https://img.shields.io/badge/Vite-^2.13.1-646CFF?logo=vite&logoColor=white)](https://jotai.org/)                            |
-|  **Supabase**   |                         [![Supabase](https://img.shields.io/badge/Vite-^2.57.1-646CFF?logo=vite&logoColor=white)](https://supabase.com/)                         |
+|   **Vitest**    |                         [![Vitest](https://img.shields.io/badge/Vitest-^3.2.4-C21325?logo=vitest&logoColor=white)](https://vitest.dev/)                          |
+|    **Jotai**    |                           [![Jotai](https://img.shields.io/badge/Jotai-^2.13.1-646CFF?logo=jotai&logoColor=white)](https://jotai.org/)                           |
+|  **Supabase**   |                     [![Supabase](https://img.shields.io/badge/Supabase-^2.57.1-646CFF?logo=supabase&logoColor=white)](https://supabase.com/)                     |
+|   **i18next**   |                     [![i18next](https://img.shields.io/badge/i18next-^2.57.1-646CFF?logo=i18next&logoColor=white)](https://www.i18next.com/)                     |
 |   **ESLint**    |                         [![ESLint](https://img.shields.io/badge/ESLint-^9.26.0-4B32C3?logo=eslint&logoColor=white)](https://eslint.org/)                         |
 |  **Prettier**   |                      [![Prettier](https://img.shields.io/badge/Prettier-^3.6.2-F7B93E?logo=prettier&logoColor=white)](https://prettier.io/)                      |
 | **Commitlint**  |               [![Commitlint](https://img.shields.io/badge/Commitlint-^19.8.1-3F51B5?logo=commitlint&logoColor=white)](https://commitlint.js.org/)                |
