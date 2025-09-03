@@ -7,7 +7,7 @@
   --text-secondary: #555;
 }
 
-[data-theme='dark'] {
+[data-dark] {
   --primary-main: #90caf9;
   --secondary-main: #ce93d8;
   --background-default: #121212;

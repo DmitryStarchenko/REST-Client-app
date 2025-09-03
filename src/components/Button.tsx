@@ -1,12 +1,16 @@
+'use client';
 import { Button as MUIButton } from '@mui/material';
+import { FC } from 'react';
 
-type ButtonProps = {
+interface ButtonProps {
   onClick: () => void;
   label: string;
-};
+}
 
-export const Button = ({ onClick, label }: ButtonProps) => (
+const Button: FC<ButtonProps> = ({ onClick, label }) => (
   <MUIButton variant="contained" color="primary" onClick={onClick}>
     {label}
   </MUIButton>
 );
+
+export default Button;

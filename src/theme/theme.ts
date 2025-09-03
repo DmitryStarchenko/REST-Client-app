@@ -18,22 +18,26 @@ const colorsDark = {
   textSecondary: '#aaaaaa',
 };
 
-export const lightTheme = createTheme({
-  palette: {
-    mode: 'light',
-    primary: { main: colors.primaryMain },
-    secondary: { main: colors.secondaryMain },
-    background: { default: colors.bgDefault, paper: colors.bgPaper },
-    text: { primary: colors.textPrimary, secondary: colors.textSecondary },
+export const theme = createTheme({
+  colorSchemes: {
+    light: {
+      palette: {
+        primary: { main: colors.primaryMain },
+        secondary: { main: colors.secondaryMain },
+        background: { default: colors.bgDefault, paper: colors.bgPaper },
+        text: { primary: colors.textPrimary, secondary: colors.textSecondary },
+      },
+    },
+    dark: {
+      palette: {
+        primary: { main: colorsDark.primaryMain },
+        secondary: { main: colorsDark.secondaryMain },
+        background: { default: colorsDark.bgDefault, paper: colorsDark.bgPaper },
+        text: { primary: colorsDark.textPrimary, secondary: colorsDark.textSecondary },
+      },
+    },
   },
-});
-
-export const darkTheme = createTheme({
-  palette: {
-    mode: 'dark',
-    primary: { main: colorsDark.primaryMain },
-    secondary: { main: colorsDark.secondaryMain },
-    background: { default: colorsDark.bgDefault, paper: colorsDark.bgPaper },
-    text: { primary: colorsDark.textPrimary, secondary: colorsDark.textSecondary },
+  cssVariables: {
+    colorSchemeSelector: 'data',
   },
 });
