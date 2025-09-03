@@ -1,0 +1,38 @@
+:root {
+  --primary-main: #1976d2;
+  --secondary-main: #9c27b0;
+  --background-default: #f5f5f5;
+  --background-paper: #fff;
+  --text-primary: #111;
+  --text-secondary: #555;
+}
+
+[data-theme='dark'] {
+  --primary-main: #90caf9;
+  --secondary-main: #ce93d8;
+  --background-default: #121212;
+  --background-paper: #1e1e1e;
+  --text-primary: #fff;
+  --text-secondary: #aaa;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Roboto, sans-serif;
+  color: var(--text-primary);
+  background-color: var(--background-default);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
