@@ -1,6 +1,6 @@
-import { ReactNode } from 'react';
+import { FC } from 'react';
 
-const Login = (): ReactNode => {
+const Login: FC = () => {
   return <div>Login</div>;
 };
 

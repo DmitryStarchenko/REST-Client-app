@@ -1,6 +1,6 @@
-import { ReactNode } from 'react';
+import { FC } from 'react';
 
-const History = (): ReactNode => {
+const History: FC = () => {
   return <div>History</div>;
 };
 
