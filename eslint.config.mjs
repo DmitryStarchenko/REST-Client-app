@@ -9,7 +9,7 @@ const compat = new FlatCompat({ baseDirectory: process.cwd() });
 
 export default [
   {
-    ignores: ['node_modules/**', '.next/**', 'out/**', 'build/**', 'coverage/**'],
+    ignores: ['node_modules/**', '.next/**', 'out/**', 'build/**', 'coverage/**', 'commitlint.config.js'],
   },
   ...compat.extends('next/core-web-vitals', 'plugin:prettier/recommended'),
   {
