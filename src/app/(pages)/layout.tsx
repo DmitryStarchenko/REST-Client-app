@@ -1,9 +1,13 @@
-import { ReactNode } from 'react';
+import { FC, ReactNode } from 'react';
 
 import Footer from '../../widgets/footer/footer';
 import Header from '../../widgets/header/header';
 
-const PageLayout = ({ children }: { children: ReactNode }): ReactNode => {
+interface PageLayoutProps {
+  children: ReactNode;
+}
+
+const PageLayout: FC<PageLayoutProps> = ({ children }) => {
   return (
     <>
       <Header />

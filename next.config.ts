@@ -31,8 +31,8 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
-        source: '/old-path',
-        destination: '/new-path',
+        source: '/',
+        destination: '/main',
         permanent: true,
       },
     ];

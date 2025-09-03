@@ -1,6 +1,6 @@
-import { ReactNode } from 'react';
+import { FC } from 'react';
 
-const Variables = (): ReactNode => {
+const Variables: FC = () => {
   return <div>Variables</div>;
 };
 

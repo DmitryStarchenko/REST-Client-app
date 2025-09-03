@@ -1,6 +1,6 @@
-import { ReactNode } from 'react';
+import { FC } from 'react';
 
-const Registration = (): ReactNode => {
+const Registration: FC = () => {
   return <div>Registration</div>;
 };
 
