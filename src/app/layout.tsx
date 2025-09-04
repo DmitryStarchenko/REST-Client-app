@@ -1,24 +1,15 @@
-import type { Metadata } from 'next';
-import '@/styles/globals.css';
-import { FC, ReactNode } from 'react';
+import { ReactNode } from 'react';
 
-export const metadata: Metadata = {
-  title: 'PUTMAN',
-  description: 'Interact with APIs, manage requests, and debug effortlessly.',
+import { ReadonlyFC } from '@/types/readonly.types';
+
+type RootLayoutProps = {
+  children: ReactNode;
 };
 
-interface RootLayoutProps {
-  children: ReactNode;
-}
-
-const RootLayout: FC<RootLayoutProps> = ({ children }) => {
-  return (
-    <html lang="en">
-      <body>
-        <div id="root">{children}</div>
-      </body>
-    </html>
-  );
+// Since we have a `not-found.tsx` page on the root, a layout file
+// is required, even if it's just passing children through.
+const RootLayout: ReadonlyFC<RootLayoutProps> = ({ children }) => {
+  return children;
 };
 
 export default RootLayout;

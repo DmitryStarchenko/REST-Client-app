@@ -2,7 +2,7 @@ import React from 'react';
 
 import { ReadonlyFC } from '@/types/readonly.types';
 
-import ThemeToggler from '../shared/ThemeToggler';
+import Navigation from './Navigation';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -11,8 +11,8 @@ interface LayoutProps {
 const Layout: ReadonlyFC<LayoutProps> = ({ children }) => {
   return (
     <div>
+      <Navigation />
       {children}
-      <ThemeToggler />
     </div>
   );
 };
