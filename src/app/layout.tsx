@@ -1,9 +1,11 @@
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
-import '@/styles/globals.css';
-import { FC } from 'react';
+
+import { ReadonlyFC } from '@/types/readonly.types';
 
 import Providers from './providers';
+
+import '@/styles/globals.css';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -24,7 +26,7 @@ interface RootLayoutProps {
   children: React.ReactNode;
 }
 
-const RootLayout: FC<RootLayoutProps> = ({ children }) => {
+const RootLayout: ReadonlyFC<RootLayoutProps> = ({ children }) => {
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>

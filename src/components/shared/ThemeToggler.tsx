@@ -1,9 +1,10 @@
 import { useColorScheme } from '@mui/material/styles';
-import React, { FC } from 'react';
+import React from 'react';
 
+import { ReadonlyFC } from '@/types/readonly.types';
 import { Mode } from '@/types/theme.types';
 
-const ThemeToggler: FC = () => {
+const ThemeToggler: ReadonlyFC = () => {
   const { mode, setMode } = useColorScheme();
 
   if (!mode) {

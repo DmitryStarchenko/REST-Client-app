@@ -1,16 +1,17 @@
 'use client';
 import { InitColorSchemeScript, ThemeProvider } from '@mui/material';
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
-import React, { FC } from 'react';
+import React from 'react';
 
 import Layout from '@/components/layout/Layout';
 import { theme } from '@/theme/theme';
+import { ReadonlyFC } from '@/types/readonly.types';
 
 interface ProvidersProps {
   children: React.ReactNode;
 }
 
-const Providers: FC<ProvidersProps> = ({ children }) => {
+const Providers: ReadonlyFC<ProvidersProps> = ({ children }) => {
   return (
     <AppRouterCacheProvider>
       <InitColorSchemeScript attribute="data" />
