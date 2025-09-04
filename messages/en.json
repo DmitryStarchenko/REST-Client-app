@@ -4,5 +4,14 @@
   },
   "Navigation": {
     "Main": "Main"
+  },
+  "NotFoundPage": {
+    "title": "Not Found!",
+    "message": "Could not find resource!"
+  },
+  "ErrorPage": {
+    "title": "Something went wrong",
+    "message": "Error Page",
+    "Try again": "Try again"
   }
 }

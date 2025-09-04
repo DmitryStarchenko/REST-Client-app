@@ -4,5 +4,14 @@
   },
   "Navigation": {
     "Main": "Главная"
+  },
+  "NotFoundPage": {
+    "title": "Не найдено!",
+    "message": "Ресурс не найден!"
+  },
+  "ErrorPage": {
+    "title": "Что-то пошло не так",
+    "message": "Страница ошибки",
+    "Try again": "Попробовать снова"
   }
 }
