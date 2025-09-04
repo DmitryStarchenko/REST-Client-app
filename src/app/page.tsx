@@ -1,9 +1,10 @@
-'use client';
+import { redirect } from 'next/navigation';
 
-import { NextPage } from 'next';
+import { ReadonlyFC } from '@/types/readonly.types';
 
-const MainPage: NextPage = () => {
-  return <div>MainPage</div>;
+// This page only renders when the app is built statically (output: 'export')
+const RootPage: ReadonlyFC = () => {
+  redirect('/en');
 };
 
-export default MainPage;
+export default RootPage;

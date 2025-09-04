@@ -1,39 +1,15 @@
-import type { Metadata } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
+import { ReactNode } from 'react';
 
 import { ReadonlyFC } from '@/types/readonly.types';
 
-import Providers from './providers';
-
-import '@/styles/globals.css';
-
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
-});
-
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
-});
-
-export const metadata: Metadata = {
-  title: 'Rest Client App',
-  description: 'Interact with APIs, manage requests, and debug effortlessly.',
+type RootLayoutProps = {
+  children: ReactNode;
 };
 
-interface RootLayoutProps {
-  children: React.ReactNode;
-}
-
+// Since we have a `not-found.tsx` page on the root, a layout file
+// is required, even if it's just passing children through.
 const RootLayout: ReadonlyFC<RootLayoutProps> = ({ children }) => {
-  return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <Providers>{children}</Providers>
-      </body>
-    </html>
-  );
+  return children;
 };
 
 export default RootLayout;
