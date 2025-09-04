@@ -1,5 +1,6 @@
 'use client';
 
+import { useSearchParams } from 'next/navigation';
 import { useLocale } from 'next-intl';
 import { useTransition } from 'react';
 
@@ -14,6 +15,7 @@ const LangSwitcher: ReadonlyFC = () => {
   const locale = useLocale();
   const router = useRouter();
   const pathname = usePathname();
+  const searchParams = useSearchParams();
 
   const [, startTransition] = useTransition();
 
@@ -22,8 +24,7 @@ const LangSwitcher: ReadonlyFC = () => {
       return;
     }
 
-    const searchParams = window.location.search;
-    const currentPathname = pathname + searchParams;
+    const currentPathname = pathname + searchParams.toString();
 
     startTransition(() => {
       router.replace(currentPathname, { locale: lang });
