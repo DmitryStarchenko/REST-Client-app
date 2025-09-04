@@ -1,8 +1,11 @@
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 
+import { ReadonlyFC } from '@/types/readonly.types';
+
+import Providers from './providers';
+
 import '@/styles/globals.css';
-import { ThemeProvider } from '@/theme/ThemeProvider';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -19,16 +22,18 @@ export const metadata: Metadata = {
   description: 'Interact with APIs, manage requests, and debug effortlessly.',
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
+interface RootLayoutProps {
   children: React.ReactNode;
-}>) {
+}
+
+const RootLayout: ReadonlyFC<RootLayoutProps> = ({ children }) => {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <ThemeProvider>{children}</ThemeProvider>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
-}
+};
+
+export default RootLayout;
