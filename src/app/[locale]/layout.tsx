@@ -1,29 +1,15 @@
 import type { Metadata } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
+import '@/styles/globals.css';
+import { notFound } from 'next/navigation';
+import { hasLocale, NextIntlClientProvider } from 'next-intl';
 
+import { routing } from '@/i18n/routing';
 import { ReadonlyFC } from '@/types/readonly.types';
 
 import Providers from './providers';
 
-import '@/styles/globals.css';
-import { hasLocale, NextIntlClientProvider } from 'next-intl';
-
-import { routing } from '@/i18n/routing';
-
-import { notFound } from 'next/navigation';
-
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
-});
-
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
-});
-
 export const metadata: Metadata = {
-  title: 'Rest Client App',
+  title: 'PUTMAN',
   description: 'Interact with APIs, manage requests, and debug effortlessly.',
 };
 
@@ -40,10 +26,12 @@ const RootLayout: ReadonlyFC<RootLayoutProps> = async ({ children, params }) => 
   }
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <NextIntlClientProvider locale={locale}>
-          <Providers>{children}</Providers>
-        </NextIntlClientProvider>
+      <body>
+        <div id="root">
+          <NextIntlClientProvider locale={locale}>
+            <Providers>{children}</Providers>
+          </NextIntlClientProvider>
+        </div>
       </body>
     </html>
   );
