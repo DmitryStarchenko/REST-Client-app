@@ -1,15 +1,21 @@
-# REST Client app
+# REST Client app (PUTMAN)
 
 ## Description
 
 The final project of the React Q3 2025 course from RSSchool.
-This is a platform for creating, testing, documenting, publishing and maintaining APIs. It allows you to create collections of requests to any API. Thanks to the user-friendly graphical interface, even a beginner can understand the platform.
+PUTMAN is a universal testing, development, and REST API platform. It provides a clean interface that replaces disparate tools like Postman, Curl, and the command line, bringing together everything you need to work with an API into one powerful yet simple web application.
+
+PUTMAN is positioned as a "Swiss knife" for backend developers, QA engineers and API designers. Unlike heavy desktop applications, PUTMAN works directly in the browser, without requiring installation, and offers a modern, minimalist UI.
+
+The key idea is not just to send requests, but to manage the entire life cycle of interaction with the API: from writing and debugging individual requests to organizing collections, automated testing, documentation and monitoring the health (health check) of your services.
 
 ## Purposes
 
-1. To gain experience in conditions as close as possible to real product development.
-2. To learn to resolve controversial issues within the team.
-3. To create a full-fledged finished product for use.
+1. **Functional client for sending requests:** Support for all major HTTP methods (GET, POST, PUT, PATCH, DELETE, etc.).
+2. **Managing request headers and body:** Simple interface for adding, editing and deleting headers. Support for various body types (JSON, XML, form-data, plain text).
+3. **Saving and organizing requests:** Ability to create collections and folders to group requests by projects or functionality.
+4. **Saving environment variables:** Ability to set global and local variables (e.g. base_url, api_key) for easy switching between development, staging and production environments.
+5. **Convenient response viewing:** Formatted JSON/XML output, syntax highlighting, viewing response headers, status code and execution time.
 
 ## Setup and Running Locally
 
@@ -93,3 +99,11 @@ To run the unit tests:
 - [Dmitry Starchenko](https://github.com/dmitrystarchenko)
 - [Bubnov Roma](https://github.com/bubnov-roma)
 - [Husan Abdigafurov](https://github.com/husanGuru)
+
+## Mentors
+
+- [Alexei Skutov](https://github.com/KaPuTaH-UluTka)
+- [Igor Shaymukhametov](https://github.com/knyazigor)
+
+
+<a href="https://rs.school/"><img width="50" height="50" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTrImqYFcE49SmOYUm5jaqXz4L8UC0QFBrbQ&s" alt="RSSchool" title="RSSchool"/></a>
