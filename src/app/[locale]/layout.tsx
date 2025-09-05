@@ -3,6 +3,7 @@ import '@/styles/globals.css';
 import { notFound } from 'next/navigation';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
 
+import Layout from '@/components/layout/Layout';
 import { routing } from '@/i18n/routing';
 import { ReadonlyFC } from '@/types/readonly.types';
 
@@ -29,7 +30,9 @@ const RootLayout: ReadonlyFC<RootLayoutProps> = async ({ children, params }) => 
       <body>
         <div id="root">
           <NextIntlClientProvider locale={locale}>
-            <Providers>{children}</Providers>
+            <Providers>
+              <Layout>{children}</Layout>
+            </Providers>
           </NextIntlClientProvider>
         </div>
       </body>
