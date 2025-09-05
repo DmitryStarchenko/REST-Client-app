@@ -1,3 +1,5 @@
+'use client';
+
 import { useColorScheme } from '@mui/material/styles';
 import React from 'react';
 

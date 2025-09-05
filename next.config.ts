@@ -30,13 +30,7 @@ const nextConfig: NextConfig = {
     ];
   },
   async redirects() {
-    return [
-      {
-        source: '/',
-        destination: '/main',
-        permanent: true,
-      },
-    ];
+    return [];
   },
   async rewrites() {
     return [
