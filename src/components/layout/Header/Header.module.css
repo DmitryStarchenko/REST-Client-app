@@ -1,0 +1,50 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  background-color: var(--background-header);
+  width: 100%;
+  height: 70px;
+  padding: 10px;
+  transition: height 0.8s ease;
+}
+
+.headerCompact {
+  height: 50px;
+}
+
+.logoContainer {
+  display: flex;
+}
+
+.logo {
+  width: 250px;
+  background-image: url('/assets/logo.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  transition: width 0.8s ease;
+}
+
+.logoCompact {
+  width: 150px;
+}
+
+.navigation {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.navButton {
+  padding: 10px;
+  background-color: #00000000;
+  border: none;
+  border-bottom: 4px solid var(--primary-main);
+  font-size: 14px;
+
+  &:hover {
+    border-color: var(--secondary-main);
+  }
+}
