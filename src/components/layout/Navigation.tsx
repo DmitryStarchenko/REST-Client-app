@@ -4,14 +4,13 @@ import { Link } from '@/i18n/navigation';
 import { ReadonlyFC } from '@/types/readonly.types';
 
 import LangSwitcher from './LangSwitcher/LangSwitcher';
-import styles from './Layout.module.css';
 import ThemeToggler from './ThemeToggler/ThemeToggler';
 
 const Navigation: ReadonlyFC = () => {
   const t = useTranslations('Navigation');
 
   return (
-    <div className={styles.navigation}>
+    <div>
       <Link href={'/'}>{t('Main')}</Link>
 
       <ThemeToggler />
