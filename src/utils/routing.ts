@@ -31,7 +31,9 @@ export const buildRestPath = (opts: Readonly<BuildRestPathOptions>): BuildRestPa
   const encodedBody = opts.body ? encodeBase64(opts.body) : undefined;
 
   let path = `/${method}/${encodedUrl}`;
-  if (encodedBody) path += `/${encodedBody}`;
+  if (encodedBody) {
+    path += `/${encodedBody}`;
+  }
 
   const qs = opts.headers
     ? Object.entries(opts.headers)
@@ -40,7 +42,9 @@ export const buildRestPath = (opts: Readonly<BuildRestPathOptions>): BuildRestPa
         .join('&')
     : '';
 
-  if (qs) path += `?${qs}`;
+  if (qs) {
+    path += `?${qs}`;
+  }
   return { path };
 };
 
