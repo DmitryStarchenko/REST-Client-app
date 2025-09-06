@@ -1,29 +1,11 @@
+import {
+  BuildRestPathOptions,
+  BuildRestPathResult,
+  ParseRestPathParams,
+  ParseRestPathResult,
+} from '@/types';
+
 import { encodeBase64, decodeBase64 } from './base64';
-
-interface BuildRestPathOptions {
-  method?: string;
-  url?: string;
-  body?: string;
-  headers?: Record<string, string>;
-}
-
-interface BuildRestPathResult {
-  path: string;
-}
-
-interface ParseRestPathParams {
-  method?: string;
-  url?: string;
-  body?: string;
-  searchParams?: URLSearchParams | null;
-}
-
-interface ParseRestPathResult {
-  method: string;
-  url: string;
-  body: string;
-  headers: Record<string, string>;
-}
 
 export const buildRestPath = (opts: Readonly<BuildRestPathOptions>): BuildRestPathResult => {
   const method = (opts.method || 'GET').toUpperCase();
