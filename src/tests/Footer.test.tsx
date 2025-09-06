@@ -16,13 +16,13 @@ describe('Footer', () => {
   it('renders all author names', () => {
     expect(screen.getByText('Dmitry Starchenko')).toBeInTheDocument();
     expect(screen.getByText('Husan Abdigafurov')).toBeInTheDocument();
-    expect(screen.getByText('Bubnov-Roma')).toBeInTheDocument();
+    expect(screen.getByText('Bubnov Roma')).toBeInTheDocument();
   });
 
   it('has links for each author', () => {
     const dmitryLink = screen.getByText('Dmitry Starchenko').closest('a');
     const husanLink = screen.getByText('Husan Abdigafurov').closest('a');
-    const romaLink = screen.getByText('Bubnov-Roma').closest('a');
+    const romaLink = screen.getByText('Bubnov Roma').closest('a');
 
     expect(dmitryLink).toHaveAttribute('href', 'https://github.com/DmitryStarchenko');
     expect(husanLink).toHaveAttribute('href', 'https://github.com/husanGuru');

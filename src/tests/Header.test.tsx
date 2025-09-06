@@ -60,7 +60,7 @@ describe('Header', () => {
     vi.clearAllMocks();
   });
 
-  it('рендерит все основные элементы', () => {
+  it('renders all the main elements', () => {
     render(<Header />);
 
     expect(screen.getByRole('banner')).toBeInTheDocument();
@@ -69,7 +69,7 @@ describe('Header', () => {
     expect(screen.getByText('Выйти')).toBeInTheDocument();
   });
 
-  it('удаляет компактный класс при скролле назад', () => {
+  it('adds and removes compact class on scroll', () => {
     const { container } = render(<Header />);
 
     const header = container.firstChild as HTMLElement;

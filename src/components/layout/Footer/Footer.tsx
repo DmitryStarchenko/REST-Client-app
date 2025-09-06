@@ -20,7 +20,7 @@ const Footer: ReadonlyFC = () => {
         </Link>
         <Link className={styles.author} href={'https://github.com/Bubnov-Roma'}>
           <div className={styles.logoGH}></div>
-          Bubnov-Roma
+          Bubnov Roma
         </Link>
       </div>
       <p className={styles.year}>© 2025 PUTMAN</p>
