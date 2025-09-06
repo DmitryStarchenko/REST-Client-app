@@ -2,6 +2,7 @@
 
 import { useSearchParams } from 'next/navigation';
 import { useLocale } from 'next-intl';
+import React from 'react';
 import { useTransition } from 'react';
 
 import { usePathname, useRouter } from '@/i18n/navigation';
@@ -19,30 +20,33 @@ const LangSwitcher: ReadonlyFC = () => {
 
   const [, startTransition] = useTransition();
 
-  const handleSelectChange = (lang: Lang): void => {
-    if (locale === lang) {
-      return;
-    }
+  const handleLangToggle = (): void => {
+    const currentIndex = locales.indexOf(locale as Lang);
+    const nextIndex = (currentIndex + 1) % locales.length;
+    const nextLang = locales[nextIndex] as Lang;
 
     const currentPathname = pathname + searchParams.toString();
 
     startTransition(() => {
-      router.replace(currentPathname, { locale: lang });
+      router.replace(currentPathname, { locale: nextLang });
     });
   };
 
+  const getButtonText = (): string => {
+    switch (locale) {
+      case 'en':
+        return 'EN';
+      case 'ru':
+        return 'RU';
+      default:
+        return locale.toUpperCase();
+    }
+  };
+
   return (
-    <div className={styles.langSwitcher}>
-      {locales.map((lang) => (
-        <button
-          key={lang}
-          className={lang === locale ? styles.active : ''}
-          onClick={() => handleSelectChange(lang as Lang)}
-        >
-          {lang}
-        </button>
-      ))}
-    </div>
+    <button className={styles.langToggle} onClick={handleLangToggle}>
+      {getButtonText()}
+    </button>
   );
 };
 

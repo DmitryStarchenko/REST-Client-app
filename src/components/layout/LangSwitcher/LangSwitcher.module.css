@@ -1,14 +1,10 @@
-.langSwitcher {
-  display: flex;
-  gap: 10px;
-}
+.langToggle {
+  padding: 10px;
+  background-color: #00000000;
+  border: none;
+  border-bottom: 4px solid var(--primary-main);
 
-.langSwitcher > button {
-  font-size: 20px;
-  cursor: pointer;
-}
-
-.active {
-  font-weight: bold;
-  transform: scale(1.2);
+  &:hover {
+    border-color: var(--secondary-main);
+  }
 }

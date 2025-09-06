@@ -3,7 +3,9 @@
     "Test": "Тест"
   },
   "Navigation": {
-    "Main": "Главная"
+    "signIn": "ВХОД",
+    "signUp": "РЕГИСТРАЦИЯ",
+    "signOut": "ВЫХОД"
   },
   "NotFoundPage": {
     "title": "Не найдено!",

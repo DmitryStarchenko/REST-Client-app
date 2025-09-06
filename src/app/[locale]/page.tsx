@@ -5,7 +5,7 @@ import { ReadonlyFC } from '@/types/readonly.types';
 const MainPage: ReadonlyFC = () => {
   const t = useTranslations('MainPage');
 
-  return <div>{t('Test')}</div>;
+  return <main>{t('Test')}</main>;
 };
 
 export default MainPage;
