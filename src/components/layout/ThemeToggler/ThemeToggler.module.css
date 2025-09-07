@@ -1,0 +1,10 @@
+.toggler {
+  width: 50px;
+  color: var(--primary-main);
+  background-color: #0000;
+  border: none;
+
+  &:hover {
+    color: var(--secondary-main);
+  }
+}

@@ -3,7 +3,9 @@
     "Test": "Test"
   },
   "Navigation": {
-    "Main": "Main"
+    "signIn": "SIGN IN",
+    "signUp": "SIGN UP",
+    "signOut": "SIGN OUT"
   },
   "NotFoundPage": {
     "title": "Not Found!",
