@@ -23,9 +23,16 @@
 }
 
 body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
   font-family: Roboto, sans-serif;
   color: var(--text-primary);
   background-color: var(--background-default);
+}
+
+main {
+  flex: 1;
 }
 
 a {

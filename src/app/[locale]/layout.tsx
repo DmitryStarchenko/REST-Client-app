@@ -26,15 +26,13 @@ const RootLayout: ReadonlyFC<RootLayoutProps> = async ({ children, params }) => 
     notFound();
   }
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang={locale} suppressHydrationWarning>
       <body>
-        <div id="root">
-          <NextIntlClientProvider locale={locale}>
-            <Providers>
-              <Layout>{children}</Layout>
-            </Providers>
-          </NextIntlClientProvider>
-        </div>
+        <NextIntlClientProvider locale={locale}>
+          <Providers>
+            <Layout>{children}</Layout>
+          </Providers>
+        </NextIntlClientProvider>
       </body>
     </html>
   );
