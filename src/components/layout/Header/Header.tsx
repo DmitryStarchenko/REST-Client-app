@@ -1,5 +1,5 @@
 'use client';
-import { useAtomValue, useStore } from 'jotai';
+import { useAtomValue } from 'jotai';
 import { useTranslations } from 'next-intl';
 import React from 'react';
 import { useEffect, useState } from 'react';

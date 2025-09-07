@@ -1,5 +1,3 @@
-import { FC } from 'react';
-
 import { redirect } from '@/i18n/navigation';
 import { createClient } from '@/lib/supabase/server';
 import { ReadonlyFC } from '@/types';
