@@ -4,9 +4,9 @@
   gap: 20px;
   align-items: center;
   width: 100%;
-  margin-top: 30px;
+  margin-top: auto;
   padding: 30px;
-  border-top: 2px solid var(--primary-main);
+  border-top: 2px solid var(--mui-palette-primary-main);
 }
 
 .logoRS,
@@ -38,13 +38,13 @@
 }
 
 .year {
-  color: var(--text-secondary);
+  color: var(--mui-palette-text-secondary);
 }
 
 .author:hover {
-  color: var(--primary-main);
+  color: var(--mui-palette-primary-main);
 
   .logoGH {
-    background-color: var(--primary-main);
+    background-color: var(--mui-palette-primary-main);
   }
 }

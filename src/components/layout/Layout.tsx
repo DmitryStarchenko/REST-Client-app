@@ -11,11 +11,11 @@ interface LayoutProps {
 
 const Layout: ReadonlyFC<LayoutProps> = ({ children }) => {
   return (
-    <div>
+    <>
       <Header />
-      {children}
+      <main>{children}</main>
       <Footer />
-    </div>
+    </>
   );
 };
 
