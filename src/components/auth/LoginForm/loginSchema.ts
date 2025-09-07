@@ -1,7 +1,7 @@
 import z from 'zod';
 
 export const loginSchema = z.object({
-  email: z.email(),
+  email: z.email({ error: 'Enter valid email' }),
 
   password: z
     .string()

@@ -2,9 +2,9 @@
   padding: 10px;
   background-color: #0000;
   border: none;
-  border-bottom: 4px solid var(--primary-main);
+  border-bottom: 4px solid var(--mui-palette-primary-main);
 
   &:hover {
-    border-color: var(--secondary-main);
+    border-color: var(--mui-palette-secondary-main);
   }
 }

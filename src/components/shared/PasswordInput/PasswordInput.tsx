@@ -2,6 +2,7 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import {
   FormControl,
+  FormHelperText,
   IconButton,
   Input,
   InputAdornment,
@@ -14,9 +15,10 @@ import { ReadonlyFC } from '@/types/readonly.types';
 
 interface PasswordInputProps extends InputProps {
   label: string;
+  helperText?: string;
 }
 
-const PasswordInput: ReadonlyFC<PasswordInputProps> = ({ label, ...props }) => {
+const PasswordInput: ReadonlyFC<PasswordInputProps> = ({ label, error, helperText, ...props }) => {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -31,10 +33,13 @@ const PasswordInput: ReadonlyFC<PasswordInputProps> = ({ label, ...props }) => {
 
   return (
     <FormControl variant="standard">
-      <InputLabel htmlFor="standard-adornment-password">{label}</InputLabel>
+      <InputLabel htmlFor="standard-adornment-password" error={error}>
+        {label}
+      </InputLabel>
       <Input
         id="standard-adornment-password"
         type={showPassword ? 'text' : 'password'}
+        error={error}
         endAdornment={
           <InputAdornment position="end">
             <IconButton
@@ -49,6 +54,7 @@ const PasswordInput: ReadonlyFC<PasswordInputProps> = ({ label, ...props }) => {
         }
         {...props}
       />
+      <FormHelperText error={error}>{helperText}</FormHelperText>
     </FormControl>
   );
 };

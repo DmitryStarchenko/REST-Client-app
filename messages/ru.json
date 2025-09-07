@@ -15,5 +15,22 @@
     "title": "Что-то пошло не так",
     "message": "Страница ошибки",
     "Try again": "Попробовать снова"
+  },
+  "Auth": {
+    "login": "логин",
+    "email": "эл. почта",
+    "password": "пароль",
+    "confirm password": "подтвердить пароль",
+    "Submit": "Подтвердить",
+    "Registration": "Регистрация",
+    "Enter valid email": "Введите корректный email",
+    "Password must be at least 8 characters long": "Пароль должен содержать не менее 8 символов",
+    "Password must contain at least one number": "Пароль должен содержать хотя бы одну цифру",
+    "Password must contain at least one uppercase letter": "Пароль должен содержать хотя бы одну заглавную букву",
+    "Password must contain at least one lowercase letter": "Пароль должен содержать хотя бы одну строчную букву",
+    "Password must contain at least one special character": "Пароль должен содержать хотя бы один специальный символ",
+    "Passwords do not match": "Пароли не совпадают",
+    "Invalid login credentials": "Неверные данные для входа"
+
   }
 }

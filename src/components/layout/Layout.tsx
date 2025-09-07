@@ -13,7 +13,7 @@ const Layout: ReadonlyFC<LayoutProps> = ({ children }) => {
   return (
     <>
       <Header />
-      {children}
+      <main>{children}</main>
       <Footer />
     </>
   );

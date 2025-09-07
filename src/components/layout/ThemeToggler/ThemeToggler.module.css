@@ -1,10 +1,10 @@
 .toggler {
   width: 50px;
-  color: var(--primary-main);
+  color: var(--mui-palette-primary-main);
   background-color: #0000;
   border: none;
 
   &:hover {
-    color: var(--secondary-main);
+    color: var(--mui-palette-secondary-main);
   }
 }
