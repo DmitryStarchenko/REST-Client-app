@@ -1,37 +1,7 @@
-import axios, {
-  AxiosHeaderValue,
-  AxiosRequestHeaders,
-  AxiosResponseHeaders,
-  RawAxiosResponseHeaders,
-} from 'axios';
+import axios, { AxiosRequestHeaders } from 'axios';
 import { NextRequest, NextResponse } from 'next/server';
 
-interface SuccessResponse {
-  ok: boolean;
-  status: number;
-  statusText: string;
-  headers:
-    | AxiosResponseHeaders
-    | Partial<
-        RawAxiosResponseHeaders & {
-          'Content-Length': AxiosHeaderValue;
-          'Content-Encoding': AxiosHeaderValue;
-          'Content-Type': AxiosHeaderValue;
-          Server: AxiosHeaderValue;
-          'Cache-Control': AxiosHeaderValue;
-        } & {
-          'set-cookie': string[];
-        }
-      >;
-  data: unknown;
-}
-
-interface ErrorResponse {
-  ok: false;
-  error: string;
-}
-
-type ApiResponse = Readonly<SuccessResponse | ErrorResponse>;
+import { ApiResponse } from '@/types';
 
 export async function POST(req: NextRequest): Promise<NextResponse<ApiResponse>> {
   try {
@@ -51,7 +21,7 @@ export async function POST(req: NextRequest): Promise<NextResponse<ApiResponse>>
       validateStatus: () => true,
     });
 
-    const _durationMs = Date.now() - start; //TODO: for analytics
+    const durationMs = Date.now() - start;
 
     let responseText: string;
 
@@ -64,9 +34,21 @@ export async function POST(req: NextRequest): Promise<NextResponse<ApiResponse>>
     let parsed: unknown = responseText;
     try {
       parsed = JSON.parse(responseText);
-    } catch {
-      //TODO: add log error
+    } catch (err) {
+      console.error(err);
     }
+
+    //TODO: for analytics
+    console.log({
+      userId: '',
+      url,
+      method,
+      durationMs,
+      status: axiosRes.status,
+      requestSize: body ? Buffer.byteLength(JSON.stringify(body), 'utf8') : 0,
+      responseSize: responseText ? Buffer.byteLength(responseText, 'utf8') : 0,
+      timestamp: new Date().toISOString(),
+    });
 
     return NextResponse.json(
       {
