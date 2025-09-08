@@ -1,0 +1,19 @@
+.main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding-top: 30px;
+}
+
+.container h1 {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.mainNav {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  width: 100%;
+}

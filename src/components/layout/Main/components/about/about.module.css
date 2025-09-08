@@ -1,0 +1,70 @@
+.about {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+  width: 70%;
+  padding: 40px 0 30px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.project,
+.rs,
+.authors {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+  padding: 20px 10px;
+  border-top: 2px solid var(--mui-palette-primary-main);
+}
+
+.project > p,
+.rs > p {
+  text-indent: 3rem;
+}
+
+.logoProject,
+.logoRS,
+.logoAuthors {
+  width: 40px;
+  height: 40px;
+  background-image: url('/assets/logoMini.png');
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  border-radius: 50%;
+}
+
+.logoRS {
+  background-image: url('/assets/logoRS.png');
+}
+
+.logoAuthors {
+  background-image: url('/assets/team.png');
+}
+
+.leadContainer {
+  display: flex;
+  gap: 10px;
+}
+
+.lead {
+  width: 20px;
+  height: 20px;
+  background-image: url('/assets/lead.png');
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.author {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}

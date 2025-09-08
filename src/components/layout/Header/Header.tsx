@@ -12,6 +12,7 @@ import { ReadonlyFC } from '@/types/readonly.types';
 import styles from './Header.module.css';
 import LangSwitcher from '../LangSwitcher/LangSwitcher';
 import ThemeToggler from '../ThemeToggler/ThemeToggler';
+import ButtonsSignInUp from './ButtonsSignInUp/ButtonsSignInUp';
 
 const Header: ReadonlyFC = () => {
   const t = useTranslations('Navigation');
@@ -35,21 +36,21 @@ const Header: ReadonlyFC = () => {
       </Link>
       <nav className={styles.navigation}>
         {auth?.user ? (
-          <Link
-            className={styles.navButton}
-            href={'/login'}
-            onClick={() => supabaseClient.auth.signOut()}
-          >
-            {t('signOut')}
-          </Link>
+          <>
+            <Link className={styles.navButton} href={'/'}>
+              {t('main')}
+            </Link>
+            <Link
+              className={styles.navButton}
+              href={'/login'}
+              onClick={() => supabaseClient.auth.signOut()}
+            >
+              {t('signOut')}
+            </Link>
+          </>
         ) : (
           <>
-            <Link className={styles.navButton} href={'/login'}>
-              {t('signIn')}
-            </Link>
-            <Link className={styles.navButton} href={'/registration'}>
-              {t('signUp')}
-            </Link>
+            <ButtonsSignInUp />
           </>
         )}
 
