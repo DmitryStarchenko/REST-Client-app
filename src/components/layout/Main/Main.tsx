@@ -1,6 +1,7 @@
 'use client';
 import { useAtomValue } from 'jotai';
 import { useTranslations } from 'next-intl';
+import React from 'react';
 
 import { authAtom } from '@/store/authAtom';
 import { ReadonlyFC } from '@/types/readonly.types';

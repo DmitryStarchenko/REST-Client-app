@@ -1,8 +1,16 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
-import { beforeEach, describe, expect, it } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import Footer from '../components/layout/Footer/Footer';
+
+vi.mock('@supabase/ssr', () => ({
+  createClient: () => ({
+    auth: {
+      getUser: vi.fn().mockResolvedValue({ data: { user: null }, error: null }),
+    },
+  }),
+}));
 
 describe('Footer', () => {
   beforeEach(() => {

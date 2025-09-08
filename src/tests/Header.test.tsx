@@ -8,8 +8,15 @@ import Header from '../components/layout/Header/Header';
 vi.mock('next-intl', () => ({
   useTranslations: vi.fn(),
   useLocale: vi.fn(() => 'ru'),
-  useNow: vi.fn(() => new Date()),
-  useTimeZone: vi.fn(() => 'UTC'),
+}));
+
+vi.mock('@supabase/ssr', () => ({
+  createBrowserClient: vi.fn(() => ({
+    auth: {
+      getUser: vi.fn().mockResolvedValue({ data: { user: null }, error: null }),
+      signOut: vi.fn(),
+    },
+  })),
 }));
 
 vi.mock('@/i18n/navigation', () => ({
@@ -48,7 +55,6 @@ describe('Header', () => {
       const translations: Record<string, string> = {
         signIn: 'Войти',
         signUp: 'Регистрация',
-        signOut: 'Выйти',
       };
       return translations[key] || key;
     });
@@ -66,7 +72,6 @@ describe('Header', () => {
     expect(screen.getByRole('banner')).toBeInTheDocument();
     expect(screen.getByText('Войти')).toBeInTheDocument();
     expect(screen.getByText('Регистрация')).toBeInTheDocument();
-    expect(screen.getByText('Выйти')).toBeInTheDocument();
   });
 
   it('adds and removes compact class on scroll', () => {
