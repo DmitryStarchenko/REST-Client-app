@@ -3,7 +3,9 @@
     "Test": "Test"
   },
   "Navigation": {
-    "Main": "Main"
+    "signIn": "SIGN IN",
+    "signUp": "SIGN UP",
+    "signOut": "SIGN OUT"
   },
   "NotFoundPage": {
     "title": "Not Found!",
@@ -13,5 +15,22 @@
     "title": "Something went wrong",
     "message": "Error Page",
     "Try again": "Try again"
+  },
+  "Auth": {
+    "login": "login",
+    "email": "email",
+    "password": "password",
+    "confirm password": "confirm password",
+    "Submit": "Submit",
+    "Registration": "Registration",
+
+    "Enter valid email": "Enter valid email",
+    "Password must be at least 8 characters long": "Password must be at least 8 characters long",
+    "Password must contain at least one number": "Password must contain at least one number",
+    "Password must contain at least one uppercase letter": "Password must contain at least one uppercase letter",
+    "Password must contain at least one lowercase letter": "Password must contain at least one lowercase letter",
+    "Password must contain at least one special character": "Password must contain at least one special character",
+    "Passwords do not match": "Passwords do not match",
+    "Invalid login credentials": "Invalid login credentials"
   }
 }

@@ -1,0 +1,16 @@
+.form {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+  width: 100%;
+  max-width: 500px;
+  height: 100%;
+  margin: 10px auto;
+  padding: 10px;
+}
+
+.form > h1 {
+  text-transform: uppercase;
+}

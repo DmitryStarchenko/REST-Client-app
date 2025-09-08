@@ -1,8 +1,8 @@
 import { createTheme } from '@mui/material/styles';
 
 const colors = {
-  primaryMain: '#1976d2',
-  secondaryMain: '#9c27b0',
+  primaryMain: '#7e077e',
+  secondaryMain: '#f0f',
   bgDefault: '#f5f5f5',
   bgPaper: '#ffffff',
   textPrimary: '#111111',
@@ -10,8 +10,8 @@ const colors = {
 };
 
 const colorsDark = {
-  primaryMain: '#90caf9',
-  secondaryMain: '#ce93d8',
+  primaryMain: '#7e077e',
+  secondaryMain: '#f0f',
   bgDefault: '#121212',
   bgPaper: '#1e1e1e',
   textPrimary: '#ffffff',

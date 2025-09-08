@@ -2,8 +2,8 @@ import React from 'react';
 
 import { ReadonlyFC } from '@/types/readonly.types';
 
-import Footer from './Footer';
-import Navigation from './Navigation';
+import Footer from './Footer/Footer';
+import Header from './Header/Header';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -11,11 +11,11 @@ interface LayoutProps {
 
 const Layout: ReadonlyFC<LayoutProps> = ({ children }) => {
   return (
-    <div>
-      <Navigation />
-      {children}
+    <>
+      <Header />
+      <main>{children}</main>
       <Footer />
-    </div>
+    </>
   );
 };
 
