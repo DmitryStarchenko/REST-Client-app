@@ -4,3 +4,4 @@ export * from './routing';
 export * from './uid';
 export * from './isJson';
 export * from './isSuccess';
+export * from './isProtectedPath';
