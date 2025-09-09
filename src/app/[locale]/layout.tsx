@@ -29,13 +29,15 @@ const RootLayout: ReadonlyFC<RootLayoutProps> = async ({ children, params }) => 
 
   const supabase = await createClient();
 
-  const { data } = await supabase.auth.getSession();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
   return (
     <html lang={locale} suppressHydrationWarning>
       <body>
         <NextIntlClientProvider locale={locale}>
-          <Providers initialSession={data.session}>
+          <Providers initialUser={user}>
             <Layout>{children}</Layout>
           </Providers>
         </NextIntlClientProvider>

@@ -34,7 +34,7 @@ const Header: ReadonlyFC = () => {
         <div className={`${styles.logo} ${isCompact ? styles.logoCompact : ''}`}></div>
       </Link>
       <nav className={styles.navigation}>
-        {auth?.user ? (
+        {auth ? (
           <Link
             className={styles.navButton}
             href={'/login'}
