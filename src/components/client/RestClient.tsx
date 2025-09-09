@@ -34,23 +34,68 @@ const RestClient: ReadonlyFC = () => {
   const lastPathRef = useRef('');
 
   useEffect(() => {
-    const hdrs: Record<string, string> = {};
-    headers.forEach((h) => {
-      if (h.key) hdrs[h.key] = h.value;
-    });
+    try {
+      const parsed = parseRestPath({
+        method: params?.method,
+        url: params?.url,
+        body: params?.body,
+        searchParams: searchParamsString ? new URLSearchParams(searchParamsString) : null,
+      });
+      setMethod(parsed.method);
+      setUrl(parsed.url || '');
+      setBodyText(parsed.body || '');
+      const initialHeaders = Object.entries(parsed.headers).map(([k, v]) => ({
+        key: k,
+        value: v,
+        id: uid(),
+      }));
+      setHeaders(initialHeaders.length ? initialHeaders : [{ key: '', value: '', id: uid() }]);
+    } catch (e) {
+      console.error('parseRestPath failed', e);
+    }
+  }, [pathname, params?.body, params?.method, params?.url, searchParamsString]);
 
-    const pathObj = buildRestPath({
-      method,
-      url,
-      body: bodyText || undefined,
-      headers: hdrs,
-    });
+  const syncRoute = useCallback(
+    (opts?: { push?: boolean }) => {
+      const hdrs: Record<string, string> = {};
+      headers.forEach((h) => {
+        if (h.key) {
+          hdrs[h.key] = h.value;
+        }
+      });
+      const path = buildRestPath({
+        method,
+        url,
+        body: bodyText || undefined,
+        headers: hdrs,
+      });
+      if (opts?.push) {
+        router.push(path.path);
+      } else {
+        router.replace(path.path);
+      }
+    },
+    [method, url, bodyText, headers, router],
+  );
 
-    if (lastPathRef.current === pathObj.path) return;
-    lastPathRef.current = pathObj.path;
-  }, [bodyText, headers, method, router, url]);
+  useEffect(() => {
+    syncRoute({ push: false });
+  }, [method, syncRoute]);
 
-  const sendRequest = useCallback(async () => {
+  const addHeader = (): void => setHeaders((s) => [...s, { key: '', value: '', id: uid() }]);
+  const removeHeader = (id: string): void => setHeaders((s) => s.filter((h) => h.id !== id));
+  const updateHeader = (id: string, key: string, value: string): void =>
+    setHeaders((s) => s.map((h) => (h.id === id ? { ...h, key, value } : h)));
+
+  const tryPretty = (text: string): string => {
+    try {
+      return JSON.stringify(JSON.parse(text), null, 2);
+    } catch {
+      return text;
+    }
+  };
+
+  const sendRequest = async (): Promise<void> => {
     setErrorMessage(null);
     setResponse(null);
     setLoading(true);
