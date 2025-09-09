@@ -1,15 +1,25 @@
 import { NextRequest, NextResponse } from 'next/server';
 import createMiddleware from 'next-intl/middleware';
 
-import { routing } from './i18n/routing';
-import { updateSession } from './lib/supabase/middleware';
+import { routing } from '@/i18n';
+import { requireAuth, updateSession } from '@/lib';
+import { isProtectedPath } from '@/utils';
 
 const handleI18nRouting = createMiddleware(routing);
 
 export default async function middleware(request: NextRequest): Promise<NextResponse<unknown>> {
   const response = handleI18nRouting(request);
 
-  return await updateSession(request, response);
+  const updatedResponse = await updateSession(request, response);
+
+  if (isProtectedPath(request.nextUrl.pathname)) {
+    try {
+      await requireAuth(request);
+    } catch (redirectResponse) {
+      return redirectResponse as NextResponse;
+    }
+  }
+  return updatedResponse;
 }
 
 export const config = {
