@@ -81,9 +81,9 @@ const RestClient: ReadonlyFC = () => {
         headers: hdrs,
       });
       if (opts?.push) {
-        router.push(path.path);
+        router.push(`/client${path.path}`);
       } else {
-        router.replace(path.path);
+        router.replace(`/client${path.path}`);
       }
     },
     [method, url, bodyText, headers, router],
