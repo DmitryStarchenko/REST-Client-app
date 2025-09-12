@@ -1,4 +1,5 @@
 'use client';
+
 import { InitColorSchemeScript, ThemeProvider } from '@mui/material';
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
 import { User } from '@supabase/supabase-js';
@@ -8,9 +9,9 @@ import { Provider as JotaiProvider } from 'jotai';
 import React, { useEffect } from 'react';
 
 import supabaseClient from '@/lib/supabase/client';
-import { authAtom } from '@/store/authAtom';
-import { theme } from '@/theme/theme';
-import { ReadonlyFC } from '@/types/readonly.types';
+import { authAtom } from '@/store';
+import { theme, EditorThemeProvider } from '@/theme';
+import { ReadonlyFC } from '@/types';
 import getQueryClient from '@/utils/get-query-client';
 
 interface ProvidersProps {
@@ -41,7 +42,10 @@ const Providers: ReadonlyFC<ProvidersProps> = ({ children, initialUser }) => {
       <JotaiProvider store={store}>
         <QueryClientProvider client={queryClient}>
           <InitColorSchemeScript attribute="data" />
-          <ThemeProvider theme={theme}>{children}</ThemeProvider>
+          <ThemeProvider theme={theme}>
+            <EditorThemeProvider />
+            {children}
+          </ThemeProvider>
         </QueryClientProvider>
       </JotaiProvider>
     </AppRouterCacheProvider>
