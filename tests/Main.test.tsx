@@ -3,7 +3,7 @@ import { useAtomValue } from 'jotai';
 import React from 'react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 
-import Main from '../components/layout/Main/Main';
+import Main from '../src/components/layout/Main/Main';
 
 const mockT = vi.fn();
 
