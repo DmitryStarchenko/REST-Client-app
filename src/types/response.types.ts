@@ -1,7 +1,7 @@
 import { AxiosHeaderValue, AxiosResponseHeaders, RawAxiosResponseHeaders } from 'axios';
 
 export interface SuccessResponse {
-  ok: boolean;
+  ok: true;
   status: number;
   statusText: string;
   headers:
