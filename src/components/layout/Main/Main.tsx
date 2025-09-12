@@ -12,7 +12,7 @@ import ButtonsSignInUp from '../Header/ButtonsSignInUp/ButtonsSignInUp';
 import About from './components/about/about';
 
 const Main: ReadonlyFC = () => {
-  const t = useTranslations('Main');
+  const translationMain = useTranslations('Main');
 
   const auth = useAtomValue(authAtom);
 
@@ -20,14 +20,14 @@ const Main: ReadonlyFC = () => {
     <main className={styles.main}>
       {auth?.user ? (
         <div className={styles.container}>
-          <h1>{t('welcomeBack')}</h1>
+          <h1>{translationMain('welcomeBack')}</h1>
           <nav className={styles.mainNav}>
             <ButtonsNavPage />
           </nav>
         </div>
       ) : (
         <div className={styles.container}>
-          <h1>{t('welcome')}</h1>
+          <h1>{translationMain('welcome')}</h1>
           <nav className={styles.mainNav}>
             <ButtonsSignInUp />
           </nav>

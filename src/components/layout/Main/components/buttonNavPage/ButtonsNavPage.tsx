@@ -7,18 +7,18 @@ import { ReadonlyFC } from '@/types/readonly.types';
 import styles from './ButtonsNavPage.module.css';
 
 const ButtonsNavPage: ReadonlyFC = () => {
-  const t = useTranslations('Main');
+  const translationMain = useTranslations('Main');
 
   return (
     <>
       <Link className={styles.navButton} href={'/client'}>
-        {t('client')}
+        {translationMain('client')}
       </Link>
       <Link className={styles.navButton} href={'/variables'}>
-        {t('variables')}
+        {translationMain('variables')}
       </Link>
       <Link className={styles.navButton} href={'/history'}>
-        {t('history')}
+        {translationMain('history')}
       </Link>
     </>
   );

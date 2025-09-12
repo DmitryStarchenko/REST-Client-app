@@ -6,38 +6,38 @@ import { ReadonlyFC } from '@/types/readonly.types';
 import styles from './about.module.css';
 
 const About: ReadonlyFC = () => {
-  const t = useTranslations('About');
+  const translationAbout = useTranslations('About');
 
   return (
     <div className={styles.about}>
-      <h2>{t('about')}</h2>
+      <h2>{translationAbout('about')}</h2>
       <div className={styles.container}>
         <div className={styles.project}>
           <div className={styles.logoProject}></div>
-          <p>{t('project1')}</p>
-          <p>{t('project2')}</p>
-          <p>{t('project3')}</p>
+          <p>{translationAbout('project1')}</p>
+          <p>{translationAbout('project2')}</p>
+          <p>{translationAbout('project3')}</p>
         </div>
         <div className={styles.rs}>
           <div className={styles.logoRS}></div>
-          <p>{t('rs')}</p>
+          <p>{translationAbout('rs')}</p>
         </div>
         <div className={styles.authors}>
           <div className={styles.logoAuthors}></div>
           <div className={styles.author}>
             <div className={styles.leadContainer}>
-              <h3>{t('author1Name')}</h3>
+              <h3>{translationAbout('author1Name')}</h3>
               <div className={styles.lead}></div>
             </div>
-            <p>{t('author1Description')}</p>
+            <p>{translationAbout('author1Description')}</p>
           </div>
           <div className={styles.author}>
-            <h3>{t('author2Name')}</h3>
-            <p>{t('author2Description')}</p>
+            <h3>{translationAbout('author2Name')}</h3>
+            <p>{translationAbout('author2Description')}</p>
           </div>
           <div className={styles.author}>
-            <h3>{t('author3Name')}</h3>
-            <p>{t('author3Description')}</p>
+            <h3>{translationAbout('author3Name')}</h3>
+            <p>{translationAbout('author3Description')}</p>
           </div>
         </div>
       </div>

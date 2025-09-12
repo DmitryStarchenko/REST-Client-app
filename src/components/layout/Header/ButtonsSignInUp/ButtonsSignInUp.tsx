@@ -7,15 +7,15 @@ import { ReadonlyFC } from '@/types/readonly.types';
 import styles from './ButtonsSignInUp.module.css';
 
 const ButtonsSignInUp: ReadonlyFC = () => {
-  const t = useTranslations('Navigation');
+  const translationNav = useTranslations('Navigation');
 
   return (
     <>
       <Link className={styles.navButton} href={'/login'}>
-        {t('signIn')}
+        {translationNav('signIn')}
       </Link>
       <Link className={styles.navButton} href={'/registration'}>
-        {t('signUp')}
+        {translationNav('signUp')}
       </Link>
     </>
   );

@@ -15,7 +15,7 @@ import ThemeToggler from '../ThemeToggler/ThemeToggler';
 import ButtonsSignInUp from './ButtonsSignInUp/ButtonsSignInUp';
 
 const Header: ReadonlyFC = () => {
-  const t = useTranslations('Navigation');
+  const translationNav = useTranslations('Navigation');
 
   const auth = useAtomValue(authAtom);
 
@@ -38,14 +38,14 @@ const Header: ReadonlyFC = () => {
         {auth?.user ? (
           <>
             <Link className={styles.navButton} href={'/'}>
-              {t('main')}
+              {translationNav('main')}
             </Link>
             <Link
               className={styles.navButton}
               href={'/login'}
               onClick={() => supabaseClient.auth.signOut()}
             >
-              {t('signOut')}
+              {translationNav('signOut')}
             </Link>
           </>
         ) : (
