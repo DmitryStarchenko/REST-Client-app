@@ -1,6 +1,7 @@
 .header {
   position: sticky;
   top: 0;
+  z-index: 5;
   display: flex;
   justify-content: space-between;
   width: 100%;
@@ -8,6 +9,7 @@
   padding: 10px;
   background-color: var(--mui-palette-background-header);
   transition: height 0.8s ease;
+  backdrop-filter: blur(35px);
 }
 
 .headerCompact {
