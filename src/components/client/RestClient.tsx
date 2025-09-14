@@ -3,7 +3,7 @@
 import { Box, Divider, Paper, Typography } from '@mui/material';
 import axios from 'axios';
 import { useAtom, useAtomValue } from 'jotai';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 import supabaseClient from '@/lib/supabase/client';
@@ -20,6 +20,8 @@ import ResponseBlock from './ResponseSection';
 const RestClient: ReadonlyFC = () => {
   const router = useRouter();
   const editorTheme = useAtomValue(themeAtom);
+  const pathname = usePathname();
+  const localeSegment = pathname.split('/')[1] || '';
 
   const [url, setUrl] = useAtom(urlAtom);
   const [method, setMethod] = useAtom(methodAtom);
@@ -66,10 +68,9 @@ const RestClient: ReadonlyFC = () => {
       body: bodyForPath,
       headers: headersObj,
     });
-
     // replace path to URL without browser history
     try {
-      router.replace(pathObj.path);
+      router.replace(`/${localeSegment}${pathObj.path}`);
     } catch {
       // in some environments router.replace may be sync/async
     }
@@ -144,7 +145,7 @@ const RestClient: ReadonlyFC = () => {
     } finally {
       setLoading(false);
     }
-  }, [setResponse, headers, bodyText, method, url, router]);
+  }, [setResponse, headers, bodyText, method, url, router, localeSegment]);
 
   return (
     <Box p={2}>

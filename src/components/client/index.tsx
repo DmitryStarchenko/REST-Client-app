@@ -1,15 +1,16 @@
 'use client';
 
-import { Suspense } from 'react';
+import dynamic from 'next/dynamic';
 
 import { ReadonlyFC } from '@/types';
 
-import RestClient from './RestClient';
+const RestClient = dynamic(() => import('@/components/client/RestClient'), {
+  ssr: false,
+  loading: () => <div>Loading REST Client</div>,
+});
 
-const RestClientWrapper: ReadonlyFC = () => (
-  <Suspense fallback={<div>Loading REST client…</div>}>
-    <RestClient />
-  </Suspense>
-);
+const ClientWrapper: ReadonlyFC = () => {
+  return <RestClient />;
+};
 
-export default RestClientWrapper;
+export default ClientWrapper;

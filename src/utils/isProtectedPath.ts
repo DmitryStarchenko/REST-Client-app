@@ -4,7 +4,7 @@ export type ProtectedPatternConfig = {
 };
 
 const defaultConfig: ProtectedPatternConfig = {
-  include: [/^\/[a-z][2]\/client/],
+  include: [/^\/[A-Za-z-]+\/(client|history|variables)/],
   exclude: [],
 };
 

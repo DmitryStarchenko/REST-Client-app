@@ -6,11 +6,9 @@ import { ReadonlyFC } from '@/types';
 
 const RestClientWrapper = dynamic(() => import('@/components/client'), {
   ssr: false,
-  loading: () => <div>Loading REST client…</div>,
+  loading: () => <div>Loading REST client...</div>,
 });
 
-const ClientPageWrapper: ReadonlyFC = () => {
-  return <RestClientWrapper />;
-};
+const ClientIndex: ReadonlyFC = () => <RestClientWrapper />;
 
-export default ClientPageWrapper;
+export default ClientIndex;
