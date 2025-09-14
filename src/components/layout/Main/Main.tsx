@@ -1,4 +1,5 @@
 'use client';
+import { Box, Typography } from '@mui/material';
 import { useAtomValue } from 'jotai';
 import { useTranslations } from 'next-intl';
 import React from 'react';
@@ -19,19 +20,19 @@ const Main: ReadonlyFC = () => {
   return (
     <main className={styles.main}>
       {auth?.user ? (
-        <div className={styles.container}>
-          <h1>{translationMain('welcomeBack')}</h1>
+        <Box className={styles.container}>
+          <Typography variant="h3">{translationMain('welcomeBack')}</Typography>
           <nav className={styles.mainNav}>
             <ButtonsNavPage />
           </nav>
-        </div>
+        </Box>
       ) : (
-        <div className={styles.container}>
-          <h1>{translationMain('welcome')}</h1>
+        <Box className={styles.container}>
+          <Typography variant="h3">{translationMain('welcome')}</Typography>
           <nav className={styles.mainNav}>
             <ButtonsSignInUp />
           </nav>
-        </div>
+        </Box>
       )}
       <About />
     </main>
