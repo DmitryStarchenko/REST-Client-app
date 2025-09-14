@@ -1,9 +1,14 @@
-/* :root {
+:root {
+  --gap10: 10px;
+  --gap15: 15px;
+  --gap20: 20px;
+  --margin10: 10px;
+  --padding10: 10px;
+  --padding20: 20px;
+  --padding30: 30px;
+  --padding40: 40px;
+  --border-radius: 50%;
 }
-
-[data-dark] {
-  
-} */
 
 * {
   margin: 0;

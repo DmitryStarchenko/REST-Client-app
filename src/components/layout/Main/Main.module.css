@@ -1,19 +1,18 @@
 .main {
-  display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
-  padding-top: 30px;
+  padding-top: var(--padding30);
 }
 
 .container h1 {
-  margin-bottom: 20px;
+  margin-bottom: var(--margin20);
   text-align: center;
 }
 
 .mainNav {
   display: flex;
-  gap: 20px;
+  gap: var(--gap20);
   justify-content: center;
   width: 100%;
 }

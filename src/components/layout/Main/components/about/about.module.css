@@ -1,16 +1,16 @@
 .about {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: var(--gap15);
   align-items: center;
   width: 70%;
-  padding: 40px 0 30px;
+  padding: var(--padding40) 0 var(--padding30);
 }
 
 .container {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: var(--gap15);
 }
 
 .project,
@@ -18,9 +18,9 @@
 .authors {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: var(--gap15);
   align-items: center;
-  padding: 20px 10px;
+  padding: var(--padding20) var(--padding10);
   border-top: 2px solid var(--mui-palette-primary-main);
 }
 
@@ -38,7 +38,7 @@
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
-  border-radius: 50%;
+  border-radius: var(--border-radius);
 }
 
 .logoRS {
@@ -51,7 +51,7 @@
 
 .leadContainer {
   display: flex;
-  gap: 10px;
+  gap: var(--gap10);
 }
 
 .lead {
@@ -66,5 +66,5 @@
 .author {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: var(--gap10);
 }

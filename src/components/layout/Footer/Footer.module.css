@@ -1,11 +1,11 @@
 .footer {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: var(--gap20);
   align-items: center;
   width: 100%;
   margin-top: auto;
-  padding: 30px;
+  padding: var(--padding30);
   border-top: 2px solid var(--mui-palette-primary-main);
 }
 
@@ -17,12 +17,12 @@
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
-  border-radius: 50px;
+  border-radius: var(--border-radius);
 }
 
 .authors {
   display: flex;
-  gap: 15px;
+  gap: var(--gap15);
 }
 
 .author {
@@ -33,7 +33,7 @@
 .logoGH {
   width: 30px;
   height: 30px;
-  margin: 10px;
+  margin: var(--margin10);
   background-image: url('/assets/logoGH.png');
 }
 

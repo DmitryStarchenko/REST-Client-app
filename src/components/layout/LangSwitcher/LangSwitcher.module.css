@@ -1,5 +1,5 @@
 .langToggle {
-  padding: 10px;
+  padding: var(--padding10);
   background-color: #0000;
   border: none;
   border-bottom: 4px solid var(--mui-palette-primary-main);
