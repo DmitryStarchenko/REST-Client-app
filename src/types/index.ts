@@ -5,3 +5,4 @@ export * from './theme.types';
 export * from './response.types';
 export * from './header.types';
 export * from './codeGen.types';
+export * from './methodPage.types';

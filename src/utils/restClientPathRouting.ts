@@ -23,7 +23,7 @@ export function buildRestPath({
     if (k && v != null) params.append(k, encodeURIComponent(String(v)));
   });
   const query = params.toString();
-  const path = `/${methodPart}/${urlB64}${bodyPart}${query ? `?${query}` : ''}`;
+  const path = `/client/${methodPart}/${urlB64}${bodyPart}${query ? `?${query}` : ''}`;
   return {
     path,
     method: methodPart,
