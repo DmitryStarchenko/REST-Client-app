@@ -41,7 +41,7 @@ const Header: ReadonlyFC = () => {
             href={'/login'}
             onClick={() => supabaseClient.auth.signOut()}
           >
-            {t('signOut')}
+            {translationNav('signOut')}
           </Link>
         ) : (
           <>

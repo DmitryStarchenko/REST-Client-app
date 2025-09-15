@@ -12,13 +12,6 @@ export default async function middleware(request: NextRequest): Promise<NextResp
 
   const updatedResponse = await updateSession(request, response);
 
-  if (isProtectedPath(request.nextUrl.pathname)) {
-    try {
-      await requireAuth(request);
-    } catch (redirectResponse) {
-      return redirectResponse as NextResponse;
-    }
-  }
   return updatedResponse;
 }
 
