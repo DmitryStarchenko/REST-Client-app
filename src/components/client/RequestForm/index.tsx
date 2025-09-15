@@ -5,6 +5,8 @@ import { Grid, Select, MenuItem, TextField, Button, Stack } from '@mui/material'
 import { METHODS } from '@/constants';
 import { ReadonlyFC } from '@/types';
 
+import CopyButton from '../Shared/CopyButton';
+
 interface RequestFormProps {
   method: string;
   setMethod: (method: string) => void;
@@ -39,7 +41,7 @@ const RequestForm: ReadonlyFC<RequestFormProps> = ({
         </Select>
       </Grid>
 
-      <Grid sx={{ flexGrow: 1 }}>
+      <Grid sx={{ flexGrow: 1, position: 'relative' }}>
         <TextField
           id="endpoint-url"
           label="Endpoint URL"
@@ -49,12 +51,13 @@ const RequestForm: ReadonlyFC<RequestFormProps> = ({
           fullWidth
           size="small"
         />
+        <CopyButton getValue={() => url} />
       </Grid>
 
       <Grid sx={{ xs: 12, md: 2 }}>
         <Stack direction="row" spacing={1}>
-          <Button variant="contained" onClick={sendRequest} disabled={loading}>
-            {loading ? 'Sending…' : 'Send'}
+          <Button variant="contained" onClick={sendRequest} disabled={loading} loading>
+            {/* {loading ? 'Sending…' : 'Send'} */}
           </Button>
         </Stack>
       </Grid>

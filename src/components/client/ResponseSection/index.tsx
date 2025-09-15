@@ -8,6 +8,8 @@ import React from 'react';
 import { themeAtom } from '@/store';
 import { ApiResponse } from '@/types';
 
+import CopyButton from '../Shared/CopyButton';
+
 interface ResponseBlockProps {
   response: ApiResponse | null;
   errorMessage: string | null;
@@ -29,7 +31,7 @@ const ResponseBlock: React.FC<ResponseBlockProps> = ({ response, errorMessage })
     <Box>
       <Typography variant="subtitle1">Response</Typography>
       {errorMessage && <Typography color="error">{errorMessage}</Typography>}
-      <Box sx={{ mt: 1, borderRadius: 1, overflow: 'hidden' }}>
+      <Box sx={{ mt: 1, borderRadius: 1, overflow: 'hidden', position: 'relative' }}>
         <Editor
           theme={useAtomValue(themeAtom)}
           height="200px"
@@ -37,6 +39,7 @@ const ResponseBlock: React.FC<ResponseBlockProps> = ({ response, errorMessage })
           value={getResponseContent()}
           options={{ minimap: { enabled: false }, readOnly: true }}
         />
+        <CopyButton getValue={() => getResponseContent()} />
       </Box>
     </Box>
   );

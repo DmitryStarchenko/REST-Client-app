@@ -6,18 +6,20 @@ import { useAtomValue } from 'jotai';
 import React from 'react';
 
 import { themeAtom } from '@/store';
-import { encodeBase64 } from '@/utils/base64';
+import { BodyBlockProps } from '@/types';
+import { encodeBase64 } from '@/utils';
 
-interface BodyBlockProps {
-  bodyText: string;
-  setBodyText: (value: string) => void;
-}
+import CopyButton from '../Shared/CopyButton';
 
 const BodyBlock: React.FC<BodyBlockProps> = ({ bodyText, setBodyText }) => {
+  const handleClick = (): void => {
+    const encoded = encodeBase64(bodyText || '');
+    navigator.clipboard?.writeText(encoded);
+  };
   return (
     <Box>
       <Typography variant="subtitle1">Body</Typography>
-      <Box sx={{ mt: 1, borderRadius: 1, overflow: 'hidden' }}>
+      <Box sx={{ mt: 1, borderRadius: 1, overflow: 'hidden', position: 'relative' }}>
         <Editor
           height="200px"
           language="json"
@@ -31,17 +33,11 @@ const BodyBlock: React.FC<BodyBlockProps> = ({ bodyText, setBodyText }) => {
             automaticLayout: true,
           }}
         />
+        <CopyButton getValue={() => bodyText} />
       </Box>
       <Stack direction="row" spacing={1} sx={{ mt: 1 }}>
-        <Button
-          onClick={() => {
-            const encoded = encodeBase64(bodyText || '');
-            navigator.clipboard?.writeText(encoded);
-          }}
-          size="small"
-          variant="outlined"
-        >
-          Copy base64(body)
+        <Button onClick={handleClick} size="small" variant="contained">
+          Copy base64
         </Button>
       </Stack>
     </Box>

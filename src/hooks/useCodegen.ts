@@ -21,16 +21,22 @@ export function useCodegen(
           .filter((h) => h.key)
           .map((h) => ({ name: h.key, value: h.value }));
 
+        let postData;
+
+        if (isJson(bodyText)) {
+          postData = { mimeType: 'application/json', text: bodyText };
+        } else if (bodyText) {
+          postData = { mimeType: 'text/plain', text: bodyText };
+        } else {
+          postData = undefined;
+        }
+
         const snippetInput = {
           method,
           url,
           httpVersion: '1.1',
           headers: headersArr,
-          postData: isJson(bodyText)
-            ? { mimeType: 'application/json', text: bodyText }
-            : bodyText
-              ? { mimeType: 'text/plain', text: bodyText }
-              : undefined,
+          postData,
         };
 
         const sn = new HTTPSnippet(snippetInput);

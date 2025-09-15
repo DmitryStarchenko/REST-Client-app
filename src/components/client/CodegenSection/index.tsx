@@ -10,7 +10,8 @@ import { useCodegen } from '@/hooks';
 import { themeAtom } from '@/store';
 import { CodegenSectionProps } from '@/types';
 
-import LangTabs from './LangTabs';
+import LangTabs from './Tabs';
+import CopyButton from '../Shared/CopyButton';
 
 const CodegenSection: React.FC<CodegenSectionProps> = ({ method, url, headers, bodyText }) => {
   const langs = useMemo(() => Object.keys(LANG_MAP), []);
@@ -41,7 +42,7 @@ const CodegenSection: React.FC<CodegenSectionProps> = ({ method, url, headers, b
         {langs.length > 0 ? `Generated code` : `No languages available.`}
       </Typography>
       <LangTabs langs={langs} selectedLang={codeLang} onSelect={setCodeLang} />
-      <Box>
+      <Box sx={{ borderRadius: 1, overflow: 'hidden', position: 'relative' }}>
         <Editor
           height="calc(100vh - 400px)"
           language={LANG_MAP[codeLang] ?? 'plaintext'}
@@ -54,6 +55,7 @@ const CodegenSection: React.FC<CodegenSectionProps> = ({ method, url, headers, b
             automaticLayout: true,
           }}
         />
+        <CopyButton getValue={() => cache[codeLang]} />
       </Box>
     </Box>
   );
