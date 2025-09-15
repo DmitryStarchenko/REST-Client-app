@@ -17,7 +17,6 @@ const CodegenSection: React.FC<CodegenSectionProps> = ({ method, url, headers, b
   const [codeLang, setCodeLang] = useState<string>(() => langs[0] ?? '');
   const [cache, setCache] = useState<Record<string, string>>({});
   const { generateForLang } = useCodegen(method, url, headers, bodyText);
-  const editorTheme = useAtomValue(themeAtom);
 
   useEffect(() => {
     if (!codeLang) return;
@@ -47,7 +46,7 @@ const CodegenSection: React.FC<CodegenSectionProps> = ({ method, url, headers, b
           height="calc(100vh - 400px)"
           language={LANG_MAP[codeLang] ?? 'plaintext'}
           value={cache[codeLang] ?? 'Generating...'}
-          theme={editorTheme}
+          theme={useAtomValue(themeAtom)}
           options={{
             minimap: { enabled: false },
             fontSize: 13,

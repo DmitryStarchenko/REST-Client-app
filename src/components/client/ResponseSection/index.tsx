@@ -2,17 +2,18 @@
 
 import Editor from '@monaco-editor/react';
 import { Box, Typography } from '@mui/material';
+import { useAtomValue } from 'jotai';
 import React from 'react';
 
+import { themeAtom } from '@/store';
 import { ApiResponse } from '@/types';
 
 interface ResponseBlockProps {
   response: ApiResponse | null;
   errorMessage: string | null;
-  theme: string;
 }
 
-const ResponseBlock: React.FC<ResponseBlockProps> = ({ response, errorMessage, theme }) => {
+const ResponseBlock: React.FC<ResponseBlockProps> = ({ response, errorMessage }) => {
   const getResponseContent = (): string => {
     if (!response) return 'Not response yet';
     if ('ok' in response && response.ok) {
@@ -30,10 +31,10 @@ const ResponseBlock: React.FC<ResponseBlockProps> = ({ response, errorMessage, t
       {errorMessage && <Typography color="error">{errorMessage}</Typography>}
       <Box sx={{ mt: 1, borderRadius: 1, overflow: 'hidden' }}>
         <Editor
+          theme={useAtomValue(themeAtom)}
           height="200px"
           language="json"
           value={getResponseContent()}
-          theme={theme}
           options={{ minimap: { enabled: false }, readOnly: true }}
         />
       </Box>

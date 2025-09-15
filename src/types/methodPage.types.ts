@@ -1,3 +1,3 @@
 export interface PageProps {
-  params: { locale: string; method?: string; params?: string[] };
+  params: Promise<{ locale: string; method?: string; params?: string[] }>;
 }

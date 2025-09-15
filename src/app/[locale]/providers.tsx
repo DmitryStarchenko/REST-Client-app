@@ -10,7 +10,7 @@ import React, { useEffect } from 'react';
 
 import supabaseClient from '@/lib/supabase/client';
 import { authAtom } from '@/store';
-import { theme, EditorThemeProvider } from '@/theme';
+import { theme, MonacoThemeProvider } from '@/theme';
 import { ReadonlyFC } from '@/types';
 import getQueryClient from '@/utils/get-query-client';
 
@@ -43,7 +43,7 @@ const Providers: ReadonlyFC<ProvidersProps> = ({ children, initialUser }) => {
         <QueryClientProvider client={queryClient}>
           <InitColorSchemeScript attribute="data" />
           <ThemeProvider theme={theme}>
-            <EditorThemeProvider />
+            <MonacoThemeProvider />
             {children}
           </ThemeProvider>
         </QueryClientProvider>

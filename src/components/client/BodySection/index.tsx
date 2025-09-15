@@ -2,17 +2,18 @@
 
 import Editor from '@monaco-editor/react';
 import { Box, Button, Stack, Typography } from '@mui/material';
+import { useAtomValue } from 'jotai';
 import React from 'react';
 
+import { themeAtom } from '@/store';
 import { encodeBase64 } from '@/utils/base64';
 
 interface BodyBlockProps {
   bodyText: string;
   setBodyText: (value: string) => void;
-  theme: string;
 }
 
-const BodyBlock: React.FC<BodyBlockProps> = ({ bodyText, setBodyText, theme }) => {
+const BodyBlock: React.FC<BodyBlockProps> = ({ bodyText, setBodyText }) => {
   return (
     <Box>
       <Typography variant="subtitle1">Body</Typography>
@@ -21,7 +22,7 @@ const BodyBlock: React.FC<BodyBlockProps> = ({ bodyText, setBodyText, theme }) =
           height="200px"
           language="json"
           value={bodyText}
-          theme={theme}
+          theme={useAtomValue(themeAtom)}
           onChange={(val) => setBodyText(val ?? '')}
           options={{
             minimap: { enabled: false },
