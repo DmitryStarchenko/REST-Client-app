@@ -1,11 +1,8 @@
-import { useTranslations } from 'next-intl';
-
+import Main from '@/components/layout/Main/Main';
 import { ReadonlyFC } from '@/types/readonly.types';
 
 const MainPage: ReadonlyFC = () => {
-  const t = useTranslations('MainPage');
-
-  return <main>{t('Test')}</main>;
+  return <Main />;
 };
 
 export default MainPage;

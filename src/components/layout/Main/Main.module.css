@@ -1,0 +1,18 @@
+.main {
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding-top: var(--padding30);
+}
+
+.container h1 {
+  margin-bottom: var(--margin20);
+  text-align: center;
+}
+
+.mainNav {
+  display: flex;
+  gap: var(--gap20);
+  justify-content: center;
+  width: 100%;
+}

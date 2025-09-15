@@ -7,6 +7,7 @@ const colors = {
   bgPaper: '#ffffff',
   textPrimary: '#111111',
   textSecondary: '#555555',
+  bgHeader: '#f5f5f599',
 };
 
 const colorsDark = {
@@ -16,6 +17,7 @@ const colorsDark = {
   bgPaper: '#1e1e1e',
   textPrimary: '#ffffff',
   textSecondary: '#aaaaaa',
+  bgHeader: '#12121299',
 };
 
 export const theme = createTheme({
@@ -26,6 +28,7 @@ export const theme = createTheme({
         secondary: { main: colors.secondaryMain },
         background: { default: colors.bgDefault, paper: colors.bgPaper },
         text: { primary: colors.textPrimary, secondary: colors.textSecondary },
+        custom: { header: colors.bgHeader },
       },
     },
     dark: {
@@ -34,6 +37,7 @@ export const theme = createTheme({
         secondary: { main: colorsDark.secondaryMain },
         background: { default: colorsDark.bgDefault, paper: colorsDark.bgPaper },
         text: { primary: colorsDark.textPrimary, secondary: colorsDark.textSecondary },
+        custom: { header: colorsDark.bgHeader },
       },
     },
   },
@@ -41,3 +45,16 @@ export const theme = createTheme({
     colorSchemeSelector: 'data',
   },
 });
+
+declare module '@mui/material/styles' {
+  interface Palette {
+    custom: {
+      header: string;
+    };
+  }
+  interface PaletteOptions {
+    custom?: {
+      header?: string;
+    };
+  }
+}

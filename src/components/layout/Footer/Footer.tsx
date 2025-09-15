@@ -1,3 +1,4 @@
+import { Typography } from '@mui/material';
 import Link from 'next/link';
 import React from 'react';
 
@@ -23,7 +24,7 @@ const Footer: ReadonlyFC = () => {
           Bubnov Roma
         </Link>
       </div>
-      <p className={styles.year}>© 2025 PUTMAN</p>
+      <Typography className={styles.year}>© 2025 PUTMAN</Typography>
     </footer>
   );
 };
