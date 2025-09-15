@@ -7,7 +7,7 @@
   width: 100%;
   height: 70px;
   padding: 10px;
-  background-color: var(--mui-palette-background-header);
+  background-color: var(--mui-palette-custom-header);
   transition: height 0.8s ease;
   backdrop-filter: blur(35px);
 }

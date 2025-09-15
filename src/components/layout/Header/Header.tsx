@@ -12,9 +12,10 @@ import { ReadonlyFC } from '@/types/readonly.types';
 import styles from './Header.module.css';
 import LangSwitcher from '../LangSwitcher/LangSwitcher';
 import ThemeToggler from '../ThemeToggler/ThemeToggler';
+import ButtonsSignInUp from './ButtonsSignInUp/ButtonsSignInUp';
 
 const Header: ReadonlyFC = () => {
-  const t = useTranslations('Navigation');
+  const translationNav = useTranslations('Navigation');
 
   const auth = useAtomValue(authAtom);
 
@@ -44,12 +45,7 @@ const Header: ReadonlyFC = () => {
           </Link>
         ) : (
           <>
-            <Link className={styles.navButton} href={'/login'}>
-              {t('signIn')}
-            </Link>
-            <Link className={styles.navButton} href={'/registration'}>
-              {t('signUp')}
-            </Link>
+            <ButtonsSignInUp />
           </>
         )}
 

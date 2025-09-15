@@ -13,7 +13,7 @@ import styles from './RegForm.module.css';
 import { RegFormFields, regSchema } from './regSchema';
 
 const RegForm: ReadonlyFC = () => {
-  const t = useTranslations('Auth');
+  const translationAuth = useTranslations('Auth');
 
   const router = useRouter();
 
@@ -44,37 +44,42 @@ const RegForm: ReadonlyFC = () => {
 
   return (
     <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-      <h1>{t('Registration')}</h1>
+      <h1>{translationAuth('Registration')}</h1>
       <TextField
         id="email"
-        label={t('email')}
+        label={translationAuth('email')}
         variant="standard"
         {...register('email')}
         error={Boolean(formState.errors.email)}
-        helperText={formState.errors.email?.message && t(formState.errors.email?.message)}
+        helperText={
+          formState.errors.email?.message && translationAuth(formState.errors.email?.message)
+        }
       />
 
       <PasswordInput
-        label={t('password')}
+        label={translationAuth('password')}
         fullWidth
         {...register('password')}
         error={Boolean(formState.errors.password)}
-        helperText={formState.errors.password?.message && t(formState.errors.password?.message)}
+        helperText={
+          formState.errors.password?.message && translationAuth(formState.errors.password?.message)
+        }
       />
       <PasswordInput
-        label={t('confirm password')}
+        label={translationAuth('confirm password')}
         fullWidth
         {...register('confirmPassword')}
         error={Boolean(formState.errors.confirmPassword)}
         helperText={
-          formState.errors.confirmPassword?.message && t(formState.errors.confirmPassword?.message)
+          formState.errors.confirmPassword?.message &&
+          translationAuth(formState.errors.confirmPassword?.message)
         }
       />
       {formState.errors.root && (
         <FormHelperText error={true}>{formState.errors.root.message}</FormHelperText>
       )}
       <Button type="submit" loading={formState.isSubmitting}>
-        {t('Submit')}
+        {translationAuth('Submit')}
       </Button>
     </form>
   );

@@ -13,7 +13,7 @@ import styles from './LoginForm.module.css';
 import { LoginFormFields, loginSchema } from './loginSchema';
 
 const LoginForm: ReadonlyFC = () => {
-  const t = useTranslations('Auth');
+  const translationAuth = useTranslations('Auth');
   const router = useRouter();
 
   const { handleSubmit, register, setError, formState } = useForm<LoginFormFields>({
@@ -40,29 +40,35 @@ const LoginForm: ReadonlyFC = () => {
 
   return (
     <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-      <h1>{t('login')}</h1>
+      <h1>{translationAuth('login')}</h1>
       <TextField
         id="email"
-        label={t('email')}
+        label={translationAuth('email')}
         variant="standard"
         error={Boolean(formState.errors.email)}
-        helperText={formState.errors.email?.message && t(formState.errors.email?.message)}
+        helperText={
+          formState.errors.email?.message && translationAuth(formState.errors.email?.message)
+        }
         type="email"
         {...register('email')}
       />
 
       <PasswordInput
-        label={t('password')}
+        label={translationAuth('password')}
         fullWidth
         {...register('password')}
         error={Boolean(formState.errors.password)}
-        helperText={formState.errors.password?.message && t(formState.errors.password?.message)}
+        helperText={
+          formState.errors.password?.message && translationAuth(formState.errors.password?.message)
+        }
       />
       {formState.errors.root && (
-        <FormHelperText error={true}>{t(formState.errors.root.message ?? '')}</FormHelperText>
+        <FormHelperText error={true}>
+          {translationAuth(formState.errors.root.message ?? '')}
+        </FormHelperText>
       )}
       <Button type="submit" loading={formState.isSubmitting}>
-        {t('Submit')}
+        {translationAuth('Submit')}
       </Button>
     </form>
   );
