@@ -10,7 +10,7 @@ import { ReadonlyFC } from '@/types/readonly.types';
 import ButtonsNavPage from './components/buttonNavPage/ButtonsNavPage';
 import styles from './Main.module.css';
 import ButtonsSignInUp from '../Header/ButtonsSignInUp/ButtonsSignInUp';
-import About from './components/about/about';
+import About from './components/about/About';
 
 const Main: ReadonlyFC = () => {
   const translationMain = useTranslations('Main');

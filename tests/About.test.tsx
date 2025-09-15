@@ -3,7 +3,7 @@ import { useTranslations } from 'next-intl';
 import React from 'react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import About from '../src/components/layout/Main/components/about/about';
+import About from '../src/components/layout/Main/components/about/About';
 
 vi.mock('next-intl', () => ({
   useTranslations: vi.fn(),
@@ -54,7 +54,7 @@ describe('About Component', () => {
 
     render(<About />);
 
-    expect(screen.getByRole('heading', { level: 2 })).toHaveTextContent('About Us');
+    expect(screen.getByRole('heading', { level: 4 })).toHaveTextContent('About');
     expect(screen.getByText('Project description 1')).toBeInTheDocument();
     expect(screen.getByText('Project description 2')).toBeInTheDocument();
     expect(screen.getByText('Project description 3')).toBeInTheDocument();
