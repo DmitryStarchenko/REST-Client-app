@@ -26,3 +26,8 @@ export interface ErrorResponse {
 }
 
 export type ApiResponse = Readonly<SuccessResponse | ErrorResponse>;
+
+export interface ResponseBlockProps {
+  response: ApiResponse | null;
+  errorMessage: string | null;
+}

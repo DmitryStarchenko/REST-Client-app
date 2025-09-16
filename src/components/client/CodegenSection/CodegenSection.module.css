@@ -1,0 +1,23 @@
+.wrapper {
+  position: relative;
+  background-color: var(--mui-palette-background-paper);
+  border: none;
+  overflow: hidden;
+}
+
+.langBox {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 2;
+  min-width: 180px;
+  background-color: var(--mui-palette-background-paper);
+  border: 1px;
+  border-radius: 6px;
+  transition: border 0.2s ease;
+}
+
+.editorBox {
+  margin-top: 4rem;
+  box-sizing: border-box;
+}

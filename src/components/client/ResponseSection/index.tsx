@@ -1,19 +1,11 @@
 'use client';
 
-import Editor from '@monaco-editor/react';
-import { Box, Typography } from '@mui/material';
-import { useAtomValue } from 'jotai';
-import React from 'react';
+import { Typography } from '@mui/material';
+import React, { Fragment } from 'react';
 
-import { themeAtom } from '@/store';
-import { ApiResponse } from '@/types';
+import { ResponseBlockProps } from '@/types';
 
-import CopyButton from '../Shared/CopyButton';
-
-interface ResponseBlockProps {
-  response: ApiResponse | null;
-  errorMessage: string | null;
-}
+import { CodeEditor } from '../Shared';
 
 const ResponseBlock: React.FC<ResponseBlockProps> = ({ response, errorMessage }) => {
   const getResponseContent = (): string => {
@@ -28,20 +20,11 @@ const ResponseBlock: React.FC<ResponseBlockProps> = ({ response, errorMessage })
   };
 
   return (
-    <Box>
+    <>
       <Typography variant="subtitle1">Response</Typography>
       {errorMessage && <Typography color="error">{errorMessage}</Typography>}
-      <Box sx={{ mt: 1, borderRadius: 1, overflow: 'hidden', position: 'relative' }}>
-        <Editor
-          theme={useAtomValue(themeAtom)}
-          height="200px"
-          language="json"
-          value={getResponseContent()}
-          options={{ minimap: { enabled: false }, readOnly: true }}
-        />
-        <CopyButton getValue={() => getResponseContent()} />
-      </Box>
-    </Box>
+      <CodeEditor value={getResponseContent()} height="200px" language="json" readOnly />
+    </>
   );
 };
 

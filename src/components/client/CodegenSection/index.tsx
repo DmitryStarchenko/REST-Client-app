@@ -1,17 +1,15 @@
 'use client';
 
-import Editor from '@monaco-editor/react';
-import { Box, Typography } from '@mui/material';
-import { useAtomValue } from 'jotai';
+import { Typography } from '@mui/material';
 import React, { useState, useEffect, useMemo } from 'react';
 
 import { LANG_MAP } from '@/constants';
 import { useCodegen } from '@/hooks';
-import { themeAtom } from '@/store';
 import { CodegenSectionProps } from '@/types';
 
-import LangTabs from './Tabs';
-import CopyButton from '../Shared/CopyButton';
+import styles from './CodegenSection.module.css';
+import LangSelect from './LangSelect';
+import { CodeEditor } from '../Shared';
 
 const CodegenSection: React.FC<CodegenSectionProps> = ({ method, url, headers, bodyText }) => {
   const langs = useMemo(() => Object.keys(LANG_MAP), []);
@@ -37,27 +35,25 @@ const CodegenSection: React.FC<CodegenSectionProps> = ({ method, url, headers, b
   }, [codeLang, cache, generateForLang]);
 
   return (
-    <Box>
+    <>
       <Typography variant="subtitle1" sx={{ mb: 1 }}>
         {langs.length > 0 ? `Generated code` : `No languages available.`}
       </Typography>
-      <LangTabs langs={langs} selectedLang={codeLang} onSelect={setCodeLang} />
-      <Box sx={{ borderRadius: 1, overflow: 'hidden', position: 'relative' }}>
-        <Editor
-          height="calc(100vh - 400px)"
-          language={LANG_MAP[codeLang] ?? 'plaintext'}
-          value={cache[codeLang] ?? 'Generating...'}
-          theme={useAtomValue(themeAtom)}
-          options={{
-            minimap: { enabled: false },
-            fontSize: 13,
-            fontFamily: 'ui-monospace, monospace',
-            automaticLayout: true,
-          }}
-        />
-        <CopyButton getValue={() => cache[codeLang]} />
-      </Box>
-    </Box>
+
+      <div className={styles.wrapper}>
+        <div className={styles.langBox}>
+          <LangSelect langs={langs} selectedLang={codeLang} onSelect={setCodeLang} />
+        </div>
+
+        <div className={styles.editorBox}>
+          <CodeEditor
+            value={cache[codeLang] ?? 'Generating...'}
+            height="200px"
+            language={LANG_MAP[codeLang] ?? 'plaintext'}
+          />
+        </div>
+      </div>
+    </>
   );
 };
 

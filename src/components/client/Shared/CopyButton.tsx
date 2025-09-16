@@ -4,11 +4,9 @@ import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import { IconButton, Snackbar, Tooltip } from '@mui/material';
 import React, { useState } from 'react';
 
-interface CopyButtonProps {
-  getValue: () => string;
-}
+import { CopyButtonProps } from '@/types';
 
-const CopyButton: React.FC<CopyButtonProps> = ({ getValue }) => {
+export const CopyButton: React.FC<CopyButtonProps> = ({ getValue }) => {
   const [open, setOpen] = useState(false);
 
   const handleCopy = async (): Promise<void> => {
@@ -30,8 +28,8 @@ const CopyButton: React.FC<CopyButtonProps> = ({ getValue }) => {
           onClick={handleCopy}
           sx={{
             position: 'absolute',
-            top: 2,
-            right: 7,
+            top: 8,
+            right: 8,
             bgcolor: 'background.paper',
             opacity: 0.4,
             '&:hover': { bgcolor: 'action.hover', opacity: 1 },
@@ -52,5 +50,3 @@ const CopyButton: React.FC<CopyButtonProps> = ({ getValue }) => {
     </>
   );
 };
-
-export default CopyButton;

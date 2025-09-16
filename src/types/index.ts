@@ -6,3 +6,6 @@ export * from './response.types';
 export * from './header.types';
 export * from './codeGen.types';
 export * from './methodPage.types';
+export * from './bodyBlockProps.types';
+export * from './LangTabsProps.types';
+export * from './LangTabProps';

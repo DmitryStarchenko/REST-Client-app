@@ -1,4 +1,4 @@
-export interface LangTabsProps {
+export interface LangSelectProps {
   langs: string[];
   selectedLang: string;
   onSelect: (lang: string) => void;

@@ -2,8 +2,7 @@ import { NextRequest } from 'next/server';
 import createMiddleware from 'next-intl/middleware';
 
 import { routing } from '@/i18n';
-import { requireAuth, updateSession } from '@/lib';
-import { isProtectedPath } from '@/utils';
+import { updateSession } from '@/lib';
 
 const handleI18nRouting = createMiddleware(routing);
 
@@ -12,13 +11,6 @@ export default async function middleware(request: NextRequest) {
 
   const updatedResponse = await updateSession(request, response);
 
-  if (isProtectedPath(request.nextUrl.pathname)) {
-    try {
-      await requireAuth(request);
-    } catch (redirectResponse) {
-      return redirectResponse as NextResponse;
-    }
-  }
   return updatedResponse;
 }
 

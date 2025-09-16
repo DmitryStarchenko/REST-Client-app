@@ -3,18 +3,7 @@
 import { Grid, Select, MenuItem, TextField, Button, Stack } from '@mui/material';
 
 import { METHODS } from '@/constants';
-import { ReadonlyFC } from '@/types';
-
-import CopyButton from '../Shared/CopyButton';
-
-interface RequestFormProps {
-  method: string;
-  setMethod: (method: string) => void;
-  url: string;
-  setUrl: (url: string) => void;
-  sendRequest: () => void;
-  loading: boolean;
-}
+import { ReadonlyFC, RequestFormProps } from '@/types';
 
 const RequestForm: ReadonlyFC<RequestFormProps> = ({
   method,
@@ -51,13 +40,12 @@ const RequestForm: ReadonlyFC<RequestFormProps> = ({
           fullWidth
           size="small"
         />
-        <CopyButton getValue={() => url} />
       </Grid>
 
       <Grid sx={{ xs: 12, md: 2 }}>
         <Stack direction="row" spacing={1}>
-          <Button variant="contained" onClick={sendRequest} disabled={loading} loading>
-            {/* {loading ? 'Sending…' : 'Send'} */}
+          <Button variant="contained" onClick={sendRequest} disabled={loading}>
+            {loading ? 'Sending…' : 'Send'}
           </Button>
         </Stack>
       </Grid>
