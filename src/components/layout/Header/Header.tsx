@@ -13,6 +13,7 @@ import styles from './Header.module.css';
 import LangSwitcher from '../LangSwitcher/LangSwitcher';
 import ThemeToggler from '../ThemeToggler/ThemeToggler';
 import ButtonsSignInUp from './ButtonsSignInUp/ButtonsSignInUp';
+import ButtonsNavPage from '../Main/components/ButtonNavPage/ButtonsNavPage';
 
 const Header: ReadonlyFC = () => {
   const translationNav = useTranslations('Navigation');
@@ -36,13 +37,16 @@ const Header: ReadonlyFC = () => {
       </Link>
       <nav className={styles.navigation}>
         {auth ? (
-          <Link
-            className={styles.navButton}
-            href={'/login'}
-            onClick={() => supabaseClient.auth.signOut()}
-          >
-            {translationNav('signOut')}
-          </Link>
+          <>
+            <ButtonsNavPage />
+            <Link
+              className={styles.navButton}
+              href={'/login'}
+              onClick={() => supabaseClient.auth.signOut()}
+            >
+              {translationNav('signOut')}
+            </Link>
+          </>
         ) : (
           <>
             <ButtonsSignInUp />

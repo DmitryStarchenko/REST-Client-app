@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import '@/styles/globals.css';
 import { notFound } from 'next/navigation';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
+import NextTopLoader from 'nextjs-toploader';
 
 import Layout from '@/components/layout/Layout';
 import { routing } from '@/i18n/routing';
@@ -36,6 +37,7 @@ const RootLayout: ReadonlyFC<RootLayoutProps> = async ({ children, params }) => 
   return (
     <html lang={locale} suppressHydrationWarning>
       <body>
+        <NextTopLoader color="#7e077e" showSpinner={false} />
         <NextIntlClientProvider locale={locale}>
           <Providers initialUser={user}>
             <Layout>{children}</Layout>

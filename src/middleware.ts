@@ -2,8 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import createMiddleware from 'next-intl/middleware';
 
 import { routing } from '@/i18n';
-import { requireAuth, updateSession } from '@/lib';
-import { isProtectedPath } from '@/utils';
+import { updateSession } from '@/lib';
 
 const handleI18nRouting = createMiddleware(routing);
 

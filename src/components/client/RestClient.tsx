@@ -3,25 +3,34 @@
 import { Box, Divider, Paper, Typography } from '@mui/material';
 import axios from 'axios';
 import { useAtom, useAtomValue } from 'jotai';
-import { usePathname, useRouter } from 'next/navigation';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { useLocalStorage } from 'usehooks-ts';
 
+import { VARIABLES_KEY } from '@/constants';
+import { useRouter } from '@/i18n';
 import supabaseClient from '@/lib/supabase/client';
 import { bodyAtom, themeAtom, headersAtom, methodAtom, responseAtom, urlAtom } from '@/store';
-import { ApiResponse, ReadonlyFC } from '@/types';
+import { ApiResponse, IVariable, ReadonlyFC } from '@/types';
 import { buildRestPath } from '@/utils/restClientPathRouting';
+import { replaceVariables } from '@/utils/variable';
 
 import BodyBlock from './BodySection';
 import CodeGenSection from './CodegenSection';
 import HeadersBlock from './HeadersSection';
 import RequestForm from './RequestForm';
 import ResponseBlock from './ResponseSection';
+import SavedVariables from './SavedVariables/SavedVariables';
 
 const RestClient: ReadonlyFC = () => {
   const router = useRouter();
   const editorTheme = useAtomValue(themeAtom);
-  const pathname = usePathname();
-  const localeSegment = pathname.split('/')[1] || '';
+
+  const [variables] = useLocalStorage<IVariable[]>(VARIABLES_KEY, []);
+
+  const variablesObj = variables.reduce<Record<string, string>>((acc, { key, value }) => {
+    acc[key] = value;
+    return acc;
+  }, {});
 
   const [url, setUrl] = useAtom(urlAtom);
   const [method, setMethod] = useAtom(methodAtom);
@@ -57,20 +66,23 @@ const RestClient: ReadonlyFC = () => {
 
     const headersObj: Record<string, string> = {};
     headers.forEach((h) => {
-      if (h.key) headersObj[h.key] = h.value;
+      if (h.key) headersObj[h.key] = replaceVariables(h.value, variablesObj);
     });
 
     const bodyForPath = bodyText && bodyText.trim() !== '' ? bodyText : undefined;
 
+    const parsedUrl = replaceVariables(url, variablesObj);
+    const parsedBody = bodyForPath ? replaceVariables(bodyForPath, variablesObj) : undefined;
+
     const pathObj = buildRestPath({
       method,
-      url,
-      body: bodyForPath,
+      url: parsedUrl,
+      body: parsedBody,
       headers: headersObj,
     });
     // replace path to URL without browser history
     try {
-      router.replace(`/${localeSegment}${pathObj.path}`);
+      router.replace(`/${pathObj.path}`);
     } catch {
       // in some environments router.replace may be sync/async
     }
@@ -93,7 +105,7 @@ const RestClient: ReadonlyFC = () => {
       }
 
       const result = await axios.post<ApiResponse>('/api/proxy', {
-        url,
+        url: parsedUrl,
         method,
         headers: headersObj,
         body: parsedBody,
@@ -145,7 +157,7 @@ const RestClient: ReadonlyFC = () => {
     } finally {
       setLoading(false);
     }
-  }, [setResponse, headers, bodyText, method, url, router, localeSegment]);
+  }, [setResponse, headers, bodyText, method, url, router, variablesObj]);
 
   return (
     <Box p={2}>
@@ -168,6 +180,9 @@ const RestClient: ReadonlyFC = () => {
         {method !== 'GET' && (
           <BodyBlock bodyText={bodyText} setBodyText={setBodyText} theme={editorTheme} />
         )}
+        <Divider sx={{ my: 2 }} />
+
+        <SavedVariables variables={variables} />
         <Divider sx={{ my: 2 }} />
         {/* Code generation */}
         <CodeGenSection method={method} url={url} headers={headers} bodyText={bodyText} />

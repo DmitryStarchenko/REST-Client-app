@@ -1,7 +1,7 @@
 {
   "Main": {
     "welcome": "Welcome!!!",
-    "welcomeBack": "Welcome back!!!",
+    "welcomeBack": "Welcome back",
     "client": "REST CLIENT",
     "variables": "VARIABLES",
     "history": "HISTORY"

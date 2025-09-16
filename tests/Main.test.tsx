@@ -45,7 +45,7 @@ vi.mock('../Header/ButtonsSignInUp/ButtonsSignInUp', () => ({
   default: vi.fn(() => <div data-testid="buttons-sign-in-up" />),
 }));
 
-vi.mock('./components/about/about', () => ({
+vi.mock('./components/about/About', () => ({
   default: vi.fn(() => <div data-testid="about" />),
 }));
 

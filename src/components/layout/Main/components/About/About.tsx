@@ -4,7 +4,7 @@ import React from 'react';
 
 import { ReadonlyFC } from '@/types/readonly.types';
 
-import styles from './about.module.css';
+import styles from './About.module.css';
 
 const About: ReadonlyFC = () => {
   const translationAbout = useTranslations('About');

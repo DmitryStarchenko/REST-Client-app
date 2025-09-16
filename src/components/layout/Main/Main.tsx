@@ -7,10 +7,10 @@ import React from 'react';
 import { authAtom } from '@/store/authAtom';
 import { ReadonlyFC } from '@/types/readonly.types';
 
-import ButtonsNavPage from './components/buttonNavPage/ButtonsNavPage';
+import ButtonsNavPage from './components/ButtonNavPage/ButtonsNavPage';
 import styles from './Main.module.css';
 import ButtonsSignInUp from '../Header/ButtonsSignInUp/ButtonsSignInUp';
-import About from './components/about/About';
+import About from './components/About/About';
 
 const Main: ReadonlyFC = () => {
   const translationMain = useTranslations('Main');
@@ -19,9 +19,11 @@ const Main: ReadonlyFC = () => {
 
   return (
     <main className={styles.main}>
-      {auth?.user ? (
+      {auth ? (
         <Box className={styles.container}>
-          <Typography variant="h3">{translationMain('welcomeBack')}</Typography>
+          <Typography variant="h3">
+            {translationMain('welcomeBack')} {auth.email?.split('@')[0]}!
+          </Typography>
           <nav className={styles.mainNav}>
             <ButtonsNavPage />
           </nav>
