@@ -1,56 +1,51 @@
 'use client';
 
-import { Grid, Select, MenuItem, TextField, Button, Stack } from '@mui/material';
+import { Box, Divider } from '@mui/material';
 
-import { METHODS } from '@/constants';
-import { ReadonlyFC, RequestFormProps } from '@/types';
+import { ReadonlyFC, RequestBuilderFormProps } from '@/types';
+import { uid } from '@/utils';
 
-const RequestForm: ReadonlyFC<RequestFormProps> = ({
+import BodyBlock from './BodySection';
+import RequestForm from './EndpointSection';
+import HeadersBlock from './HeadersSection';
+
+const RequestBuilderForm: ReadonlyFC<RequestBuilderFormProps> = ({
   method,
-  setMethod,
   url,
-  setUrl,
-  sendRequest,
-  loading,
+  headers,
+  body = '',
+  loading = false,
+  onChange,
+  onSubmit,
 }) => {
+  const handleSend = (): void => {
+    onSubmit({ method, url, headers, body: body || undefined });
+  };
+
   return (
-    <Grid container spacing={0.1} alignItems="center" sx={{ mt: 1.5, display: 'flex' }}>
-      <Grid sx={{ xs: 12, md: 2 }}>
-        <Select
-          value={method}
-          onChange={(e) => setMethod(String(e.target.value))}
-          fullWidth
-          size="small"
-        >
-          {METHODS.map((method) => (
-            <MenuItem key={method} value={method}>
-              {method}
-            </MenuItem>
-          ))}
-        </Select>
-      </Grid>
-
-      <Grid sx={{ flexGrow: 1, position: 'relative' }}>
-        <TextField
-          id="endpoint-url"
-          label="Endpoint URL"
-          placeholder="https://jsonplaceholder.typicode.com/posts/1"
-          value={url}
-          onChange={(e) => setUrl(e.target.value)}
-          fullWidth
-          size="small"
+    <Box>
+      <RequestForm
+        method={method}
+        setMethod={(m) => onChange({ method: m, url, headers, body })}
+        url={url}
+        setUrl={(u) => onChange({ method, url: u, headers, body })}
+        sendRequest={handleSend}
+        loading={loading}
+      />
+      <Divider sx={{ my: 2 }} />
+      <HeadersBlock
+        headers={headers.length ? headers : [{ key: '', value: '', id: uid() }]}
+        setHeaders={(h) => onChange({ method, url, headers: h, body })}
+      />
+      <Divider sx={{ my: 2 }} />
+      {method !== 'GET' && (
+        <BodyBlock
+          bodyText={body}
+          setBodyText={(b) => onChange({ method, url, headers, body: b })}
         />
-      </Grid>
-
-      <Grid sx={{ xs: 12, md: 2 }}>
-        <Stack direction="row" spacing={1}>
-          <Button variant="contained" onClick={sendRequest} disabled={loading}>
-            {loading ? 'Sending…' : 'Send'}
-          </Button>
-        </Stack>
-      </Grid>
-    </Grid>
+      )}
+    </Box>
   );
 };
 
-export default RequestForm;
+export default RequestBuilderForm;

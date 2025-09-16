@@ -6,7 +6,7 @@ import React from 'react';
 import { BodyBlockProps } from '@/types';
 import { encodeBase64 } from '@/utils';
 
-import { CodeEditor } from '../Shared';
+import { CodeEditor } from '../../Shared';
 
 const BodyBlock: React.FC<BodyBlockProps> = ({ bodyText, setBodyText }) => {
   const handleClick = (): void => {

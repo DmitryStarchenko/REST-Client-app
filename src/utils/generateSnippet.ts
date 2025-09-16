@@ -2,7 +2,7 @@ import HTTPSnippet from 'httpsnippet';
 
 import { CodeGenOutputs } from '@/types';
 
-export function generateOutputs(sn: HTTPSnippet): CodeGenOutputs {
+export function generateSnippet(sn: HTTPSnippet): CodeGenOutputs {
   return {
     curl: sn.convert('shell', 'curl') ?? '',
     httpie: sn.convert('shell', 'httpie') ?? '',

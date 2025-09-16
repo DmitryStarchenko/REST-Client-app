@@ -18,11 +18,22 @@ export interface SuccessResponse {
         }
       >;
   data: unknown;
+  durationMs?: number;
+  requestSize?: number;
+  responseSize?: number;
+  timestamp?: string;
 }
 
 export interface ErrorResponse {
   ok: false;
+  status: number;
+  statusText: string;
+  headers?: AxiosResponseHeaders | Record<string, unknown>;
   error: string;
+  durationMs?: number;
+  requestSize?: number;
+  responseSize?: number;
+  timestamp?: string;
 }
 
 export type ApiResponse = Readonly<SuccessResponse | ErrorResponse>;

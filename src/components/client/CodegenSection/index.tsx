@@ -11,11 +11,11 @@ import styles from './CodegenSection.module.css';
 import LangSelect from './LangSelect';
 import { CodeEditor } from '../Shared';
 
-const CodegenSection: React.FC<CodegenSectionProps> = ({ method, url, headers, bodyText }) => {
+const CodegenSection: React.FC<CodegenSectionProps> = ({ method, url, headers, body }) => {
   const langs = useMemo(() => Object.keys(LANG_MAP), []);
   const [codeLang, setCodeLang] = useState<string>(() => langs[0] ?? '');
   const [cache, setCache] = useState<Record<string, string>>({});
-  const { generateForLang } = useCodegen(method, url, headers, bodyText);
+  const { generateForLang } = useCodegen(method, url, headers, body);
 
   useEffect(() => {
     if (!codeLang) return;

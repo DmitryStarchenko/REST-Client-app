@@ -8,8 +8,6 @@ export async function POST(req: NextRequest): Promise<NextResponse<ApiResponse>>
   try {
     const payload = await req.json();
     const { url, method = 'GET', headers = {}, body, timeoutMs = 30_000, access_token } = payload;
-
-    // Create Supabase client with user token if possible
     let userId: string | null = null;
     if (access_token) {
       const {
@@ -44,7 +42,6 @@ export async function POST(req: NextRequest): Promise<NextResponse<ApiResponse>>
       parsed = JSON.parse(responseText);
     } catch {}
 
-    // --- Save in Supabase ---
     try {
       await supabaseAdmin.from('request_history').insert({
         user_id: userId,
@@ -61,7 +58,6 @@ export async function POST(req: NextRequest): Promise<NextResponse<ApiResponse>>
       console.error('Failed to save request history:', err);
     }
 
-    // --- Return response ---
     if (axiosRes.status >= 200 && axiosRes.status < 300) {
       const successResponse: ApiResponse = {
         ok: true,
@@ -69,18 +65,29 @@ export async function POST(req: NextRequest): Promise<NextResponse<ApiResponse>>
         statusText: axiosRes.statusText,
         headers: axiosRes.headers,
         data: parsed,
+        durationMs,
       };
-      return NextResponse.json(successResponse, { status: 200 });
+      return NextResponse.json(successResponse, { status: axiosRes.status });
     } else {
       const errorResponse: ApiResponse = {
         ok: false,
+        status: axiosRes.status,
+        statusText: axiosRes.statusText,
+        headers: axiosRes.headers,
         error: responseText,
+        durationMs,
       };
-      return NextResponse.json(errorResponse, { status: 200 });
+      return NextResponse.json(errorResponse, { status: axiosRes.status });
     }
   } catch (err) {
     const message = err instanceof Error ? err.message : 'Unknown error';
-    const errorResponse: ApiResponse = { ok: false, error: message };
+    const errorResponse: ApiResponse = {
+      ok: false,
+      status: 500,
+      statusText: 'Internal Server Error',
+      headers: {},
+      error: message,
+    };
     return NextResponse.json(errorResponse, { status: 500 });
   }
 }

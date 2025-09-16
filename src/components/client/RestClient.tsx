@@ -2,123 +2,51 @@
 
 import { Box, Divider, Paper, Typography } from '@mui/material';
 import axios from 'axios';
-import { useAtom, useAtomValue } from 'jotai';
-import { usePathname, useRouter } from 'next/navigation';
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
+import { useCallback, useState } from 'react';
 
+import { usePathname } from '@/i18n/navigation';
 import supabaseClient from '@/lib/supabase/client';
-import { bodyAtom, themeAtom, headersAtom, methodAtom, responseAtom, urlAtom } from '@/store';
-import { ApiResponse, ReadonlyFC } from '@/types';
-import { buildRestPath } from '@/utils/restClientPathRouting';
+import { ApiResponse, Header, ReadonlyFC } from '@/types';
+import { headersArrayToObject, parseRestPath, buildRestPath } from '@/utils';
 
-import BodyBlock from './BodySection';
 import CodeGenSection from './CodegenSection';
-import HeadersBlock from './HeadersSection';
-import RequestForm from './RequestForm';
+import RequestBuilderForm from './RequestForm';
 import ResponseBlock from './ResponseSection';
 
 const RestClient: ReadonlyFC = () => {
-  const router = useRouter();
-  const editorTheme = useAtomValue(themeAtom);
   const pathname = usePathname();
-  const localeSegment = pathname.split('/')[1] || '';
+  const searchParams = useSearchParams();
 
-  const [url, setUrl] = useAtom(urlAtom);
-  const [method, setMethod] = useAtom(methodAtom);
-  const [bodyText, setBodyText] = useAtom(bodyAtom);
-  const [headers, setHeaders] = useAtom(headersAtom);
-  const [response, setResponse] = useAtom(responseAtom);
-  const [loading, setLoading] = useState(false);
+  const [response, setResponse] = useState<ApiResponse | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const lastPathRef = useRef('');
 
   useEffect(() => {
-    try {
-      const parsed = parseRestPath({
-        method: params?.method,
-        url: params?.url,
-        body: params?.body,
-        searchParams: searchParamsString ? new URLSearchParams(searchParamsString) : null,
-      });
-      setMethod(parsed.method);
-      setUrl(parsed.url || '');
-      setBodyText(parsed.body || '');
-      const initialHeaders = Object.entries(parsed.headers).map(([k, v]) => ({
-        key: k,
-        value: v,
-        id: uid(),
-      }));
-      setHeaders(initialHeaders.length ? initialHeaders : [{ key: '', value: '', id: uid() }]);
-    } catch (e) {
-      console.error('parseRestPath failed', e);
-    }
-  }, [pathname, params?.body, params?.method, params?.url, searchParamsString]);
-
-  const syncRoute = useCallback(
-    (opts?: { push?: boolean }) => {
-      const hdrs: Record<string, string> = {};
-      headers.forEach((h) => {
-        if (h.key) {
-          hdrs[h.key] = h.value;
-        }
-      });
-      const path = buildRestPath({
-        method,
-        url,
-        body: bodyText || undefined,
-        headers: hdrs,
-      });
-      if (opts?.push) {
-        router.push(path.path);
-      } else {
-        router.replace(path.path);
-      }
-    },
-    [method, url, bodyText, headers, router],
-  );
-
-  useEffect(() => {
-    syncRoute({ push: false });
-  }, [method, syncRoute]);
-
-  const addHeader = (): void => setHeaders((s) => [...s, { key: '', value: '', id: uid() }]);
-  const removeHeader = (id: string): void => setHeaders((s) => s.filter((h) => h.id !== id));
-  const updateHeader = (id: string, key: string, value: string): void =>
-    setHeaders((s) => s.map((h) => (h.id === id ? { ...h, key, value } : h)));
-
-  const tryPretty = (text: string): string => {
-    try {
-      return JSON.stringify(JSON.parse(text), null, 2);
-    } catch {
-      return text;
-    }
-  };
-
-  const sendRequest = async (): Promise<void> => {
-    setErrorMessage(null);
-    setResponse(null);
-    setLoading(true);
-
-    const headersObj: Record<string, string> = {};
+    const hdrs: Record<string, string> = {};
     headers.forEach((h) => {
-      if (h.key) headersObj[h.key] = h.value;
+      if (h.key) hdrs[h.key] = h.value;
     });
-
-    const bodyForPath = bodyText && bodyText.trim() !== '' ? bodyText : undefined;
 
     const pathObj = buildRestPath({
       method,
       url,
-      body: bodyForPath,
-      headers: headersObj,
+      body: bodyText || undefined,
+      headers: hdrs,
     });
-    // replace path to URL without browser history
-    try {
-      router.replace(`/${localeSegment}${pathObj.path}`);
-    } catch {
-      // in some environments router.replace may be sync/async
-    }
+
+    if (lastPathRef.current === pathObj.path) return;
+    lastPathRef.current = pathObj.path;
+  }, [bodyText, headers, method, router, url]);
+
+  const sendRequest = useCallback(async () => {
+    setErrorMessage(null);
+    setResponse(null);
+    setLoading(true);
+
+    const { method, url, headers, body } = data;
+    const bodyForPath = body && body.trim() !== '' ? body : undefined;
 
     const start = performance.now();
 
@@ -127,29 +55,21 @@ const RestClient: ReadonlyFC = () => {
         data: { session },
       } = await supabaseClient.auth.getSession();
       const accessToken = session?.access_token ?? null;
-      // parse body to JS if it's JSON text
-      let parsedBody: unknown = undefined;
-      if (bodyForPath) {
-        try {
-          parsedBody = JSON.parse(bodyForPath);
-        } catch {
-          parsedBody = bodyForPath;
-        }
-      }
 
-      const result = await axios.post<ApiResponse>('/api/proxy', {
+      const headersObj = headersArrayToObject(headers);
+
+      const response = await axios.post<ApiResponse>('/api/proxy', {
         url,
         method,
         headers: headersObj,
-        body: parsedBody,
+        body,
         access_token: accessToken,
       });
 
       const durationMs = performance.now() - start;
-      const data = result.data;
-      setResponse(data);
+      const timestamp = new Date().toISOString();
+      const data = response.data;
 
-      // Calculate request/response sizes:
       const requestSizeBytes = bodyForPath ? new Blob([bodyForPath]).size : 0;
       let responseSizeBytes = 0;
       if (data && 'data' in data) {
@@ -159,66 +79,67 @@ const RestClient: ReadonlyFC = () => {
         responseSizeBytes = new Blob([data.error]).size;
       }
 
-      // HISTORY:for the client side
-      try {
-        const {
-          data: { user },
-        } = await supabaseClient.auth.getUser();
-        const userId = user?.id ?? null;
-
-        await supabaseClient.from('request_history').insert({
-          user_id: userId,
-          method,
-          url,
-          headers: JSON.stringify(headersObj),
-          body: bodyForPath ?? null,
-          response_status: 'status' in data ? data.status : null,
-          response_data: 'data' in data ? JSON.stringify(data.data ?? null) : data.error,
-          duration_ms: Math.round(durationMs),
-          request_size: requestSizeBytes,
-          response_size: responseSizeBytes,
-          timestamp: new Date().toISOString(),
+      if (data.ok) {
+        setResponse({
+          ...data,
+          durationMs: Math.round(durationMs),
+          requestSize: requestSizeBytes,
+          responseSize: responseSizeBytes,
+          timestamp,
         });
-      } catch (err) {
-        // ignore client-side history failure — proxy already tries to save server-side
-        console.warn('Optional client-side history save failed', err);
+      } else {
+        setResponse({
+          ...data,
+          timestamp,
+          durationMs: Math.round(durationMs),
+          requestSize: requestSizeBytes,
+          responseSize: responseSizeBytes,
+          status: data.status ?? 400,
+          statusText: data.statusText ?? 'Bad Request',
+          headers: data.headers ?? {},
+        });
       }
     } catch (e) {
       const message = e instanceof Error ? e.message : 'Unknown error';
       setErrorMessage(message);
-      setResponse({ ok: false, error: message });
+
+      setResponse({
+        ok: false,
+        status: 500,
+        statusText: 'Internal Error',
+        headers: {},
+        error: message,
+        timestamp: new Date().toISOString(),
+      });
     } finally {
       setLoading(false);
     }
-  }, [setResponse, headers, bodyText, method, url, router, localeSegment]);
+  }, []);
 
   return (
     <Box p={2}>
       <Paper elevation={2} sx={{ p: 2 }}>
         <Typography variant="h6">REST Client</Typography>
-        {/* Method + Endpoint + Send */}
-        <RequestForm
-          method={method}
-          setMethod={setMethod}
-          url={url}
-          setUrl={setUrl}
-          sendRequest={sendRequest}
+
+        <RequestBuilderForm
+          method={request.method}
+          url={request.url}
+          body={request.body}
+          headers={request.headers}
+          onChange={handleChange}
+          onSubmit={handleSubmit}
           loading={loading}
         />
+
         <Divider sx={{ my: 2 }} />
-        {/* Headers */}
-        <HeadersBlock headers={headers} setHeaders={setHeaders} />
+        <CodeGenSection
+          method={request.method}
+          url={request.url}
+          headers={request.headers}
+          body={request.body}
+        />
         <Divider sx={{ my: 2 }} />
-        {/* Body */}
-        {method !== 'GET' && (
-          <BodyBlock bodyText={bodyText} setBodyText={setBodyText} theme={editorTheme} />
-        )}
-        <Divider sx={{ my: 2 }} />
-        {/* Code generation */}
-        <CodeGenSection method={method} url={url} headers={headers} bodyText={bodyText} />
-        <Divider sx={{ my: 2 }} />
-        {/* Response */}
-        <ResponseBlock response={response} errorMessage={errorMessage} theme={editorTheme} />
+        <ResponseBlock response={response} errorMessage={errorMessage} />
       </Paper>
     </Box>
   );

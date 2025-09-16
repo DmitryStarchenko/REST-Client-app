@@ -3,14 +3,14 @@
 import { useCallback } from 'react';
 
 import { CodeGenOutputs, UseCodeGenReturn } from '@/types';
-import { generateOutputs } from '@/utils';
+import { generateSnippet } from '@/utils';
 import { isJson } from '@/utils';
 
 export function useCodegen(
   method: string,
   url: string,
   headers: { key: string; value: string }[],
-  bodyText: string,
+  body?: string,
 ): UseCodeGenReturn {
   const generateForLang = useCallback(
     async (lang: string): Promise<string> => {
@@ -23,10 +23,10 @@ export function useCodegen(
 
         let postData;
 
-        if (isJson(bodyText)) {
-          postData = { mimeType: 'application/json', text: bodyText };
-        } else if (bodyText) {
-          postData = { mimeType: 'text/plain', text: bodyText };
+        if (body && isJson(body)) {
+          postData = { mimeType: 'application/json', text: body };
+        } else if (body) {
+          postData = { mimeType: 'text/plain', text: body };
         } else {
           postData = undefined;
         }
@@ -40,7 +40,7 @@ export function useCodegen(
         };
 
         const sn = new HTTPSnippet(snippetInput);
-        const outputs: CodeGenOutputs = generateOutputs(sn);
+        const outputs: CodeGenOutputs = generateSnippet(sn);
 
         if (!(lang in outputs)) {
           throw new Error(`Language ${lang} not supported`);
@@ -52,7 +52,7 @@ export function useCodegen(
         throw new Error('Codegen failed: ' + message);
       }
     },
-    [method, url, headers, bodyText],
+    [method, url, headers, body],
   );
 
   return { generateForLang };
