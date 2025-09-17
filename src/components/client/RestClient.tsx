@@ -38,7 +38,7 @@ const RestClient: ReadonlyFC = () => {
 
     const pathObj = buildRestPath({ method, url, headers, body: bodyForPath });
     window.history.replaceState(null, '', pathObj.path);
-    // router.replace(pathObj.path);
+
     const start = performance.now();
 
     try {
