@@ -4,3 +4,6 @@ export * from './uid';
 export * from './generateSnippet';
 export * from './isJson';
 export * from './isValidMethod';
+export * from './headersArrayToObject';
+export * from './parseRestPath';
+export * from './restClientPathRouting';

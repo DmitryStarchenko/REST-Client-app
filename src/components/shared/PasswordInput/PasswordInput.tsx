@@ -21,13 +21,13 @@ interface PasswordInputProps extends InputProps {
 const PasswordInput: ReadonlyFC<PasswordInputProps> = ({ label, error, helperText, ...props }) => {
   const [showPassword, setShowPassword] = useState(false);
 
-  const handleClickShowPassword = () => setShowPassword((show) => !show);
+  const handleClickShowPassword = (): void => setShowPassword((show) => !show);
 
-  const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>): void => {
     event.preventDefault();
   };
 
-  const handleMouseUpPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleMouseUpPassword = (event: React.MouseEvent<HTMLButtonElement>): void => {
     event.preventDefault();
   };
 

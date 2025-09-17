@@ -1,8 +1,8 @@
 import { useAtomValue } from 'jotai';
 import { redirect } from 'next/navigation';
 
-import RestClientWrapper from '@/components/client/RestClientWrapper';
-import { authAtom } from '@/store/apiAtom';
+import RestClientWrapper from '@/components/client';
+import { authAtom } from '@/store';
 import { ReadonlyFC } from '@/types';
 
 const ClientPageWrapper: ReadonlyFC = () => {
