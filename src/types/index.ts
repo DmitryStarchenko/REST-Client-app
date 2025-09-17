@@ -11,3 +11,5 @@ export * from './LangSelectProps.types';
 export * from './CopyButtonProps.types';
 export * from './CodeEditorProps.types';
 export * from './RequestFormProps.types';
+export * from './RequestBuilderFormProps.types';
+export * from './HeadersBlockProps.types';

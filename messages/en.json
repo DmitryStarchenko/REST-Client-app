@@ -47,7 +47,7 @@
     "author1Name": "Dmitry Starchenko",
     "author1Description": "Hello, my name is Dima, I am 33 years old, I am from Gomel (Belarus). My first attempts to create a website were in my school years. I abandoned this idea and did something else. And now, many years later, I decided to make my dream come true...",
     "author2Name": "Roma Bubnov",
-    "author2Description": "Hello. My name is Roma Bubnov. I graduated from the Saratov State Conservatory with a degree in music performance. My fascination with programming started around 2019. Like many people, I was curious about the world behind the software we use every day. My first programming language was Java, but i quickly found that JavaScript resonated with me in a way that Java hadn&apos;t initially. I think it was the dynamic nature of the language and its versatility. In the final project, my team and I decided to try our hand at React; it is on studying this JavaScript library that I would like to focus further development.",
+    "author2Description": "Hello. My name is Roma. My first programming language was Java, but I quickly discovered that JavaScript resonated with me more. I think it has to do with the dynamic nature of language and its universality.  Our team decided to write the final project in Next js! This is a very interesting framework that is especially attractive to me because it allows create fullstack applications.",
     "author3Name": "Husan Abdigafurov",
     "author3Description": "Hello, my name is Husan. I am interested in frontend and backend, I like to understand the architecture of applications and learn new things. I am always open to new knowledge and experiments."
   }
