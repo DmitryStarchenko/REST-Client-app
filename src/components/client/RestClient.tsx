@@ -2,7 +2,6 @@
 
 import { Box, Divider, Paper, Typography } from '@mui/material';
 import axios from 'axios';
-import { useSearchParams } from 'next/navigation';
 import { useCallback, useState } from 'react';
 
 import { usePathname } from '@/i18n/navigation';
@@ -16,29 +15,25 @@ import ResponseBlock from './ResponseSection';
 
 const RestClient: ReadonlyFC = () => {
   const pathname = usePathname();
-  const searchParams = useSearchParams();
+  const locale = pathname.split('/')[1];
+  const pathWithoutLocale = pathname.replace(`/${locale}`, '');
 
   const [response, setResponse] = useState<ApiResponse | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
 
-  const lastPathRef = useRef('');
+  const fullPath = `${pathname}${searchParams.toString() ? `?${searchParams.toString()}` : ''}`;
 
-  useEffect(() => {
-    const hdrs: Record<string, string> = {};
-    headers.forEach((h) => {
-      if (h.key) hdrs[h.key] = h.value;
-    });
+  const [request, setRequest] = useState(() => parseRestPath(fullPath));
 
-    const pathObj = buildRestPath({
-      method,
-      url,
-      body: bodyText || undefined,
-      headers: hdrs,
-    });
-
-    if (lastPathRef.current === pathObj.path) return;
-    lastPathRef.current = pathObj.path;
-  }, [bodyText, headers, method, router, url]);
+  const handleChange = useCallback(
+    (data: { method: string; url: string; headers: Header[]; body?: string }) => {
+      setRequest(data);
+      const pathObj = buildRestPath(data);
+      window.history.replaceState(null, '', pathObj.path);
+    },
+    [],
+  );
 
   const sendRequest = useCallback(async () => {
     setErrorMessage(null);
