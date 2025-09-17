@@ -2,7 +2,8 @@
 
 import { Box, Divider, Paper, Typography } from '@mui/material';
 import axios from 'axios';
-import { useCallback, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
+import { useCallback, useMemo, useState } from 'react';
 
 import { usePathname } from '@/i18n/navigation';
 import supabaseClient from '@/lib/supabase/client';
@@ -15,102 +16,96 @@ import ResponseBlock from './ResponseSection';
 
 const RestClient: ReadonlyFC = () => {
   const pathname = usePathname();
-  const locale = pathname.split('/')[1];
-  const pathWithoutLocale = pathname.replace(`/${locale}`, '');
+  const searchParams = useSearchParams();
+  const fullPath = `${pathname}${searchParams.toString() ? `?${searchParams.toString()}` : ''}`;
+
+  const initialData = useMemo(() => parseRestPath(fullPath), [fullPath]);
+  const [method, setMethod] = useState(initialData.method);
+  const [url, setUrl] = useState(initialData.url);
+  const [body, setBody] = useState(initialData.body);
+  const [headers, setHeaders] = useState<Header[]>(initialData.headers);
 
   const [response, setResponse] = useState<ApiResponse | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
-  const [request, setRequest] = useState(() => parseRestPath(pathWithoutLocale));
+  const handleSubmit = useCallback(async () => {
+    setErrorMessage(null);
+    setResponse(null);
+    setLoading(true);
 
-  const handleChange = useCallback(
-    (data: { method: string; url: string; headers: Header[]; body?: string }) => {
-      setRequest(data);
-      const pathObj = buildRestPath(data);
-      window.history.replaceState(null, '', pathObj.path);
-    },
-    [],
-  );
+    const bodyForPath = body && body.trim() !== '' ? body : undefined;
 
-  const handleSubmit = useCallback(
-    async (data: { method: string; url: string; headers: Header[]; body?: string }) => {
-      setErrorMessage(null);
-      setResponse(null);
-      setLoading(true);
+    const pathObj = buildRestPath({ method, url, headers, body: bodyForPath });
+    window.history.replaceState(null, '', pathObj.path);
+    // router.replace(pathObj.path);
+    const start = performance.now();
 
-      const { method, url, headers, body } = data;
-      const bodyForPath = body && body.trim() !== '' ? body : undefined;
+    try {
+      const {
+        data: { session },
+      } = await supabaseClient.auth.getSession();
+      const accessToken = session?.access_token ?? null;
 
-      const start = performance.now();
+      const headersObj = headersArrayToObject(headers);
 
-      try {
-        const {
-          data: { session },
-        } = await supabaseClient.auth.getSession();
-        const accessToken = session?.access_token ?? null;
+      const response = await axios.post<ApiResponse>('/api/proxy', {
+        url,
+        method,
+        headers: headersObj,
+        body,
+        access_token: accessToken,
+      });
 
-        const headersObj = headersArrayToObject(headers);
+      const durationMs = performance.now() - start;
+      const timestamp = new Date().toISOString();
+      const data = response.data;
 
-        const response = await axios.post<ApiResponse>('/api/proxy', {
-          url,
-          method,
-          headers: headersObj,
-          body,
-          access_token: accessToken,
-        });
-
-        const durationMs = performance.now() - start;
-        const timestamp = new Date().toISOString();
-        const data = response.data;
-
-        const requestSizeBytes = bodyForPath ? new Blob([bodyForPath]).size : 0;
-        let responseSizeBytes = 0;
-        if (data && 'data' in data) {
-          const respStr = typeof data.data === 'string' ? data.data : JSON.stringify(data.data);
-          responseSizeBytes = new Blob([respStr]).size;
-        } else if (data && 'error' in data) {
-          responseSizeBytes = new Blob([data.error]).size;
-        }
-
-        if (data.ok) {
-          setResponse({
-            ...data,
-            durationMs: Math.round(durationMs),
-            requestSize: requestSizeBytes,
-            responseSize: responseSizeBytes,
-            timestamp,
-          });
-        } else {
-          setResponse({
-            ...data,
-            timestamp,
-            durationMs: Math.round(durationMs),
-            requestSize: requestSizeBytes,
-            responseSize: responseSizeBytes,
-            status: data.status ?? 400,
-            statusText: data.statusText ?? 'Bad Request',
-            headers: data.headers ?? {},
-          });
-        }
-      } catch (e) {
-        const message = e instanceof Error ? e.message : 'Unknown error';
-        setErrorMessage(message);
-
-        setResponse({
-          ok: false,
-          status: 500,
-          statusText: 'Internal Error',
-          headers: {},
-          error: message,
-          timestamp: new Date().toISOString(),
-        });
-      } finally {
-        setLoading(false);
+      const requestSizeBytes = bodyForPath ? new Blob([bodyForPath]).size : 0;
+      let responseSizeBytes = 0;
+      if (data && 'data' in data) {
+        const respStr = typeof data.data === 'string' ? data.data : JSON.stringify(data.data);
+        responseSizeBytes = new Blob([respStr]).size;
+      } else if (data && 'error' in data) {
+        responseSizeBytes = new Blob([data.error]).size;
       }
-    },
-    [],
-  );
+
+      if (data.ok) {
+        setResponse({
+          ...data,
+          durationMs: Math.round(durationMs),
+          requestSize: requestSizeBytes,
+          responseSize: responseSizeBytes,
+          timestamp,
+        });
+      } else {
+        setResponse({
+          ...data,
+          timestamp,
+          durationMs: Math.round(durationMs),
+          requestSize: requestSizeBytes,
+          responseSize: responseSizeBytes,
+          status: data.status ?? 400,
+          statusText: data.statusText ?? 'Bad Request',
+          headers: data.headers ?? {},
+        });
+      }
+    } catch (e) {
+      const message = e instanceof Error ? e.message : 'Unknown error';
+      setErrorMessage(message);
+
+      setResponse({
+        ok: false,
+        status: 500,
+        statusText: 'Internal Error',
+        headers: {},
+        error: message,
+        timestamp: new Date().toISOString(),
+      });
+    } finally {
+      setLoading(false);
+    }
+  }, [body, headers, method, url]);
 
   return (
     <Box p={2}>
@@ -118,22 +113,20 @@ const RestClient: ReadonlyFC = () => {
         <Typography variant="h6">REST Client</Typography>
 
         <RequestBuilderForm
-          method={request.method}
-          url={request.url}
-          body={request.body}
-          headers={request.headers}
-          onChange={handleChange}
+          method={method}
+          setMethod={setMethod}
+          url={url}
+          setUrl={setUrl}
+          headers={headers}
+          setHeaders={setHeaders}
+          body={body}
+          setBody={setBody}
           onSubmit={handleSubmit}
           loading={loading}
         />
 
         <Divider sx={{ my: 2 }} />
-        <CodeGenSection
-          method={request.method}
-          url={request.url}
-          headers={request.headers}
-          body={request.body}
-        />
+        <CodeGenSection method={method} url={url} headers={headers} body={body} />
         <Divider sx={{ my: 2 }} />
         <ResponseBlock response={response} errorMessage={errorMessage} />
       </Paper>
