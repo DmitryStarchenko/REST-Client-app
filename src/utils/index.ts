@@ -4,4 +4,4 @@ export * from './uid';
 export * from './isProtectedPath';
 export * from './generateOutputs';
 export * from './isJson';
-export * from './isValidMethod';
+export * from './isSuccess';
