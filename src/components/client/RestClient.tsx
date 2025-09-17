@@ -65,8 +65,12 @@ const RestClient: ReadonlyFC = () => {
     setLoading(true);
 
     const headersObj: Record<string, string> = {};
+    const headersObjParsed: Record<string, string> = {};
     headers.forEach((h) => {
-      if (h.key) headersObj[h.key] = replaceVariables(h.value, variablesObj);
+      if (h.key) {
+        headersObj[h.key] = h.value;
+        headersObjParsed[h.key] = replaceVariables(h.value, variablesObj);
+      }
     });
 
     const bodyForPath = bodyText && bodyText.trim() !== '' ? bodyText : undefined;
@@ -78,7 +82,7 @@ const RestClient: ReadonlyFC = () => {
       method,
       url: parsedUrl,
       body: parsedBody,
-      headers: headersObj,
+      headers: headersObjParsed,
     });
     // replace path to URL without browser history
     try {
@@ -95,20 +99,20 @@ const RestClient: ReadonlyFC = () => {
       } = await supabaseClient.auth.getSession();
       const accessToken = session?.access_token ?? null;
       // parse body to JS if it's JSON text
-      let parsedBody: unknown = undefined;
-      if (bodyForPath) {
+      let parsedJsonBody: unknown = undefined;
+      if (parsedBody) {
         try {
-          parsedBody = JSON.parse(bodyForPath);
+          parsedJsonBody = JSON.parse(parsedBody);
         } catch {
-          parsedBody = bodyForPath;
+          parsedJsonBody = parsedBody;
         }
       }
 
       const result = await axios.post<ApiResponse>('/api/proxy', {
         url: parsedUrl,
         method,
-        headers: headersObj,
-        body: parsedBody,
+        headers: headersObjParsed,
+        body: parsedJsonBody,
         access_token: accessToken,
       });
 
