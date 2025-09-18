@@ -9,7 +9,7 @@ vi.mock('next-intl', () => ({
   useTranslations: vi.fn(),
 }));
 
-vi.mock('./about.module.css', () => ({
+vi.mock('./About.module.css', () => ({
   about: 'about',
   container: 'container',
   project: 'project',
