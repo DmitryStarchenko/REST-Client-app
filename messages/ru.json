@@ -1,7 +1,7 @@
 {
   "Main": {
     "welcome": "Здравствуйте!!!",
-    "welcomeBack": "С возвращением!!!",
+    "welcomeBack": "С возвращением",
     "client": "REST КЛИЕНТ",
     "variables": "ПЕРЕМЕННЫЕ",
     "history": "ИСТОРИЯ"

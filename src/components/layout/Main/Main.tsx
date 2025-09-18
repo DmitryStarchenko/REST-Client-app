@@ -17,11 +17,18 @@ const Main: ReadonlyFC = () => {
 
   const auth = useAtomValue(authAtom);
 
+  const userEmail = auth?.user.email;
+  const separator = '@';
+  const separatorIndex = userEmail?.indexOf(separator);
+  const userName = userEmail?.slice(0, separatorIndex);
+
   return (
     <main className={styles.main}>
       {auth ? (
         <Box className={styles.container}>
-          <Typography variant="h3">{translationMain('welcomeBack')}</Typography>
+          <Typography variant="h3">
+            {translationMain('welcomeBack')}, {userName}
+          </Typography>
           <nav className={styles.mainNav}>
             <ButtonsNavPage />
           </nav>

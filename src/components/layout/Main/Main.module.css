@@ -5,9 +5,10 @@
   padding-top: var(--padding30);
 }
 
-.container h1 {
-  margin-bottom: var(--margin20);
-  text-align: center;
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .mainNav {
