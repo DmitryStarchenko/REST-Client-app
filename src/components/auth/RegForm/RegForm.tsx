@@ -57,6 +57,7 @@ const RegForm: ReadonlyFC = () => {
       />
 
       <PasswordInput
+        id="password"
         label={translationAuth('password')}
         fullWidth
         {...register('password')}
@@ -66,6 +67,7 @@ const RegForm: ReadonlyFC = () => {
         }
       />
       <PasswordInput
+        id="confirmPassword"
         label={translationAuth('confirm password')}
         fullWidth
         {...register('confirmPassword')}

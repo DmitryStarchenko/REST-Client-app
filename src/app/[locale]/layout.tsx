@@ -6,7 +6,7 @@ import NextTopLoader from 'nextjs-toploader';
 
 import Layout from '@/components/layout/Layout';
 import { routing } from '@/i18n/routing';
-import { createClient } from '@/lib/supabase/server';
+import { createClient } from '@/lib';
 import { ReadonlyFC } from '@/types/readonly.types';
 
 import Providers from './providers';

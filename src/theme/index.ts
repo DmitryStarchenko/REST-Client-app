@@ -1,2 +1,2 @@
 export * from './theme';
-export * from './EditorThemeProvider';
+export * from './MonacoThemeProvider';

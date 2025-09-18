@@ -1,23 +1,23 @@
 'use client';
 
-import Editor from '@monaco-editor/react';
-import { Box, Typography } from '@mui/material';
-import { useAtomValue } from 'jotai';
+import { Typography } from '@mui/material';
+import { useTranslations } from 'next-intl';
 import React, { useState, useEffect, useMemo } from 'react';
 
 import { LANG_MAP } from '@/constants';
 import { useCodegen } from '@/hooks';
-import { themeAtom } from '@/store';
 import { CodegenSectionProps } from '@/types';
 
-import LangTabs from './LangTabs';
+import styles from './CodegenSection.module.css';
+import LangSelect from './LangSelect';
+import { CodeEditor } from '../Shared';
 
-const CodegenSection: React.FC<CodegenSectionProps> = ({ method, url, headers, bodyText }) => {
+const CodegenSection: React.FC<CodegenSectionProps> = ({ method, url, headers, body }) => {
+  const t = useTranslations('CodegenSection');
   const langs = useMemo(() => Object.keys(LANG_MAP), []);
   const [codeLang, setCodeLang] = useState<string>(() => langs[0] ?? '');
   const [cache, setCache] = useState<Record<string, string>>({});
-  const { generateForLang } = useCodegen(method, url, headers, bodyText);
-  const editorTheme = useAtomValue(themeAtom);
+  const { generateForLang } = useCodegen(method, url, headers, body);
 
   useEffect(() => {
     if (!codeLang) return;
@@ -30,33 +30,32 @@ const CodegenSection: React.FC<CodegenSectionProps> = ({ method, url, headers, b
         .catch(() => {
           setCache((prev) => ({
             ...prev,
-            [codeLang]: 'Error generating code',
+            [codeLang]: t('Error generating code'),
           }));
         });
     }
-  }, [codeLang, cache, generateForLang]);
+  }, [codeLang, cache, generateForLang, t]);
 
   return (
-    <Box>
+    <>
       <Typography variant="subtitle1" sx={{ mb: 1 }}>
-        {langs.length > 0 ? `Generated code` : `No languages available.`}
+        {langs.length > 0 ? t(`Generated code`) : t(`No languages available`)}
       </Typography>
-      <LangTabs langs={langs} selectedLang={codeLang} onSelect={setCodeLang} />
-      <Box>
-        <Editor
-          height="calc(100vh - 400px)"
-          language={LANG_MAP[codeLang] ?? 'plaintext'}
-          value={cache[codeLang] ?? 'Generating...'}
-          theme={editorTheme}
-          options={{
-            minimap: { enabled: false },
-            fontSize: 13,
-            fontFamily: 'ui-monospace, monospace',
-            automaticLayout: true,
-          }}
-        />
-      </Box>
-    </Box>
+
+      <div className={styles.wrapper}>
+        <div className={styles.langBox}>
+          <LangSelect langs={langs} selectedLang={codeLang} onSelect={setCodeLang} />
+        </div>
+
+        <div className={styles.editorBox}>
+          <CodeEditor
+            value={cache[codeLang] ?? t('Generating')}
+            height="200px"
+            language={LANG_MAP[codeLang] ?? 'plaintext'}
+          />
+        </div>
+      </div>
+    </>
   );
 };
 

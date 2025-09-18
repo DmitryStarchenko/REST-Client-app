@@ -4,7 +4,7 @@ export interface CodegenSectionProps {
   method: string;
   url: string;
   headers: { key: string; value: string }[];
-  bodyText: string;
+  body?: string;
 }
 
 export interface UseCodeGenReturn {
