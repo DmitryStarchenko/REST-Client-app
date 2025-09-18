@@ -1,24 +1,16 @@
-export interface BuildRestPathOptions {
-  method?: string;
-  url?: string;
-  body?: string;
-  headers?: Record<string, string>;
-}
+import { Header } from './header.types';
 
-export interface BuildRestPathResult {
-  path: string;
-}
-
-export interface ParseRestPathParams {
-  method?: string;
-  url?: string;
+export interface BuildRestPathInput {
+  method: string;
+  url: string;
   body?: string;
-  searchParams?: URLSearchParams | null;
+  headers: Header[];
 }
 
 export interface ParseRestPathResult {
+  path: string;
   method: string;
-  url: string;
-  body: string;
-  headers: Record<string, string>;
+  urlB64: string;
+  bodyB64: string | undefined;
+  query: string;
 }

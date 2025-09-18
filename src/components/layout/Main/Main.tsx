@@ -19,7 +19,7 @@ const Main: ReadonlyFC = () => {
 
   return (
     <main className={styles.main}>
-      {auth?.user ? (
+      {auth ? (
         <Box className={styles.container}>
           <Typography variant="h3">{translationMain('welcomeBack')}</Typography>
           <nav className={styles.mainNav}>
