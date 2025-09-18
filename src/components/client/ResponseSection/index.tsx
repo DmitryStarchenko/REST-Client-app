@@ -1,15 +1,23 @@
 'use client';
 
 import { Box, Stack, Typography } from '@mui/material';
+import { useTranslations } from 'next-intl';
 import React from 'react';
 
 import { ResponseBlockProps } from '@/types';
 
 import { CodeEditor } from '../Shared';
 
-const ResponseBlock: React.FC<ResponseBlockProps> = ({ response, errorMessage }) => {
+const ResponseBlock: React.FC<ResponseBlockProps> = ({
+  response,
+  errorMessage,
+  unknownErrorText,
+  internalErrorText,
+}) => {
+  const t = useTranslations('ResponseBlock');
+
   const getResponseContent = (): string => {
-    if (!response) return 'No response yet';
+    if (!response) return t('No response yet');
 
     if (errorMessage) return errorMessage;
 
@@ -18,7 +26,7 @@ const ResponseBlock: React.FC<ResponseBlockProps> = ({ response, errorMessage })
         ? response.data
         : JSON.stringify(response.data, null, 2);
     } else {
-      return response.error ?? 'Error response';
+      return response.error ?? unknownErrorText;
     }
   };
 
@@ -32,7 +40,7 @@ const ResponseBlock: React.FC<ResponseBlockProps> = ({ response, errorMessage })
           mb: 2,
         }}
       >
-        <Typography variant="subtitle1">Response</Typography>
+        <Typography variant="subtitle1">{t(`Response`)}</Typography>
 
         {errorMessage ? (
           <Stack direction="row" spacing={2} sx={{ flexWrap: 'wrap' }}>
@@ -40,29 +48,29 @@ const ResponseBlock: React.FC<ResponseBlockProps> = ({ response, errorMessage })
               {errorMessage}
             </Typography>
             <Typography variant="body2" color="error">
-              Timestamp: {response?.timestamp ?? '-'}
+              {t(`Timestamp`)}: {response?.timestamp ?? '-'}
             </Typography>
           </Stack>
         ) : (
           response && (
             <Stack direction="row" spacing={2} sx={{ flexWrap: 'wrap' }}>
               <Typography variant="body2" color="success">
-                Status: {response.status ?? '-'}
+                {t(`Status`)}: {response.status ?? '-'}
               </Typography>
               <Typography variant="body2" color="success">
-                StatusText: {response.statusText ?? '-'}
+                {t(`StatusText`)}: {response.statusText ?? internalErrorText}
               </Typography>
               <Typography variant="body2" color="success">
-                Success: {String(response.ok)}
+                {t(`Success`)}: {String(response.ok)}
               </Typography>
               <Typography variant="body2" color="success">
-                Duration: {response.durationMs ?? '-'} ms
+                {t(`Duration`)}: {response.durationMs ?? '-'} {t(`ms`)}
               </Typography>
               <Typography variant="body2" color="success">
-                Response: {response.responseSize ?? '-'} bytes
+                {t(`Response`)}: {response.responseSize ?? '-'} {t('bytes')}
               </Typography>
               <Typography variant="body2" color="success">
-                Timestamp: {response.timestamp ?? '-'}
+                {t('Timestamp')}: {response.timestamp ?? '-'}
               </Typography>
             </Stack>
           )
@@ -73,7 +81,7 @@ const ResponseBlock: React.FC<ResponseBlockProps> = ({ response, errorMessage })
 
       {!errorMessage && response?.headers && (
         <Box sx={{ mt: 2 }}>
-          <Typography variant="subtitle2">Headers</Typography>
+          <Typography variant="subtitle2">{t('Headers')}</Typography>
           <CodeEditor
             value={JSON.stringify(response.headers, null, 2)}
             height="150px"

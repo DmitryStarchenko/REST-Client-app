@@ -50,5 +50,43 @@
     "author2Description": "Hello. My name is Roma. My first programming language was Java, but I quickly discovered that JavaScript resonated with me more. I think it has to do with the dynamic nature of language and its universality.  Our team decided to write the final project in Next js! This is a very interesting framework that is especially attractive to me because it allows create fullstack applications.",
     "author3Name": "Husan Abdigafurov",
     "author3Description": "Hello, my name is Husan. I am interested in frontend and backend, I like to understand the architecture of applications and learn new things. I am always open to new knowledge and experiments."
+  },
+  "RestClient": {
+    "UError": "Unknown Error",
+    "IError": "Internal Error",
+    "Title": "REST Client"
+  },
+  "ResponseBlock": {
+    "No response yet": "No response yet",
+    "Response": "Response",
+    "Timestamp": "Timestamp",
+    "Status": "Status",
+    "StatusText": "StatusText",
+    "Success": "Success",
+    "Duration": "Duration",
+    "ms": "ms",
+    "bytes": "bytes",
+    "Headers": "Headers"
+  },
+  "RequestForm": {
+    "Send": "Send",
+    "Endpoint URL": "Endpoint URL"
+  },
+  "HeadersBlock": {
+    "Headers": "Headers",
+    "Key": "Key",
+    "Tooltip": "To use this header in a request, both fields must be filled in",
+    "Value": "Value",
+    "Delete": "Delete"
+  },
+  "BodyBlock": {
+    "Body": "Body",
+    "Copy base64": "Copy base64"
+  },
+  "CodegenSection": {
+    "Error generating code": "Error generating code",
+    "Generated code": "Generated code",
+    "No languages available": "No languages available",
+    "Generating": "Generating..."
   }
 }

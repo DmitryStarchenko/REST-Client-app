@@ -1,6 +1,7 @@
 'use client';
 
 import { Grid, Select, MenuItem, TextField, Button, Stack } from '@mui/material';
+import { useTranslations } from 'next-intl';
 
 import { METHODS } from '@/constants';
 import { ReadonlyFC, RequestFormProps } from '@/types';
@@ -13,6 +14,7 @@ const RequestForm: ReadonlyFC<RequestFormProps> = ({
   sendRequest,
   loading,
 }) => {
+  const t = useTranslations('RequestForm');
   return (
     <Grid container spacing={0.1} alignItems="center" sx={{ mt: 1.5, display: 'flex' }}>
       <Grid sx={{ xs: 12, md: 2 }}>
@@ -33,7 +35,7 @@ const RequestForm: ReadonlyFC<RequestFormProps> = ({
       <Grid sx={{ flexGrow: 1, position: 'relative' }}>
         <TextField
           id="endpoint-url"
-          label="Endpoint URL"
+          label={t('Endpoint URL')}
           placeholder="https://jsonplaceholder.typicode.com/posts/1"
           value={url}
           onChange={(e) => setUrl(e.target.value)}
@@ -45,7 +47,7 @@ const RequestForm: ReadonlyFC<RequestFormProps> = ({
       <Grid sx={{ xs: 12, md: 2 }}>
         <Stack direction="row" spacing={1}>
           <Button variant="contained" onClick={sendRequest} loading={loading}>
-            Send
+            {t(`Send`)}
           </Button>
         </Stack>
       </Grid>

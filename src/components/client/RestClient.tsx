@@ -2,6 +2,7 @@
 
 import { Box, Divider, Paper, Typography } from '@mui/material';
 import { useSearchParams } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 import { useCallback, useMemo, useState } from 'react';
 
 import { usePathname } from '@/i18n/navigation';
@@ -13,6 +14,7 @@ import RequestBuilderForm from './RequestForm';
 import ResponseBlock from './ResponseSection';
 
 const RestClient: ReadonlyFC = () => {
+  const t = useTranslations('RestClient');
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const fullPath = `${pathname}${searchParams.toString() ? `?${searchParams.toString()}` : ''}`;
@@ -54,7 +56,7 @@ const RestClient: ReadonlyFC = () => {
   return (
     <Box p={2}>
       <Paper elevation={2} sx={{ p: 2 }}>
-        <Typography variant="h6">REST Client</Typography>
+        <Typography variant="h6">{t(`Title`)}</Typography>
 
         <RequestBuilderForm
           method={method}
@@ -72,7 +74,12 @@ const RestClient: ReadonlyFC = () => {
         <Divider sx={{ my: 2 }} />
         <CodeGenSection method={method} url={url} headers={headers} body={body} />
         <Divider sx={{ my: 2 }} />
-        <ResponseBlock response={response} errorMessage={errorMessage} />
+        <ResponseBlock
+          response={response}
+          errorMessage={errorMessage}
+          unknownErrorText={t('UError')}
+          internalErrorText={t('IError')}
+        />
       </Paper>
     </Box>
   );

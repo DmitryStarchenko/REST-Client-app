@@ -1,6 +1,7 @@
 'use client';
 
 import { Typography } from '@mui/material';
+import { useTranslations } from 'next-intl';
 import React, { useState, useEffect, useMemo } from 'react';
 
 import { LANG_MAP } from '@/constants';
@@ -12,6 +13,7 @@ import LangSelect from './LangSelect';
 import { CodeEditor } from '../Shared';
 
 const CodegenSection: React.FC<CodegenSectionProps> = ({ method, url, headers, body }) => {
+  const t = useTranslations('CodegenSection');
   const langs = useMemo(() => Object.keys(LANG_MAP), []);
   const [codeLang, setCodeLang] = useState<string>(() => langs[0] ?? '');
   const [cache, setCache] = useState<Record<string, string>>({});
@@ -28,16 +30,16 @@ const CodegenSection: React.FC<CodegenSectionProps> = ({ method, url, headers, b
         .catch(() => {
           setCache((prev) => ({
             ...prev,
-            [codeLang]: 'Error generating code',
+            [codeLang]: t('Error generating code'),
           }));
         });
     }
-  }, [codeLang, cache, generateForLang]);
+  }, [codeLang, cache, generateForLang, t]);
 
   return (
     <>
       <Typography variant="subtitle1" sx={{ mb: 1 }}>
-        {langs.length > 0 ? `Generated code` : `No languages available.`}
+        {langs.length > 0 ? t(`Generated code`) : t(`No languages available`)}
       </Typography>
 
       <div className={styles.wrapper}>
@@ -47,7 +49,7 @@ const CodegenSection: React.FC<CodegenSectionProps> = ({ method, url, headers, b
 
         <div className={styles.editorBox}>
           <CodeEditor
-            value={cache[codeLang] ?? 'Generating...'}
+            value={cache[codeLang] ?? t('Generating')}
             height="200px"
             language={LANG_MAP[codeLang] ?? 'plaintext'}
           />

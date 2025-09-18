@@ -18,7 +18,6 @@ export const CodeEditor: React.FC<CodeEditorProps> = ({
   readOnly = false,
 }) => {
   const theme = useAtomValue(themeAtom);
-
   return (
     <Box sx={{ mt: 1, borderRadius: 1, overflow: 'hidden', position: 'relative' }}>
       <Editor

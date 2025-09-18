@@ -9,12 +9,14 @@ import {
   Tooltip,
   Typography,
 } from '@mui/material';
+import { useTranslations } from 'next-intl';
 import React from 'react';
 
 import { HeadersBlockProps } from '@/types';
 import { uid } from '@/utils';
 
 const HeadersBlock: React.FC<HeadersBlockProps> = ({ headers, setHeaders }) => {
+  const t = useTranslations('HeadersBlock');
   const handleChange = (id: string, key: string, value: string): void => {
     const newHeaders = headers.map((h) => (h.id === id ? { ...h, key, value } : h));
 
@@ -33,7 +35,7 @@ const HeadersBlock: React.FC<HeadersBlockProps> = ({ headers, setHeaders }) => {
 
   return (
     <Box>
-      <Typography variant="subtitle1">Headers</Typography>
+      <Typography variant="subtitle1">{t(`Headers`)}</Typography>
       <Stack spacing={1} sx={{ mt: 1 }}>
         {headers.map((h, index) => {
           const isLast = index === headers.length - 1;
@@ -50,7 +52,7 @@ const HeadersBlock: React.FC<HeadersBlockProps> = ({ headers, setHeaders }) => {
             >
               <Stack direction="row" spacing={1}>
                 <TextField
-                  placeholder="Key"
+                  placeholder={t(`Key`)}
                   value={h.key}
                   onChange={(e) => handleChange(h.id, e.target.value, h.value)}
                   size="small"
@@ -59,11 +61,7 @@ const HeadersBlock: React.FC<HeadersBlockProps> = ({ headers, setHeaders }) => {
                     input: {
                       endAdornment: incomplete ? (
                         <InputAdornment position="end">
-                          <Tooltip
-                            arrow
-                            placement="right"
-                            title="To use this header in a request, both fields must be filled in."
-                          >
+                          <Tooltip arrow placement="right" title={t(`Tooltip`)}>
                             <InfoOutlined color="warning" fontSize="small" opacity="0.6" />
                           </Tooltip>
                         </InputAdornment>
@@ -72,7 +70,7 @@ const HeadersBlock: React.FC<HeadersBlockProps> = ({ headers, setHeaders }) => {
                   }}
                 />
                 <TextField
-                  placeholder="Value"
+                  placeholder={t(`Value`)}
                   value={h.value}
                   onChange={(e) => handleChange(h.id, h.key, e.target.value)}
                   size="small"
@@ -81,7 +79,7 @@ const HeadersBlock: React.FC<HeadersBlockProps> = ({ headers, setHeaders }) => {
               </Stack>
 
               {(!isLast || !isEmpty) && (
-                <Tooltip title="Delete">
+                <Tooltip title={t(`Delete`)}>
                   <IconButton
                     className="delete-btn"
                     onClick={() => handleRemove(h.id)}
