@@ -5,7 +5,7 @@ import { hasLocale, NextIntlClientProvider } from 'next-intl';
 
 import Layout from '@/components/layout/Layout';
 import { routing } from '@/i18n/routing';
-import { createClient } from '@/lib/supabase/server';
+import { getValidatedClientSession } from '@/lib/supabase/session';
 import { ReadonlyFC } from '@/types/readonly.types';
 
 import Providers from './providers';
@@ -27,17 +27,13 @@ const RootLayout: ReadonlyFC<RootLayoutProps> = async ({ children, params }) => 
     notFound();
   }
 
-  const supabase = await createClient();
-
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const session = await getValidatedClientSession();
 
   return (
     <html lang={locale} suppressHydrationWarning>
       <body>
         <NextIntlClientProvider locale={locale}>
-          <Providers initialUser={user}>
+          <Providers initialSession={session}>
             <Layout>{children}</Layout>
           </Providers>
         </NextIntlClientProvider>

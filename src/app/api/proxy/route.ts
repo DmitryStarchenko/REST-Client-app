@@ -1,7 +1,7 @@
 import axios, { AxiosRequestHeaders } from 'axios';
 import { NextRequest, NextResponse } from 'next/server';
 
-import { supabaseAdmin } from '@/lib';
+import { supabaseAdmin } from '@/lib/supabase/admin';
 import { ApiResponse } from '@/types';
 
 export async function POST(req: NextRequest): Promise<NextResponse<ApiResponse>> {

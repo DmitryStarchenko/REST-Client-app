@@ -7,3 +7,5 @@ export * from './isValidMethod';
 export * from './headersArrayToObject';
 export * from './parseRestPath';
 export * from './restClientPathRouting';
+export * from './supabaseClient';
+export * from './sendRestRequest';
