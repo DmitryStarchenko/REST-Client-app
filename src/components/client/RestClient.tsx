@@ -3,20 +3,16 @@
 import { Box, Divider, Paper, Typography } from '@mui/material';
 import { useSearchParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
-import React, { useCallback, useState } from 'react';
 import { useCallback, useMemo, useState } from 'react';
 import { useLocalStorage } from 'usehooks-ts';
 
 import { VARIABLES_KEY } from '@/constants';
 import { usePathname } from '@/i18n/navigation';
-import { ApiResponse, IVariable, ReadonlyFC } from '@/types';
-import { ApiResponse, Header, ReadonlyFC } from '@/types';
+import { ApiResponse, IVariable, ReadonlyFC, Header } from '@/types';
 import { parseRestPath, sendRestRequest } from '@/utils';
 
 import CodeGenSection from './CodegenSection';
-import CodeGenSection from './CodegenSection';
 import RequestBuilderForm from './RequestForm';
-import ResponseBlock from './ResponseSection';
 import ResponseBlock from './ResponseSection';
 
 const RestClient: ReadonlyFC = () => {

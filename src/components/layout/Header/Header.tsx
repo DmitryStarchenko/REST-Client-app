@@ -41,7 +41,7 @@ const Header: ReadonlyFC = () => {
             <ButtonsNavPage />
             <Link
               className={styles.navButton}
-              href={'/login'}
+              href={'/'}
               onClick={() => supabaseClient.auth.signOut()}
             >
               {translationNav('signOut')}
