@@ -1,13 +1,13 @@
 .loader {
   width: 50px;
   height: 50px;
-  margin-top: 150px;
+  margin: auto;
   background-image: url('/assets/logoMini.png');
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
   border-radius: var(--border-radius);
-  animation: loader 4s linear infinite;
+  animation: loader 3s linear infinite;
 }
 
 @keyframes loader {
