@@ -1,14 +1,12 @@
 'use client';
 
 import { Box, Divider, Paper, Typography } from '@mui/material';
-import axios from 'axios';
 import { useSearchParams } from 'next/navigation';
 import { useCallback, useMemo, useState } from 'react';
 
 import { usePathname } from '@/i18n/navigation';
-import supabaseClient from '@/lib/supabase/client';
 import { ApiResponse, Header, ReadonlyFC } from '@/types';
-import { headersArrayToObject, parseRestPath, buildRestPath } from '@/utils';
+import { parseRestPath, sendRestRequest } from '@/utils';
 
 import CodeGenSection from './CodegenSection';
 import RequestBuilderForm from './RequestForm';
@@ -34,66 +32,12 @@ const RestClient: ReadonlyFC = () => {
     setResponse(null);
     setLoading(true);
 
-    const bodyForPath = body && body.trim() !== '' ? body : undefined;
-
-    const pathObj = buildRestPath({ method, url, headers, body: bodyForPath });
-    window.history.replaceState(null, '', pathObj.path);
-
-    const start = performance.now();
-
     try {
-      const {
-        data: { session },
-      } = await supabaseClient.auth.getSession();
-      const accessToken = session?.access_token ?? null;
-
-      const headersObj = headersArrayToObject(headers);
-
-      const response = await axios.post<ApiResponse>('/api/proxy', {
-        url,
-        method,
-        headers: headersObj,
-        body,
-        access_token: accessToken,
-      });
-
-      const durationMs = performance.now() - start;
-      const timestamp = new Date().toISOString();
-      const data = response.data;
-
-      const requestSizeBytes = bodyForPath ? new Blob([bodyForPath]).size : 0;
-      let responseSizeBytes = 0;
-      if (data && 'data' in data) {
-        const respStr = typeof data.data === 'string' ? data.data : JSON.stringify(data.data);
-        responseSizeBytes = new Blob([respStr]).size;
-      } else if (data && 'error' in data) {
-        responseSizeBytes = new Blob([data.error]).size;
-      }
-
-      if (data.ok) {
-        setResponse({
-          ...data,
-          durationMs: Math.round(durationMs),
-          requestSize: requestSizeBytes,
-          responseSize: responseSizeBytes,
-          timestamp,
-        });
-      } else {
-        setResponse({
-          ...data,
-          timestamp,
-          durationMs: Math.round(durationMs),
-          requestSize: requestSizeBytes,
-          responseSize: responseSizeBytes,
-          status: data.status ?? 400,
-          statusText: data.statusText ?? 'Bad Request',
-          headers: data.headers ?? {},
-        });
-      }
+      const result = await sendRestRequest({ method, url, headers, body });
+      setResponse(result);
     } catch (e) {
       const message = e instanceof Error ? e.message : 'Unknown error';
       setErrorMessage(message);
-
       setResponse({
         ok: false,
         status: 500,
