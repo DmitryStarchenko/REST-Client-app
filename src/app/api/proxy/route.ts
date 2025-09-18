@@ -8,6 +8,7 @@ export async function POST(req: NextRequest): Promise<NextResponse<ApiResponse>>
   try {
     const payload = await req.json();
     const { url, method = 'GET', headers = {}, body, timeoutMs = 30_000, access_token } = payload;
+
     let userId: string | null = null;
     if (access_token) {
       const {
@@ -18,29 +19,56 @@ export async function POST(req: NextRequest): Promise<NextResponse<ApiResponse>>
 
     const requestHeaders: AxiosRequestHeaders = { ...headers };
 
-    const start = Date.now();
-    const axiosRes = await axios.request({
-      url,
-      method,
-      headers: requestHeaders,
-      data: body === '' ? undefined : body,
-      responseType: 'arraybuffer',
-      timeout: timeoutMs,
-      validateStatus: () => true,
-    });
-    const durationMs = Date.now() - start;
+    const start = performance.now();
 
-    let responseText: string;
+    let axiosRes;
+    let responseText = '';
+    let errorDetails: string | null = null;
+
+    let parsedBody = body;
     try {
-      responseText = Buffer.from(axiosRes.data).toString('utf-8');
+      parsedBody = body ? JSON.parse(body) : undefined;
     } catch {
-      responseText = String(axiosRes.data);
+      parsedBody = body;
     }
 
+    try {
+      axiosRes = await axios.request({
+        url,
+        method,
+        headers: requestHeaders,
+        data: parsedBody,
+        responseType: 'arraybuffer',
+        timeout: timeoutMs,
+        validateStatus: () => true,
+      });
+
+      try {
+        responseText = Buffer.from(axiosRes.data).toString('utf-8');
+      } catch {
+        responseText = String(axiosRes.data);
+      }
+    } catch (err) {
+      errorDetails = err instanceof Error ? err.message : 'Unknown error';
+    }
+
+    const durationMs = performance.now() - start;
+    const timestamp = new Date().toISOString();
+
+    const requestSize = body ? new Blob([body]).size : 0;
+    const responseSize = responseText ? Buffer.byteLength(responseText, 'utf8') : 0;
+
+    const statusCode = axiosRes?.status ?? 500;
+    const statusText = axiosRes?.statusText ?? (errorDetails ? 'Request Failed' : 'Internal Error');
+    const responseHeaders = axiosRes?.headers ?? {};
+
     let parsed: unknown = responseText;
+
     try {
       parsed = JSON.parse(responseText);
-    } catch {}
+    } catch {
+      parsed = responseText;
+    }
 
     try {
       await supabaseAdmin.from('request_history').insert({
@@ -49,35 +77,44 @@ export async function POST(req: NextRequest): Promise<NextResponse<ApiResponse>>
         url,
         headers: JSON.stringify(headers),
         body: body ?? null,
-        response_status: axiosRes.status,
-        response_data: responseText,
-        duration_ms: durationMs,
-        timestamp: new Date().toISOString(),
+        response_status: statusCode,
+        response_data: responseText || null,
+        duration_ms: Math.round(durationMs),
+        timestamp,
+        request_size: requestSize,
+        response_size: responseSize,
+        error_details: errorDetails,
       });
     } catch (err) {
       console.error('Failed to save request history:', err);
     }
 
-    if (axiosRes.status >= 200 && axiosRes.status < 300) {
+    if (statusCode >= 200 && statusCode < 300) {
       const successResponse: ApiResponse = {
         ok: true,
-        status: axiosRes.status,
-        statusText: axiosRes.statusText,
-        headers: axiosRes.headers,
+        status: statusCode,
+        statusText,
+        headers: responseHeaders,
         data: parsed,
-        durationMs,
+        durationMs: Math.round(durationMs),
+        timestamp,
+        requestSize,
+        responseSize,
       };
-      return NextResponse.json(successResponse, { status: axiosRes.status });
+      return NextResponse.json(successResponse, { status: statusCode });
     } else {
       const errorResponse: ApiResponse = {
         ok: false,
-        status: axiosRes.status,
-        statusText: axiosRes.statusText,
-        headers: axiosRes.headers,
-        error: responseText,
-        durationMs,
+        status: statusCode,
+        statusText,
+        headers: responseHeaders,
+        error: errorDetails || responseText,
+        durationMs: Math.round(durationMs),
+        timestamp,
+        requestSize,
+        responseSize,
       };
-      return NextResponse.json(errorResponse, { status: axiosRes.status });
+      return NextResponse.json(errorResponse, { status: statusCode });
     }
   } catch (err) {
     const message = err instanceof Error ? err.message : 'Unknown error';
