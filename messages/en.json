@@ -81,7 +81,8 @@
   },
   "BodyBlock": {
     "Body": "Body",
-    "Copy base64": "Copy base64"
+    "Copy base64": "Copy base64",
+    "Invalid JSON": "Invalid JSON"
   },
   "CodegenSection": {
     "Error generating code": "Error generating code",

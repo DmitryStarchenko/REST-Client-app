@@ -60,11 +60,11 @@
     "Response": "Ответ",
     "Timestamp": "Время",
     "Status": "Статус",
-    "StatusText": "Статустекст",
+    "StatusText": "Текст",
     "Success": "Успех",
     "Duration": "Продолжительность",
     "ms": "мс",
-    "bytes": "байты",
+    "bytes": "байт",
     "Headers": "Заголовки"
   },
   "RequestForm": {
@@ -80,12 +80,13 @@
   },
   "BodyBlock": {
     "Body": "Тело",
-    "Copy base64": "Копироать base64"
+    "Copy base64": "Копироать base64",
+    "Invalid JSON": "Некорректный JSON"
   },
 
   "CodegenSection": {
     "Error generating code": "Ошибка генерации кода",
-    "Generated code": "Генерация кода",
+    "Generated code": "Генератор кода",
     "No languages available": "Нет доступных языков",
     "Generating": "Генерация..."
   }

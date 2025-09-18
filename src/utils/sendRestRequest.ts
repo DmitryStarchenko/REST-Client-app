@@ -1,22 +1,15 @@
 import axios from 'axios';
 
 import { getValidatedClientSession } from '@/lib/supabase/session';
-import { ApiResponse, Header } from '@/types';
+import { ApiResponse, BuildRestPathInput } from '@/types';
 import { headersArrayToObject, buildRestPath } from '@/utils';
-
-interface RequestParams {
-  method: string;
-  url: string;
-  headers: Header[];
-  body?: string;
-}
 
 export async function sendRestRequest({
   method,
   url,
   headers,
   body,
-}: RequestParams): Promise<ApiResponse> {
+}: BuildRestPathInput): Promise<ApiResponse> {
   const bodyForPath = body && body.trim() !== '' ? body : undefined;
 
   const pathObj = buildRestPath({ method, url, headers, body: bodyForPath });

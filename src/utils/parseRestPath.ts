@@ -1,10 +1,12 @@
+'use client';
 import { BuildRestPathInput, Header } from '@/types';
 
 import { decodeBase64 } from './base64';
 import { uid } from './uid';
 
-export function parseRestPath(path: string): BuildRestPathInput {
-  const cleanPath = path.replace(/^\/client\//, '');
+export const parseRestPath = (path: string): BuildRestPathInput => {
+  const idx = path.indexOf('/client/');
+  const cleanPath = idx >= 0 ? path.slice(idx + '/client/'.length) : '';
 
   const [mainPart, queryString = ''] = cleanPath.split('#');
 
@@ -27,4 +29,4 @@ export function parseRestPath(path: string): BuildRestPathInput {
   }
 
   return { method, url, body, headers };
-}
+};
