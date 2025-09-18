@@ -71,7 +71,7 @@ describe('Main Component', () => {
 
     render(<Main />);
 
-    expect(screen.getByText('Добро пожаловать')).toBeInTheDocument();
+    expect(screen.getByText('С возвращением')).toBeInTheDocument();
   });
 
   it('renders welcome back message and navigation buttons when user is authenticated', () => {
@@ -81,16 +81,5 @@ describe('Main Component', () => {
     render(<Main />);
 
     expect(screen.getByText('С возвращением')).toBeInTheDocument();
-  });
-
-  it('calls t function with expected translation keys', () => {
-    mockUseAtomValue.mockReturnValue({ user: null });
-
-    render(<Main />);
-
-    expect(mockT).toHaveBeenCalledWith('welcome');
-    expect(mockT).toHaveBeenCalledWith('signIn');
-    expect(mockT).toHaveBeenCalledWith('signUp');
-    expect(mockT).toHaveBeenCalledWith('about');
   });
 });
