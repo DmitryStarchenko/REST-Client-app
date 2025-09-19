@@ -57,7 +57,7 @@
     "Title": "REST Client"
   },
   "ResponseBlock": {
-    "No response yet": "No response yet",
+    "No response yet": "No data yet",
     "Response": "Response",
     "Timestamp": "Timestamp",
     "Status": "Status",
@@ -81,7 +81,7 @@
   },
   "BodyBlock": {
     "Body": "Body",
-    "Copy base64": "Copy base64",
+    "Copy base64": "Copy Base 64",
     "Invalid JSON": "Invalid JSON"
   },
   "CodegenSection": {
@@ -102,5 +102,18 @@
     "responseSize": "Response size (b)",
     "duration": "Duration (ms)",
     "error_text": "Error"
+  },
+  "CopyButton": {
+    "Copy content": "Copy content this block"
+  },
+  "TopSection": {
+    "Request Headers": "Request Headers",
+    "Request Body": "Request Body",
+    "Codegen": "Codegen"
+  },
+  "BottomTabsBlock": {
+    "Response": "Response",
+    "Response Headers": "Response Headers",
+    "Statistic Fields": "Statistic Data"
   }
 }

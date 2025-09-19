@@ -2,11 +2,13 @@
 
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import { IconButton, Snackbar, Tooltip } from '@mui/material';
+import { useTranslations } from 'next-intl';
 import React, { useState } from 'react';
 
 import { CopyButtonProps } from '@/types';
 
 export const CopyButton: React.FC<CopyButtonProps> = ({ getValue }) => {
+  const t = useTranslations('CopyButton');
   const [open, setOpen] = useState(false);
 
   const handleCopy = async (): Promise<void> => {
@@ -22,7 +24,7 @@ export const CopyButton: React.FC<CopyButtonProps> = ({ getValue }) => {
 
   return (
     <>
-      <Tooltip title="Copy content" placement="left">
+      <Tooltip title={t('Copy content')} placement="left">
         <IconButton
           size="small"
           onClick={handleCopy}

@@ -3,7 +3,7 @@ import { Header } from './header.types';
 export interface BuildRestPathInput {
   method: string;
   url: string;
-  body?: string;
+  body: string;
   headers: Header[];
 }
 

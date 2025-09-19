@@ -14,7 +14,7 @@ export const parseRestPath = (path: string): BuildRestPathInput => {
 
   const method = decodeURIComponent(methodPart || 'GET');
   const url = urlB64 ? decodeBase64(urlB64) : '';
-  const body = bodyB64 ? decodeBase64(bodyB64) : undefined;
+  const body = bodyB64 ? decodeBase64(bodyB64) : '';
 
   const headers: Header[] = [];
   if (queryString) {
