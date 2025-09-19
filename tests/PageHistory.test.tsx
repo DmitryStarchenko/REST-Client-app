@@ -20,7 +20,7 @@ vi.mock('./History.module.css', () => ({
   main: 'mock-main-class',
 }));
 
-import LayoutHistory from '../src/components/layout/History/History';
+import LayoutHistory from '../src/app/[locale]/(protected)/history/page';
 
 describe('LayoutHistory', () => {
   it('should render without errors', () => {
