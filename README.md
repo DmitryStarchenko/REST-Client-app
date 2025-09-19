@@ -1,5 +1,17 @@
 # REST Client app (PUTMAN)
 
+<p align="center"><img width="300" height="300" src="./public/assets/logoMini.png"></p>
+
+## For reviewers
+
+In the root of the project, add the following to the ".env" file:
+
+```javascript
+NEXT_PUBLIC_SUPABASE_URL=https://gseobzrkozgmmygrltlp.supabase.co
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=sb_publishable_uXbwrJBdIiOzgKrRTlYDMQ_bN4cUG8Y
+SUPABASE_SERVICE_ROLE_KEY=sb_secret_HQk5Z7KAJzQ2CoyB37PHEg_vxVOsO8V
+```
+
 ## Description
 
 The final project of the React Q3 2025 course from RSSchool.
@@ -77,15 +89,16 @@ To run the unit tests:
 
 |   Technology    |                                                                             Version                                                                              |
 | :-------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------: |
-|   **NextJS**    |                       [![NextJS](https://img.shields.io/badge/NextJS-^15.5.2-61DAFB?logo=nextdotjs&logoColor=white)](https://nextjs.org/)                        |
+|   **NextJS**    |                       [![NextJS](https://img.shields.io/badge/NextJS-^15.5.2-919191?logo=nextdotjs&logoColor=white)](https://nextjs.org/)                        |
 |    **React**    |                           [![React](https://img.shields.io/badge/React-^19.1.0-61DAFB?logo=react&logoColor=white)](https://react.dev/)                           |
 | **TypeScript**  |             [![TypeScript](https://img.shields.io/badge/TypeScript-~5.7.2-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)              |
-| **Material UI** |                      [![Material-UI](https://img.shields.io/badge/Material--UI-v7.3.2-blue.svg?logo=mui&logoColor=white)](https://mui.com/)                      |
+| **Material UI** |                       [![Material-UI](https://img.shields.io/badge/Material--UI-v7.3.2-000C61?logo=mui&logoColor=white)](https://mui.com/)                       |
 |     **CSS**     |                     [![CSS](https://img.shields.io/badge/CSS-v3-639?logo=css&logoColor=fff)](https://www.w3.org/Style/CSS/Overview.en.html)                      |
-|   **Vitest**    |                         [![Vitest](https://img.shields.io/badge/Vitest-^3.2.4-C21325?logo=vitest&logoColor=white)](https://vitest.dev/)                          |
-|    **Jotai**    |                           [![Jotai](https://img.shields.io/badge/Jotai-^2.13.1-646CFF?logo=jotai&logoColor=white)](https://jotai.org/)                           |
-|  **Supabase**   |                     [![Supabase](https://img.shields.io/badge/Supabase-^2.57.1-646CFF?logo=supabase&logoColor=white)](https://supabase.com/)                     |
-|   **i18next**   |                     [![i18next](https://img.shields.io/badge/i18next-^2.57.1-646CFF?logo=i18next&logoColor=white)](https://www.i18next.com/)                     |
+|   **Vitest**    |                         [![Vitest](https://img.shields.io/badge/Vitest-^3.2.4-8AFF82?logo=vitest&logoColor=white)](https://vitest.dev/)                          |
+|    **Jotai**    |                           [![Jotai](https://img.shields.io/badge/Jotai-^2.13.1-black?logo=jotai&logoColor=white)](https://jotai.org/)                            |
+|  **Supabase**   |                     [![Supabase](https://img.shields.io/badge/Supabase-^2.57.1-10AD00?logo=supabase&logoColor=white)](https://supabase.com/)                     |
+|   **i18next**   |                     [![i18next](https://img.shields.io/badge/i18next-^25.4.2-89A885?logo=i18next&logoColor=white)](https://www.i18next.com/)                     |
+|     **Zod**     |                               [![Zod](https://img.shields.io/badge/Zod-^4.1.5-6687FA?logo=zod&logoColor=white)](https://zod.dev/)                                |
 |   **ESLint**    |                         [![ESLint](https://img.shields.io/badge/ESLint-^9.26.0-4B32C3?logo=eslint&logoColor=white)](https://eslint.org/)                         |
 |  **Prettier**   |                      [![Prettier](https://img.shields.io/badge/Prettier-^3.6.2-F7B93E?logo=prettier&logoColor=white)](https://prettier.io/)                      |
 | **Commitlint**  |               [![Commitlint](https://img.shields.io/badge/Commitlint-^19.8.1-3F51B5?logo=commitlint&logoColor=white)](https://commitlint.js.org/)                |
@@ -105,5 +118,4 @@ To run the unit tests:
 - [Alexei Skutov](https://github.com/KaPuTaH-UluTka)
 - [Igor Shaymukhametov](https://github.com/knyazigor)
 
-
-<a href="https://rs.school/"><img width="50" height="50" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTrImqYFcE49SmOYUm5jaqXz4L8UC0QFBrbQ&s" alt="RSSchool" title="RSSchool"/></a>
+<a href="https://rs.school/" align="center"><img width="50" height="50" src="./public/assets/logoRS.png"></a>
