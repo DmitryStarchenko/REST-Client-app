@@ -75,6 +75,7 @@ const LayoutHistoryContent: ReadonlyFC = async () => {
               <TableCell>{translationHistory('requestSize')}</TableCell>
               <TableCell>{translationHistory('responseSize')}</TableCell>
               <TableCell>{translationHistory('duration')}</TableCell>
+              <TableCell>{translationHistory('error_text')}</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -82,13 +83,14 @@ const LayoutHistoryContent: ReadonlyFC = async () => {
               <TableRow key={item.id}>
                 <TableCell>{formatDate(item.timestamp)}</TableCell>
                 <TableCell>{item.method}</TableCell>
-                <TableCell>{item.status ? item.status : 'N/A'}</TableCell>
+                <TableCell>{item.response_status}</TableCell>
                 <TableCell>
-                  <Link href={item.url_path}>{item.url}</Link>
+                  <Link href={item.path}>{item.url}</Link>
                 </TableCell>
                 <TableCell>{item.request_size}</TableCell>
                 <TableCell>{item.response_size}</TableCell>
-                <TableCell>{item.duration}</TableCell>
+                <TableCell>{item.duration_ms}</TableCell>
+                <TableCell>{item.error_details ? item.error_details : 'N/A'}</TableCell>
               </TableRow>
             ))}
           </TableBody>
