@@ -1,0 +1,21 @@
+.loader {
+  width: 50px;
+  height: 50px;
+  margin: auto;
+  background-image: url('/assets/logoMini.png');
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  border-radius: var(--border-radius);
+  animation: loader 3s linear infinite;
+}
+
+@keyframes loader {
+  0% {
+    transform: rotate(-360deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}

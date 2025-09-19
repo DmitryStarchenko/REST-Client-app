@@ -37,15 +37,15 @@ vi.mock('@/i18n/navigation', () => ({
   usePathname: vi.fn(() => '/'),
 }));
 
-vi.mock('./components/buttonNavPage/ButtonsNavPage', () => ({
+vi.mock('../src/components/layout/Main/components/buttonNavPage/ButtonsNavPage', () => ({
   default: vi.fn(() => <div data-testid="buttons-nav-page" />),
 }));
 
-vi.mock('../Header/ButtonsSignInUp/ButtonsSignInUp', () => ({
+vi.mock('../src/components/layout/Header/ButtonsSignInUp/ButtonsSignInUp', () => ({
   default: vi.fn(() => <div data-testid="buttons-sign-in-up" />),
 }));
 
-vi.mock('./components/About/About', () => ({
+vi.mock('../src/components/layout/Main/components/about/About', () => ({
   default: vi.fn(() => <div data-testid="about" />),
 }));
 
@@ -54,43 +54,47 @@ const mockUseAtomValue = vi.mocked(useAtomValue);
 describe('Main Component', () => {
   beforeEach(() => {
     vi.clearAllMocks();
-
-    mockT.mockImplementation((key: string) => {
+    mockT.mockImplementation((key) => {
       const translations: Record<string, string> = {
-        welcome: 'Добро пожаловать',
         welcomeBack: 'С возвращением',
-        signIn: 'Войти',
-        signUp: 'Зарегистрироваться',
+        welcome: 'Добро пожаловать',
       };
       return translations[key] || key;
     });
   });
 
   it('renders welcome message and sign in/up buttons when user is not authenticated', () => {
-    mockUseAtomValue.mockReturnValue({ user: null });
+    mockUseAtomValue.mockReturnValue(null);
 
     render(<Main />);
 
     expect(screen.getByText('Добро пожаловать')).toBeInTheDocument();
+    expect(screen.getByTestId('buttons-sign-in-up')).toBeInTheDocument();
+    expect(screen.queryByTestId('buttons-nav-page')).not.toBeInTheDocument();
   });
 
   it('renders welcome back message and navigation buttons when user is authenticated', () => {
-    const mockUser = { id: '1', name: 'Test User', email: 'test@example.com' };
-    mockUseAtomValue.mockReturnValue({ user: mockUser });
+    const mockUser = {
+      user: {
+        id: '1',
+        name: 'Test User',
+        email: 'testuser@example.com',
+      },
+    };
+    mockUseAtomValue.mockReturnValue(mockUser);
 
     render(<Main />);
 
-    expect(screen.getByText('С возвращением')).toBeInTheDocument();
+    expect(screen.getByText('С возвращением, testuser')).toBeInTheDocument();
+    expect(screen.getByTestId('buttons-nav-page')).toBeInTheDocument();
+    expect(screen.queryByTestId('buttons-sign-in-up')).not.toBeInTheDocument();
   });
 
-  it('calls t function with expected translation keys', () => {
-    mockUseAtomValue.mockReturnValue({ user: null });
+  it('renders About component in both cases', () => {
+    mockUseAtomValue.mockReturnValue(null);
 
     render(<Main />);
 
-    expect(mockT).toHaveBeenCalledWith('welcome');
-    expect(mockT).toHaveBeenCalledWith('signIn');
-    expect(mockT).toHaveBeenCalledWith('signUp');
-    expect(mockT).toHaveBeenCalledWith('about');
+    expect(screen.getByTestId('about')).toBeInTheDocument();
   });
 });

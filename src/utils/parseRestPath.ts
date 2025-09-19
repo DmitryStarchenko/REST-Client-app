@@ -8,7 +8,7 @@ export const parseRestPath = (path: string): BuildRestPathInput => {
   const idx = path.indexOf('/client/');
   const cleanPath = idx >= 0 ? path.slice(idx + '/client/'.length) : '';
 
-  const [mainPart, queryString = ''] = cleanPath.split('#');
+  const [mainPart, queryString = ''] = cleanPath.split('?');
 
   const [methodPart, urlB64 = '', bodyB64] = mainPart.split('/');
 
