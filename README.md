@@ -15,6 +15,7 @@ SUPABASE_SERVICE_ROLE_KEY=sb_secret_HQk5Z7KAJzQ2CoyB37PHEg_vxVOsO8V
 ## Description
 
 The final project of the React Q3 2025 course from RSSchool.
+
 PUTMAN is a universal testing, development, and REST API platform. It provides a clean interface that replaces disparate tools like Postman, Curl, and the command line, bringing together everything you need to work with an API into one powerful yet simple web application.
 
 PUTMAN is positioned as a "Swiss knife" for backend developers, QA engineers and API designers. Unlike heavy desktop applications, PUTMAN works directly in the browser, without requiring installation, and offers a modern, minimalist UI.
@@ -37,7 +38,9 @@ Follow these steps to set up and run the project locally:
 
 Clone the project to your local machine using Git:
 
-`git clone https://github.com/DmitryStarchenko/REST-Client-app.git`
+```
+git clone https://github.com/DmitryStarchenko/REST-Client-app.git
+```
 
 ### 2. Install Dependencies
 
@@ -52,7 +55,9 @@ npm run init
 
 Start the development server:
 
-`npm run dev`
+```
+npm run dev
+```
 
 This will start the project on localhost:3000 for development.
 
@@ -60,7 +65,9 @@ This will start the project on localhost:3000 for development.
 
 Start the development server:
 
-`npm run build`
+```
+npm run build
+```
 
 This will output the bundled files in the dist directory.
 
@@ -68,7 +75,9 @@ This will output the bundled files in the dist directory.
 
 To run the unit tests:
 
-`npm run test`
+```
+npm run test
+```
 
 ## Available Scripts
 
@@ -118,4 +127,4 @@ To run the unit tests:
 - [Alexei Skutov](https://github.com/KaPuTaH-UluTka)
 - [Igor Shaymukhametov](https://github.com/knyazigor)
 
-<a href="https://rs.school/" align="center"><img width="50" height="50" src="./public/assets/logoRS.png"></a>
+<p align="center" borderRadius="50px"><a href="https://rs.school/" ><img width="50" height="50" src="./public/assets/logoRS.png"></a></p>
