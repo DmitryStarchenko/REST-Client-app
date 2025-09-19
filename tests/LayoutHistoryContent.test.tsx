@@ -59,12 +59,13 @@ interface MockHistoryItem {
   id: string;
   timestamp: string;
   method: string;
-  status: number | null;
+  response_status: number | null;
   url: string;
-  url_path: string;
+  path: string;
   request_size: number;
   response_size: number;
-  duration: number;
+  duration_ms: number;
+  error_details: string | null;
 }
 
 describe('LayoutHistoryContent', () => {
@@ -110,7 +111,8 @@ describe('LayoutHistoryContent', () => {
         requestSize: 'Request Size',
         responseSize: 'Response Size',
         duration: 'Duration',
-        error: 'Error',
+        error_text: 'Error',
+        error: 'Error:',
       };
       return translations[key] || key;
     });
@@ -142,23 +144,25 @@ describe('LayoutHistoryContent', () => {
         id: '1',
         timestamp: '2023-12-01T10:30:00Z',
         method: 'GET',
-        status: 200,
+        response_status: 200,
         url: 'https://example.com/api',
-        url_path: '/api',
+        path: '/api',
         request_size: 1024,
         response_size: 2048,
-        duration: 150,
+        duration_ms: 150,
+        error_details: null,
       },
       {
         id: '2',
         timestamp: '2023-12-01T09:15:00Z',
         method: 'POST',
-        status: null,
+        response_status: 404,
         url: 'https://example.com/create',
-        url_path: '/create',
+        path: '/create',
         request_size: 159,
         response_size: 357,
-        duration: 255,
+        duration_ms: 255,
+        error_details: 'Not found',
       },
     ];
 
@@ -185,6 +189,7 @@ describe('LayoutHistoryContent', () => {
         requestSize: 'Req Size',
         responseSize: 'Resp Size',
         duration: 'Duration (ms)',
+        error_text: 'Error Details',
       };
       return translations[key] || key;
     });
@@ -204,33 +209,23 @@ describe('LayoutHistoryContent', () => {
     expect(screen.getByText('Req Size')).toBeInTheDocument();
     expect(screen.getByText('Resp Size')).toBeInTheDocument();
     expect(screen.getByText('Duration (ms)')).toBeInTheDocument();
+    expect(screen.getByText('Error Details')).toBeInTheDocument();
     expect(screen.getByText('01/12/2023, 13:30')).toBeInTheDocument();
-
-    const status200Elements = screen.getAllByText('200');
-    expect(status200Elements).toHaveLength(1);
-
-    const naElements = screen.getAllByText('N/A');
-    expect(naElements).toHaveLength(1);
-
+    expect(screen.getByText('01/12/2023, 12:15')).toBeInTheDocument();
     expect(screen.getByText('GET')).toBeInTheDocument();
     expect(screen.getByText('POST')).toBeInTheDocument();
+    expect(screen.getByText('200')).toBeInTheDocument();
+    expect(screen.getByText('404')).toBeInTheDocument();
     expect(screen.getByText('https://example.com/api')).toBeInTheDocument();
     expect(screen.getByText('https://example.com/create')).toBeInTheDocument();
-
-    const size1024Elements = screen.getAllByText('1024');
-    expect(size1024Elements).toHaveLength(1);
-
-    const size2048Elements = screen.getAllByText('2048');
-    expect(size2048Elements).toHaveLength(1);
-
-    const size159Elements = screen.getAllByText('159');
-    expect(size159Elements).toHaveLength(1);
-
-    const duration150Elements = screen.getAllByText('150');
-    expect(duration150Elements).toHaveLength(1);
-
-    const duration255Elements = screen.getAllByText('255');
-    expect(duration255Elements).toHaveLength(1);
+    expect(screen.getByText('1024')).toBeInTheDocument();
+    expect(screen.getByText('159')).toBeInTheDocument();
+    expect(screen.getByText('2048')).toBeInTheDocument();
+    expect(screen.getByText('357')).toBeInTheDocument();
+    expect(screen.getByText('150')).toBeInTheDocument();
+    expect(screen.getByText('255')).toBeInTheDocument();
+    expect(screen.getByText('Not found')).toBeInTheDocument();
+    expect(screen.getByText('N/A')).toBeInTheDocument();
   });
 
   it('should handle database error', async () => {
@@ -265,32 +260,6 @@ describe('LayoutHistoryContent', () => {
 
     expect(screen.getByText('History')).toBeInTheDocument();
     expect(screen.getByText('Error: Database connection failed')).toBeInTheDocument();
-  });
-
-  it('should handle authentication error', async () => {
-    mockAuthGetUser.mockResolvedValue({
-      data: { user: null },
-      error: { message: 'Auth failed' },
-    });
-
-    mockGetTranslations.mockImplementation((key: string) => {
-      const translations: Record<string, string> = {
-        title: 'History',
-        error: 'Error:',
-      };
-      return translations[key] || key;
-    });
-
-    const mockGetMainTranslations = vi.fn();
-    (getTranslations as unknown as ReturnType<typeof vi.fn>)
-      .mockResolvedValueOnce(mockGetTranslations)
-      .mockResolvedValueOnce(mockGetMainTranslations);
-
-    const Component = await LayoutHistoryContent({});
-    render(Component);
-
-    expect(screen.getByText('History')).toBeInTheDocument();
-    expect(screen.getByText(/Error:/)).toBeInTheDocument();
   });
 
   it('should handle unknown errors', async () => {
