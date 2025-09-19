@@ -92,7 +92,7 @@ npm run test
 | **format:check** | `npm run format:check` | Checks if the code is properly formatted without making any changes. Useful for CI/CD pipelines.                                                                   |
 | **stylelint**    | `npm run stylelint`    | Runs [Stylelint](https://stylelint.io/) on `.css` and `.scss` files to automatically fix style issues.                                                             |
 | **prepare**      | `npm run prepare`      | Initializes Git hooks using [Husky](https://typicode.github.io/husky/). This script runs automatically after installing dependencies.                              |
-| **test**         | `npm run test`         | Executes tests using [Jest](https://jestjs.io/). Looks for test files inside the `src/` folder with `.test.tsx`/`.test.ts` extensions.                             |
+| **test**         | `npm run test`         | Executes tests using [Vitest](https://vitest.dev/). Searches for test files with extensions `.test.tsx/.test.ts`.                                                  |
 
 ## Technology Stack
 
