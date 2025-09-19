@@ -7,7 +7,15 @@ import { ApiResponse } from '@/types';
 export async function POST(req: NextRequest): Promise<NextResponse<ApiResponse>> {
   try {
     const payload = await req.json();
-    const { url, method = 'GET', headers = {}, body, timeoutMs = 30_000, access_token } = payload;
+    const {
+      url,
+      method = 'GET',
+      headers = {},
+      body,
+      timeoutMs = 30_000,
+      access_token,
+      path,
+    } = payload;
 
     let userId: string | null = null;
     if (access_token) {
@@ -84,6 +92,7 @@ export async function POST(req: NextRequest): Promise<NextResponse<ApiResponse>>
         request_size: requestSize,
         response_size: responseSize,
         error_details: errorDetails,
+        path: path,
       });
     } catch (err) {
       console.error('Failed to save request history:', err);

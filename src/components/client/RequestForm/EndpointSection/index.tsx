@@ -16,7 +16,7 @@ const RequestForm: ReadonlyFC<RequestFormProps> = ({
 }) => {
   const t = useTranslations('RequestForm');
   return (
-    <Grid container spacing={0.1} alignItems="center" sx={{ mt: 1.5, display: 'flex' }}>
+    <Grid container spacing={2} alignItems="center" sx={{ mt: 1.5, display: 'flex' }}>
       <Grid sx={{ xs: 12, md: 2 }}>
         <Select
           value={method}

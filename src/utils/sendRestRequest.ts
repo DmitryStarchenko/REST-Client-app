@@ -28,6 +28,7 @@ export async function sendRestRequest({
     headers: headersObj,
     body,
     access_token: accessToken,
+    path: pathObj.path,
   });
 
   const durationMs = performance.now() - start;

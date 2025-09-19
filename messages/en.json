@@ -1,7 +1,7 @@
 {
   "Main": {
     "welcome": "Welcome!!!",
-    "welcomeBack": "Welcome back!!!",
+    "welcomeBack": "Welcome back",
     "client": "REST CLIENT",
     "variables": "VARIABLES",
     "history": "HISTORY"
@@ -89,5 +89,18 @@
     "Generated code": "Generated code",
     "No languages available": "No languages available",
     "Generating": "Generating..."
+  },
+  "History": {
+    "title": "History Requests",
+    "error": "Error:",
+    "text": "You haven't executed any requests",
+    "timestamp": "Timestamp",
+    "method": "Method",
+    "status": "Status",
+    "url": "Endpoint/URL",
+    "requestSize": "Request size (b)",
+    "responseSize": "Response size (b)",
+    "duration": "Duration (ms)",
+    "error_text": "Error"
   }
 }

@@ -54,34 +54,37 @@ const RestClient: ReadonlyFC = () => {
   }, [body, headers, method, url]);
 
   return (
-    <Box p={2}>
-      <Paper elevation={2} sx={{ p: 2 }}>
-        <Typography variant="h6">{t(`Title`)}</Typography>
+    <>
+      <Typography variant="h4" mb={2} textAlign={'center'}>
+        {t(`Title`)}
+      </Typography>
+      <Box p={2} width={1200} m={'auto'}>
+        <Paper elevation={2} sx={{ p: 2 }}>
+          <RequestBuilderForm
+            method={method}
+            setMethod={setMethod}
+            url={url}
+            setUrl={setUrl}
+            headers={headers}
+            setHeaders={setHeaders}
+            body={body}
+            setBody={setBody}
+            onSubmit={handleSubmit}
+            loading={loading}
+          />
 
-        <RequestBuilderForm
-          method={method}
-          setMethod={setMethod}
-          url={url}
-          setUrl={setUrl}
-          headers={headers}
-          setHeaders={setHeaders}
-          body={body}
-          setBody={setBody}
-          onSubmit={handleSubmit}
-          loading={loading}
-        />
-
-        <Divider sx={{ my: 2 }} />
-        <CodeGenSection method={method} url={url} headers={headers} body={body} />
-        <Divider sx={{ my: 2 }} />
-        <ResponseBlock
-          response={response}
-          errorMessage={errorMessage}
-          unknownErrorText={t('UError')}
-          internalErrorText={t('IError')}
-        />
-      </Paper>
-    </Box>
+          <Divider sx={{ my: 2 }} />
+          <CodeGenSection method={method} url={url} headers={headers} body={body} />
+          <Divider sx={{ my: 2 }} />
+          <ResponseBlock
+            response={response}
+            errorMessage={errorMessage}
+            unknownErrorText={t('UError')}
+            internalErrorText={t('IError')}
+          />
+        </Paper>
+      </Box>
+    </>
   );
 };
 
