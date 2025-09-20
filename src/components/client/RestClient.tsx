@@ -76,7 +76,7 @@ const RestClient: ReadonlyFC = () => {
     } finally {
       setLoading(false);
     }
-  }, [body, headers, method, url]);
+  }, [body, headers, method, url, variablesObj]);
 
   return (
     <>
