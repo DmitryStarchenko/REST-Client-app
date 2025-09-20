@@ -22,6 +22,9 @@ const LangSelect: React.FC<LangSelectProps> = ({ langs, selectedLang, onSelect }
         },
         minWidth: 180,
       }}
+      inputProps={{
+        'data-value': selectedLang,
+      }}
     >
       {langs.map((lang) => (
         <MenuItem key={lang} value={lang}>
