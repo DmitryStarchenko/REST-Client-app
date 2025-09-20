@@ -1,7 +1,7 @@
 'use client';
 
 import { Alert, Box, Slide, Snackbar } from '@mui/material';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useLocalStorage } from 'usehooks-ts';
 
 import { VARIABLES_KEY } from '@/constants';
