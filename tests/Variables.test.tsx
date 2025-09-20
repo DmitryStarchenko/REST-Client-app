@@ -40,7 +40,6 @@ vi.mock('@mui/material', () => ({
     open,
     onClose,
     autoHideDuration,
-    anchorOrigin,
   }: {
     children: React.ReactNode;
     open: boolean;
