@@ -3,6 +3,7 @@
 import { Stack, Typography } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import { JSX } from 'react';
+import React from 'react';
 
 import { StatisticProps } from '@/types';
 

@@ -15,7 +15,7 @@ const ResponseHeaders: React.FC<ResponseHeadersSectionProps> = ({
   unknownErrorText,
   internalErrorText,
 }) => {
-  return response?.headers ? (
+  return response && response.headers != null ? (
     <div className={styles.wrapper}>
       <div className={styles.topBox}>
         <div className={styles.editorBox}>
@@ -25,6 +25,7 @@ const ResponseHeaders: React.FC<ResponseHeadersSectionProps> = ({
               height="340px"
               language="json"
               readOnly
+              data-testid="code-editor"
             />
           </Box>
         </div>
@@ -36,6 +37,7 @@ const ResponseHeaders: React.FC<ResponseHeadersSectionProps> = ({
       errorMessage={errorMessage}
       unknownErrorText={unknownErrorText}
       internalErrorText={internalErrorText}
+      data-testid="response-block"
     />
   );
 };

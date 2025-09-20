@@ -10,9 +10,9 @@ const Response: React.FC<ResponseBlockProps> = ({ response, errorMessage, unknow
   const t = useTranslations('ResponseBlock');
 
   const getResponseContent = (): string => {
-    if (!response) return t('No response yet');
-
     if (errorMessage) return errorMessage;
+
+    if (!response) return t('No response yet');
 
     if (response.ok) {
       return typeof response.data === 'string'
@@ -27,7 +27,13 @@ const Response: React.FC<ResponseBlockProps> = ({ response, errorMessage, unknow
     <div className={styles.wrapper}>
       <div className={styles.topBox}>
         <div className={styles.editorBox}>
-          <CodeEditor value={getResponseContent()} height="340px" language="json" readOnly />
+          <CodeEditor
+            value={getResponseContent()}
+            height="340px"
+            language="json"
+            readOnly
+            data-testid="response-block"
+          />
         </div>
       </div>
     </div>
