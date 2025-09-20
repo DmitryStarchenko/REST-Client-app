@@ -1,4 +1,5 @@
 import { useTranslations } from 'next-intl';
+import React from 'react';
 
 import ErrorPage from '@/components/shared/ErrorPage/ErrorPage';
 import { ReadonlyFC } from '@/types/readonly.types';
