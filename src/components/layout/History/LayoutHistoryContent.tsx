@@ -98,7 +98,6 @@ const LayoutHistoryContent: ReadonlyFC = async () => {
       </main>
     );
   } catch (error) {
-    console.error('History error:', error);
     const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
 
     return (

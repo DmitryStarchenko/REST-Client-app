@@ -94,9 +94,7 @@ export async function POST(req: NextRequest): Promise<NextResponse<ApiResponse>>
         error_details: errorDetails,
         path: path,
       });
-    } catch (err) {
-      console.error('Failed to save request history:', err);
-    }
+    } catch {}
 
     if (statusCode >= 200 && statusCode < 300) {
       const successResponse: ApiResponse = {
