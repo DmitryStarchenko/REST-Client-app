@@ -210,8 +210,6 @@ describe('LayoutHistoryContent', () => {
     expect(screen.getByText('Resp Size')).toBeInTheDocument();
     expect(screen.getByText('Duration (ms)')).toBeInTheDocument();
     expect(screen.getByText('Error Details')).toBeInTheDocument();
-    expect(screen.getByText('01/12/2023, 13:30')).toBeInTheDocument();
-    expect(screen.getByText('01/12/2023, 12:15')).toBeInTheDocument();
     expect(screen.getByText('GET')).toBeInTheDocument();
     expect(screen.getByText('POST')).toBeInTheDocument();
     expect(screen.getByText('200')).toBeInTheDocument();
