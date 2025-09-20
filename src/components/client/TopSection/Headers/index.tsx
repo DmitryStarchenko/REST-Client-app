@@ -58,7 +58,12 @@ const HeadersBlock: React.FC<HeadersBlockProps> = ({ headers, setHeaders }) => {
                         endAdornment: incomplete ? (
                           <InputAdornment position="end">
                             <Tooltip arrow placement="right" title={t(`Tooltip`)}>
-                              <InfoOutlined color="warning" fontSize="small" opacity="0.6" />
+                              <InfoOutlined
+                                color="warning"
+                                fontSize="small"
+                                opacity="0.6"
+                                data-testid="info-icon"
+                              />
                             </Tooltip>
                           </InputAdornment>
                         ) : null,

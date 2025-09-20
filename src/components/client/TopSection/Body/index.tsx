@@ -41,6 +41,7 @@ const BodyBlock: React.FC<BodyBlockProps> = ({ bodyText, setBodyText }) => {
       <div className={styles.wrapper}>
         <div className={styles.topBox}>
           <Button
+            data-testid="copy-base-button"
             className={styles.copyButton}
             onClick={handleClick}
             size="small"
@@ -68,6 +69,7 @@ const BodyBlock: React.FC<BodyBlockProps> = ({ bodyText, setBodyText }) => {
               </Typography>
             )}
             <Select
+              data-testid="select-body-type"
               className={styles.selector}
               size="small"
               sx={{

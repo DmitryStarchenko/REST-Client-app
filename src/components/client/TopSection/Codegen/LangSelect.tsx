@@ -10,6 +10,7 @@ import styles from '../TopSection.module.css';
 const LangSelect: React.FC<LangSelectProps> = ({ langs, selectedLang, onSelect }) => {
   return (
     <Select
+      data-testid="lang-select"
       className={styles.selector}
       value={selectedLang}
       onChange={(e) => onSelect(e.target.value)}
