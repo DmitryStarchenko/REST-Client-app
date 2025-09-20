@@ -15,9 +15,7 @@ export const CopyButton: React.FC<CopyButtonProps> = ({ getValue }) => {
       if (!text) return;
       await navigator.clipboard.writeText(text);
       setOpen(true);
-    } catch (err) {
-      console.error('Failed to copy:', err);
-    }
+    } catch {}
   };
 
   return (
