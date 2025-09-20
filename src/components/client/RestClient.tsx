@@ -10,6 +10,7 @@ import { VARIABLES_KEY } from '@/constants';
 import { usePathname } from '@/i18n/navigation';
 import { ApiResponse, IVariable, ReadonlyFC, Header } from '@/types';
 import { parseRestPath, sendRestRequest } from '@/utils';
+import { replaceVariables } from '@/utils/variable';
 
 import CodeGenSection from './CodegenSection';
 import RequestBuilderForm from './RequestForm';
@@ -29,6 +30,7 @@ const RestClient: ReadonlyFC = () => {
   const fullPath = `${pathname}${searchParams.toString() ? `?${searchParams.toString()}` : ''}`;
 
   const initialData = useMemo(() => parseRestPath(fullPath), [fullPath]);
+
   const [method, setMethod] = useState(initialData.method);
   const [url, setUrl] = useState(initialData.url);
   const [body, setBody] = useState(initialData.body);
@@ -44,7 +46,21 @@ const RestClient: ReadonlyFC = () => {
     setLoading(true);
 
     try {
-      const result = await sendRestRequest({ method, url, headers, body });
+      // Replace variables in URL, headers, and body
+      const processedUrl = replaceVariables(url, variablesObj);
+      const processedHeaders = headers.map((header) => ({
+        ...header,
+        key: replaceVariables(header.key, variablesObj),
+        value: replaceVariables(header.value, variablesObj),
+      }));
+      const processedBody = replaceVariables(body || '', variablesObj);
+
+      const result = await sendRestRequest({
+        method,
+        url: processedUrl,
+        headers: processedHeaders,
+        body: processedBody,
+      });
       setResponse(result);
     } catch (e) {
       const message = e instanceof Error ? e.message : 'Unknown error';
@@ -80,6 +96,7 @@ const RestClient: ReadonlyFC = () => {
             setBody={setBody}
             onSubmit={handleSubmit}
             loading={loading}
+            variables={variables}
           />
 
           <Divider sx={{ my: 2 }} />

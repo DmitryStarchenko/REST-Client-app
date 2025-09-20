@@ -17,7 +17,7 @@ const Main: ReadonlyFC = () => {
 
   const auth = useAtomValue(authAtom);
 
-  const userEmail = auth?.user.email;
+  const userEmail = auth?.email;
   const separator = '@';
   const separatorIndex = userEmail?.indexOf(separator);
   const userName = userEmail?.slice(0, separatorIndex);

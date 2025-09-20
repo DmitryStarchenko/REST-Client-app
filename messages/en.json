@@ -54,7 +54,9 @@
   "RestClient": {
     "UError": "Unknown Error",
     "IError": "Internal Error",
-    "Title": "REST Client"
+    "Title": "REST Client",
+    "Variables": "Variables",
+    "No variables defined": "No variables defined"
   },
   "ResponseBlock": {
     "No response yet": "No response yet",
