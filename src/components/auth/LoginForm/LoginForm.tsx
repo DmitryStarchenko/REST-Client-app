@@ -2,6 +2,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, FormHelperText, TextField } from '@mui/material';
 import { useTranslations } from 'next-intl';
+import React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import PasswordInput from '@/components/shared/PasswordInput/PasswordInput';
@@ -28,7 +29,6 @@ const LoginForm: ReadonlyFC = () => {
         password: data.password,
       });
       if (error) throw error;
-      // Update this route to redirect to an authenticated route. The user already has an active session.
       router.push('/');
     } catch (error: unknown) {
       setError('root', {
