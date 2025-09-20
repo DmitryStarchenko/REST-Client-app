@@ -37,7 +37,7 @@ vi.mock('@/i18n/navigation', () => ({
   usePathname: vi.fn(() => '/'),
 }));
 
-vi.mock('../src/components/layout/Main/components/buttonNavPage/ButtonsNavPage', () => ({
+vi.mock('../src/components/layout/Main/components/ButtonNavPage/ButtonsNavPage', () => ({
   default: vi.fn(() => <div data-testid="buttons-nav-page" />),
 }));
 
@@ -45,7 +45,7 @@ vi.mock('../src/components/layout/Header/ButtonsSignInUp/ButtonsSignInUp', () =>
   default: vi.fn(() => <div data-testid="buttons-sign-in-up" />),
 }));
 
-vi.mock('../src/components/layout/Main/components/about/About', () => ({
+vi.mock('../src/components/layout/Main/components/About/About', () => ({
   default: vi.fn(() => <div data-testid="about" />),
 }));
 
@@ -75,11 +75,9 @@ describe('Main Component', () => {
 
   it('renders welcome back message and navigation buttons when user is authenticated', () => {
     const mockUser = {
-      user: {
-        id: '1',
-        name: 'Test User',
-        email: 'testuser@example.com',
-      },
+      id: '1',
+      name: 'Test User',
+      email: 'testuser@example.com',
     };
     mockUseAtomValue.mockReturnValue(mockUser);
 
