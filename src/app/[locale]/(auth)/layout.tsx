@@ -14,10 +14,10 @@ const AuthLayout: ReadonlyFC<AuthLayoutProps> = async ({ children, params }) => 
 
   const supabase = await createClient();
 
-  const { error } = await supabase.auth.getClaims();
+  const { data } = await supabase.auth.getClaims();
 
-  if (!error) {
-    redirect({ href: '/', locale });
+  if (data?.claims) {
+    return redirect({ href: '/', locale });
   }
 
   return children;
