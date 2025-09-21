@@ -28,13 +28,13 @@ const MultipleInputs: ReadonlyFC<MultipleInputsProps> = ({ inputs, onChange, lab
         {inputs.map((input) => (
           <Stack direction="row" spacing={1} key={input.id}>
             <TextField
-              placeholder="Key"
+              placeholder={t('Key')}
               value={input.key}
               onChange={(e) => onChange(input.id, { key: e.target.value })}
               size="small"
             />
             <TextField
-              placeholder="Value"
+              placeholder={t('Value')}
               value={input.value}
               onChange={(e) => onChange(input.id, { value: e.target.value })}
               size="small"
