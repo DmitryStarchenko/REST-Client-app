@@ -5,7 +5,6 @@ import React from 'react';
 import Statistic from '@/components/client/BottomSection/Statistic';
 import { ApiResponse } from '@/types';
 
-// Mock next-intl
 vi.mock('next-intl', () => ({
   useTranslations: () => (key: string) => {
     const translations: Record<string, string> = {
@@ -154,7 +153,6 @@ describe('Statistic Component', () => {
     render(<Statistic response={successResponse} errorMessage={null} />);
 
     const statusElement = screen.getByText(new RegExp(`Status: ${successResponse.status}`));
-    // MUI colors are applied as classes, so we check for the class
     expect(statusElement).toHaveClass('MuiTypography-body2');
   });
 
@@ -176,7 +174,6 @@ describe('Statistic Component', () => {
   test('renders all statistics in a stack layout', () => {
     render(<Statistic response={successResponse} errorMessage={null} />);
 
-    // Stack component typically renders as a div with flexbox styles
     const stackElements = screen.getAllByText(/:/);
     expect(stackElements.length).toBeGreaterThan(0);
   });

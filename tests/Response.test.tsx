@@ -176,7 +176,7 @@ describe('Response Component', () => {
 
     const codeEditor = screen.getByTestId('code-editor');
     expect(codeEditor).toHaveAttribute('data-readonly', 'true');
-    expect(codeEditor).toHaveAttribute('readonly'); // Исправлено: проверяем атрибут readonly
+    expect(codeEditor).toHaveAttribute('readonly');
   });
 
   test('uses json language for code editor', () => {

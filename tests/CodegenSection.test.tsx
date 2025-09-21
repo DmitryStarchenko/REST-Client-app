@@ -8,7 +8,7 @@ vi.mock('next-intl', () => ({
 
 vi.mock('@/hooks/useCodegen', () => ({
   useCodegen: () => ({
-    generateForLang: vi.fn().mockResolvedValue('test code'), // ← ВАЖНО: mockResolvedValue
+    generateForLang: vi.fn().mockResolvedValue('test code'),
   }),
 }));
 

@@ -5,12 +5,10 @@ import { describe, it, vi } from 'vitest';
 
 import HeadersBlock from '@/components/client/TopSection/Headers';
 
-// Мокаем next-intl
 vi.mock('next-intl', () => ({
   useTranslations: () => (key: string) => key,
 }));
 
-// Мокаем uid
 vi.mock('@/utils', () => ({
   uid: vi.fn(() => 'unique-id'),
 }));
@@ -35,7 +33,7 @@ describe('HeadersBlock', () => {
 
     expect(setHeaders).toHaveBeenCalledWith([
       { id: '1', key: 'Authorization', value: 'application/json' },
-      { id: 'unique-id', key: '', value: '' }, // новое пустое поле
+      { id: 'unique-id', key: '', value: '' },
     ]);
   });
 
@@ -47,7 +45,6 @@ describe('HeadersBlock', () => {
     ];
     render(<HeadersBlock headers={headers} setHeaders={setHeaders} />);
 
-    // Берём первую кнопку удаления (delete)
     const deleteButtons = screen.getAllByRole('button');
     fireEvent.click(deleteButtons[0]);
 
@@ -64,7 +61,6 @@ describe('HeadersBlock', () => {
     const infoIcon = screen.getByTestId('info-icon');
     await userEvent.hover(infoIcon);
 
-    // tooltip появляется после hover
     expect(await screen.findByText('Tooltip')).toBeInTheDocument();
   });
 });

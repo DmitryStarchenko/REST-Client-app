@@ -51,7 +51,6 @@ describe('CopyButton Component', () => {
     const copyButton = screen.getByRole('button', { name: 'Copy content' });
     await user.click(copyButton);
 
-    // Snackbar should appear
     const snackbar = await screen.findByText('Copied!');
     expect(snackbar).toBeInTheDocument();
   });
@@ -68,7 +67,6 @@ describe('CopyButton Component', () => {
     expect(mockGetValue).toHaveBeenCalledTimes(1);
     expect(mockClipboard.writeText).not.toHaveBeenCalled();
 
-    // Snackbar should not appear
     await waitFor(() => {
       expect(screen.queryByText('Copied!')).not.toBeInTheDocument();
     });
@@ -80,7 +78,6 @@ describe('CopyButton Component', () => {
 
     const copyButton = screen.getByRole('button', { name: 'Copy content' });
 
-    // Check basic styling
     expect(copyButton).toHaveStyle({
       position: 'absolute',
       top: '8px',

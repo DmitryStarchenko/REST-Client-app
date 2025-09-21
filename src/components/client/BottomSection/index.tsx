@@ -4,6 +4,7 @@ import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import { Box, Tab, Tabs, IconButton, Stack } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
+import React from 'react';
 
 import { BottomTabsBlockProps } from '@/types';
 
