@@ -1,4 +1,6 @@
-import { Session } from '@supabase/supabase-js';
+import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
+import { User } from '@supabase/supabase-js';
+import { QueryClientProvider } from '@tanstack/react-query';
 import { render, screen } from '@testing-library/react';
 import { createStore } from 'jotai';
 import React from 'react';
@@ -14,6 +16,7 @@ vi.mock('@mui/material', async () => {
   return {
     ...actual,
     InitColorSchemeScript: vi.fn(() => <div data-testid="color-scheme-script" />),
+    ThemeProvider: vi.fn(({ children }) => <div>{children}</div>),
   };
 });
 
@@ -62,19 +65,12 @@ vi.mock('@/store', () => ({
 }));
 
 describe('Providers', () => {
-  const mockSession: Session = {
-    access_token: 'test-token',
-    token_type: 'bearer',
-    user: {
-      id: 'user-id',
-      app_metadata: {},
-      user_metadata: {},
-      aud: 'authenticated',
-      created_at: '2023-01-01',
-    },
-    expires_in: 3600,
-    expires_at: Date.now() + 3600000,
-    refresh_token: 'refresh-token',
+  const mockUser: User = {
+    id: 'user-id',
+    app_metadata: {},
+    user_metadata: {},
+    aud: 'authenticated',
+    created_at: '2023-01-01',
   };
 
   const mockStore = {
@@ -92,7 +88,7 @@ describe('Providers', () => {
 
   it('should render children with all providers', () => {
     render(
-      <Providers initialSession={null}>
+      <Providers initialUser={null}>
         <div data-testid="test-child">Test Child</div>
       </Providers>,
     );
@@ -102,35 +98,35 @@ describe('Providers', () => {
     expect(screen.getByTestId('monaco-provider')).toBeInTheDocument();
   });
 
-  // it('should set initial session when provided', () => {
-  //   render(
-  //     <Providers initialSession={mockSession}>
-  //       <div>Test</div>
-  //     </Providers>,
-  //   );
+  it('should set initial user when provided', () => {
+    render(
+      <Providers initialUser={mockUser}>
+        <div>Test</div>
+      </Providers>,
+    );
 
-  //   expect(mockStore.set).toHaveBeenCalledWith(authAtom, mockSession);
-  // });
+    expect(mockStore.set).toHaveBeenCalledWith(authAtom, mockUser);
+  });
 
-  // it('should not set initial session when null', () => {
-  //   render(
-  //     <Providers initialSession={null}>
-  //       <div>Test</div>
-  //     </Providers>,
-  //   );
+  it('should not set initial user when null', () => {
+    render(
+      <Providers initialUser={null}>
+        <div>Test</div>
+      </Providers>,
+    );
 
-  //   expect(mockStore.set).not.toHaveBeenCalledWith(authAtom, mockSession);
-  // });
+    expect(mockStore.set).not.toHaveBeenCalledWith(authAtom, mockUser);
+  });
 
-  // it('should wrap children with all provider components', () => {
-  //   render(
-  //     <Providers initialSession={null}>
-  //       <div>Test</div>
-  //     </Providers>,
-  //   );
+  it('should wrap children with all provider components', () => {
+    render(
+      <Providers initialUser={null}>
+        <div>Test</div>
+      </Providers>,
+    );
 
-  //   expect(AppRouterCacheProvider).toHaveBeenCalled();
-  //   expect(JotaiProvider).toHaveBeenCalled();
-  //   expect(QueryClientProvider).toHaveBeenCalled();
-  // });
+    expect(AppRouterCacheProvider).toHaveBeenCalled();
+    expect(JotaiProvider).toHaveBeenCalled();
+    expect(QueryClientProvider).toHaveBeenCalled();
+  });
 });
