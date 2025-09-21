@@ -1,6 +1,6 @@
 'use client';
 import dynamic from 'next/dynamic';
-import { FC } from 'react';
+import React, { FC } from 'react';
 
 import Loader from '@/components/shared/Loader/Loader';
 

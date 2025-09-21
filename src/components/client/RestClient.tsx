@@ -4,6 +4,7 @@ import { Box, Typography } from '@mui/material';
 import { useSearchParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { useCallback, useMemo, useState } from 'react';
+import React from 'react';
 import { useLocalStorage } from 'usehooks-ts';
 
 import { VARIABLES_KEY } from '@/constants';
