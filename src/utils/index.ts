@@ -9,3 +9,4 @@ export * from './parseRestPath';
 export * from './restClientPathRouting';
 export * from './supabaseClient';
 export * from './sendRestRequest';
+export * from './variable';

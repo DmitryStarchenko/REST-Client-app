@@ -5,6 +5,9 @@ export interface CodegenSectionProps {
   url: string;
   headers: { key: string; value: string }[];
   body?: string;
+  codeLang: string;
+  setCodeLang: (lang: string) => void;
+  variablesObj: Record<string, string>;
 }
 
 export interface UseCodeGenReturn {

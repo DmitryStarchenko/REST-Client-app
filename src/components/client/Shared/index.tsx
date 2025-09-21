@@ -21,6 +21,7 @@ export const CodeEditor: React.FC<CodeEditorProps> = ({
   return (
     <Box sx={{ mt: 1, borderRadius: 1, overflow: 'hidden', position: 'relative' }}>
       <Editor
+        data-testid="code-editor"
         value={value}
         height={height}
         language={language}

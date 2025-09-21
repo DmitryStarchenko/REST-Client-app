@@ -10,7 +10,7 @@ export async function sendRestRequest({
   headers,
   body,
 }: BuildRestPathInput): Promise<ApiResponse> {
-  const bodyForPath = body && body.trim() !== '' ? body : undefined;
+  const bodyForPath = body && body.trim() !== '' ? body : '';
 
   const pathObj = buildRestPath({ method, url, headers, body: bodyForPath });
   window.history.replaceState(null, '', pathObj.path);
