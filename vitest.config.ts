@@ -17,9 +17,7 @@ export default defineConfig({
         'eslint.config.mj',
         'next.config.ts',
         'vitest.config.ts',
-        // Исключает папку 'types' на любом уровне
       ],
-      // Другие настройки покрытия, если они есть
     },
   },
   resolve: {
