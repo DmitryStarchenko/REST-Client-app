@@ -2,11 +2,11 @@ import type { Metadata } from 'next';
 import '@/styles/globals.css';
 import { notFound } from 'next/navigation';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
-import React from 'react';
+import NextTopLoader from 'nextjs-toploader';
 
 import Layout from '@/components/layout/Layout';
 import { routing } from '@/i18n/routing';
-import { getValidatedClientSession } from '@/lib/supabase/session';
+import { createClient } from '@/lib';
 import { ReadonlyFC } from '@/types/readonly.types';
 
 import Providers from './providers';
@@ -28,13 +28,18 @@ const RootLayout: ReadonlyFC<RootLayoutProps> = async ({ children, params }) => 
     notFound();
   }
 
-  const session = await getValidatedClientSession();
+  const supabase = await createClient();
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
   return (
     <html lang={locale} suppressHydrationWarning>
       <body>
+        <NextTopLoader color="#7e077e" showSpinner={false} />
         <NextIntlClientProvider locale={locale}>
-          <Providers initialSession={session}>
+          <Providers initialUser={user}>
             <Layout>{children}</Layout>
           </Providers>
         </NextIntlClientProvider>

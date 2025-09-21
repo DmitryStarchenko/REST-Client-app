@@ -1,4 +1,5 @@
 import { createServerClient } from '@supabase/ssr';
+import { SupabaseClient } from '@supabase/supabase-js';
 import { cookies } from 'next/headers';
 
 /**
@@ -6,7 +7,7 @@ import { cookies } from 'next/headers';
  * global variable. Always create a new client within each function when using
  * it.
  */
-export async function createClient() {
+export async function createClient(): Promise<SupabaseClient> {
   const cookieStore = await cookies();
 
   return createServerClient(

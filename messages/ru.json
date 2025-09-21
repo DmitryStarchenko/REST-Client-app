@@ -53,7 +53,9 @@
   "RestClient": {
     "UError": "Неизвестная Ошибка",
     "IError": "Внутренняя Ошибка",
-    "Title": "REST Клиент"
+    "Title": "REST Клиент",
+    "Variables": "Переменные",
+    "No variables defined": "Переменные не определены"
   },
   "ResponseBlock": {
     "No response yet": "Еще нет данных",
@@ -108,8 +110,9 @@
   },
   "TopSection": {
     "Request Headers": "Заголовки Запроса",
-    "Request Body": "Тело Запрлса",
-    "Codegen": "Генератор Кода"
+    "Request Body": "Тело Запроса",
+    "Codegen": "Генератор Кода",
+    "Variables": "Переменные"
   },
   "BottomTabsBlock": {
     "Response": "Ответ",

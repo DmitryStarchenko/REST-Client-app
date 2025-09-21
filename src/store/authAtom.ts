@@ -1,4 +1,5 @@
-import { Session } from '@supabase/supabase-js';
+import { User } from '@supabase/supabase-js';
 import { atom } from 'jotai';
 
-export const authAtom = atom<Session | null>(null);
+// Holds the Supabase auth session (null if logged out)
+export const authAtom = atom<User | null>(null);

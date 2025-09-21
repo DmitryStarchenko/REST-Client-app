@@ -6,6 +6,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { LANG_MAP } from '@/constants';
 import { useCodegen } from '@/hooks';
 import { CodegenSectionProps } from '@/types';
+import { replaceVariables } from '@/utils/';
 
 import styles from '../TopSection.module.css';
 import LangSelect from './LangSelect';
@@ -18,11 +19,23 @@ const CodegenSection: React.FC<CodegenSectionProps> = ({
   body,
   codeLang,
   setCodeLang,
+  variablesObj,
 }) => {
   const t = useTranslations('CodegenSection');
   const langs = useMemo(() => Object.keys(LANG_MAP), []);
   const [cache, setCache] = useState<Record<string, string>>({});
-  const { generateForLang } = useCodegen(method, url, headers, body);
+
+  const processedUrl = replaceVariables(url, variablesObj);
+  const processedHeaders = headers
+    .map((header) => ({
+      ...header,
+      key: replaceVariables(header.key, variablesObj),
+      value: replaceVariables(header.value, variablesObj),
+    }))
+    .filter((header) => header.key && header.value);
+  const processedBody = replaceVariables(body || '', variablesObj);
+
+  const { generateForLang } = useCodegen(method, processedUrl, processedHeaders, processedBody);
 
   useEffect(() => {
     if (!codeLang) return;

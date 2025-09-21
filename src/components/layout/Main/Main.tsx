@@ -7,17 +7,17 @@ import React from 'react';
 import { authAtom } from '@/store/authAtom';
 import { ReadonlyFC } from '@/types/readonly.types';
 
-import ButtonsNavPage from './components/buttonNavPage/ButtonsNavPage';
+import ButtonsNavPage from './components/ButtonNavPage/ButtonsNavPage';
 import styles from './Main.module.css';
 import ButtonsSignInUp from '../Header/ButtonsSignInUp/ButtonsSignInUp';
-import About from './components/about/About';
+import About from './components/About/About';
 
 const Main: ReadonlyFC = () => {
   const translationMain = useTranslations('Main');
 
   const auth = useAtomValue(authAtom);
 
-  const userEmail = auth?.user.email;
+  const userEmail = auth?.email;
   const separator = '@';
   const separatorIndex = userEmail?.indexOf(separator);
   const userName = userEmail?.slice(0, separatorIndex);

@@ -11,6 +11,7 @@ import { uid } from '@/utils';
 import BodyBlock from './Body';
 import CodeGenSection from './Codegen';
 import HeadersBlock from './Headers';
+import VariablesSection from '../VariablesSection';
 
 const TopSection: React.FC<TopTabsBlockProps> = ({
   headers,
@@ -19,6 +20,8 @@ const TopSection: React.FC<TopTabsBlockProps> = ({
   setBodyText,
   method,
   url,
+  variables,
+  variablesObj,
 }) => {
   const t = useTranslations('TopSection');
   const [topTab, setTopTab] = useState(0);
@@ -39,6 +42,7 @@ const TopSection: React.FC<TopTabsBlockProps> = ({
           <Tab label={t('Request Headers')} />
           <Tab label={t('Request Body')} />
           <Tab label={t('Codegen')} />
+          <Tab label={t('Variables')} />
         </Tabs>
       </Stack>
       {open && (
@@ -58,8 +62,10 @@ const TopSection: React.FC<TopTabsBlockProps> = ({
               body={bodyText}
               codeLang={codeLang}
               setCodeLang={setCodeLang}
+              variablesObj={variablesObj}
             />
           )}
+          {topTab === 3 && <VariablesSection variables={variables} />}
         </Box>
       )}
     </>

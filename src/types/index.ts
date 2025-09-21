@@ -13,6 +13,7 @@ export * from './CodeEditorProps.types';
 export * from './RequestFormProps.types';
 export * from './TopTabsBlockProps.types';
 export * from './HeadersBlockProps.types';
+export * from './variables.types';
 export * from './ResponseHeadersSectionProps.types';
 export * from './StatisticProps.types';
 export * from './BottomTabsBlockProps.types';

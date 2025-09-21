@@ -7,6 +7,7 @@ export interface CodegenSectionProps {
   body?: string;
   codeLang: string;
   setCodeLang: (lang: string) => void;
+  variablesObj: Record<string, string>;
 }
 
 export interface UseCodeGenReturn {
