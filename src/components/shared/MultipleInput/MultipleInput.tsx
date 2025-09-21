@@ -3,6 +3,7 @@
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import { Box, Button, IconButton, Stack, TextField, Typography } from '@mui/material';
+import { useTranslations } from 'next-intl';
 import React from 'react';
 
 import { IVariable, ReadonlyFC } from '@/types';
@@ -14,11 +15,12 @@ interface MultipleInputsProps {
 }
 
 const MultipleInputs: ReadonlyFC<MultipleInputsProps> = ({ inputs, onChange, label }) => {
+  const t = useTranslations('MultipleInputs');
   return (
     <Box>
       <Stack direction="row" justifyContent="space-between" alignItems="center">
         <Typography variant="subtitle1">{label}</Typography>
-        <IconButton size="small" onClick={() => onChange()}>
+        <IconButton aria-label="add" size="small" onClick={() => onChange()}>
           <AddIcon />
         </IconButton>
       </Stack>
@@ -38,12 +40,12 @@ const MultipleInputs: ReadonlyFC<MultipleInputsProps> = ({ inputs, onChange, lab
               size="small"
               sx={{ flex: 1 }}
             />
-            <IconButton onClick={() => onChange(input.id)} size="small">
+            <IconButton aria-label="remove" onClick={() => onChange(input.id)} size="small">
               <RemoveIcon />
             </IconButton>
           </Stack>
         ))}
-        <Button sx={{}}>Save</Button>
+        <Button sx={{}}>{t('Save')}</Button>
       </Stack>
     </Box>
   );

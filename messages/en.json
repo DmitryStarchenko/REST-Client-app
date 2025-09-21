@@ -118,5 +118,8 @@
     "Response": "Response",
     "Response Headers": "Response Headers",
     "Statistic Fields": "Statistic Data"
+  },
+  "MultipleInputs": {
+    "Save": "Save"
   }
 }
