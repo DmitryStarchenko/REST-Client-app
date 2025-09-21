@@ -36,12 +36,13 @@ vi.mock('@supabase/ssr', () => ({
 }));
 
 vi.mock('@/i18n/navigation', () => ({
-  Link: vi.fn(({ children, href, className }) =>
+  Link: vi.fn(({ children, href, className, onClick }) =>
     React.createElement(
       'a',
       {
         href,
         className,
+        onClick,
         'data-testid': `link-${href}`,
       },
       children,
@@ -54,11 +55,27 @@ vi.mock('@/i18n/navigation', () => ({
 }));
 
 vi.mock('../LangSwitcher/LangSwitcher', () => ({
-  default: vi.fn(() => React.createElement('div', 'LangSwitcher')),
+  default: vi.fn(() =>
+    React.createElement('div', { 'data-testid': 'lang-switcher' }, 'LangSwitcher'),
+  ),
 }));
 
 vi.mock('../ThemeToggler/ThemeToggler', () => ({
-  default: vi.fn(() => React.createElement('div', 'ThemeToggler')),
+  default: vi.fn(() =>
+    React.createElement('div', { 'data-testid': 'theme-toggler' }, 'ThemeToggler'),
+  ),
+}));
+
+vi.mock('./ButtonsSignInUp/ButtonsSignInUp', () => ({
+  default: vi.fn(() =>
+    React.createElement('div', { 'data-testid': 'buttons-signinup' }, 'ButtonsSignInUp'),
+  ),
+}));
+
+vi.mock('../Main/components/ButtonNavPage/ButtonsNavPage', () => ({
+  default: vi.fn(() =>
+    React.createElement('div', { 'data-testid': 'buttons-navpage' }, 'ButtonsNavPage'),
+  ),
 }));
 
 type MockFunction = ReturnType<typeof vi.fn>;
@@ -80,6 +97,8 @@ describe('Header', async () => {
       const translations: Record<string, string> = {
         signIn: 'Войти',
         signUp: 'Регистрация',
+        main: 'Главная',
+        signOut: 'Выйти',
       };
       return translations[key] || key;
     });
@@ -91,13 +110,11 @@ describe('Header', async () => {
     vi.clearAllMocks();
   });
 
-  // it('renders all the main elements', () => {
-  //   render(<Header />);
+  it('renders all the main elements', () => {
+    render(<Header />);
 
-  //   expect(screen.getByRole('banner')).toBeInTheDocument();
-  //   expect(screen.getByText('Войти')).toBeInTheDocument();
-  //   expect(screen.getByText('Регистрация')).toBeInTheDocument();
-  // });
+    expect(screen.getByRole('banner')).toBeInTheDocument();
+  });
 
   it('adds and removes compact class on scroll', () => {
     const { container } = render(<Header />);
@@ -115,28 +132,46 @@ describe('Header', async () => {
     expect(header.className).not.toContain('headerCompact');
   });
 
-  // it('renders main and sign out links when user is authenticated', async () => {
-  //   vi.doMock('jotai', () => ({
-  //     ...originalJotai,
-  //     useAtomValue: vi.fn(() => ({ user: { id: '1', email: 'test@example.com' } })),
-  //   }));
-  //   mockT.mockImplementation((key: string) => {
-  //     const translations: Record<string, string> = {
-  //       signIn: 'Войти',
-  //       signUp: 'Регистрация',
-  //       main: 'Главная',
-  //       signOut: 'Выйти',
-  //     };
-  //     return translations[key] || key;
-  //   });
-  //   vi.resetModules();
-  //   Header = (await import('../src/components/layout/Header/Header')).default;
+  it('renders main, nav page buttons and sign out links when user is authenticated', async () => {
+    vi.doMock('jotai', () => ({
+      ...originalJotai,
+      useAtomValue: vi.fn(() => ({ user: { id: '1', email: 'test@example.com' } })),
+    }));
 
-  //   render(<Header />);
+    vi.resetModules();
+    Header = (await import('../src/components/layout/Header/Header')).default;
 
-  //   expect(screen.getByText('Главная')).toBeInTheDocument();
-  //   expect(screen.getByText('Выйти')).toBeInTheDocument();
-  // });
+    render(<Header />);
+
+    expect(screen.getByText('Главная')).toBeInTheDocument();
+    expect(screen.getByText('Выйти')).toBeInTheDocument();
+  });
+
+  it('calls signOut when sign out link is clicked', async () => {
+    const mockSignOut = vi.fn();
+    vi.doMock('@/lib/supabase/client', () => ({
+      default: {
+        auth: {
+          signOut: mockSignOut,
+        },
+      },
+    }));
+
+    vi.doMock('jotai', () => ({
+      ...originalJotai,
+      useAtomValue: vi.fn(() => ({ user: { id: '1', email: 'test@example.com' } })),
+    }));
+
+    vi.resetModules();
+    Header = (await import('../src/components/layout/Header/Header')).default;
+
+    render(<Header />);
+
+    const signOutLink = screen.getByText('Выйти');
+    fireEvent.click(signOutLink);
+
+    expect(mockSignOut).toHaveBeenCalled();
+  });
 
   it('does not render auth links when user is authenticated', async () => {
     vi.doMock('jotai', () => ({
@@ -148,7 +183,7 @@ describe('Header', async () => {
     Header = (await import('../src/components/layout/Header/Header')).default;
 
     render(<Header />);
-    expect(screen.queryByText('Войти')).not.toBeInTheDocument();
-    expect(screen.queryByText('Регистрация')).not.toBeInTheDocument();
+
+    expect(screen.queryByTestId('buttons-signinup')).not.toBeInTheDocument();
   });
 });
