@@ -53,7 +53,9 @@
   "RestClient": {
     "UError": "Неизвестная Ошибка",
     "IError": "Внутренняя Ошибка",
-    "Title": "REST Клиент"
+    "Title": "REST Клиент",
+    "Variables": "Переменные",
+    "No variables defined": "Переменные не определены"
   },
   "ResponseBlock": {
     "No response yet": "Еще нет ответа",

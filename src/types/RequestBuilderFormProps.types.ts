@@ -1,4 +1,5 @@
 import { Header } from './header.types';
+import { IVariable } from './variables.types';
 
 export interface RequestBuilderFormProps {
   method: string;
@@ -11,4 +12,5 @@ export interface RequestBuilderFormProps {
   setBody: (b: string) => void;
   onSubmit: () => void;
   loading: boolean;
+  variables: IVariable[];
 }

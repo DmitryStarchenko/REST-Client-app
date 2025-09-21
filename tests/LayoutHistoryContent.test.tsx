@@ -76,6 +76,9 @@ describe('LayoutHistoryContent', () => {
   beforeEach(() => {
     vi.clearAllMocks();
 
+    // Mock timezone to UTC for consistent test results
+    vi.stubEnv('TZ', 'UTC');
+
     (getTranslations as unknown as ReturnType<typeof vi.fn>).mockResolvedValue(mockGetTranslations);
 
     (createClient as unknown as ReturnType<typeof vi.fn>).mockResolvedValue({
@@ -210,8 +213,22 @@ describe('LayoutHistoryContent', () => {
     expect(screen.getByText('Resp Size')).toBeInTheDocument();
     expect(screen.getByText('Duration (ms)')).toBeInTheDocument();
     expect(screen.getByText('Error Details')).toBeInTheDocument();
-    expect(screen.getByText('01/12/2023, 13:30')).toBeInTheDocument();
-    expect(screen.getByText('01/12/2023, 12:15')).toBeInTheDocument();
+    // Calculate expected formatted dates based on the same logic as the component
+    const formatDate = (dateString: string): string => {
+      return new Date(dateString).toLocaleString('en-GB', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+      });
+    };
+
+    const expectedDate1 = formatDate('2023-12-01T10:30:00Z');
+    const expectedDate2 = formatDate('2023-12-01T09:15:00Z');
+
+    expect(screen.getByText(expectedDate1)).toBeInTheDocument();
+    expect(screen.getByText(expectedDate2)).toBeInTheDocument();
     expect(screen.getByText('GET')).toBeInTheDocument();
     expect(screen.getByText('POST')).toBeInTheDocument();
     expect(screen.getByText('200')).toBeInTheDocument();

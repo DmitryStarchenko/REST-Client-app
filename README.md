@@ -105,5 +105,4 @@ To run the unit tests:
 - [Alexei Skutov](https://github.com/KaPuTaH-UluTka)
 - [Igor Shaymukhametov](https://github.com/knyazigor)
 
-
 <a href="https://rs.school/"><img width="50" height="50" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTrImqYFcE49SmOYUm5jaqXz4L8UC0QFBrbQ&s" alt="RSSchool" title="RSSchool"/></a>
