@@ -217,23 +217,6 @@ describe('useAutoLogout', () => {
 
     expect(mockGetSession).toHaveBeenCalledTimes(2);
   });
-  //   const pastTime = Math.floor((Date.now() - 3600000) / 1000);
-  //   const mockSession: MockSession = {
-  //     data: { session: { expires_at: pastTime } },
-  //     error: null,
-  //   };
-
-  //   mockGetSession.mockResolvedValue(mockSession);
-  //   mockSignOut.mockRejectedValue(new Error('Sign out error'));
-
-  //   const { result } = renderHook(() => useAutoLogout());
-
-  //   await act(async () => {
-  //     await result.current.checkTokenExpiration();
-  //   });
-
-  //   expect(mockPush).toHaveBeenCalledWith('/login');
-  // });
 
   it('should return checkTokenExpiration function', async () => {
     const futureTime = Math.floor((Date.now() + 3600000) / 1000);

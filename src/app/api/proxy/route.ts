@@ -94,10 +94,7 @@ export async function POST(req: NextRequest): Promise<NextResponse<ApiResponse>>
         error_details: errorDetails,
         path: path,
       });
-      console.log(supabaseResult);
-    } catch (err) {
-      console.log(err);
-    }
+    } catch {}
 
     if (statusCode >= 200 && statusCode < 300) {
       const successResponse: ApiResponse = {
