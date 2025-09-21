@@ -118,5 +118,8 @@
     "Response": "Ответ",
     "Response Headers": "Заголовки Ответа",
     "Statistic Fields": "Статистические Данные"
+  },
+  "MultipleInputs": {
+    "Save": "Сохранить"
   }
 }
