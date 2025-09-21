@@ -1,6 +1,6 @@
 'use client';
 
-import { Box, Divider, Paper, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { useSearchParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { useCallback, useMemo, useState } from 'react';
@@ -12,9 +12,9 @@ import { ApiResponse, IVariable, ReadonlyFC, Header } from '@/types';
 import { parseRestPath, sendRestRequest } from '@/utils';
 import { replaceVariables } from '@/utils/variable';
 
-import CodeGenSection from './CodegenSection';
-import RequestBuilderForm from './RequestForm';
-import ResponseBlock from './ResponseSection';
+import BottomTabsBlock from './BottomSection';
+import RequestForm from './EndpointSection';
+import TopTabsBlock from './TopSection';
 
 const RestClient: ReadonlyFC = () => {
   const [variables] = useLocalStorage<IVariable[]>(VARIABLES_KEY, []);
@@ -46,7 +46,6 @@ const RestClient: ReadonlyFC = () => {
     setLoading(true);
 
     try {
-      // Replace variables in URL, headers, and body
       const processedUrl = replaceVariables(url, variablesObj);
       const processedHeaders = headers.map((header) => ({
         ...header,
@@ -79,38 +78,39 @@ const RestClient: ReadonlyFC = () => {
   }, [body, headers, method, url, variablesObj]);
 
   return (
-    <>
-      <Typography variant="h4" mb={2} textAlign={'center'}>
-        {t(`Title`)}
+    <Box p={2} width={1200} m="auto">
+      <Typography variant="h4" mb={2} textAlign="center">
+        {t('Title')}
       </Typography>
-      <Box p={2} width={1200} m={'auto'}>
-        <Paper elevation={2} sx={{ p: 2 }}>
-          <RequestBuilderForm
-            method={method}
-            setMethod={setMethod}
-            url={url}
-            setUrl={setUrl}
-            headers={headers}
-            setHeaders={setHeaders}
-            body={body}
-            setBody={setBody}
-            onSubmit={handleSubmit}
-            loading={loading}
-            variables={variables}
-          />
+      <RequestForm
+        method={method}
+        setMethod={setMethod}
+        url={url}
+        setUrl={setUrl}
+        sendRequest={handleSubmit}
+        loading={loading}
+        variables={variables}
+        variablesObj={variablesObj}
+      />
 
-          <Divider sx={{ my: 2 }} />
-          <CodeGenSection method={method} url={url} headers={headers} body={body} />
-          <Divider sx={{ my: 2 }} />
-          <ResponseBlock
-            response={response}
-            errorMessage={errorMessage}
-            unknownErrorText={t('UError')}
-            internalErrorText={t('IError')}
-          />
-        </Paper>
-      </Box>
-    </>
+      <TopTabsBlock
+        headers={headers}
+        setHeaders={setHeaders}
+        bodyText={body}
+        setBodyText={setBody}
+        method={method}
+        url={url}
+        variables={variables}
+        variablesObj={variablesObj}
+      />
+
+      <BottomTabsBlock
+        response={response}
+        errorMessage={errorMessage}
+        unknownErrorText={t('UError')}
+        internalErrorText={t('IError')}
+      />
+    </Box>
   );
 };
 

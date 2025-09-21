@@ -1,7 +1,8 @@
-'use client'; // Error boundaries must be Client Components
+'use client';
 
 import { useTranslations } from 'next-intl';
 import { useEffect } from 'react';
+import React from 'react';
 
 import CustomErrorPage from '@/components/shared/ErrorPage/ErrorPage';
 import { ReadonlyFC } from '@/types/readonly.types';
@@ -14,22 +15,12 @@ interface ErrorPageProps {
 const ErrorPage: ReadonlyFC<ErrorPageProps> = ({ error, reset }) => {
   const t = useTranslations('ErrorPage');
 
-  useEffect(() => {
-    // Log the error to an error reporting service
-    console.error(error);
-  }, [error]);
+  useEffect(() => {}, [error]);
 
   return (
     <div>
       <CustomErrorPage title={t('title')} message={error.message}>
-        <button
-          onClick={
-            // Attempt to recover by trying to re-render the segment
-            () => reset()
-          }
-        >
-          {t('Try again')}
-        </button>
+        <button onClick={() => reset()}>{t('Try again')}</button>
       </CustomErrorPage>
     </div>
   );

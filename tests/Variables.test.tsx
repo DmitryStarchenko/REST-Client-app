@@ -6,12 +6,10 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import Variables from '@/components/variables/Variables';
 import { IVariable } from '@/types';
 
-// Mock the useLocalStorage hook
 vi.mock('usehooks-ts', () => ({
   useLocalStorage: vi.fn(),
 }));
 
-// Mock Material-UI components
 vi.mock('@mui/material', () => ({
   Alert: ({
     children,
@@ -57,7 +55,6 @@ vi.mock('@mui/material', () => ({
     ) : null,
 }));
 
-// Mock MultipleInputs component
 vi.mock('@/components/shared/MultipleInput/MultipleInput', () => ({
   default: ({
     inputs,
@@ -96,7 +93,6 @@ vi.mock('@/components/shared/MultipleInput/MultipleInput', () => ({
   ),
 }));
 
-// Mock constants
 vi.mock('@/constants', () => ({
   VARIABLES_KEY: 'test-variables-key',
 }));
@@ -113,12 +109,10 @@ describe('Variables Component', () => {
   beforeEach(async () => {
     vi.clearAllMocks();
 
-    // Get the mocked useLocalStorage
     const { useLocalStorage } = await vi.importMock('usehooks-ts');
     mockUseLocalStorage = useLocalStorage as ReturnType<typeof vi.fn>;
     mockSetVariables = vi.fn();
 
-    // Default to empty variables for each test
     mockUseLocalStorage.mockReturnValue([[], mockSetVariables]);
   });
 
@@ -152,7 +146,6 @@ describe('Variables Component', () => {
 
     expect(mockSetVariables).toHaveBeenCalledWith(expect.any(Function));
 
-    // Test the function that was passed to setVariables
     const setVariablesCall = mockSetVariables.mock.calls[0][0];
     const result = setVariablesCall([]);
 

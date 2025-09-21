@@ -58,7 +58,7 @@
     "No variables defined": "Переменные не определены"
   },
   "ResponseBlock": {
-    "No response yet": "Еще нет ответа",
+    "No response yet": "Еще нет данных",
     "Response": "Ответ",
     "Timestamp": "Время",
     "Status": "Статус",
@@ -82,7 +82,7 @@
   },
   "BodyBlock": {
     "Body": "Тело",
-    "Copy base64": "Копироать base64",
+    "Copy base64": "Копия Base 64",
     "Invalid JSON": "Некорректный JSON"
   },
 
@@ -104,5 +104,19 @@
     "responseSize": "Размер ответа (б)",
     "duration": "Продолжительность (мс)",
     "error_text": "Ошибка"
+  },
+  "CopyButton": {
+    "Copy content": "Копировать содержимое блока"
+  },
+  "TopSection": {
+    "Request Headers": "Заголовки Запроса",
+    "Request Body": "Тело Запроса",
+    "Codegen": "Генератор Кода",
+    "Variables": "Переменные"
+  },
+  "BottomTabsBlock": {
+    "Response": "Ответ",
+    "Response Headers": "Заголовки Ответа",
+    "Statistic Fields": "Статистические Данные"
   }
 }

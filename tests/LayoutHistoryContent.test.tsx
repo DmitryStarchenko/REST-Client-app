@@ -55,19 +55,6 @@ vi.mock('./History.module.css', () => ({
   table: 'table-class',
 }));
 
-interface MockHistoryItem {
-  id: string;
-  timestamp: string;
-  method: string;
-  response_status: number | null;
-  url: string;
-  path: string;
-  request_size: number;
-  response_size: number;
-  duration_ms: number;
-  error_details: string | null;
-}
-
 describe('LayoutHistoryContent', () => {
   const mockGetTranslations = vi.fn();
   const mockAuthGetUser = vi.fn();
@@ -76,7 +63,6 @@ describe('LayoutHistoryContent', () => {
   beforeEach(() => {
     vi.clearAllMocks();
 
-    // Mock timezone to UTC for consistent test results
     vi.stubEnv('TZ', 'UTC');
 
     (getTranslations as unknown as ReturnType<typeof vi.fn>).mockResolvedValue(mockGetTranslations);
@@ -125,6 +111,7 @@ describe('LayoutHistoryContent', () => {
       const mainTranslations: Record<string, string> = {
         client: 'Client Page',
       };
+
       return mainTranslations[key] || key;
     });
 
@@ -213,7 +200,6 @@ describe('LayoutHistoryContent', () => {
     expect(screen.getByText('Resp Size')).toBeInTheDocument();
     expect(screen.getByText('Duration (ms)')).toBeInTheDocument();
     expect(screen.getByText('Error Details')).toBeInTheDocument();
-    // Calculate expected formatted dates based on the same logic as the component
     const formatDate = (dateString: string): string => {
       return new Date(dateString).toLocaleString('en-GB', {
         day: '2-digit',

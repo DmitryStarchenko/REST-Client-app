@@ -1,23 +1,41 @@
 'use client';
 
-import { Typography } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import React, { useState, useEffect, useMemo } from 'react';
 
 import { LANG_MAP } from '@/constants';
 import { useCodegen } from '@/hooks';
 import { CodegenSectionProps } from '@/types';
+import { replaceVariables } from '@/utils/';
 
-import styles from './CodegenSection.module.css';
+import styles from '../TopSection.module.css';
 import LangSelect from './LangSelect';
-import { CodeEditor } from '../Shared';
+import { CodeEditor } from '../../Shared';
 
-const CodegenSection: React.FC<CodegenSectionProps> = ({ method, url, headers, body }) => {
+const CodegenSection: React.FC<CodegenSectionProps> = ({
+  method,
+  url,
+  headers,
+  body,
+  codeLang,
+  setCodeLang,
+  variablesObj,
+}) => {
   const t = useTranslations('CodegenSection');
   const langs = useMemo(() => Object.keys(LANG_MAP), []);
-  const [codeLang, setCodeLang] = useState<string>(() => langs[0] ?? '');
   const [cache, setCache] = useState<Record<string, string>>({});
-  const { generateForLang } = useCodegen(method, url, headers, body);
+
+  const processedUrl = replaceVariables(url, variablesObj);
+  const processedHeaders = headers
+    .map((header) => ({
+      ...header,
+      key: replaceVariables(header.key, variablesObj),
+      value: replaceVariables(header.value, variablesObj),
+    }))
+    .filter((header) => header.key && header.value);
+  const processedBody = replaceVariables(body || '', variablesObj);
+
+  const { generateForLang } = useCodegen(method, processedUrl, processedHeaders, processedBody);
 
   useEffect(() => {
     if (!codeLang) return;
@@ -38,19 +56,15 @@ const CodegenSection: React.FC<CodegenSectionProps> = ({ method, url, headers, b
 
   return (
     <>
-      <Typography variant="subtitle1" sx={{ mb: 1 }}>
-        {langs.length > 0 ? t(`Generated code`) : t(`No languages available`)}
-      </Typography>
-
       <div className={styles.wrapper}>
-        <div className={styles.langBox}>
+        <div className={styles.topBox}>
           <LangSelect langs={langs} selectedLang={codeLang} onSelect={setCodeLang} />
         </div>
 
         <div className={styles.editorBox}>
           <CodeEditor
             value={cache[codeLang] ?? t('Generating')}
-            height="200px"
+            height="300px"
             language={LANG_MAP[codeLang] ?? 'plaintext'}
           />
         </div>
