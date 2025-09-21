@@ -63,7 +63,6 @@ describe('LayoutHistoryContent', () => {
   beforeEach(() => {
     vi.clearAllMocks();
 
-    // Mock timezone to UTC for consistent test results
     vi.stubEnv('TZ', 'UTC');
 
     (getTranslations as unknown as ReturnType<typeof vi.fn>).mockResolvedValue(mockGetTranslations);
@@ -201,7 +200,6 @@ describe('LayoutHistoryContent', () => {
     expect(screen.getByText('Resp Size')).toBeInTheDocument();
     expect(screen.getByText('Duration (ms)')).toBeInTheDocument();
     expect(screen.getByText('Error Details')).toBeInTheDocument();
-    // Calculate expected formatted dates based on the same logic as the component
     const formatDate = (dateString: string): string => {
       return new Date(dateString).toLocaleString('en-GB', {
         day: '2-digit',

@@ -160,7 +160,7 @@ describe('TopSection Component', () => {
 
     const headersBlock = screen.getByTestId('headers-block');
     expect(headersBlock).toBeInTheDocument();
-    expect(screen.getByTestId('headers-count')).toHaveTextContent('2'); // 2 headers passed
+    expect(screen.getByTestId('headers-count')).toHaveTextContent('2');
   });
 
   test('passes correct props to Body component', () => {
@@ -211,7 +211,7 @@ describe('TopSection Component', () => {
     expect(screen.queryByTestId('codegen-block')).not.toBeInTheDocument();
 
     fireEvent.click(collapseButton);
-    expect(screen.getByTestId('codegen-block')).toBeInTheDocument(); // Должен остаться на Codegen tab
+    expect(screen.getByTestId('codegen-block')).toBeInTheDocument();
   });
 
   test('handles headers changes from Headers component', () => {
