@@ -38,6 +38,9 @@ const Header: ReadonlyFC = () => {
       <nav className={styles.navigation}>
         {auth ? (
           <>
+            <Link className={styles.navButton} href={'/'}>
+              {translationNav('main')}
+            </Link>
             <ButtonsNavPage />
             <Link
               className={styles.navButton}

@@ -3,6 +3,7 @@ import '@/styles/globals.css';
 import { notFound } from 'next/navigation';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import NextTopLoader from 'nextjs-toploader';
+import React from 'react';
 
 import Layout from '@/components/layout/Layout';
 import { routing } from '@/i18n/routing';

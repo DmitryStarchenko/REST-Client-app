@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { useTranslations } from 'next-intl';
 import React from 'react';
-import { beforeEach, describe, expect, it, Mock, vi } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 
 import ButtonsNavPage from '../src/components/layout/Main/components/ButtonNavPage/ButtonsNavPage';
 
@@ -9,26 +9,12 @@ vi.mock('next-intl', () => ({
   useTranslations: vi.fn(),
 }));
 
-vi.mock('next/link', () => ({
-  default: vi.fn(({ children, href, className }) => (
-    <a href={href} className={className}>
-      {children}
-    </a>
-  )),
-}));
-
 vi.mock('@/i18n/navigation', () => ({
   Link: vi.fn(({ children, href, className }) => (
-    <a href={href} className={className}>
+    <a href={href} className={className} data-testid={`link-${href.replace('/', '')}`}>
       {children}
     </a>
   )),
-}));
-
-vi.mock('./ButtonsNavPage.module.css', () => ({
-  default: {
-    navButton: 'navButton-class',
-  },
 }));
 
 describe('ButtonsNavPage', () => {
@@ -36,47 +22,50 @@ describe('ButtonsNavPage', () => {
 
   beforeEach(() => {
     vi.clearAllMocks();
+    (useTranslations as ReturnType<typeof vi.fn>).mockReturnValue(mockTranslation);
+  });
+
+  it('should display all navigation links with correct translations', () => {
     mockTranslation.mockImplementation((key: string) => {
       const translations: Record<string, string> = {
-        client: 'Client Page',
-        variables: 'Variables Page',
-        history: 'History Page',
+        client: 'Клиент',
+        variables: 'Переменные',
+        history: 'История',
       };
       return translations[key] || key;
     });
-
-    (useTranslations as Mock).mockReturnValue(mockTranslation);
-  });
-
-  it('should render all navigation buttons with correct text and links', () => {
-    render(<ButtonsNavPage />);
-    const clientLink = screen.getByRole('link', { name: 'Client Page' });
-    const variablesLink = screen.getByRole('link', { name: 'Variables Page' });
-    const historyLink = screen.getByRole('link', { name: 'History Page' });
-
-    expect(clientLink).toBeInTheDocument();
-    expect(clientLink).toHaveAttribute('href', '/client');
-    expect(variablesLink).toBeInTheDocument();
-    expect(variablesLink).toHaveAttribute('href', '/variables');
-    expect(historyLink).toBeInTheDocument();
-    expect(historyLink).toHaveAttribute('href', '/history');
-  });
-
-  it('should call useTranslations with correct namespace', () => {
     render(<ButtonsNavPage />);
     expect(useTranslations).toHaveBeenCalledWith('Main');
-  });
+    const clientLink = screen.getByTestId('link-client');
+    const variablesLink = screen.getByTestId('link-variables');
+    const historyLink = screen.getByTestId('link-history');
 
-  it('should call translation function with correct keys', () => {
-    render(<ButtonsNavPage />);
+    expect(clientLink).toBeInTheDocument();
+    expect(variablesLink).toBeInTheDocument();
+    expect(historyLink).toBeInTheDocument();
+    expect(clientLink).toHaveAttribute('href', '/client');
+    expect(variablesLink).toHaveAttribute('href', '/variables');
+    expect(historyLink).toHaveAttribute('href', '/history');
+    expect(clientLink).toHaveTextContent('Клиент');
+    expect(variablesLink).toHaveTextContent('Переменные');
+    expect(historyLink).toHaveTextContent('История');
     expect(mockTranslation).toHaveBeenCalledWith('client');
     expect(mockTranslation).toHaveBeenCalledWith('variables');
     expect(mockTranslation).toHaveBeenCalledWith('history');
-    expect(mockTranslation).toHaveBeenCalledTimes(3);
   });
 
-  // it('should match snapshot', () => {
-  //   const { container } = render(<ButtonsNavPage />);
-  //   expect(container).toMatchSnapshot();
-  // });
+  it('must use the correct translation keys even if no translations are found', () => {
+    mockTranslation.mockImplementation((key: string) => key);
+    render(<ButtonsNavPage />);
+    expect(screen.getByTestId('link-client')).toHaveTextContent('client');
+    expect(screen.getByTestId('link-variables')).toHaveTextContent('variables');
+    expect(screen.getByTestId('link-history')).toHaveTextContent('history');
+  });
+
+  it('should render the correct number of links', () => {
+    mockTranslation.mockImplementation((key: string) => key);
+    render(<ButtonsNavPage />);
+    const links = screen.getAllByTestId(/^link-/);
+    expect(links).toHaveLength(3);
+  });
 });
