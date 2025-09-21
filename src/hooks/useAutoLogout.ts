@@ -1,0 +1,77 @@
+'use client';
+
+import { useCallback, useEffect, useRef } from 'react';
+
+import { useRouter } from '@/i18n/navigation';
+import supabaseClient from '@/lib/supabase/client';
+
+interface UseAutoLogoutOptions {
+  onLogout?: () => void;
+  checkInterval?: number; // default 60000 (1 minute)
+  isLoggedIn?: boolean; // only run when user is logged in
+}
+
+const useAutoLogout = (options: UseAutoLogoutOptions = {}) => {
+  const { onLogout, checkInterval = 60000, isLoggedIn = true } = options;
+  const router = useRouter();
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+
+  const checkTokenExpiration = useCallback(async () => {
+    if (!isLoggedIn) {
+      return;
+    }
+
+    try {
+      const {
+        data: { session },
+        error,
+      } = await supabaseClient.auth.getSession();
+
+      if (error || !session?.expires_at) {
+        return;
+      }
+
+      const expirationTime = session.expires_at * 1000;
+      const currentTime = Date.now();
+
+      console.log(expirationTime);
+      console.log(currentTime);
+
+      // If token is expired, logout user
+      if (currentTime >= expirationTime) {
+        await supabaseClient.auth.signOut();
+
+        if (onLogout) {
+          onLogout();
+        }
+
+        router.push('/login');
+      }
+    } catch (error) {
+      console.error('Error checking token expiration:', error);
+    }
+  }, [onLogout, router, isLoggedIn]);
+
+  useEffect(() => {
+    // Only start checking if user is logged in
+    if (!isLoggedIn) {
+      return;
+    }
+
+    checkTokenExpiration();
+
+    intervalRef.current = setInterval(checkTokenExpiration, checkInterval);
+
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+    };
+  }, [checkInterval, onLogout, router, checkTokenExpiration, isLoggedIn]);
+
+  return {
+    checkTokenExpiration,
+  };
+};
+
+export default useAutoLogout;
