@@ -79,7 +79,7 @@ export async function POST(req: NextRequest): Promise<NextResponse<ApiResponse>>
     }
 
     try {
-      await supabaseAdmin.from('request_history').insert({
+      const supabaseResult = await supabaseAdmin.from('request_history').insert({
         user_id: userId,
         method,
         url,
@@ -94,7 +94,10 @@ export async function POST(req: NextRequest): Promise<NextResponse<ApiResponse>>
         error_details: errorDetails,
         path: path,
       });
-    } catch {}
+      console.log(supabaseResult);
+    } catch (err) {
+      console.log(err);
+    }
 
     if (statusCode >= 200 && statusCode < 300) {
       const successResponse: ApiResponse = {

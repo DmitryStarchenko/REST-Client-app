@@ -14,10 +14,21 @@ vi.mock('@/lib/supabase/server', () => ({
   createClient: vi.fn(),
 }));
 
-vi.mock('next/link', () => ({
-  default: ({ href, children }: { href: string; children: React.ReactNode }) => (
-    <a href={href}>{children}</a>
+vi.mock('@/i18n', () => ({
+  Link: vi.fn(({ children, href, className }) =>
+    React.createElement(
+      'a',
+      {
+        href,
+        className,
+      },
+      children,
+    ),
   ),
+  useRouter: vi.fn(() => ({
+    push: vi.fn(),
+  })),
+  usePathname: vi.fn(() => '/'),
 }));
 
 vi.mock('@mui/material', () => ({

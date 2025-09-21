@@ -7,10 +7,10 @@ import {
   TableRow,
   Typography,
 } from '@mui/material';
-import Link from 'next/link';
 import { getTranslations } from 'next-intl/server';
 import React from 'react';
 
+import { Link } from '@/i18n';
 import { createClient } from '@/lib/supabase/server';
 import { ReadonlyFC } from '@/types/readonly.types';
 
@@ -85,7 +85,7 @@ const LayoutHistoryContent: ReadonlyFC = async () => {
                 <TableCell>{item.method}</TableCell>
                 <TableCell>{item.response_status}</TableCell>
                 <TableCell>
-                  <Link href={item.path}>{item.url}</Link>
+                  <Link href={item.path ?? ''}>{item.url}</Link>
                 </TableCell>
                 <TableCell>{item.request_size}</TableCell>
                 <TableCell>{item.response_size}</TableCell>
