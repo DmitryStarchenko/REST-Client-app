@@ -10,6 +10,18 @@ vi.mock('usehooks-ts', () => ({
   useLocalStorage: vi.fn(),
 }));
 
+vi.mock('next-intl', () => ({
+  useTranslations: () => (key: string) => {
+    const translations: Record<string, string> = {
+      'MultipleInputs.variables': 'Variables',
+      'MultipleInputs.errorInvalidFormat':
+        'Variable key should be contain only letters, digits, or underscore!',
+      'MultipleInputs.errorDuplicateKey': 'Variable key must be unique!',
+    };
+    return translations[key] || key;
+  },
+}));
+
 vi.mock('@mui/material', () => ({
   Alert: ({
     children,

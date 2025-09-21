@@ -120,6 +120,9 @@
     "Statistic Fields": "Статистические Данные"
   },
   "MultipleInputs": {
-    "Save": "Сохранить"
+    "Save": "Сохранить",
+    "Variables": "Переменные",
+    "Key": "Ключ",
+    "Value": "Значение"
   }
 }

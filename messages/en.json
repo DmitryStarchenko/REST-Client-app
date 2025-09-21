@@ -120,6 +120,9 @@
     "Statistic Fields": "Statistic Data"
   },
   "MultipleInputs": {
-    "Save": "Save"
+    "Save": "Save",
+    "Variables": "Variables",
+    "Key": "Key",
+    "Value": "Value"
   }
 }
