@@ -7,11 +7,15 @@ import supabaseClient from '@/lib/supabase/client';
 
 interface UseAutoLogoutOptions {
   onLogout?: () => void;
-  checkInterval?: number; // default 60000 (1 minute)
-  isLoggedIn?: boolean; // only run when user is logged in
+  checkInterval?: number;
+  isLoggedIn?: boolean;
 }
 
-const useAutoLogout = (options: UseAutoLogoutOptions = {}) => {
+interface UseAutoLogoutReturn {
+  checkTokenExpiration: () => Promise<void>;
+}
+
+const useAutoLogout = (options: UseAutoLogoutOptions = {}): UseAutoLogoutReturn => {
   const { onLogout, checkInterval = 60000, isLoggedIn = true } = options;
   const router = useRouter();
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
@@ -34,10 +38,6 @@ const useAutoLogout = (options: UseAutoLogoutOptions = {}) => {
       const expirationTime = session.expires_at * 1000;
       const currentTime = Date.now();
 
-      console.log(expirationTime);
-      console.log(currentTime);
-
-      // If token is expired, logout user
       if (currentTime >= expirationTime) {
         await supabaseClient.auth.signOut();
 
@@ -53,7 +53,6 @@ const useAutoLogout = (options: UseAutoLogoutOptions = {}) => {
   }, [onLogout, router, isLoggedIn]);
 
   useEffect(() => {
-    // Only start checking if user is logged in
     if (!isLoggedIn) {
       return;
     }

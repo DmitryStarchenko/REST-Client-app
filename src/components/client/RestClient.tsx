@@ -4,12 +4,14 @@ import { Box, Typography } from '@mui/material';
 import { useSearchParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { useCallback, useMemo, useState } from 'react';
+import React from 'react';
 import { useLocalStorage } from 'usehooks-ts';
 
 import { VARIABLES_KEY } from '@/constants';
 import { usePathname } from '@/i18n/navigation';
 import { ApiResponse, IVariable, ReadonlyFC, Header } from '@/types';
-import { parseRestPath, sendRestRequest } from '@/utils';
+import { parseRestPath } from '@/utils/parseRestPath';
+import { sendRestRequest } from '@/utils/sendRestRequest';
 import { replaceVariables } from '@/utils/variable';
 
 import BottomTabsBlock from './BottomSection';

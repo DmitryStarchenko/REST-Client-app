@@ -91,14 +91,6 @@ describe('Header', async () => {
     vi.clearAllMocks();
   });
 
-  // it('renders all the main elements', () => {
-  //   render(<Header />);
-
-  //   expect(screen.getByRole('banner')).toBeInTheDocument();
-  //   expect(screen.getByText('Войти')).toBeInTheDocument();
-  //   expect(screen.getByText('Регистрация')).toBeInTheDocument();
-  // });
-
   it('adds and removes compact class on scroll', () => {
     const { container } = render(<Header />);
 
@@ -114,29 +106,6 @@ describe('Header', async () => {
     expect(header.className).toContain('header');
     expect(header.className).not.toContain('headerCompact');
   });
-
-  // it('renders main and sign out links when user is authenticated', async () => {
-  //   vi.doMock('jotai', () => ({
-  //     ...originalJotai,
-  //     useAtomValue: vi.fn(() => ({ user: { id: '1', email: 'test@example.com' } })),
-  //   }));
-  //   mockT.mockImplementation((key: string) => {
-  //     const translations: Record<string, string> = {
-  //       signIn: 'Войти',
-  //       signUp: 'Регистрация',
-  //       main: 'Главная',
-  //       signOut: 'Выйти',
-  //     };
-  //     return translations[key] || key;
-  //   });
-  //   vi.resetModules();
-  //   Header = (await import('../src/components/layout/Header/Header')).default;
-
-  //   render(<Header />);
-
-  //   expect(screen.getByText('Главная')).toBeInTheDocument();
-  //   expect(screen.getByText('Выйти')).toBeInTheDocument();
-  // });
 
   it('does not render auth links when user is authenticated', async () => {
     vi.doMock('jotai', () => ({

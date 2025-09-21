@@ -11,7 +11,6 @@ const SavedVariables: ReadonlyFC<SavedVariablesProps> = ({ variables }) => {
   return (
     <Box sx={{ marginBottom: 10 }}>
       <Typography variant="subtitle1">Variables: </Typography>
-
       <Box
         sx={{
           display: 'flex',

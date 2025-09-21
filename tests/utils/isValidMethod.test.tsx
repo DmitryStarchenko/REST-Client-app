@@ -3,11 +3,10 @@ import { fail } from 'assert';
 import { describe, it, expect } from 'vitest';
 
 import { METHODS } from '@/constants';
-
-import { isValidMethod } from './isValidMethod';
+import { isValidMethod } from '@/utils/isValidMethod';
 
 describe('isValidMethod', () => {
-  it('возвращает true для всех валидных HTTP методов', () => {
+  it('returns true for all valid HTTP methods', () => {
     METHODS.forEach((method) => {
       expect(isValidMethod(method)).toBe(true);
     });

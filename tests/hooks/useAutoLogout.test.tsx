@@ -1,15 +1,29 @@
 import { renderHook, act } from '@testing-library/react';
-import { vi, describe, it, expect, beforeEach, afterEach } from 'vitest';
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+import { Mock } from 'vitest';
 
 import useAutoLogout from '@/hooks/useAutoLogout';
+import { useRouter } from '@/i18n/navigation';
 import supabaseClient from '@/lib/supabase/client';
 
-// Mock i18n navigation
-vi.mock('@/i18n/navigation', () => ({
-  useRouter: vi.fn(),
-}));
+type MockSession = {
+  data: {
+    session: {
+      expires_at?: number;
+    } | null;
+  };
+  error: Error | null;
+};
 
-// Mock supabase client
+type MockRouter = {
+  push: Mock;
+  replace: Mock;
+  prefetch: Mock;
+  back: Mock;
+  forward: Mock;
+  refresh: Mock;
+};
+
 vi.mock('@/lib/supabase/client', () => ({
   default: {
     auth: {
@@ -19,101 +33,122 @@ vi.mock('@/lib/supabase/client', () => ({
   },
 }));
 
+vi.mock('@/i18n/navigation', () => ({
+  useRouter: vi.fn(() => ({
+    push: vi.fn(),
+    replace: vi.fn(),
+    prefetch: vi.fn(),
+    back: vi.fn(),
+    forward: vi.fn(),
+    refresh: vi.fn(),
+  })),
+}));
+
 describe('useAutoLogout', () => {
   const mockPush = vi.fn();
-  const mockGetSession = vi.fn();
   const mockSignOut = vi.fn();
+  const mockGetSession = vi.fn();
+  const mockOnLogout = vi.fn();
 
-  beforeEach(async () => {
+  const mockRouter: MockRouter = {
+    push: mockPush,
+    replace: vi.fn(),
+    prefetch: vi.fn(),
+    back: vi.fn(),
+    forward: vi.fn(),
+    refresh: vi.fn(),
+  };
+
+  beforeEach(() => {
     vi.clearAllMocks();
+
+    vi.mocked(useRouter).mockReturnValue(mockRouter);
+
+    vi.mocked(supabaseClient.auth.getSession).mockImplementation(mockGetSession);
+    vi.mocked(supabaseClient.auth.signOut).mockImplementation(mockSignOut);
+
     vi.useFakeTimers();
-
-    const { useRouter } = await vi.importMock('@/i18n/navigation');
-    (useRouter as ReturnType<typeof vi.fn>).mockReturnValue({
-      push: mockPush,
-    });
-
-    (supabaseClient.auth.getSession as ReturnType<typeof vi.fn>) = mockGetSession;
-    (supabaseClient.auth.signOut as ReturnType<typeof vi.fn>) = mockSignOut;
   });
 
   afterEach(() => {
     vi.useRealTimers();
   });
 
-  it('should initialize without errors', () => {
-    mockGetSession.mockResolvedValue({
-      data: { session: null },
-      error: null,
-    });
-
-    const { result } = renderHook(() => useAutoLogout({ isLoggedIn: true }));
-
-    expect(result.current.checkTokenExpiration).toBeInstanceOf(Function);
-  });
-
-  it('should not run when user is not logged in', () => {
+  it('should not check expiration when user is not logged in', async () => {
     const { result } = renderHook(() => useAutoLogout({ isLoggedIn: false }));
-
-    expect(result.current.checkTokenExpiration).toBeInstanceOf(Function);
-    // Should not call getSession when not logged in
-    expect(mockGetSession).not.toHaveBeenCalled();
-  });
-
-  it('should handle session with valid token', async () => {
-    const futureTime = Math.floor(Date.now() / 1000) + 3600; // 1 hour from now
-    const mockSession = {
-      expires_at: futureTime,
-      user: { id: '1' },
-    };
-
-    mockGetSession.mockResolvedValue({
-      data: { session: mockSession },
-      error: null,
-    });
-
-    const { result } = renderHook(() => useAutoLogout({ isLoggedIn: true }));
 
     await act(async () => {
       await result.current.checkTokenExpiration();
     });
 
-    expect(mockGetSession).toHaveBeenCalled();
+    expect(mockGetSession).not.toHaveBeenCalled();
+  });
+
+  it('should not logout when token is still valid', async () => {
+    const futureTime = Math.floor((Date.now() + 3600000) / 1000);
+    const mockSession: MockSession = {
+      data: { session: { expires_at: futureTime } },
+      error: null,
+    };
+
+    mockGetSession.mockResolvedValue(mockSession);
+
+    const { result } = renderHook(() => useAutoLogout());
+
+    await act(async () => {
+      await result.current.checkTokenExpiration();
+    });
+
     expect(mockSignOut).not.toHaveBeenCalled();
     expect(mockPush).not.toHaveBeenCalled();
   });
 
   it('should logout when token is expired', async () => {
-    const pastTime = Math.floor(Date.now() / 1000) - 3600; // 1 hour ago
-    const mockSession = {
-      expires_at: pastTime,
-      user: { id: '1' },
+    const pastTime = Math.floor((Date.now() - 3600000) / 1000);
+    const mockSession: MockSession = {
+      data: { session: { expires_at: pastTime } },
+      error: null,
     };
 
-    mockGetSession.mockResolvedValue({
-      data: { session: mockSession },
-      error: null,
-    });
+    mockGetSession.mockResolvedValue(mockSession);
 
-    const onLogout = vi.fn();
-    const { result } = renderHook(() => useAutoLogout({ onLogout, isLoggedIn: true }));
+    const { result } = renderHook(() => useAutoLogout());
 
     await act(async () => {
       await result.current.checkTokenExpiration();
     });
 
     expect(mockSignOut).toHaveBeenCalled();
-    expect(onLogout).toHaveBeenCalled();
     expect(mockPush).toHaveBeenCalledWith('/login');
   });
 
-  it('should handle session errors gracefully', async () => {
-    mockGetSession.mockResolvedValue({
-      data: { session: null },
-      error: new Error('Session error'),
+  it('should call onLogout callback when provided', async () => {
+    const pastTime = Math.floor((Date.now() - 3600000) / 1000);
+    const mockSession: MockSession = {
+      data: { session: { expires_at: pastTime } },
+      error: null,
+    };
+
+    mockGetSession.mockResolvedValue(mockSession);
+
+    const { result } = renderHook(() => useAutoLogout({ onLogout: mockOnLogout }));
+
+    await act(async () => {
+      await result.current.checkTokenExpiration();
     });
 
-    const { result } = renderHook(() => useAutoLogout({ isLoggedIn: true }));
+    expect(mockOnLogout).toHaveBeenCalled();
+  });
+
+  it('should handle session error gracefully', async () => {
+    const mockSession: MockSession = {
+      data: { session: null },
+      error: new Error('Session error'),
+    };
+
+    mockGetSession.mockResolvedValue(mockSession);
+
+    const { result } = renderHook(() => useAutoLogout());
 
     await act(async () => {
       await result.current.checkTokenExpiration();
@@ -123,13 +158,15 @@ describe('useAutoLogout', () => {
     expect(mockPush).not.toHaveBeenCalled();
   });
 
-  it('should handle missing session gracefully', async () => {
-    mockGetSession.mockResolvedValue({
-      data: { session: null },
+  it('should handle missing expires_at field', async () => {
+    const mockSession: MockSession = {
+      data: { session: { expires_at: undefined } },
       error: null,
-    });
+    };
 
-    const { result } = renderHook(() => useAutoLogout({ isLoggedIn: true }));
+    mockGetSession.mockResolvedValue(mockSession);
+
+    const { result } = renderHook(() => useAutoLogout());
 
     await act(async () => {
       await result.current.checkTokenExpiration();
@@ -137,5 +174,84 @@ describe('useAutoLogout', () => {
 
     expect(mockSignOut).not.toHaveBeenCalled();
     expect(mockPush).not.toHaveBeenCalled();
+  });
+
+  it('should set up interval for checking expiration', async () => {
+    const futureTime = Math.floor((Date.now() + 3600000) / 1000);
+    const mockSession: MockSession = {
+      data: { session: { expires_at: futureTime } },
+      error: null,
+    };
+
+    mockGetSession.mockResolvedValue(mockSession);
+
+    renderHook(() => useAutoLogout({ checkInterval: 5000 }));
+
+    await act(async () => {
+      vi.advanceTimersByTime(10000);
+    });
+
+    expect(mockGetSession).toHaveBeenCalledTimes(3);
+  });
+
+  it('should clear interval on unmount', async () => {
+    const futureTime = Math.floor((Date.now() + 3600000) / 1000);
+    const mockSession: MockSession = {
+      data: { session: { expires_at: futureTime } },
+      error: null,
+    };
+
+    mockGetSession.mockResolvedValue(mockSession);
+
+    const { unmount } = renderHook(() => useAutoLogout());
+
+    await act(async () => {
+      vi.advanceTimersByTime(60000);
+    });
+
+    unmount();
+
+    await act(async () => {
+      vi.advanceTimersByTime(60000);
+    });
+
+    expect(mockGetSession).toHaveBeenCalledTimes(2);
+  });
+  //   const pastTime = Math.floor((Date.now() - 3600000) / 1000);
+  //   const mockSession: MockSession = {
+  //     data: { session: { expires_at: pastTime } },
+  //     error: null,
+  //   };
+
+  //   mockGetSession.mockResolvedValue(mockSession);
+  //   mockSignOut.mockRejectedValue(new Error('Sign out error'));
+
+  //   const { result } = renderHook(() => useAutoLogout());
+
+  //   await act(async () => {
+  //     await result.current.checkTokenExpiration();
+  //   });
+
+  //   expect(mockPush).toHaveBeenCalledWith('/login');
+  // });
+
+  it('should return checkTokenExpiration function', async () => {
+    const futureTime = Math.floor((Date.now() + 3600000) / 1000);
+    const mockSession: MockSession = {
+      data: { session: { expires_at: futureTime } },
+      error: null,
+    };
+
+    mockGetSession.mockResolvedValue(mockSession);
+
+    const { result } = renderHook(() => useAutoLogout());
+
+    expect(typeof result.current.checkTokenExpiration).toBe('function');
+
+    await act(async () => {
+      await result.current.checkTokenExpiration();
+    });
+
+    expect(mockGetSession).toHaveBeenCalled();
   });
 });
