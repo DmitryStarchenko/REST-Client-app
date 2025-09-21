@@ -8,6 +8,7 @@ import { createStore } from 'jotai';
 import { Provider as JotaiProvider } from 'jotai';
 import React, { useEffect } from 'react';
 
+import useAutoLogout from '@/hooks/useAutoLogout';
 import supabaseClient from '@/lib/supabase/client';
 import { authAtom } from '@/store';
 import { theme, MonacoThemeProvider } from '@/theme';
@@ -23,6 +24,13 @@ const Providers: ReadonlyFC<ProvidersProps> = ({ children, initialUser }) => {
   const queryClient = getQueryClient();
   const store = createStore();
 
+  useAutoLogout({
+    onLogout: () => {
+      store.set(authAtom, null);
+    },
+    isLoggedIn: !!initialUser,
+  });
+
   useEffect(() => {
     const {
       data: { subscription },
@@ -30,7 +38,9 @@ const Providers: ReadonlyFC<ProvidersProps> = ({ children, initialUser }) => {
       store.set(authAtom, session?.user ?? null);
     });
 
-    return () => subscription.unsubscribe();
+    return () => {
+      subscription.unsubscribe();
+    };
   }, [store]);
 
   if (initialUser) {
