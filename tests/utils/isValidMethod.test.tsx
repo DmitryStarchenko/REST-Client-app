@@ -3,8 +3,7 @@ import { fail } from 'assert';
 import { describe, it, expect } from 'vitest';
 
 import { METHODS } from '@/constants';
-
-import { isValidMethod } from './isValidMethod';
+import { isValidMethod } from '@/utils/isValidMethod';
 
 describe('isValidMethod', () => {
   it('возвращает true для всех валидных HTTP методов', () => {

@@ -1,10 +1,9 @@
 import { renderHook } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 
+import { useCodegen } from '@/hooks/useCodegen';
 import { generateSnippet } from '@/utils';
 import { isJson } from '@/utils';
-
-import { useCodegen } from './useCodegen';
 
 vi.mock('@/utils', () => ({
   generateSnippet: vi.fn(),

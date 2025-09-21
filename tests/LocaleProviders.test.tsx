@@ -1,12 +1,9 @@
-import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
 import { Session } from '@supabase/supabase-js';
-import { QueryClientProvider } from '@tanstack/react-query';
 import { render, screen } from '@testing-library/react';
-import { createStore, Provider as JotaiProvider } from 'jotai';
+import { createStore } from 'jotai';
 import React from 'react';
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 
-import { authAtom } from '@/store';
 import getQueryClient from '@/utils/get-query-client';
 
 import { createMockQueryClient } from './utils/mock-query-client';
