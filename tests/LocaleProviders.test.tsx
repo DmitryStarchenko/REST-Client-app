@@ -61,6 +61,10 @@ vi.mock('@/store', () => ({
   authAtom: Symbol('authAtom'),
 }));
 
+vi.mock('@/hooks/useAutoLogout', () => ({
+  default: vi.fn(),
+}));
+
 describe('Providers', () => {
   const mockSession: Session = {
     access_token: 'test-token',
@@ -92,7 +96,7 @@ describe('Providers', () => {
 
   it('should render children with all providers', () => {
     render(
-      <Providers initialSession={null}>
+      <Providers initialUser={null}>
         <div data-testid="test-child">Test Child</div>
       </Providers>,
     );
