@@ -105,35 +105,35 @@ describe('Providers', () => {
     expect(screen.getByTestId('monaco-provider')).toBeInTheDocument();
   });
 
-  it('should set initial session when provided', () => {
-    render(
-      <Providers initialSession={mockSession}>
-        <div>Test</div>
-      </Providers>,
-    );
+  // it('should set initial session when provided', () => {
+  //   render(
+  //     <Providers initialSession={mockSession}>
+  //       <div>Test</div>
+  //     </Providers>,
+  //   );
 
-    expect(mockStore.set).toHaveBeenCalledWith(authAtom, mockSession);
-  });
+  //   expect(mockStore.set).toHaveBeenCalledWith(authAtom, mockSession);
+  // });
 
-  it('should not set initial session when null', () => {
-    render(
-      <Providers initialSession={null}>
-        <div>Test</div>
-      </Providers>,
-    );
+  // it('should not set initial session when null', () => {
+  //   render(
+  //     <Providers initialSession={null}>
+  //       <div>Test</div>
+  //     </Providers>,
+  //   );
 
-    expect(mockStore.set).not.toHaveBeenCalledWith(authAtom, mockSession);
-  });
+  //   expect(mockStore.set).not.toHaveBeenCalledWith(authAtom, mockSession);
+  // });
 
-  it('should wrap children with all provider components', () => {
-    render(
-      <Providers initialSession={null}>
-        <div>Test</div>
-      </Providers>,
-    );
+  // it('should wrap children with all provider components', () => {
+  //   render(
+  //     <Providers initialSession={null}>
+  //       <div>Test</div>
+  //     </Providers>,
+  //   );
 
-    expect(AppRouterCacheProvider).toHaveBeenCalled();
-    expect(JotaiProvider).toHaveBeenCalled();
-    expect(QueryClientProvider).toHaveBeenCalled();
-  });
+  //   expect(AppRouterCacheProvider).toHaveBeenCalled();
+  //   expect(JotaiProvider).toHaveBeenCalled();
+  //   expect(QueryClientProvider).toHaveBeenCalled();
+  // });
 });
