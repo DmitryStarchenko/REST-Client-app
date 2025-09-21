@@ -1,4 +1,5 @@
 import { notFound } from 'next/navigation';
+import React from 'react';
 
 import ClientWrapper from '@/components/client';
 import { ReadonlyFC, PageProps } from '@/types';
