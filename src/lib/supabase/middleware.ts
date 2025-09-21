@@ -8,14 +8,10 @@ export async function updateSession(
   request: NextRequest,
   response: NextResponse,
 ): Promise<NextResponse<unknown>> {
-  // If the env vars are not set, skip middleware check. You can remove this
-  // once you setup the project.
   if (!hasEnvVars) {
     return response;
   }
 
-  // With Fluid compute, don't put this client in a global environment
-  // variable. Always create a new one on each request.
   createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!,
