@@ -1,19 +1,52 @@
-import { Session } from '@supabase/supabase-js';
-import { render, screen } from '@testing-library/react';
-import { createStore } from 'jotai';
-import React from 'react';
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 
-import getQueryClient from '@/utils/get-query-client';
+const mockPush = vi.hoisted(() => vi.fn());
 
-import { createMockQueryClient } from './utils/mock-query-client';
-import Providers from '../src/app/[locale]/providers';
+vi.mock('../src/i18n/navigation.ts', () => ({
+  useRouter: () => ({
+    push: mockPush,
+    back: vi.fn(),
+    forward: vi.fn(),
+    refresh: vi.fn(),
+    replace: vi.fn(),
+    prefetch: vi.fn(),
+  }),
+  redirect: vi.fn(),
+  usePathname: vi.fn(() => '/'),
+  useSearchParams: vi.fn(() => new URLSearchParams()),
+  useParams: vi.fn(() => ({})),
+  useSelectedLayoutSegment: vi.fn(() => null),
+  useSelectedLayoutSegments: vi.fn(() => []),
+}));
+
+vi.mock('next-intl', () => ({
+  useTranslations: () => (key: string) => key,
+}));
+
+vi.mock('@/lib/supabase/client', () => {
+  const mockOnAuthStateChange = vi.fn(() => ({
+    data: {
+      subscription: {
+        unsubscribe: vi.fn(),
+      },
+    },
+  }));
+
+  return {
+    default: {
+      auth: {
+        onAuthStateChange: mockOnAuthStateChange,
+      },
+    },
+  };
+});
 
 vi.mock('@mui/material', async () => {
   const actual = await vi.importActual('@mui/material');
   return {
     ...actual,
     InitColorSchemeScript: vi.fn(() => <div data-testid="color-scheme-script" />),
+    ThemeProvider: vi.fn(({ children }) => <div>{children}</div>),
   };
 });
 
@@ -34,20 +67,6 @@ vi.mock('jotai', async () => {
   };
 });
 
-vi.mock('@/lib/supabase/client', () => ({
-  default: {
-    auth: {
-      onAuthStateChange: vi.fn(() => ({
-        data: {
-          subscription: {
-            unsubscribe: vi.fn(),
-          },
-        },
-      })),
-    },
-  },
-}));
-
 vi.mock('@/theme', () => ({
   theme: {},
   MonacoThemeProvider: vi.fn(() => <div data-testid="monaco-provider" />),
@@ -61,24 +80,34 @@ vi.mock('@/store', () => ({
   authAtom: Symbol('authAtom'),
 }));
 
-vi.mock('@/hooks/useAutoLogout', () => ({
-  default: vi.fn(),
+import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
+import { User } from '@supabase/supabase-js';
+import { QueryClientProvider } from '@tanstack/react-query';
+import { render, screen } from '@testing-library/react';
+import { createStore, Provider as JotaiProvider } from 'jotai';
+import React from 'react';
+
+import { authAtom } from '@/store';
+import getQueryClient from '@/utils/get-query-client';
+
+import { createMockQueryClient } from './utils/mock-query-client';
+import Providers from '../src/app/[locale]/providers';
+
+const mockOnAuthStateChange = vi.fn(() => ({
+  data: {
+    subscription: {
+      unsubscribe: vi.fn(),
+    },
+  },
 }));
 
 describe('Providers', () => {
-  const mockSession: Session = {
-    access_token: 'test-token',
-    token_type: 'bearer',
-    user: {
-      id: 'user-id',
-      app_metadata: {},
-      user_metadata: {},
-      aud: 'authenticated',
-      created_at: '2023-01-01',
-    },
-    expires_in: 3600,
-    expires_at: Date.now() + 3600000,
-    refresh_token: 'refresh-token',
+  const mockUser: User = {
+    id: 'user-id',
+    app_metadata: {},
+    user_metadata: {},
+    aud: 'authenticated',
+    created_at: '2023-01-01',
   };
 
   const mockStore = {
@@ -88,6 +117,8 @@ describe('Providers', () => {
   beforeEach(() => {
     vi.mocked(getQueryClient).mockReturnValue(createMockQueryClient());
     vi.mocked(createStore).mockReturnValue(mockStore as unknown as ReturnType<typeof createStore>);
+    mockOnAuthStateChange.mockClear();
+    mockStore.set.mockClear();
   });
 
   afterEach(() => {
@@ -100,41 +131,37 @@ describe('Providers', () => {
         <div data-testid="test-child">Test Child</div>
       </Providers>,
     );
-
     expect(screen.getByTestId('test-child')).toBeInTheDocument();
     expect(screen.getByTestId('color-scheme-script')).toBeInTheDocument();
     expect(screen.getByTestId('monaco-provider')).toBeInTheDocument();
   });
 
-  // it('should set initial session when provided', () => {
-  //   render(
-  //     <Providers initialSession={mockSession}>
-  //       <div>Test</div>
-  //     </Providers>,
-  //   );
+  it('should set initial user when provided', () => {
+    render(
+      <Providers initialUser={mockUser}>
+        <div>Test</div>
+      </Providers>,
+    );
+    expect(mockStore.set).toHaveBeenCalledWith(authAtom, mockUser);
+  });
 
-  //   expect(mockStore.set).toHaveBeenCalledWith(authAtom, mockSession);
-  // });
+  it('should not set initial user when null', () => {
+    render(
+      <Providers initialUser={null}>
+        <div>Test</div>
+      </Providers>,
+    );
+    expect(mockStore.set).not.toHaveBeenCalledWith(authAtom, mockUser);
+  });
 
-  // it('should not set initial session when null', () => {
-  //   render(
-  //     <Providers initialSession={null}>
-  //       <div>Test</div>
-  //     </Providers>,
-  //   );
-
-  //   expect(mockStore.set).not.toHaveBeenCalledWith(authAtom, mockSession);
-  // });
-
-  // it('should wrap children with all provider components', () => {
-  //   render(
-  //     <Providers initialSession={null}>
-  //       <div>Test</div>
-  //     </Providers>,
-  //   );
-
-  //   expect(AppRouterCacheProvider).toHaveBeenCalled();
-  //   expect(JotaiProvider).toHaveBeenCalled();
-  //   expect(QueryClientProvider).toHaveBeenCalled();
-  // });
+  it('should wrap children with all provider components', () => {
+    render(
+      <Providers initialUser={null}>
+        <div>Test</div>
+      </Providers>,
+    );
+    expect(AppRouterCacheProvider).toHaveBeenCalled();
+    expect(JotaiProvider).toHaveBeenCalled();
+    expect(QueryClientProvider).toHaveBeenCalled();
+  });
 });
