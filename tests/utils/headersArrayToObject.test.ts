@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 
 import type { Header } from '@/types';
-import { headersArrayToObject } from '@/utils';
+import { headersArrayToObject } from '@/utils/headersArrayToObject';
 
 describe('headersArrayToObject', () => {
   it('converts an array of headers to an object', () => {

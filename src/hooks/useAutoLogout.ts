@@ -38,6 +38,7 @@ const useAutoLogout = (options: UseAutoLogoutOptions = {}): UseAutoLogoutReturn 
       const expirationTime = session.expires_at * 1000;
       const currentTime = Date.now();
 
+      // If token is expired, logout user
       if (currentTime >= expirationTime) {
         await supabaseClient.auth.signOut();
 

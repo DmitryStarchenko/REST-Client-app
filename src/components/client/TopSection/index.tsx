@@ -11,7 +11,7 @@ import { uid } from '@/utils';
 import BodyBlock from './Body';
 import CodeGenSection from './Codegen';
 import HeadersBlock from './Headers';
-import VariablesSection from '../VariablesSection';
+import VariablesSection from './VariablesSection';
 
 const TopSection: React.FC<TopTabsBlockProps> = ({
   headers,

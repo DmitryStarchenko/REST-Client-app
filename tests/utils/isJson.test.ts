@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 
-import { isJson } from '@/utils';
+import { isJson } from '@/utils/isJson';
 
 describe('isJson', () => {
   it('should return true for valid JSON strings', () => {
