@@ -109,6 +109,7 @@ describe('LayoutHistoryContent', () => {
       const mainTranslations: Record<string, string> = {
         client: 'Client Page',
       };
+
       return mainTranslations[key] || key;
     });
 
