@@ -1,0 +1,55 @@
+.main {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  width: 100%;
+  padding: 30px 0;
+}
+
+.logoEmpty {
+  width: 50px;
+  height: 50px;
+  background-image: url('/assets/empty.png');
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.navButton {
+  padding: 10px;
+  font-size: 14px;
+  background-color: #0000;
+  border: none;
+  border-bottom: 4px solid var(--mui-palette-primary-main);
+
+  &:hover {
+    border-color: var(--mui-palette-secondary-main);
+  }
+}
+
+.notRequest {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  width: 60%;
+  height: 40vh;
+  border-top: 2px solid var(--mui-palette-primary-main);
+}
+
+.table {
+  max-width: 70%;
+  border: 1px solid var(--mui-palette-primary-main);
+  border-radius: 10px;
+}
+
+.table > thead > tr > th,
+.table > tbody > tr > td {
+  text-align: center;
+  border: 1px solid var(--mui-palette-primary-main);
+}
+
+.table > tbody > tr:hover {
+  box-shadow: inset 0 0 10px 2px var(--mui-palette-secondary-main);
+}

@@ -1,0 +1,19 @@
+.main {
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding-top: var(--padding30);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.mainNav {
+  display: flex;
+  gap: var(--gap20);
+  justify-content: center;
+  width: 100%;
+}

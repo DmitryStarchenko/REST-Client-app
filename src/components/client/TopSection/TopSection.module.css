@@ -1,0 +1,42 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 8px;
+  background-color: var(--mui-palette-background-paper);
+  border: none;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.topBox {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+  padding: 8px;
+  background-color: var(--mui-palette-background-paper);
+  border: 1px;
+  border-radius: 6px;
+}
+
+.editorBox {
+  flex-grow: 1;
+  box-sizing: border-box;
+}
+
+.selector {
+  min-width: 180px;
+  opacity: 0.6;
+}
+
+.selector:hover {
+  opacity: 0.8;
+}
+
+.errorText {
+  margin-right: 8px;
+  color: var(--mui-palette-warning-main);
+  opacity: 0.6;
+  overflow-wrap: break-word;
+}

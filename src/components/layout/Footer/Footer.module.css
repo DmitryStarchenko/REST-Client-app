@@ -1,0 +1,50 @@
+.footer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap20);
+  align-items: center;
+  width: 100%;
+  margin-top: auto;
+  padding: var(--padding30);
+  border-top: 2px solid var(--mui-palette-primary-main);
+}
+
+.logoRS,
+.logoGH {
+  width: 50px;
+  height: 50px;
+  background-image: url('/assets/logoRS.png');
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  border-radius: var(--border-radius);
+}
+
+.authors {
+  display: flex;
+  gap: var(--gap15);
+}
+
+.author {
+  display: flex;
+  align-items: center;
+}
+
+.logoGH {
+  width: 30px;
+  height: 30px;
+  margin: var(--margin10);
+  background-image: url('/assets/logoGH.png');
+}
+
+.year {
+  color: var(--mui-palette-text-secondary);
+}
+
+.author:hover {
+  color: var(--mui-palette-primary-main);
+
+  .logoGH {
+    background-color: var(--mui-palette-primary-main);
+  }
+}
