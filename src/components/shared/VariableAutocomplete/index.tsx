@@ -1,6 +1,6 @@
 'use client';
 
-import { Box, Paper } from '@mui/material';
+import { Box } from '@mui/material';
 import { useState, useEffect, useMemo, useCallback, useRef } from 'react';
 import { useLocalStorage } from 'usehooks-ts';
 
@@ -171,16 +171,14 @@ const VariableAutocomplete: ReadonlyFC<VariableAutocompleteProps> = ({
         position: 'absolute',
         top: scrollTop + rect.height,
         width: rect.width - rect.left,
-        zIndex: 10,
+        zIndex: 5,
       }}
     >
-      <Paper elevation={3} sx={{ overflow: 'auto' }}>
-        <VariableList
-          variables={variables}
-          selectedIndex={selectedIndex}
-          onVariableSelect={handleVariableSelect}
-        />
-      </Paper>
+      <VariableList
+        variables={filteredVariables}
+        selectedIndex={selectedIndex}
+        onVariableSelect={handleVariableSelect}
+      />
     </Box>
   );
 };

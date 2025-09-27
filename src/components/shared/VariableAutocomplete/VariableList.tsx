@@ -1,5 +1,5 @@
-import { ListItemButton, ListItemText, Typography } from '@mui/material';
-import React from 'react';
+import { ListItemButton, ListItemText, Paper, Typography } from '@mui/material';
+import React, { useEffect, useRef } from 'react';
 
 import { IVariable, ReadonlyFC } from '@/types';
 
@@ -14,13 +14,26 @@ export const VariableList: ReadonlyFC<VariableListProps> = ({
   selectedIndex,
   onVariableSelect,
 }) => {
+  const selectedItemRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (selectedItemRef.current) {
+      selectedItemRef.current.scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest',
+        inline: 'nearest',
+      });
+    }
+  }, [selectedIndex]);
+
   if (variables.length === 0) return null;
 
   return (
-    <>
+    <Paper elevation={3} sx={{ overflow: 'auto', maxHeight: '200px' }}>
       {variables.map((variable, index) => (
         <ListItemButton
           key={`${variable.id}-${variable.key}`}
+          ref={index === selectedIndex ? selectedItemRef : null}
           selected={index === selectedIndex}
           onClick={() => onVariableSelect(variable)}
           sx={{
@@ -46,6 +59,6 @@ export const VariableList: ReadonlyFC<VariableListProps> = ({
           />
         </ListItemButton>
       ))}
-    </>
+    </Paper>
   );
 };
