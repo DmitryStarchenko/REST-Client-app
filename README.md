@@ -2,11 +2,11 @@
 
 <p align="center"><img width="300" height="300" src="./public/assets/logoMini.png"></p>
 
-## For reviewers
+## For users
 
-In the root of the project, add the following to the ".env" file:
+To make the application work, add the following to the ".env" file in the root of the project:
 
-```javascript
+```
 NEXT_PUBLIC_SUPABASE_URL=https://gseobzrkozgmmygrltlp.supabase.co
 NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=sb_publishable_uXbwrJBdIiOzgKrRTlYDMQ_bN4cUG8Y
 SUPABASE_SECRET_KEY=sb_secret_HQk5Z7KAJzQ2CoyB37PHEg_vxVOsO8V
