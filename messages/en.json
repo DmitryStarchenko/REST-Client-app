@@ -23,12 +23,14 @@
   },
   "Auth": {
     "login": "login",
+    "name": "name",
     "email": "email",
     "password": "password",
     "confirm password": "confirm password",
     "Submit": "Submit",
     "Registration": "Registration",
 
+    "Enter name": "Enter name",
     "Enter valid email": "Enter valid email",
     "Password must be at least 8 characters long": "Password must be at least 8 characters long",
     "Password must contain at least one number": "Password must contain at least one number",

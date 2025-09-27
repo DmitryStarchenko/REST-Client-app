@@ -16,11 +16,7 @@ const Main: ReadonlyFC = () => {
   const translationMain = useTranslations('Main');
 
   const auth = useAtomValue(authAtom);
-
-  const userEmail = auth?.email;
-  const separator = '@';
-  const separatorIndex = userEmail?.indexOf(separator);
-  const userName = userEmail?.slice(0, separatorIndex);
+  const userName = auth?.user_metadata.first_name;
 
   return (
     <main className={styles.main}>
