@@ -3,13 +3,13 @@
 import { Box } from '@mui/material';
 import React from 'react';
 
-import { ResponseHeadersSectionProps } from '@/types';
+import { ReadonlyFC, ResponseHeadersSectionProps } from '@/types';
 
 import { CodeEditor } from '../../Shared';
 import ResponseBlock from '../Response';
 import styles from '../ResponseBlock.module.css';
 
-const ResponseHeaders: React.FC<ResponseHeadersSectionProps> = ({
+const ResponseHeaders: ReadonlyFC<ResponseHeadersSectionProps> = ({
   response,
   errorMessage,
   unknownErrorText,

@@ -5,11 +5,11 @@ import { useTranslations } from 'next-intl';
 import { JSX } from 'react';
 import React from 'react';
 
-import { StatisticProps } from '@/types';
+import { ReadonlyFC, StatisticProps } from '@/types';
 
 import styles from '../ResponseBlock.module.css';
 
-const Statistic: React.FC<StatisticProps> = ({ response, errorMessage }) => {
+const Statistic: ReadonlyFC<StatisticProps> = ({ response, errorMessage }) => {
   const t = useTranslations('ResponseBlock');
   const renderContent = (): JSX.Element => {
     if (errorMessage) {

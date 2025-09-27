@@ -3,11 +3,11 @@
 import { Select, MenuItem } from '@mui/material';
 import React from 'react';
 
-import { LangSelectProps } from '@/types';
+import { LangSelectProps, ReadonlyFC } from '@/types';
 
 import styles from '../TopSection.module.css';
 
-const LangSelect: React.FC<LangSelectProps> = ({ langs, selectedLang, onSelect }) => {
+const LangSelect: ReadonlyFC<LangSelectProps> = ({ langs, selectedLang, onSelect }) => {
   return (
     <Select
       data-testid="lang-select"

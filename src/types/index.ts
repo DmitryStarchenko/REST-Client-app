@@ -17,3 +17,8 @@ export * from './variables.types';
 export * from './ResponseHeadersSectionProps.types';
 export * from './StatisticProps.types';
 export * from './BottomTabsBlockProps.types';
+export * from './VariableAutocompleteProps.types';
+export * from './WithVariablesProps.types';
+export * from './UseVariableAutocompleteReturn';
+export * from './VariableHighlighterProps.types';
+export * from './HighlightedTextFieldProps.types';

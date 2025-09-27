@@ -6,11 +6,11 @@ import { useAtomValue } from 'jotai';
 import React from 'react';
 
 import { themeAtom } from '@/store';
-import { CodeEditorProps } from '@/types';
+import { CodeEditorProps, ReadonlyFC } from '@/types';
 
 import { CopyButton } from './CopyButton';
 
-export const CodeEditor: React.FC<CodeEditorProps> = ({
+export const CodeEditor: ReadonlyFC<CodeEditorProps> = ({
   value,
   onChange,
   height = '200px',

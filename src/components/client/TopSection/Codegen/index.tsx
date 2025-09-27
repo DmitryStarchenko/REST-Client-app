@@ -5,14 +5,14 @@ import React, { useState, useEffect, useMemo } from 'react';
 
 import { LANG_MAP } from '@/constants';
 import { useCodegen } from '@/hooks';
-import { CodegenSectionProps } from '@/types';
+import { CodegenSectionProps, ReadonlyFC } from '@/types';
 import { replaceVariables } from '@/utils/';
 
 import styles from '../TopSection.module.css';
 import LangSelect from './LangSelect';
 import { CodeEditor } from '../../Shared';
 
-const CodegenSection: React.FC<CodegenSectionProps> = ({
+const CodegenSection: ReadonlyFC<CodegenSectionProps> = ({
   method,
   url,
   headers,

@@ -6,13 +6,13 @@ import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import React from 'react';
 
-import { BottomTabsBlockProps } from '@/types';
+import { BottomTabsBlockProps, ReadonlyFC } from '@/types';
 
 import ResponseHeaders from './Headers';
 import ResponseBlock from './Response';
 import Statistic from './Statistic';
 
-const BottomTabsBlock: React.FC<BottomTabsBlockProps> = ({
+const BottomTabsBlock: ReadonlyFC<BottomTabsBlockProps> = ({
   response,
   errorMessage,
   unknownErrorText,

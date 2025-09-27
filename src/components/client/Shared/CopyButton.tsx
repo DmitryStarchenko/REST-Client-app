@@ -5,9 +5,9 @@ import { IconButton, Snackbar, Tooltip } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import React, { useState } from 'react';
 
-import { CopyButtonProps } from '@/types';
+import { CopyButtonProps, ReadonlyFC } from '@/types';
 
-export const CopyButton: React.FC<CopyButtonProps> = ({ getValue }) => {
+export const CopyButton: ReadonlyFC<CopyButtonProps> = ({ getValue }) => {
   const t = useTranslations('CopyButton');
   const [open, setOpen] = useState(false);
 

@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl';
 import React from 'react';
 import { useState } from 'react';
 
-import { TopTabsBlockProps } from '@/types';
+import { ReadonlyFC, TopTabsBlockProps } from '@/types';
 import { uid } from '@/utils';
 
 import BodyBlock from './Body';
@@ -13,7 +13,7 @@ import CodeGenSection from './Codegen';
 import HeadersBlock from './Headers';
 import VariablesSection from './VariablesSection';
 
-const TopSection: React.FC<TopTabsBlockProps> = ({
+const TopSection: ReadonlyFC<TopTabsBlockProps> = ({
   headers,
   setHeaders,
   bodyText,

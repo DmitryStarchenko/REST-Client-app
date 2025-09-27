@@ -1,12 +1,12 @@
 import { useTranslations } from 'next-intl';
 import React from 'react';
 
-import { ResponseBlockProps } from '@/types';
+import { ReadonlyFC, ResponseBlockProps } from '@/types';
 
 import { CodeEditor } from '../../Shared';
 import styles from '../ResponseBlock.module.css';
 
-const Response: React.FC<ResponseBlockProps> = ({ response, errorMessage, unknownErrorText }) => {
+const Response: ReadonlyFC<ResponseBlockProps> = ({ response, errorMessage, unknownErrorText }) => {
   const t = useTranslations('ResponseBlock');
 
   const getResponseContent = (): string => {

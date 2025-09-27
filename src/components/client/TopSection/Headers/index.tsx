@@ -6,13 +6,15 @@ import { Box, IconButton, InputAdornment, Stack, TextField, Tooltip } from '@mui
 import { useTranslations } from 'next-intl';
 import React from 'react';
 
-import { HeadersBlockProps } from '@/types';
+import WithVariables from '@/components/shared/WithVariables';
+import { HeadersBlockProps, ReadonlyFC } from '@/types';
 import { uid } from '@/utils';
 
 import styles from '../TopSection.module.css';
 
-const HeadersBlock: React.FC<HeadersBlockProps> = ({ headers, setHeaders }) => {
+const HeadersBlock: ReadonlyFC<HeadersBlockProps> = ({ headers, setHeaders }) => {
   const t = useTranslations('HeadersBlock');
+
   const handleChange = (id: string, key: string, value: string): void => {
     const newHeaders = headers.map((h) => (h.id === id ? { ...h, key, value } : h));
 
@@ -44,39 +46,43 @@ const HeadersBlock: React.FC<HeadersBlockProps> = ({ headers, setHeaders }) => {
                 sx={{
                   position: 'relative',
                   '&:hover .delete-btn': { opacity: 0.5 },
+                  gap: '2',
                 }}
               >
-                <Stack direction="row" spacing={1} sx={{ mt: 2 }}>
-                  <TextField
-                    placeholder={t(`Key`)}
+                <Stack direction="row" spacing={1}>
+                  <WithVariables
                     value={h.key}
-                    onChange={(e) => handleChange(h.id, e.target.value, h.value)}
-                    size="small"
-                    sx={{ flex: 1 }}
-                    slotProps={{
-                      input: {
-                        endAdornment: incomplete ? (
-                          <InputAdornment position="end">
-                            <Tooltip arrow placement="right" title={t(`Tooltip`)}>
-                              <InfoOutlined
-                                color="warning"
-                                fontSize="small"
-                                opacity="0.6"
-                                data-testid="info-icon"
-                              />
-                            </Tooltip>
-                          </InputAdornment>
-                        ) : null,
-                      },
-                    }}
-                  />
-                  <TextField
-                    placeholder={t(`Value`)}
+                    onChange={(newKey) => handleChange(h.id, newKey, h.value)}
+                  >
+                    <TextField
+                      fullWidth
+                      placeholder={t(`Key`)}
+                      size="small"
+                      sx={{ flex: 1 }}
+                      slotProps={{
+                        input: {
+                          endAdornment: incomplete ? (
+                            <InputAdornment position="end">
+                              <Tooltip arrow placement="right" title={t(`Tooltip`)}>
+                                <InfoOutlined
+                                  color="warning"
+                                  fontSize="small"
+                                  opacity="0.6"
+                                  data-testid="info-icon"
+                                />
+                              </Tooltip>
+                            </InputAdornment>
+                          ) : null,
+                        },
+                      }}
+                    />
+                  </WithVariables>
+                  <WithVariables
                     value={h.value}
-                    onChange={(e) => handleChange(h.id, h.key, e.target.value)}
-                    size="small"
-                    sx={{ flex: 2 }}
-                  />
+                    onChange={(newValue) => handleChange(h.id, h.key, newValue)}
+                  >
+                    <TextField fullWidth placeholder={t(`Value`)} size="small" sx={{ flex: 2 }} />
+                  </WithVariables>
                 </Stack>
 
                 {(!isLast || !isEmpty) && (

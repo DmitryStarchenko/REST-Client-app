@@ -3,6 +3,7 @@ import { Grid, Select, MenuItem, TextField, Button, Stack, Paper } from '@mui/ma
 import { useTranslations } from 'next-intl';
 import React from 'react';
 
+import WithVariables from '@/components/shared/WithVariables';
 import { METHODS } from '@/constants';
 import { ReadonlyFC, RequestFormProps } from '@/types';
 
@@ -37,15 +38,15 @@ const RequestForm: ReadonlyFC<RequestFormProps> = ({
         </Grid>
 
         <Grid sx={{ flexGrow: 1, position: 'relative' }}>
-          <TextField
-            id="endpoint-url"
-            label={t('Endpoint URL')}
-            placeholder="https://jsonplaceholder.typicode.com/posts/1"
-            value={url}
-            onChange={(e) => setUrl(e.target.value)}
-            fullWidth
-            size="small"
-          />
+          <WithVariables value={url} onChange={setUrl}>
+            <TextField
+              id="endpoint-url"
+              label={t('Endpoint URL')}
+              placeholder="https://jsonplaceholder.typicode.com/posts/1"
+              fullWidth
+              size="small"
+            />
+          </WithVariables>
         </Grid>
 
         <Grid sx={{ xs: 12, md: 2 }}>
