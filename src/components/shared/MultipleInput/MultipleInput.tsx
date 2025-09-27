@@ -11,16 +11,18 @@ import { IVariable, ReadonlyFC } from '@/types';
 interface MultipleInputsProps {
   inputs: IVariable[];
   onChange: (id?: number, input?: { key?: string; value?: string }) => void;
-  label: string;
+  disabled: boolean;
 }
 
-const MultipleInputs: ReadonlyFC<MultipleInputsProps> = ({ inputs, onChange, label }) => {
+const MultipleInputs: ReadonlyFC<MultipleInputsProps> = ({ inputs, onChange, disabled }) => {
   const t = useTranslations('MultipleInputs');
   return (
     <Box>
-      <Stack direction="row" justifyContent="space-between" alignItems="center">
-        <Typography variant="subtitle1">{label}</Typography>
-        <IconButton aria-label="add" size="small" onClick={() => onChange()}>
+      <Typography variant="h4" mb={5} textAlign="center">
+        {t('Variables')}
+      </Typography>
+      <Stack direction="row" justifyContent="center" alignItems="center">
+        <IconButton aria-label="add" size="large" onClick={() => onChange()}>
           <AddIcon />
         </IconButton>
       </Stack>
@@ -45,7 +47,7 @@ const MultipleInputs: ReadonlyFC<MultipleInputsProps> = ({ inputs, onChange, lab
             </IconButton>
           </Stack>
         ))}
-        <Button sx={{}}>{t('Save')}</Button>
+        <Button disabled={disabled}>{t('Save')}</Button>
       </Stack>
     </Box>
   );
