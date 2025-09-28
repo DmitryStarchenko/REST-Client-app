@@ -47,7 +47,7 @@ const Header: ReadonlyFC = () => {
       <Link className={styles.logoContainer} href={'/'}>
         <div className={`${styles.logo} ${isCompact ? styles.logoCompact : ''}`}></div>
       </Link>
-      {screenWidth && screenWidth > 900 ? (
+      {screenWidth && screenWidth > 940 ? (
         <nav className={styles.navigation}>
           {auth ? (
             <>

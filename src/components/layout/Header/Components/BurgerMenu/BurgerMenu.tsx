@@ -44,6 +44,11 @@ const BurgerMenu: ReadonlyFC = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [closeNavigationMenu]);
 
+  const handleClickSignOut = (): void => {
+    supabaseClient.auth.signOut();
+    closeNavigationMenu();
+  };
+
   return (
     <div className={styles.burgerMenu} ref={navigationMenuRef}>
       <button
@@ -65,20 +70,16 @@ const BurgerMenu: ReadonlyFC = () => {
             <nav className={styles.navigation}>
               {auth ? (
                 <>
-                  <Link className={styles.navButton} href="/">
+                  <Link className={styles.navButton} href="/" onClick={closeNavigationMenu}>
                     {translationNav('main')}
                   </Link>
-                  <ButtonsNavPage />
-                  <Link
-                    className={styles.navButton}
-                    href="/"
-                    onClick={() => supabaseClient.auth.signOut()}
-                  >
+                  <ButtonsNavPage closeNavigationMenu={closeNavigationMenu} />
+                  <Link className={styles.navButton} href="/" onClick={handleClickSignOut}>
                     {translationNav('signOut')}
                   </Link>
                 </>
               ) : (
-                <ButtonsSignInUp />
+                <ButtonsSignInUp closeNavigationMenu={closeNavigationMenu} />
               )}
               <LangSwitcher />
               <ThemeToggler />

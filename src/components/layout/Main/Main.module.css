@@ -17,3 +17,14 @@
   justify-content: center;
   width: 100%;
 }
+
+.welcomeText {
+  font-size: 45px;
+  text-align: center;
+}
+
+@media screen and (width <= 430px) {
+  .welcomeText {
+    font-size: 30px;
+  }
+}
