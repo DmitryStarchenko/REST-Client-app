@@ -1,3 +1,6 @@
+'use client';
+
+import { Box } from '@mui/material';
 import React, {
   cloneElement,
   isValidElement,
@@ -6,14 +9,21 @@ import React, {
   useEffect,
   useMemo,
   useRef,
+  useState,
 } from 'react';
 
 import { useVariableAutocomplete } from '@/hooks';
 import { ReadonlyFC, WithVariablesProps } from '@/types';
 
+import HighlightedText from '../HighlightedText/HighlightedText';
 import VariableAutocomplete from '../VariableAutocomplete/';
 
-export const WithVariables: ReadonlyFC<WithVariablesProps> = ({ value, onChange, children }) => {
+const WithVariables: ReadonlyFC<WithVariablesProps> = ({
+  value,
+  onChange,
+  children,
+  showHighlight = true,
+}) => {
   const {
     showAutocomplete,
     targetElement,
@@ -23,6 +33,7 @@ export const WithVariables: ReadonlyFC<WithVariablesProps> = ({ value, onChange,
     closeAutocomplete,
   } = useVariableAutocomplete();
 
+  const [isFocused, setIsFocused] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const prevShowAutocompleteRef = useRef(showAutocomplete);
 
@@ -51,15 +62,31 @@ export const WithVariables: ReadonlyFC<WithVariablesProps> = ({ value, onChange,
     };
   }, [handleClickOutside, showAutocomplete]);
 
+  const enhancedHandleFocus = useCallback(
+    (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      setIsFocused(true);
+      handleInputFocus(e);
+    },
+    [handleInputFocus],
+  );
+
+  const enhancedHandleBlur = useCallback(
+    (_e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      setIsFocused(false);
+      handleInputBlur();
+    },
+    [handleInputBlur],
+  );
+
   const childrenProps = useMemo(
     () => ({
       value: value,
       onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
         handleInputChange(e, value, onChange),
-      onFocus: handleInputFocus,
-      onBlur: handleInputBlur,
+      onFocus: enhancedHandleFocus,
+      onBlur: enhancedHandleBlur,
     }),
-    [handleInputBlur, handleInputChange, handleInputFocus, onChange, value],
+    [enhancedHandleBlur, enhancedHandleFocus, handleInputChange, onChange, value],
   );
 
   if (!isValidElement(children)) {
@@ -67,11 +94,33 @@ export const WithVariables: ReadonlyFC<WithVariablesProps> = ({ value, onChange,
     return children as ReactElement;
   }
 
-  const childrenWithProps = cloneElement(children, childrenProps);
+  const childrenWithProps = cloneElement(children, { ...childrenProps });
 
   return (
     <div ref={containerRef} style={{ position: 'relative', width: '100%' }}>
       {childrenWithProps}
+
+      {showHighlight && value && (
+        <Box
+          sx={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            pointerEvents: 'none',
+            zIndex: 1,
+            display: 'flex',
+            alignItems: 'center',
+            paddingLeft: '14px',
+            paddingRight: '14px',
+            opacity: isFocused ? 0.5 : 1,
+          }}
+        >
+          <HighlightedText text={value} />
+        </Box>
+      )}
+
       {showAutocomplete && (
         <VariableAutocomplete
           value={value}
