@@ -7,10 +7,10 @@ import React from 'react';
 import { authAtom } from '@/store/authAtom';
 import { ReadonlyFC } from '@/types/readonly.types';
 
+import About from './components/About/About';
 import ButtonsNavPage from './components/ButtonNavPage/ButtonsNavPage';
 import styles from './Main.module.css';
-import ButtonsSignInUp from '../Header/ButtonsSignInUp/ButtonsSignInUp';
-import About from './components/About/About';
+import ButtonsSignInUp from '../Header/Components/ButtonsSignInUp/ButtonsSignInUp';
 
 const Main: ReadonlyFC = () => {
   const translationMain = useTranslations('Main');
@@ -23,7 +23,7 @@ const Main: ReadonlyFC = () => {
       {auth ? (
         <Box className={styles.container}>
           <Typography variant="h3">
-            {translationMain('welcomeBack')}, {userName}
+            {translationMain('welcomeBack')}, {userName ? userName : 'User'}
           </Typography>
           <nav className={styles.mainNav}>
             <ButtonsNavPage />
