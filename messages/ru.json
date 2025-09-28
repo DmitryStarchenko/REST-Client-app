@@ -23,11 +23,13 @@
   },
   "Auth": {
     "login": "логин",
+    "name": "имя",
     "email": "эл. почта",
     "password": "пароль",
     "confirm password": "подтвердить пароль",
     "Submit": "Подтвердить",
     "Registration": "Регистрация",
+    "Enter name": "Введите имя",
     "Enter valid email": "Введите корректный email",
     "Password must be at least 8 characters long": "Пароль должен содержать не менее 8 символов",
     "Password must contain at least one number": "Пароль должен содержать хотя бы одну цифру",

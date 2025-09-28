@@ -1,8 +1,7 @@
 'use client';
 
 import { Alert, Box, Slide, Snackbar } from '@mui/material';
-import { useTranslations } from 'next-intl';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocalStorage } from 'usehooks-ts';
 
 import { VARIABLES_KEY } from '@/constants';
@@ -15,8 +14,7 @@ interface VariablesProps {}
 const Variables: ReadonlyFC<VariablesProps> = () => {
   const [variables, setVariables] = useLocalStorage<IVariable[]>(VARIABLES_KEY, []);
   const [error, setError] = useState('');
-
-  const t = useTranslations('MultipleInputs');
+  const [disabled, setDisabled] = useState(true);
 
   const handleVariablesChange = (id?: number, input?: { key?: string; value?: string }): void => {
     if (id) {
@@ -42,6 +40,7 @@ const Variables: ReadonlyFC<VariablesProps> = () => {
         setVariables((vars) => vars.filter((varItem) => varItem.id !== id));
       }
     } else {
+      setDisabled(false);
       setVariables((vars) => [
         ...vars,
         {
@@ -52,6 +51,12 @@ const Variables: ReadonlyFC<VariablesProps> = () => {
       ]);
     }
   };
+
+  useEffect(() => {
+    if (variables.length === 0) {
+      setDisabled(true);
+    }
+  }, [variables]);
   return (
     <Box sx={{ maxWidth: 600, margin: 'auto' }}>
       <Snackbar
@@ -70,7 +75,7 @@ const Variables: ReadonlyFC<VariablesProps> = () => {
           {error}
         </Alert>
       </Snackbar>
-      <MultipleInputs inputs={variables} onChange={handleVariablesChange} label={t('Variables')} />
+      <MultipleInputs inputs={variables} onChange={handleVariablesChange} disabled={disabled} />
     </Box>
   );
 };

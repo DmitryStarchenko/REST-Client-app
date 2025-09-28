@@ -48,3 +48,10 @@
     background-color: var(--mui-palette-primary-main);
   }
 }
+
+@media screen and (width <= 430px) {
+  .authors {
+    flex-direction: column;
+    gap: 0;
+  }
+}
