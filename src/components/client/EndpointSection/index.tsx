@@ -38,7 +38,7 @@ const RequestForm: ReadonlyFC<RequestFormProps> = ({
         </Grid>
 
         <Grid sx={{ flexGrow: 1, position: 'relative' }}>
-          <WithVariables value={url} onChange={setUrl}>
+          <WithVariables value={url} onChange={setUrl} showHighlight={true}>
             <TextField
               id="endpoint-url"
               label={t('Endpoint URL')}
