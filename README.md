@@ -14,8 +14,6 @@ SUPABASE_SECRET_KEY=sb_secret_HQk5Z7KAJzQ2CoyB37PHEg_vxVOsO8V
 
 ## Description
 
-The final project of the React Q3 2025 course from RSSchool.
-
 PUTMAN is a universal testing, development, and REST API platform. It provides a clean interface that replaces disparate tools like Postman, Curl, and the command line, bringing together everything you need to work with an API into one powerful yet simple web application.
 
 PUTMAN is positioned as a "Swiss knife" for backend developers, QA engineers and API designers. Unlike heavy desktop applications, PUTMAN works directly in the browser, without requiring installation, and offers a modern, minimalist UI.

@@ -32,7 +32,7 @@
 }
 
 .burgerButtonActive span:nth-child(1) {
-  transform: rotate(45deg) translate(6px, 6px);
+  transform: rotate(45deg) translate(6.5px, 6px);
 }
 
 .burgerButtonActive span:nth-child(2) {
@@ -40,12 +40,12 @@
 }
 
 .burgerButtonActive span:nth-child(3) {
-  transform: rotate(-45deg) translate(6px, -6px);
+  transform: rotate(-45deg) translate(6.5px, -6px);
 }
 
 .dropdownMenu {
   position: absolute;
-  top: 80%;
+  top: 95%;
   right: 15px;
   z-index: 1001;
   min-width: 200px;
@@ -58,14 +58,6 @@
 
 .menuContent {
   padding: 15px;
-}
-
-.menuTitle {
-  margin-bottom: 10px;
-  padding-bottom: 5px;
-  font-weight: bold;
-  color: var(--mui-palette-text-secondary);
-  border-bottom: 1px solid var(--mui-palette-text-primary);
 }
 
 .navigation {

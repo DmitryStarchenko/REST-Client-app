@@ -1,7 +1,7 @@
 .header {
   position: sticky;
   top: 0;
-  z-index: 5;
+  z-index: 500;
   display: flex;
   justify-content: space-between;
   width: 100%;
@@ -49,4 +49,14 @@
   &:hover {
     border-color: var(--mui-palette-secondary-main);
   }
+}
+
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: var(--mui-palette-custom-burger);
+  pointer-events: none;
 }

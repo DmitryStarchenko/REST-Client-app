@@ -2,13 +2,14 @@ import { useTranslations } from 'next-intl';
 import React from 'react';
 
 import { Link } from '@/i18n/navigation';
+import { ReadonlyFC } from '@/types';
 
 import styles from './ButtonsSignInUp.module.css';
 interface Props {
   closeNavigationMenu?: () => void;
 }
 
-const ButtonsSignInUp = ({ closeNavigationMenu }: Props): React.JSX.Element => {
+const ButtonsSignInUp: ReadonlyFC<Props> = ({ closeNavigationMenu }: Props) => {
   const translationNav = useTranslations('Navigation');
 
   return (
