@@ -170,7 +170,7 @@ const VariableAutocomplete: ReadonlyFC<VariableAutocompleteProps> = ({
       sx={{
         position: 'absolute',
         top: scrollTop + rect.height,
-        width: rect.width - rect.left,
+        width: 'auto-fit',
         zIndex: 5,
       }}
     >

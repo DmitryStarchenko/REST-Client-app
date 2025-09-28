@@ -26,3 +26,6 @@ export * from './HeaderFieldProps.types';
 export * from './HeaderRowProps.types';
 export * from './TooltipButtonProps.types';
 export * from './InfoTooltipProps.types';
+export * from './methods.types';
+export * from './VariableListProps.types';
+export * from './DeleteButtonProps.types';

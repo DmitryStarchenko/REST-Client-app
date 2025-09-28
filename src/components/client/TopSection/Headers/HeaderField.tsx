@@ -7,7 +7,7 @@ import InfoTooltip from '@/components/shared/InfoTooltip/InfoTooltip';
 import WithVariables from '@/components/shared/WithVariables';
 import { HeaderFieldProps, ReadonlyFC } from '@/types';
 
-export const HeaderField: ReadonlyFC<HeaderFieldProps> = ({
+const HeaderField: ReadonlyFC<HeaderFieldProps> = ({
   value,
   onChange,
   placeholder,

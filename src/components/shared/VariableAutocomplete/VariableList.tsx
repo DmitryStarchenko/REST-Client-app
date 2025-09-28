@@ -1,13 +1,7 @@
-import { ListItemButton, ListItemText, Paper, Typography } from '@mui/material';
+import { ListItemButton, ListItemText, Paper, Typography, Box } from '@mui/material';
 import React, { useEffect, useRef } from 'react';
 
-import { IVariable, ReadonlyFC } from '@/types';
-
-interface VariableListProps {
-  variables: IVariable[];
-  selectedIndex: number;
-  onVariableSelect: (variable: IVariable) => void;
-}
+import { ReadonlyFC, VariableListProps } from '@/types';
 
 export const VariableList: ReadonlyFC<VariableListProps> = ({
   variables,
@@ -29,7 +23,7 @@ export const VariableList: ReadonlyFC<VariableListProps> = ({
   if (variables.length === 0) return null;
 
   return (
-    <Paper elevation={3} sx={{ overflow: 'auto', maxHeight: '200px' }}>
+    <Paper elevation={3} sx={{ overflow: 'auto', maxHeight: '200px', maxWidth: 'auto-fit' }}>
       {variables.map((variable, index) => (
         <ListItemButton
           key={`${variable.id}-${variable.key}`}
@@ -38,9 +32,9 @@ export const VariableList: ReadonlyFC<VariableListProps> = ({
           onClick={() => onVariableSelect(variable)}
           sx={{
             '&.Mui-selected': {
-              backgroundColor: 'primary.light',
+              backgroundColor: 'secondary.main.light',
               '&:hover': {
-                backgroundColor: 'primary.main',
+                backgroundColor: 'secondary.light',
               },
             },
           }}
@@ -52,9 +46,20 @@ export const VariableList: ReadonlyFC<VariableListProps> = ({
               </Typography>
             }
             secondary={
-              <Typography variant="caption" color="text.secondary" noWrap>
-                {variable.value || 'Empty value'}
-              </Typography>
+              <Box
+                component="span"
+                sx={{
+                  opacity: 0,
+                  transition: 'opacity 0.1s ease-in-out',
+                  '.MuiListItemButton-root:hover &': {
+                    opacity: 1,
+                  },
+                }}
+              >
+                <Typography variant="caption" color="text.secondary" noWrap>
+                  {variable.value || 'Empty value'}
+                </Typography>
+              </Box>
             }
           />
         </ListItemButton>

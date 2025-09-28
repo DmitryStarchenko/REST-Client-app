@@ -9,7 +9,7 @@ import { HeaderRowProps, ReadonlyFC } from '@/types';
 import DeleteButton from './DeleteButton';
 import HeaderField from './HeaderField';
 
-export const HeaderRow: ReadonlyFC<HeaderRowProps> = ({
+const HeaderRow: ReadonlyFC<HeaderRowProps> = ({
   header,
   index,
   totalHeaders,

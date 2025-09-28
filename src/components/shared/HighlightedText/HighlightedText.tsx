@@ -91,7 +91,7 @@ const HighlightedText: ReadonlyFC<HighlightedTextProps> = ({ text, className }) 
             key={index}
             component="span"
             sx={{
-              backgroundColor: part.variableKey ? 'primary.light' : 'error.light',
+              backgroundColor: part.variableKey ? 'secondary.main' : 'error.light',
               borderRadius: '3px',
               lineHeight: 1.6,
               display: 'inline-block',

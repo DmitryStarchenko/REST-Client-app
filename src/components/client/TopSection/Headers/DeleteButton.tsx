@@ -4,14 +4,9 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import React from 'react';
 
 import TooltipButton from '@/components/shared/TooltipButton/TooltipButton';
-import { ReadonlyFC } from '@/types';
+import { DeleteButtonProps, ReadonlyFC } from '@/types';
 
-interface DeleteButtonProps {
-  onRemove: () => void;
-  tooltipText: string;
-}
-
-export const DeleteButton: ReadonlyFC<DeleteButtonProps> = ({ onRemove, tooltipText }) => {
+const DeleteButton: ReadonlyFC<DeleteButtonProps> = ({ onRemove, tooltipText }) => {
   const handleClick = (e: React.MouseEvent): void => {
     e.preventDefault();
     onRemove();
