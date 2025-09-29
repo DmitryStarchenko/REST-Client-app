@@ -15,6 +15,7 @@ const VariableAutocomplete: ReadonlyFC<VariableAutocompleteProps> = ({
   target,
   onClose,
   isOpen,
+  onEnterPress,
 }) => {
   const [variables] = useLocalStorage<IVariable[]>(VARIABLES_KEY, []);
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -90,7 +91,14 @@ const VariableAutocomplete: ReadonlyFC<VariableAutocompleteProps> = ({
 
   const handleKeyDown = useCallback(
     (event: KeyboardEvent) => {
-      if (!isOpen || filteredVariablesRef.current.length === 0) return;
+      if (!isOpen || filteredVariablesRef.current.length === 0) {
+        if (event.key === 'Enter' && onEnterPress) {
+          event.preventDefault();
+          event.stopPropagation();
+          onEnterPress();
+        }
+        return;
+      }
 
       switch (event.key) {
         case 'ArrowDown':
@@ -134,7 +142,7 @@ const VariableAutocomplete: ReadonlyFC<VariableAutocompleteProps> = ({
           break;
       }
     },
-    [isOpen, onClose, handleVariableSelect, insertVariableTemplate],
+    [isOpen, onClose, handleVariableSelect, insertVariableTemplate, onEnterPress],
   );
 
   useEffect(() => {

@@ -4,4 +4,5 @@ export interface VariableAutocompleteProps {
   target: HTMLTextAreaElement | HTMLInputElement | null;
   onClose: () => void;
   isOpen: boolean;
+  onEnterPress?: () => void;
 }

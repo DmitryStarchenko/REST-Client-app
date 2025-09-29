@@ -38,7 +38,13 @@ const RequestForm: ReadonlyFC<RequestFormProps> = ({
 
         <Grid sx={{ xs: 12, md: 2 }}>
           <Stack direction="row" spacing={1}>
-            <Button variant="contained" onClick={sendRequest} loading={loading}>
+            <Button
+              variant="contained"
+              onClick={sendRequest}
+              loading={loading}
+              type="submit"
+              disabled={!url || loading}
+            >
               {t(`Send`)}
             </Button>
           </Stack>

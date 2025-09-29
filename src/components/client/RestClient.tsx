@@ -84,27 +84,29 @@ const RestClient: ReadonlyFC = () => {
       <Typography variant="h4" mb={2} textAlign="center">
         {t('Title')}
       </Typography>
-      <RequestForm
-        method={method}
-        setMethod={setMethod}
-        url={url}
-        setUrl={setUrl}
-        sendRequest={handleSubmit}
-        loading={loading}
-        variables={variables}
-        variablesObj={variablesObj}
-      />
+      <form onSubmit={handleSubmit}>
+        <RequestForm
+          method={method}
+          setMethod={setMethod}
+          url={url}
+          setUrl={setUrl}
+          sendRequest={handleSubmit}
+          loading={loading}
+          variables={variables}
+          variablesObj={variablesObj}
+        />
 
-      <TopTabsBlock
-        headers={headers}
-        setHeaders={setHeaders}
-        bodyText={body}
-        setBodyText={setBody}
-        method={method}
-        url={url}
-        variables={variables}
-        variablesObj={variablesObj}
-      />
+        <TopTabsBlock
+          headers={headers}
+          setHeaders={setHeaders}
+          bodyText={body}
+          setBodyText={setBody}
+          method={method}
+          url={url}
+          variables={variables}
+          variablesObj={variablesObj}
+        />
+      </form>
 
       <BottomTabsBlock
         response={response}

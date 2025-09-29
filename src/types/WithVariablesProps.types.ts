@@ -10,4 +10,5 @@ export interface WithVariablesProps {
     onBlur?: (event: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
   }>;
   showHighlight: boolean;
+  onEnterPress?: () => void;
 }
