@@ -89,21 +89,21 @@ const VariableAutocomplete: ReadonlyFC<VariableAutocompleteProps> = ({
   }, [onChange, target, value]);
 
   const handleKeyDown = useCallback(
-    (e: KeyboardEvent) => {
+    (event: KeyboardEvent) => {
       if (!isOpen || filteredVariablesRef.current.length === 0) return;
 
-      switch (e.key) {
+      switch (event.key) {
         case 'ArrowDown':
-          e.preventDefault();
-          e.stopPropagation();
+          event.preventDefault();
+          event.stopPropagation();
           setSelectedIndex((prev) => {
             const newIndex = (prev + 1) % filteredVariablesRef.current.length;
             return newIndex;
           });
           break;
         case 'ArrowUp':
-          e.preventDefault();
-          e.stopPropagation();
+          event.preventDefault();
+          event.stopPropagation();
           setSelectedIndex((prev) => {
             const newIndex =
               (prev - 1 + filteredVariablesRef.current.length) %
@@ -112,21 +112,21 @@ const VariableAutocomplete: ReadonlyFC<VariableAutocompleteProps> = ({
           });
           break;
         case 'Enter':
-          e.preventDefault();
-          e.stopPropagation();
+          event.preventDefault();
+          event.stopPropagation();
           if (filteredVariablesRef.current[selectedIndexRef.current]) {
             handleVariableSelect(filteredVariablesRef.current[selectedIndexRef.current]);
           }
           break;
         case 'Escape':
-          e.preventDefault();
-          e.stopPropagation();
+          event.preventDefault();
+          event.stopPropagation();
           onClose();
           break;
         case '{':
-          if (e.ctrlKey || e.metaKey) {
-            e.preventDefault();
-            e.stopPropagation();
+          if (event.ctrlKey || event.metaKey) {
+            event.preventDefault();
+            event.stopPropagation();
             insertVariableTemplate();
           }
           break;

@@ -38,8 +38,8 @@ const WithVariables: ReadonlyFC<WithVariablesProps> = ({
   const prevShowAutocompleteRef = useRef(showAutocomplete);
 
   const handleClickOutside = useCallback(
-    (e: MouseEvent): void => {
-      if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
+    (event: MouseEvent): void => {
+      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
         closeAutocomplete();
       }
     },
@@ -63,15 +63,15 @@ const WithVariables: ReadonlyFC<WithVariablesProps> = ({
   }, [handleClickOutside, showAutocomplete]);
 
   const enhancedHandleFocus = useCallback(
-    (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    (event: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
       setIsFocused(true);
-      handleInputFocus(e);
+      handleInputFocus(event);
     },
     [handleInputFocus],
   );
 
   const enhancedHandleBlur = useCallback(
-    (_e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    (_event: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
       setIsFocused(false);
       handleInputBlur();
     },
@@ -81,8 +81,8 @@ const WithVariables: ReadonlyFC<WithVariablesProps> = ({
   const childrenProps = useMemo(
     () => ({
       value: value,
-      onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
-        handleInputChange(e, value, onChange),
+      onChange: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+        handleInputChange(event, value, onChange),
       onFocus: enhancedHandleFocus,
       onBlur: enhancedHandleBlur,
     }),

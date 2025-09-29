@@ -6,7 +6,7 @@ export interface UseVariableAutocompleteReturn {
     currentValue: string,
     onChange: (value: string) => void,
   ) => void;
-  handleInputFocus: (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  handleInputFocus: (event: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
   handleInputBlur: () => void;
   closeAutocomplete: () => void;
 }

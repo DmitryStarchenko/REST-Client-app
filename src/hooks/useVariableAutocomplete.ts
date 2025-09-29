@@ -10,14 +10,14 @@ export const useVariableAutocomplete = (): UseVariableAutocompleteReturn => {
 
   const handleInputChange = useCallback(
     (
-      e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+      event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
       currentValue: string,
       onChange: (value: string) => void,
     ) => {
-      const value = e.target.value;
+      const value = event.target.value;
       onChange(value);
 
-      const cursorPos = e.target.selectionStart || 0;
+      const cursorPos = event.target.selectionStart || 0;
       const textBeforeCursor = value.substring(0, cursorPos);
       const lastDoubleOpenBrace = textBeforeCursor.lastIndexOf('{{');
 
@@ -26,7 +26,7 @@ export const useVariableAutocomplete = (): UseVariableAutocompleteReturn => {
         const hasClosingBrace = textAfterDoubleBrace.includes('}}');
 
         if (!hasClosingBrace) {
-          setTargetElement(e.target);
+          setTargetElement(event.target);
           setShowAutocomplete(true);
           return;
         }
@@ -37,9 +37,9 @@ export const useVariableAutocomplete = (): UseVariableAutocompleteReturn => {
   );
 
   const handleInputFocus = useCallback(
-    (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-      const value = e.target.value;
-      const cursorPos = e.target.selectionStart || 0;
+    (event: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      const value = event.target.value;
+      const cursorPos = event.target.selectionStart || 0;
       const textBeforeCursor = value.substring(0, cursorPos);
 
       const lastDoubleOpenBrace = textBeforeCursor.lastIndexOf('{{');
@@ -48,7 +48,7 @@ export const useVariableAutocomplete = (): UseVariableAutocompleteReturn => {
         const hasClosingBrace = textAfterDoubleBrace.includes('}}');
 
         if (!hasClosingBrace) {
-          setTargetElement(e.target);
+          setTargetElement(event.target);
           setShowAutocomplete(true);
           return;
         }

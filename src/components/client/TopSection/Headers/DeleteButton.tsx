@@ -7,8 +7,8 @@ import TooltipButton from '@/components/shared/TooltipButton/TooltipButton';
 import { DeleteButtonProps, ReadonlyFC } from '@/types';
 
 const DeleteButton: ReadonlyFC<DeleteButtonProps> = ({ onRemove, tooltipText }) => {
-  const handleClick = (e: React.MouseEvent): void => {
-    e.preventDefault();
+  const handleClick = (event: React.MouseEvent): void => {
+    event.preventDefault();
     onRemove();
   };
 

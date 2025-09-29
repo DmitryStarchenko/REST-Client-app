@@ -86,7 +86,7 @@
     "Body": "Тело",
     "Copy base64": "Копия BASE 64",
     "Invalid JSON": "Некорректный JSON",
-    "Prettify JSON": "Рвспарсить JSON"
+    "Prettify JSON": "Распарсить JSON"
   },
 
   "CodegenSection": {

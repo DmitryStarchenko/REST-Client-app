@@ -12,9 +12,9 @@ const TooltipButton: ReadonlyFC<TooltipButtonProps> = ({
   children,
   ...iconButtonProps
 }) => {
-  const handleClick = (e: React.MouseEvent<HTMLButtonElement>): void => {
-    e.preventDefault();
-    onClick?.(e);
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>): void => {
+    event.preventDefault();
+    onClick?.(event);
   };
 
   return (
