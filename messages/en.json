@@ -29,7 +29,6 @@
     "confirm password": "confirm password",
     "Submit": "Submit",
     "Registration": "Registration",
-
     "Enter name": "Enter name",
     "Enter valid email": "Enter valid email",
     "Password must be at least 8 characters long": "Password must be at least 8 characters long",
@@ -123,8 +122,15 @@
   },
   "MultipleInputs": {
     "Save": "Save",
+    "Saved": "Saved",
+    "Message": "There are unsaved changes.",
     "Variables": "Variables",
     "Key": "Key",
-    "Value": "Value"
+    "Value": "Value",
+    "Variable key is required": "Key is required",
+    "Spaces are not allowed": "Spaces are not allowed",
+    "Invalid key": "Invalid key",
+    "Variable key should be unique!": "Key should be unique!",
+    "": ""
   }
 }

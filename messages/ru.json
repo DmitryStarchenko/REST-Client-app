@@ -125,6 +125,13 @@
     "Save": "Сохранить",
     "Variables": "Переменные",
     "Key": "Ключ",
-    "Value": "Значение"
+    "Value": "Значение",
+    "Saved": "Сохранено",
+    "Message": "Есть не сохранённые изменения",
+    "Variable key is required": "Введите ключ",
+    "Spaces are not allowed": "Пробелы не допускаются",
+    "Invalid key": "Неверный ключ",
+    "Variable key should be unique!": "Ключ должен быть уникальным!",
+    "": ""
   }
 }

@@ -1,0 +1,23 @@
+.fields {
+  gap: 10px;
+}
+
+.button {
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.removeIconButton {
+  min-width: 40px;
+  max-height: 40px;
+}
+
+.iconButton:hover,
+.removeIconButton:hover {
+  .icon,
+  .removeIcon {
+    color: var(--mui-palette-primary-main);
+  }
+}
