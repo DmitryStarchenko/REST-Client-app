@@ -21,7 +21,7 @@
 }
 
 .logo {
-  width: 250px;
+  width: 200px;
   background-image: url('/assets/logo.png');
   background-position: center;
   background-size: contain;
@@ -59,4 +59,10 @@
   height: 100vh;
   background-color: var(--mui-palette-custom-burger);
   pointer-events: none;
+}
+
+@media screen and (width <= 410px) {
+  .navigation {
+    gap: 0;
+  }
 }
