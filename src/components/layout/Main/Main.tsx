@@ -7,7 +7,7 @@ import React from 'react';
 import { authAtom } from '@/store/authAtom';
 import { ReadonlyFC } from '@/types/readonly.types';
 
-import About from './components/About/About';
+import AboutProject from './components/AboutProject/AboutProject';
 import ButtonsNavPage from './components/ButtonNavPage/ButtonsNavPage';
 import styles from './Main.module.css';
 import ButtonsSignInUp from '../Header/Components/ButtonsSignInUp/ButtonsSignInUp';
@@ -37,7 +37,7 @@ const Main: ReadonlyFC = () => {
           </nav>
         </Box>
       )}
-      <About />
+      <AboutProject />
     </main>
   );
 };

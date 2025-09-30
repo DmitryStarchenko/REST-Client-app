@@ -1,15 +1,15 @@
 .fields {
-  gap: 10px;
+  gap: var(--gap10);
 }
 
 .buttons {
   align-items: center;
   justify-content: center;
-  margin-top: 30px;
+  margin-top: var(--margin30);
 }
 
 .saveButton {
-  margin-bottom: 20px;
+  margin-bottom: var(--margin20);
 }
 
 .removeIconButton {
@@ -19,12 +19,12 @@
 
 .message {
   margin-top: 0;
-  margin-bottom: 30px;
+  margin-bottom: var(--margin30);
   color: orange;
 }
 
 .addButton {
-  margin-bottom: 10px;
+  margin-bottom: var(--margin10);
 }
 
 .addButton:hover,

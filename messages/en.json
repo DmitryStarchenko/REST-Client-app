@@ -41,10 +41,12 @@
   },
   "About": {
     "about": "About",
+    "aboutProject": "About project",
     "project1": "PUTMAN is a universal testing, development, and REST API platform. It provides a clean interface that replaces disparate tools like Postman, Curl, and the command line, bringing together everything you need to work with an API into one powerful yet simple web application.",
     "project2": "PUTMAN is positioned as a 'Swiss knife' for backend developers, QA engineers and API designers. Unlike heavy desktop applications, PUTMAN works directly in the browser, without requiring installation, and offers a modern, minimalist UI.",
     "project3": "The key idea is not just to send requests, but to manage the entire life cycle of interaction with the API: from writing and debugging individual requests to organizing collections, automated testing, documentation and monitoring the health (health check) of your services.",
-    "rs": "We would like to express our gratitude to RS school and all its staff for giving us the opportunity to try something new and interesting. Thank you for your time. Special thanks to our mentors who helped and motivated us on this long, difficult, but incredibly exciting path.",
+    "rs_1": "The project was completed as part of the final assignment for the React Q3 2025 course from RSSchool.",
+    "rs_2": "We would like to express our gratitude to RS school and all its staff for giving us the opportunity to try something new and interesting. Thank you for your time. Special thanks to our mentors who helped and motivated us on this long, difficult, but incredibly exciting path.",
     "author1Name": "Dmitry Starchenko",
     "author1Description": "Hello, my name is Dima, I am 33 years old, I am from Gomel (Belarus). My first attempts to create a website were in my school years. I abandoned this idea and did something else. And now, many years later, I decided to make my dream come true...",
     "author2Name": "Roma Bubnov",
@@ -132,5 +134,12 @@
     "Invalid key": "Invalid key",
     "Variable key should be unique!": "Key should be unique!",
     "": ""
+  },
+  "Footer": {
+    "About": "About",
+    "Contacts": "Contacts"
+  },
+  "Contacts": {
+    "Contacts": "Contacts"
   }
 }
