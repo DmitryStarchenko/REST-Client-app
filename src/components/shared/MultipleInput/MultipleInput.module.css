@@ -2,11 +2,14 @@
   gap: 10px;
 }
 
-.button {
-  gap: 10px;
+.buttons {
   align-items: center;
   justify-content: center;
   margin-top: 30px;
+}
+
+.saveButton {
+  margin-bottom: 20px;
 }
 
 .removeIconButton {
@@ -14,7 +17,17 @@
   max-height: 40px;
 }
 
-.iconButton:hover,
+.message {
+  margin-top: 0;
+  margin-bottom: 30px;
+  color: orange;
+}
+
+.addButton {
+  margin-bottom: 10px;
+}
+
+.addButton:hover,
 .removeIconButton:hover {
   .icon,
   .removeIcon {

@@ -76,20 +76,25 @@ const MultipleInputs: ReadonlyFC<MultipleInputsProps> = ({
           );
         })}
       </Stack>
-      <Stack className={styles.button}>
+      <Stack className={styles.buttons}>
         <IconButton
-          className={styles.iconButton}
+          className={styles.addButton}
           aria-label="add"
           size="large"
           onClick={() => change()}
         >
           <AddIcon className={styles.icon} />
         </IconButton>
-        <Button disabled={disabled} onClick={onSave} variant="contained">
+        <Button
+          disabled={disabled}
+          onClick={onSave}
+          className={styles.saveButton}
+          variant="contained"
+        >
           {hasUnsavedChanges ? t('Save') : t('Saved')}
         </Button>
-        {hasUnsavedChanges && (
-          <Typography variant="caption" color="text.secondary">
+        {!disabled && (
+          <Typography className={styles.message} variant="caption">
             {t('Message')}
           </Typography>
         )}
