@@ -60,14 +60,11 @@ const HighlightedText: ReadonlyFC<HighlightedTextProps> = ({ text, className }) 
     <Box
       className={className}
       sx={{
-        whiteSpace: 'pre-wrap',
-        wordBreak: 'break-word',
-        lineHeight: '1.4375em',
-        fontFamily: 'inherit',
-        display: 'flex',
+        whiteSpace: 'nowrap',
+        display: 'inline-flex',
         alignItems: 'center',
-        minHeight: '1.4375em',
-        flexWrap: 'wrap',
+        minWidth: '100%',
+        fontFamily: 'inherit',
         letterSpacing: 0.15,
       }}
     >
@@ -77,8 +74,8 @@ const HighlightedText: ReadonlyFC<HighlightedTextProps> = ({ text, className }) 
             <span
               key={index}
               style={{
-                whiteSpace: 'pre-wrap',
-                wordBreak: 'break-word',
+                display: 'inline',
+                whiteSpace: 'nowrap',
               }}
             >
               {part.text}
@@ -94,8 +91,10 @@ const HighlightedText: ReadonlyFC<HighlightedTextProps> = ({ text, className }) 
               backgroundColor: part.variableKey ? 'secondary.main' : 'error.light',
               borderRadius: '3px',
               lineHeight: 1.6,
-              display: 'inline-block',
+              display: 'inline',
+              whiteSpace: 'nowrap',
               verticalAlign: 'middle',
+              flexShrink: 0,
             }}
             title={part.variableKey ? `Variables: ${part.variableKey}` : 'Unknown variables'}
           >

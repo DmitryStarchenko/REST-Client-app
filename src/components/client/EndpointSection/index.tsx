@@ -18,7 +18,13 @@ const RequestForm: ReadonlyFC<RequestFormProps> = ({
 }) => {
   const t = useTranslations('RequestForm');
   return (
-    <Paper sx={{ p: 2, mb: 2, backgroundColor: 'var(--mui-palette-background-paper)' }}>
+    <Paper
+      sx={{
+        p: 2,
+        mb: 2,
+        backgroundColor: 'var(--mui-palette-background-paper)',
+      }}
+    >
       <Grid container spacing={2} alignItems="center" sx={{ mt: 1.5, display: 'flex' }}>
         <Grid sx={{ xs: 12, md: 2 }}>
           <MethodSelect value={method} onChange={setMethod} />
@@ -31,6 +37,7 @@ const RequestForm: ReadonlyFC<RequestFormProps> = ({
               label={t('Endpoint URL')}
               placeholder="https://jsonplaceholder.typicode.com/posts/1"
               fullWidth
+              sx={{ backgroundColor: 'var(--mui-palette-background-paper)' }}
               size="small"
             />
           </WithVariables>

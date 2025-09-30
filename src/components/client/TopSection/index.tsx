@@ -38,6 +38,9 @@ const TopSection: ReadonlyFC<TopTabsBlockProps> = ({
           value={topTab}
           onChange={(_, newTab) => setTopTab(newTab)}
           sx={{ borderBottom: 1, borderColor: 'divider', flexGrow: 1 }}
+          indicatorColor="secondary"
+          textColor="inherit"
+          variant="fullWidth"
         >
           <Tab label={t('Request Headers')} />
           <Tab label={t('Request Body')} />

@@ -32,6 +32,9 @@ const BottomTabsBlock: ReadonlyFC<BottomTabsBlockProps> = ({
           value={bottomTab}
           onChange={(_, newTab) => setBottomTab(newTab)}
           sx={{ borderBottom: 1, borderColor: 'divider', flexGrow: 1 }}
+          indicatorColor="secondary"
+          textColor="inherit"
+          variant="fullWidth"
         >
           <Tab label={t('Response')} />
           <Tab label={t('Response Headers')} />

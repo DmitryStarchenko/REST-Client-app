@@ -35,6 +35,7 @@ const WithVariables: ReadonlyFC<WithVariablesProps> = ({
 
   const [isFocused, setIsFocused] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const highlightRef = useRef<HTMLDivElement>(null);
   const prevShowAutocompleteRef = useRef(showAutocomplete);
 
   const handleClickOutside = useCallback(
@@ -62,6 +63,17 @@ const WithVariables: ReadonlyFC<WithVariablesProps> = ({
     };
   }, [handleClickOutside, showAutocomplete]);
 
+  useEffect(() => {
+    if (highlightRef.current && targetElement) {
+      const syncScroll = (): void => {
+        highlightRef.current!.scrollLeft = targetElement.scrollLeft;
+      };
+
+      targetElement.addEventListener('scroll', syncScroll);
+      return () => targetElement.removeEventListener('scroll', syncScroll);
+    }
+  }, [targetElement]);
+
   const enhancedHandleFocus = useCallback(
     (event: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
       setIsFocused(true);
@@ -85,6 +97,17 @@ const WithVariables: ReadonlyFC<WithVariablesProps> = ({
         handleInputChange(event, value, onChange),
       onFocus: enhancedHandleFocus,
       onBlur: enhancedHandleBlur,
+      sx: {
+        '& .MuiInputBase-input': {
+          overflowX: 'auto',
+          whiteSpace: 'nowrap',
+          '&::-webkit-scrollbar': {
+            display: 'none',
+          },
+          scrollbarWidth: 'none',
+          msOverflowStyle: 'none',
+        },
+      },
     }),
     [enhancedHandleBlur, enhancedHandleFocus, handleInputChange, onChange, value],
   );
@@ -97,24 +120,34 @@ const WithVariables: ReadonlyFC<WithVariablesProps> = ({
   const childrenWithProps = cloneElement(children, { ...childrenProps });
 
   return (
-    <div ref={containerRef} style={{ position: 'relative', width: '100%' }}>
+    <Box ref={containerRef} sx={{ position: 'relative', width: '100%' }}>
       {childrenWithProps}
 
       {showHighlight && value && (
         <Box
+          ref={highlightRef}
           sx={{
             position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
+            top: '50%',
+            transform: 'translateY(-50%)',
+            left: '14px',
+            right: '14px',
             pointerEvents: 'none',
             zIndex: 1,
             display: 'flex',
             alignItems: 'center',
-            paddingLeft: '14px',
-            paddingRight: '14px',
             opacity: isFocused ? 0.5 : 1,
+            width: 'calc(100% - 28px)',
+            overflowX: 'auto',
+            overflowY: 'hidden',
+            whiteSpace: 'nowrap',
+            height: '1.4375em',
+            lineHeight: '1.4375em',
+            '&::-webkit-scrollbar': {
+              display: 'none',
+            },
+            scrollbarWidth: 'none',
+            msOverflowStyle: 'none',
           }}
         >
           <HighlightedText text={value} />
@@ -130,7 +163,7 @@ const WithVariables: ReadonlyFC<WithVariablesProps> = ({
           isOpen={showAutocomplete}
         />
       )}
-    </div>
+    </Box>
   );
 };
 

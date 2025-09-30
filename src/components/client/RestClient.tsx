@@ -80,7 +80,7 @@ const RestClient: ReadonlyFC = () => {
   }, [body, headers, method, url, variablesObj]);
 
   return (
-    <Box p={2} width={1200} m="auto">
+    <Box sx={{ maxWidth: '1200', m: 'auto', p: 2, width: '100%' }}>
       <Typography variant="h4" mb={2} textAlign="center">
         {t('Title')}
       </Typography>
