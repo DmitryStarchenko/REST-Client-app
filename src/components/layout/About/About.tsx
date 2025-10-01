@@ -13,15 +13,10 @@ const About: ReadonlyFC = () => {
     <Box className={styles.about}>
       <Typography variant="h4">{translationAbout('about')}</Typography>
       <Container className={styles.container}>
-        <Container className={styles.project}>
-          <div className={styles.logoProject}></div>
-          <Typography>{translationAbout('project1')}</Typography>
-          <Typography>{translationAbout('project2')}</Typography>
-          <Typography>{translationAbout('project3')}</Typography>
-        </Container>
         <Container className={styles.rs}>
           <div className={styles.logoRS}></div>
-          <Typography>{translationAbout('rs')}</Typography>
+          <Typography fontSize={18}>{translationAbout('rs_1')}</Typography>
+          <Typography fontSize={18}>{translationAbout('rs_2')}</Typography>
         </Container>
         <Container className={styles.authors}>
           <div className={styles.logoAuthors}></div>
@@ -30,15 +25,15 @@ const About: ReadonlyFC = () => {
               <Typography variant="h5">{translationAbout('author1Name')}</Typography>
               <div className={styles.lead}></div>
             </div>
-            <Typography>{translationAbout('author1Description')}</Typography>
+            <Typography fontSize={18}>{translationAbout('author1Description')}</Typography>
           </div>
           <div className={styles.author}>
             <Typography variant="h5">{translationAbout('author2Name')}</Typography>
-            <Typography>{translationAbout('author2Description')}</Typography>
+            <Typography fontSize={18}>{translationAbout('author2Description')}</Typography>
           </div>
           <div className={styles.author}>
             <Typography variant="h5">{translationAbout('author3Name')}</Typography>
-            <Typography>{translationAbout('author3Description')}</Typography>
+            <Typography fontSize={18}>{translationAbout('author3Description')}</Typography>
           </div>
         </Container>
       </Container>

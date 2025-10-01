@@ -3,7 +3,7 @@ import { useTranslations } from 'next-intl';
 import React from 'react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import About from '../src/components/layout/Main/components/About/About';
+import About from '../src/components/layout/Main/components/AboutProject/AboutProject';
 
 vi.mock('next-intl', () => ({
   useTranslations: vi.fn(),

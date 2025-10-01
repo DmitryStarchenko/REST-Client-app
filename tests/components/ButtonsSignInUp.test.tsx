@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import React from 'react';
 import { describe, it, expect, vi } from 'vitest';
 
-import ButtonsSignInUp from '@/components/layout/Header/ButtonsSignInUp/ButtonsSignInUp';
+import ButtonsSignInUp from '@/components/layout/Header/Components/ButtonsSignInUp/ButtonsSignInUp';
 
 vi.mock('next-intl', () => ({
   useTranslations: () => {

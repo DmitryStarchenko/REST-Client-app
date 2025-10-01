@@ -8,7 +8,7 @@
 .container {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: var(--gap20);
 }
 
 .mainNav {
@@ -16,4 +16,15 @@
   gap: var(--gap20);
   justify-content: center;
   width: 100%;
+}
+
+.welcomeText {
+  font-size: 45px;
+  text-align: center;
+}
+
+@media screen and (width <= 430px) {
+  .welcomeText {
+    font-size: 30px;
+  }
 }

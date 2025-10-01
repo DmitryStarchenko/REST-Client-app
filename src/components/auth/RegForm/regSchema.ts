@@ -2,6 +2,7 @@ import z from 'zod';
 
 export const regSchema = z
   .object({
+    name: z.string().min(1, 'Enter name'),
     email: z.email({ error: 'Enter valid email' }),
 
     password: z

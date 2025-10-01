@@ -30,6 +30,9 @@ const RegForm: ReadonlyFC = () => {
         password: data.password,
         options: {
           emailRedirectTo: `${window.location.origin}`,
+          data: {
+            first_name: data.name,
+          },
         },
       });
       if (error) throw error;
@@ -45,6 +48,16 @@ const RegForm: ReadonlyFC = () => {
   return (
     <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
       <h1>{translationAuth('Registration')}</h1>
+      <TextField
+        id="name"
+        label={translationAuth('name')}
+        variant="standard"
+        {...register('name')}
+        error={Boolean(formState.errors.name)}
+        helperText={
+          formState.errors.name?.message && translationAuth(formState.errors.name?.message)
+        }
+      />
       <TextField
         id="email"
         label={translationAuth('email')}

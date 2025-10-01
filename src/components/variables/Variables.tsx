@@ -1,76 +1,103 @@
 'use client';
 
-import { Alert, Box, Slide, Snackbar } from '@mui/material';
-import { useTranslations } from 'next-intl';
-import React, { useState } from 'react';
+import { Box } from '@mui/material';
+import React, { useEffect, useState, useCallback, useMemo } from 'react';
 import { useLocalStorage } from 'usehooks-ts';
+import { z } from 'zod';
 
 import { VARIABLES_KEY } from '@/constants';
 import { IVariable, ReadonlyFC } from '@/types';
 
+import { variableKeySchema } from './variableKeySchema';
 import MultipleInputs from '../shared/MultipleInput/MultipleInput';
 
-interface VariablesProps {}
+const Variables: ReadonlyFC = () => {
+  const [savedVariables, setSavedVariables] = useLocalStorage<IVariable[]>(VARIABLES_KEY, []);
+  const [unsavedVariables, setUnsavedVariables] = useState<IVariable[]>(savedVariables);
 
-const Variables: ReadonlyFC<VariablesProps> = () => {
-  const [variables, setVariables] = useLocalStorage<IVariable[]>(VARIABLES_KEY, []);
-  const [error, setError] = useState('');
+  useEffect(() => {
+    setUnsavedVariables(savedVariables);
+  }, [savedVariables]);
 
-  const t = useTranslations('MultipleInputs');
+  const validateKey = useCallback(
+    (key: string, currentId?: number): string => {
+      try {
+        variableKeySchema.parse(key);
+        const isDuplicate = unsavedVariables.some(
+          (variable) => variable.key === key && variable.id !== currentId,
+        );
 
-  const handleVariablesChange = (id?: number, input?: { key?: string; value?: string }): void => {
-    if (id) {
-      const newVars = [...variables];
-      const varIndex = newVars.findIndex((item) => item.id === id);
-
-      if (input) {
-        if (input.key || input.key === '') {
-          if (input.key !== '' && variables.find((vars) => vars.key === input.key)) {
-            setError('Variable key should be unique!');
-          } else if (!/(\w+)/.test(input.key)) {
-            setError('Variable key should be contain only letters, digits, or underscore!');
-          } else {
-            setError('');
-          }
-
-          newVars[varIndex].key = input.key;
-        } else if (input.value || input.value === '') {
-          newVars[varIndex].value = input.value;
-        }
-        setVariables(newVars);
-      } else {
-        setVariables((vars) => vars.filter((varItem) => varItem.id !== id));
+        return isDuplicate ? 'Variable key should be unique!' : '';
+      } catch (error) {
+        return error instanceof z.ZodError
+          ? error._zod.def[0].message || 'Invalid key'
+          : 'Invalid key';
       }
-    } else {
-      setVariables((vars) => [
-        ...vars,
-        {
-          id: vars.length > 0 ? Math.max(...vars.map((varItem) => varItem.id)) + 1 : 1,
-          key: '',
-          value: '',
-        },
-      ]);
-    }
-  };
+    },
+    [unsavedVariables],
+  );
+
+  const handleVariablesChange = useCallback(
+    (id?: number, input?: { key?: string; value?: string }): void => {
+      if (id) {
+        if (input) {
+          setUnsavedVariables((prev) =>
+            prev.map((variable) => (variable.id === id ? { ...variable, ...input } : variable)),
+          );
+        } else {
+          setUnsavedVariables((prev) => prev.filter((variable) => variable.id !== id));
+        }
+      } else {
+        const newId =
+          unsavedVariables.length > 0
+            ? Math.max(...unsavedVariables.map((variable) => variable.id)) + 1
+            : 1;
+        setUnsavedVariables((prev) => [...prev, { id: newId, key: '', value: '' }]);
+      }
+    },
+    [unsavedVariables],
+  );
+
+  const handleSave = useCallback((): void => {
+    setSavedVariables(unsavedVariables);
+  }, [unsavedVariables, setSavedVariables]);
+
+  const hasUnsavedChanges = useMemo(() => {
+    if (unsavedVariables.length !== savedVariables.length) return true;
+
+    const savedMap = new Map(savedVariables.map((variable) => [variable.id, variable]));
+    return unsavedVariables.some((unsavedVar) => {
+      const savedVar = savedMap.get(unsavedVar.id);
+      return !savedVar || unsavedVar.key !== savedVar.key || unsavedVar.value !== savedVar.value;
+    });
+  }, [unsavedVariables, savedVariables]);
+
+  const fieldErrors = useMemo(
+    () =>
+      unsavedVariables.map((variable) => ({
+        id: variable.id,
+        keyError: validateKey(variable.key, variable.id),
+      })),
+    [unsavedVariables, validateKey],
+  );
+
+  const hasValidationErrors = useMemo(
+    () => fieldErrors.some((error) => error.keyError !== ''),
+    [fieldErrors],
+  );
+
+  const isSaveDisabled = !hasUnsavedChanges || hasValidationErrors;
+
   return (
     <Box sx={{ maxWidth: 600, margin: 'auto' }}>
-      <Snackbar
-        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-        open={Boolean(error)}
-        onClose={() => setError('')}
-        autoHideDuration={2000}
-        slots={{ transition: Slide }}
-      >
-        <Alert
-          onClose={() => setError('')}
-          severity="error"
-          variant="filled"
-          sx={{ width: '100%' }}
-        >
-          {error}
-        </Alert>
-      </Snackbar>
-      <MultipleInputs inputs={variables} onChange={handleVariablesChange} label={t('Variables')} />
+      <MultipleInputs
+        inputs={unsavedVariables}
+        change={handleVariablesChange}
+        fieldErrors={fieldErrors}
+        disabled={isSaveDisabled}
+        onSave={handleSave}
+        hasUnsavedChanges={hasUnsavedChanges}
+      />
     </Box>
   );
 };

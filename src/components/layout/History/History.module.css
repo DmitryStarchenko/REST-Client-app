@@ -1,9 +1,9 @@
 .main {
   display: flex;
-  gap: 20px;
+  gap: var(--gap20);
   align-items: center;
   width: 100%;
-  padding: 30px 0;
+  padding: var(--padding30) 0;
 }
 
 .logoEmpty {
@@ -16,7 +16,7 @@
 }
 
 .navButton {
-  padding: 10px;
+  padding: var(--padding10);
   font-size: 14px;
   background-color: #0000;
   border: none;
@@ -30,7 +30,7 @@
 .notRequest {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: var(--gap20);
   align-items: center;
   justify-content: center;
   width: 60%;

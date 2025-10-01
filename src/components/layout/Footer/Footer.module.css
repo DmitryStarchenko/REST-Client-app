@@ -9,42 +9,27 @@
   border-top: 2px solid var(--mui-palette-primary-main);
 }
 
-.logoRS,
-.logoGH {
-  width: 50px;
-  height: 50px;
-  background-image: url('/assets/logoRS.png');
-  background-position: center;
-  background-size: contain;
-  background-repeat: no-repeat;
-  border-radius: var(--border-radius);
-}
-
-.authors {
+.links {
   display: flex;
-  gap: var(--gap15);
-}
-
-.author {
-  display: flex;
+  flex-direction: column;
+  gap: var(--gap5);
   align-items: center;
+  margin-bottom: var(--margin20);
 }
 
-.logoGH {
-  width: 30px;
-  height: 30px;
-  margin: var(--margin10);
-  background-image: url('/assets/logoGH.png');
+.navButton {
+  padding: var(--padding10);
+  font-size: 14px;
+  text-transform: uppercase;
+  background-color: #0000;
+  border: none;
+  border-bottom: 4px solid var(--mui-palette-primary-main);
+
+  &:hover {
+    border-color: var(--mui-palette-secondary-main);
+  }
 }
 
 .year {
   color: var(--mui-palette-text-secondary);
-}
-
-.author:hover {
-  color: var(--mui-palette-primary-main);
-
-  .logoGH {
-    background-color: var(--mui-palette-primary-main);
-  }
 }
