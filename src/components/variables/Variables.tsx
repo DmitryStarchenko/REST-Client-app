@@ -55,7 +55,7 @@ const Variables: ReadonlyFC = () => {
         setUnsavedVariables((prev) => [...prev, { id: newId, key: '', value: '' }]);
       }
     },
-    [unsavedVariables.length],
+    [unsavedVariables],
   );
 
   const handleSave = useCallback((): void => {

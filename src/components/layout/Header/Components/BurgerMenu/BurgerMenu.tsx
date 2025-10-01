@@ -1,5 +1,5 @@
 import { useAtomValue } from 'jotai';
-import { Dispatch, SetStateAction, useCallback, useEffect, useRef, useState } from 'react';
+import { Dispatch, SetStateAction, useCallback, useEffect, useRef } from 'react';
 
 import { authAtom } from '@/store/authAtom';
 import { ReadonlyFC } from '@/types';
@@ -21,11 +21,11 @@ const BurgerMenu: ReadonlyFC<Props> = ({ isNavigationOpen, setIsNavigationOpen }
 
   const toggleNavigationMenu = useCallback((): void => {
     setIsNavigationOpen((prev) => !prev);
-  }, []);
+  }, [setIsNavigationOpen]);
 
   const closeNavigationMenu = useCallback((): void => {
     setIsNavigationOpen(false);
-  }, []);
+  }, [setIsNavigationOpen]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent): void => {

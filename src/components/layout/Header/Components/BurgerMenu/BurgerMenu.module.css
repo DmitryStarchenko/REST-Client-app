@@ -47,7 +47,7 @@
   position: absolute;
   top: 95%;
   right: 15px;
-  z-index: 1001;
+  z-index: 6;
   min-width: 200px;
   margin-top: var(--margin10);
   background: var(--mui-palette-background-default);

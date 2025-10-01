@@ -23,7 +23,7 @@ const ButtonNavigation: ReadonlyFC<Props> = ({ closeNavigationMenu }: Props) => 
       <Link className={styles.navButton} href={'/'} onClick={closeNavigationMenu}>
         {translationNav('main')}
       </Link>
-      <ButtonsNavPage />
+      <ButtonsNavPage closeNavigationMenu={closeNavigationMenu} />
       <Link className={styles.navButton} href={'/'} onClick={handleClickSignOut}>
         {translationNav('signOut')}
       </Link>
