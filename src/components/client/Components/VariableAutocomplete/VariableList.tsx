@@ -3,6 +3,8 @@ import React, { useEffect, useRef } from 'react';
 
 import { ReadonlyFC, VariableListProps } from '@/types';
 
+import styles from './VariableAutocomplete.module.css';
+
 export const VariableList: ReadonlyFC<VariableListProps> = ({
   variables,
   selectedIndex,
@@ -30,6 +32,7 @@ export const VariableList: ReadonlyFC<VariableListProps> = ({
           ref={index === selectedIndex ? selectedItemRef : null}
           selected={index === selectedIndex}
           onClick={() => onVariableSelect(variable)}
+          className={styles.listItem}
         >
           <ListItemText
             primary={
@@ -38,16 +41,7 @@ export const VariableList: ReadonlyFC<VariableListProps> = ({
               </Typography>
             }
             secondary={
-              <Box
-                component="span"
-                sx={{
-                  opacity: 0,
-                  transition: 'opacity 0.1s ease-in-out',
-                  '.MuiListItemButton-root:hover &': {
-                    opacity: 1,
-                  },
-                }}
-              >
+              <Box component="span" className={styles.secondaryText}>
                 <Typography variant="caption" color="text.secondary" noWrap>
                   {variable.value || 'Empty value'}
                 </Typography>

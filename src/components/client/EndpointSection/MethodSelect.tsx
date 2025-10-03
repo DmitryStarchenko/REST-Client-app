@@ -6,6 +6,10 @@ import React from 'react';
 import { METHODS, METHOD_STYLES } from '@/constants';
 import { HttpMethod, MethodSelectProps, ReadonlyFC } from '@/types';
 
+type getStyleType = (method: HttpMethod) => { color: string };
+
+import styles from './RequestForm.module.css';
+
 const MethodSelect: ReadonlyFC<MethodSelectProps> = ({ value, onChange, ...selectProps }) => {
   const handleChange = (event: SelectChangeEvent<unknown>): void => {
     const method = event.target.value as HttpMethod;
@@ -14,20 +18,24 @@ const MethodSelect: ReadonlyFC<MethodSelectProps> = ({ value, onChange, ...selec
     }
   };
 
+  const getSelectStyle: getStyleType = (method: HttpMethod) => ({
+    color: METHOD_STYLES[method]?.color || 'inherit',
+    border: `1px solid ${METHOD_STYLES[method]?.borderColor || 'transparent'}`,
+  });
+
+  const getMenuItemStyle: getStyleType = (method: HttpMethod) => ({
+    color: METHOD_STYLES[method].color,
+  });
+
   return (
     <Select
       value={value}
       onChange={handleChange}
       fullWidth
       size="small"
+      className={styles.select}
       sx={{
-        width: 125,
-        '& .MuiSelect-select': {
-          color: METHOD_STYLES[value as HttpMethod]?.color || 'inherit',
-          fontWeight: 600,
-          border: `1px solid ${METHOD_STYLES[value as HttpMethod]?.borderColor || 'transparent'}`,
-          borderRadius: '3px',
-        },
+        '& .MuiSelect-select': getSelectStyle(value as HttpMethod),
         '& .MuiOutlinedInput-notchedOutline': {
           border: 'none',
         },
@@ -44,23 +52,8 @@ const MethodSelect: ReadonlyFC<MethodSelectProps> = ({ value, onChange, ...selec
         <MenuItem
           key={method}
           value={method}
-          sx={{
-            color: METHOD_STYLES[method].color,
-            fontWeight: 600,
-            borderRadius: '3px',
-            margin: '2px',
-            opacity: 0.5,
-            '&:hover': {
-              opacity: 1,
-            },
-            '&.Mui-selected': {
-              backgroundColor: METHOD_STYLES[method].backgroundColor,
-              color: METHOD_STYLES[method].color,
-              '&:hover': {
-                opacity: 1,
-              },
-            },
-          }}
+          className={styles.menuItem}
+          sx={getMenuItemStyle(method)}
         >
           {method}
         </MenuItem>

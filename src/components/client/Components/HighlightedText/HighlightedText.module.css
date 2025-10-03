@@ -1,0 +1,33 @@
+.container {
+  display: inline-flex;
+  align-items: center;
+  min-width: 100%;
+  font-family: inherit;
+  letter-spacing: 0.15px;
+  white-space: nowrap;
+}
+
+.textPart {
+  display: inline;
+  white-space: nowrap;
+}
+
+.variable {
+  display: inline;
+  flex-shrink: 0;
+  line-height: 1.6;
+  background-color: var(--mui-palette-secondary-main);
+  border-radius: 3px;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.unknownVariable {
+  display: inline;
+  flex-shrink: 0;
+  line-height: 1.6;
+  background-color: var(--mui-palette-error-main);
+  border-radius: 3px;
+  vertical-align: middle;
+  white-space: nowrap;
+}

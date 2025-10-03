@@ -1,0 +1,21 @@
+.autocompleteContainer {
+  position: absolute;
+  top: calc(100% + 4px);
+  z-index: 5;
+  width: auto;
+}
+
+.container {
+  max-width: fit-content;
+  max-height: 200px;
+  overflow: auto;
+}
+
+.secondaryText {
+  opacity: 0;
+  transition: opacity 0.1s ease-in-out;
+}
+
+.listItem:hover .secondaryText {
+  opacity: 1;
+}

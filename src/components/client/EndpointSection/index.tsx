@@ -1,5 +1,5 @@
 'use client';
-import { Grid, TextField, Button, Stack, Paper } from '@mui/material';
+import { Grid, TextField, Button, Paper } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import React from 'react';
 
@@ -7,6 +7,7 @@ import WithVariables from '@/components/client/Components/WithVariables';
 import { ReadonlyFC, RequestFormProps } from '@/types';
 
 import MethodSelect from './MethodSelect';
+import styles from './RequestForm.module.css';
 
 const RequestForm: ReadonlyFC<RequestFormProps> = ({
   method,
@@ -18,43 +19,35 @@ const RequestForm: ReadonlyFC<RequestFormProps> = ({
 }) => {
   const t = useTranslations('RequestForm');
   return (
-    <Paper
-      sx={{
-        p: 2,
-        mb: 2,
-        backgroundColor: 'var(--mui-palette-background-paper)',
-      }}
-    >
-      <Grid container spacing={2} alignItems="center" sx={{ mt: 1.5, display: 'flex' }}>
-        <Grid sx={{ xs: 12, md: 2 }}>
+    <Paper className={styles.paper}>
+      <Grid container className={styles.gridContainer}>
+        <Grid>
           <MethodSelect value={method} onChange={setMethod} />
         </Grid>
 
-        <Grid sx={{ flexGrow: 1, position: 'relative' }}>
+        <Grid className={styles.urlInputGrid}>
           <WithVariables value={url} onChange={setUrl} showHighlight={true}>
             <TextField
               id="endpoint-url"
               label={t('Endpoint URL')}
               placeholder="https://jsonplaceholder.typicode.com/posts/1"
               fullWidth
-              sx={{ backgroundColor: 'var(--mui-palette-background-paper)' }}
+              className={styles.textField}
               size="small"
             />
           </WithVariables>
         </Grid>
 
-        <Grid sx={{ xs: 12, md: 2 }}>
-          <Stack direction="row" spacing={1}>
-            <Button
-              variant="contained"
-              onClick={sendRequest}
-              loading={loading}
-              type="submit"
-              disabled={!url || loading}
-            >
-              {t(`Send`)}
-            </Button>
-          </Stack>
+        <Grid>
+          <Button
+            variant="contained"
+            onClick={sendRequest}
+            loading={loading}
+            type="submit"
+            disabled={!url || loading}
+          >
+            {t(`Send`)}
+          </Button>
         </Grid>
       </Grid>
     </Paper>

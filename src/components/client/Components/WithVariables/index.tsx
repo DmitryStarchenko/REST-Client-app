@@ -15,6 +15,7 @@ import React, {
 import { useVariableAutocomplete } from '@/hooks';
 import { ReadonlyFC, WithVariablesProps } from '@/types';
 
+import styles from './WithVariables.module.css';
 import HighlightedText from '../HighlightedText/HighlightedText';
 import VariableAutocomplete from '../VariableAutocomplete';
 
@@ -64,7 +65,7 @@ const WithVariables: ReadonlyFC<WithVariablesProps> = ({
   }, [handleClickOutside, showAutocomplete]);
 
   useEffect(() => {
-    if (highlightRef.current && targetElement) {
+    if (highlightRef.current && targetElement && value.includes('{{')) {
       const syncScroll = (): void => {
         highlightRef.current!.scrollLeft = targetElement.scrollLeft;
       };
@@ -72,7 +73,7 @@ const WithVariables: ReadonlyFC<WithVariablesProps> = ({
       targetElement.addEventListener('scroll', syncScroll);
       return () => targetElement.removeEventListener('scroll', syncScroll);
     }
-  }, [targetElement]);
+  }, [targetElement, value]);
 
   const enhancedHandleFocus = useCallback(
     (event: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -98,15 +99,8 @@ const WithVariables: ReadonlyFC<WithVariablesProps> = ({
       onFocus: enhancedHandleFocus,
       onBlur: enhancedHandleBlur,
       sx: {
-        '& .MuiInputBase-input': {
-          overflowX: 'auto',
-          whiteSpace: 'nowrap',
-          '&::-webkit-scrollbar': {
-            display: 'none',
-          },
-          scrollbarWidth: 'none',
-          msOverflowStyle: 'none',
-        },
+        '& .MuiInputBaseInput': styles.inputBase,
+        autoComplete: 'off',
       },
     }),
     [enhancedHandleBlur, enhancedHandleFocus, handleInputChange, onChange, value],
@@ -126,29 +120,9 @@ const WithVariables: ReadonlyFC<WithVariablesProps> = ({
       {showHighlight && value.includes('{{') && (
         <Box
           ref={highlightRef}
-          sx={{
-            position: 'absolute',
-            top: '50%',
-            transform: 'translateY(-50%)',
-            left: '14px',
-            right: '14px',
-            pointerEvents: 'none',
-            zIndex: 1,
-            display: 'flex',
-            alignItems: 'center',
-            opacity: isFocused ? 0.5 : 1,
-            width: 'calc(100% - 28px)',
-            overflowX: 'auto',
-            overflowY: 'hidden',
-            whiteSpace: 'nowrap',
-            height: '1.4375em',
-            lineHeight: '1.4375em',
-            '&::-webkit-scrollbar': {
-              display: 'none',
-            },
-            scrollbarWidth: 'none',
-            msOverflowStyle: 'none',
-          }}
+          className={`${styles.highlightContainer} ${
+            isFocused ? styles.highlightFocused : styles.highlightNormal
+          }`}
         >
           <HighlightedText text={value} />
         </Box>

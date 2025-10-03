@@ -7,12 +7,13 @@ import { useLocalStorage } from 'usehooks-ts';
 import { VARIABLES_KEY, VARIABLES_SEARCH_REGEX } from '@/constants';
 import { IVariable, ReadonlyFC } from '@/types';
 
+import styles from './HighlightedText.module.css';
+
 interface HighlightedTextProps {
   text: string;
-  className?: string;
 }
 
-const HighlightedText: ReadonlyFC<HighlightedTextProps> = ({ text, className }) => {
+const HighlightedText: ReadonlyFC<HighlightedTextProps> = ({ text }) => {
   const [variables] = useLocalStorage<IVariable[]>(VARIABLES_KEY, []);
 
   const highlightedText = useMemo(() => {
@@ -57,27 +58,11 @@ const HighlightedText: ReadonlyFC<HighlightedTextProps> = ({ text, className }) 
   if (!text) return null;
 
   return (
-    <Box
-      className={className}
-      sx={{
-        whiteSpace: 'nowrap',
-        display: 'inline-flex',
-        alignItems: 'center',
-        minWidth: '100%',
-        fontFamily: 'inherit',
-        letterSpacing: 0.15,
-      }}
-    >
+    <Box className={styles.container}>
       {highlightedText.map((part, index) => {
         if (!part.isVariable) {
           return (
-            <span
-              key={index}
-              style={{
-                display: 'inline',
-                whiteSpace: 'nowrap',
-              }}
-            >
+            <span key={index} className={styles.textPart}>
               {part.text}
             </span>
           );
@@ -87,16 +72,7 @@ const HighlightedText: ReadonlyFC<HighlightedTextProps> = ({ text, className }) 
           <Box
             key={index}
             component="span"
-            sx={{
-              backgroundColor: part.variableKey ? 'secondary.main' : 'error.light',
-              borderRadius: '3px',
-              lineHeight: 1.6,
-              display: 'inline',
-              whiteSpace: 'nowrap',
-              verticalAlign: 'middle',
-              flexShrink: 0,
-            }}
-            title={part.variableKey ? `Variables: ${part.variableKey}` : 'Unknown variables'}
+            className={part.variableKey ? styles.variable : styles.unknownVariable}
           >
             {part.text}
           </Box>

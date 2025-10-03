@@ -7,6 +7,7 @@ import { useLocalStorage } from 'usehooks-ts';
 import { VARIABLES_KEY } from '@/constants';
 import { IVariable, ReadonlyFC, VariableAutocompleteProps } from '@/types';
 
+import styles from './VariableAutocomplete.module.css';
 import { VariableList } from './VariableList';
 
 const VariableAutocomplete: ReadonlyFC<VariableAutocompleteProps> = ({
@@ -175,11 +176,9 @@ const VariableAutocomplete: ReadonlyFC<VariableAutocompleteProps> = ({
 
   return (
     <Box
+      className={styles.autocompleteContainer}
       sx={{
-        position: 'absolute',
         top: scrollTop + rect.height,
-        width: 'auto-fit',
-        zIndex: 5,
       }}
     >
       <VariableList

@@ -1,0 +1,45 @@
+.paper {
+  margin-bottom: 1rem;
+  padding: 1rem;
+  background-color: var(--mui-palette-background-paper);
+}
+
+.gridContainer {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-top: 12px;
+}
+
+.urlInputGrid {
+  position: relative;
+  flex-grow: 1;
+}
+
+.textField {
+  background-color: var(--mui-palette-background-paper);
+  outline: none;
+}
+
+.buttonStack {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.select {
+  width: 125px;
+  font-weight: 600;
+}
+
+.menuItem {
+  margin: 2px;
+  font-weight: 400;
+  border-radius: 3px;
+  opacity: 0.5;
+}
+
+.menuItem:hover {
+  font-weight: 600;
+  opacity: 1;
+}
