@@ -1,6 +1,8 @@
 'use client';
 
-import { Box, Typography } from '@mui/material';
+import { SwapVert, SwapHoriz } from '@mui/icons-material';
+import { Box, Typography, Fab } from '@mui/material';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useSearchParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { useCallback, useMemo, useState } from 'react';
@@ -18,8 +20,31 @@ import { FormSection } from './FormSection';
 import { RequestSection } from './RequestSection';
 import { ResponseSection } from './ResponseSection';
 
+const fadeVariants = {
+  enter: {
+    opacity: 0,
+    scale: 0.9,
+  },
+  center: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      duration: 0.4,
+    },
+  },
+  exit: {
+    opacity: 0,
+    scale: 0.9,
+    transition: {
+      duration: 0.3,
+    },
+  },
+};
+
 const RestClient: ReadonlyFC = () => {
   const [variables] = useLocalStorage<IVariable[]>(VARIABLES_KEY, []);
+  const [activeSection, setActiveSection] = useState<'request' | 'response'>('request');
+  const [direction, setDirection] = useState(0);
 
   const variablesObj = variables.reduce<Record<string, string>>((acc, { key, value }) => {
     acc[key] = value;
@@ -63,6 +88,11 @@ const RestClient: ReadonlyFC = () => {
         body: processedBody,
       });
       setResponse(result);
+
+      setTimeout(() => {
+        setDirection(1);
+        setActiveSection('response');
+      }, 300);
     } catch (e) {
       const message = e instanceof Error ? e.message : 'Unknown error';
       setErrorMessage(message);
@@ -74,16 +104,48 @@ const RestClient: ReadonlyFC = () => {
         error: message,
         timestamp: new Date().toISOString(),
       });
+      setTimeout(() => {
+        setDirection(1);
+        setActiveSection('response');
+      }, 300);
     } finally {
       setLoading(false);
     }
   }, [body, headers, method, url, variablesObj]);
 
+  const toggleSection = (): void => {
+    if (activeSection === 'request') {
+      setDirection(1);
+      setActiveSection('response');
+    } else {
+      setDirection(-1);
+      setActiveSection('request');
+    }
+  };
+
+  const canShowResponse = response || errorMessage;
+
   return (
-    <Box sx={{ maxWidth: '1200', m: 'auto', p: 2, width: '100%' }}>
+    <Box sx={{ maxWidth: '1200', m: 'auto', p: 2, width: '100%', position: 'relative' }}>
       <Typography variant="h4" mb={2} textAlign="center">
         {t('Title')}
       </Typography>
+
+      <Fab
+        color="primary"
+        onClick={toggleSection}
+        disabled={activeSection === 'response' && !canShowResponse}
+        sx={{
+          position: 'fixed',
+          bottom: 24,
+          right: 24,
+          zIndex: 1000,
+        }}
+        size="medium"
+      >
+        {activeSection === 'request' ? <SwapVert /> : <SwapHoriz />}
+      </Fab>
+
       <form onSubmit={handleSubmit}>
         <FormSection
           method={method}
@@ -96,24 +158,82 @@ const RestClient: ReadonlyFC = () => {
           variablesObj={variablesObj}
         />
 
-        <RequestSection
-          headers={headers}
-          setHeaders={setHeaders}
-          bodyText={body}
-          setBodyText={setBody}
-          method={method}
-          url={url}
-          variables={variables}
-          variablesObj={variablesObj}
-        />
+        <Box sx={{ position: 'relative', height: '500px', overflow: 'hidden', mt: 2 }}>
+          <AnimatePresence mode="wait" custom={direction}>
+            {activeSection === 'request' ? (
+              <motion.div
+                key="request"
+                custom={direction}
+                variants={fadeVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                style={{ position: 'absolute', width: '100%', height: '100%' }}
+              >
+                <RequestSection
+                  headers={headers}
+                  setHeaders={setHeaders}
+                  bodyText={body}
+                  setBodyText={setBody}
+                  method={method}
+                  url={url}
+                  variables={variables}
+                  variablesObj={variablesObj}
+                />
+              </motion.div>
+            ) : (
+              <motion.div
+                key="response"
+                custom={direction}
+                variants={fadeVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                style={{ position: 'absolute', width: '100%', height: '100%' }}
+              >
+                <ResponseSection
+                  response={response}
+                  errorMessage={errorMessage}
+                  unknownErrorText={t('UError')}
+                  internalErrorText={t('IError')}
+                />
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </Box>
       </form>
 
-      <ResponseSection
-        response={response}
-        errorMessage={errorMessage}
-        unknownErrorText={t('UError')}
-        internalErrorText={t('IError')}
-      />
+      <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2, gap: 1 }}>
+        <Box
+          sx={{
+            width: 12,
+            height: 12,
+            borderRadius: '50%',
+            bgcolor: activeSection === 'request' ? 'primary.main' : 'grey.400',
+            cursor: 'pointer',
+          }}
+          onClick={() => {
+            setDirection(-1);
+            setActiveSection('request');
+          }}
+        />
+        <Box
+          sx={{
+            width: 12,
+            height: 12,
+            borderRadius: '50%',
+            bgcolor: activeSection === 'response' ? 'primary.main' : 'grey.400',
+            cursor: canShowResponse ? 'pointer' : 'default',
+            opacity: canShowResponse ? 1 : 0.5,
+          }}
+          onClick={() => {
+            if (canShowResponse) {
+              setDirection(1);
+              setActiveSection('response');
+            }
+          }}
+        />
+      </Box>
     </Box>
   );
 };
