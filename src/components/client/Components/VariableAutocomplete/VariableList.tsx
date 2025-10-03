@@ -30,14 +30,6 @@ export const VariableList: ReadonlyFC<VariableListProps> = ({
           ref={index === selectedIndex ? selectedItemRef : null}
           selected={index === selectedIndex}
           onClick={() => onVariableSelect(variable)}
-          sx={{
-            '&.Mui-selected': {
-              backgroundColor: 'secondary.main.light',
-              '&:hover': {
-                backgroundColor: 'secondary.light',
-              },
-            },
-          }}
         >
           <ListItemText
             primary={

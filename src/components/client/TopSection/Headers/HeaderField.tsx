@@ -3,8 +3,8 @@
 import { TextField } from '@mui/material';
 import React from 'react';
 
+import WithVariables from '@/components/client/Components/WithVariables';
 import InfoTooltip from '@/components/shared/InfoTooltip/InfoTooltip';
-import WithVariables from '@/components/shared/WithVariables';
 import { HeaderFieldProps, ReadonlyFC } from '@/types';
 
 const HeaderField: ReadonlyFC<HeaderFieldProps> = ({

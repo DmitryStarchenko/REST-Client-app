@@ -3,7 +3,7 @@ import { Grid, TextField, Button, Stack, Paper } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import React from 'react';
 
-import WithVariables from '@/components/shared/WithVariables';
+import WithVariables from '@/components/client/Components/WithVariables';
 import { ReadonlyFC, RequestFormProps } from '@/types';
 
 import MethodSelect from './MethodSelect';

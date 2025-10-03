@@ -16,7 +16,7 @@ import { useVariableAutocomplete } from '@/hooks';
 import { ReadonlyFC, WithVariablesProps } from '@/types';
 
 import HighlightedText from '../HighlightedText/HighlightedText';
-import VariableAutocomplete from '../VariableAutocomplete/';
+import VariableAutocomplete from '../VariableAutocomplete';
 
 const WithVariables: ReadonlyFC<WithVariablesProps> = ({
   value,
@@ -123,7 +123,7 @@ const WithVariables: ReadonlyFC<WithVariablesProps> = ({
     <Box ref={containerRef} sx={{ position: 'relative', width: '100%' }}>
       {childrenWithProps}
 
-      {showHighlight && value && (
+      {showHighlight && value.includes('{{') && (
         <Box
           ref={highlightRef}
           sx={{
