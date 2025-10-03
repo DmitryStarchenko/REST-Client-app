@@ -6,7 +6,7 @@ import { ReadonlyFC } from '@/types';
 
 import Loader from '../shared/Loader/Loader';
 
-const RestClient = dynamic(() => import('@/components/client/RestClient'), {
+const RestClient = dynamic(() => import('@/components/client/Components'), {
   ssr: false,
   loading: () => <Loader />,
 });

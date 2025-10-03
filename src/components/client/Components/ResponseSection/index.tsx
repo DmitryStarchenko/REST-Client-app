@@ -12,7 +12,7 @@ import ResponseHeaders from './Headers';
 import ResponseBlock from './Response';
 import Statistic from './Statistic';
 
-const BottomTabsBlock: ReadonlyFC<BottomTabsBlockProps> = ({
+export const ResponseSection: ReadonlyFC<BottomTabsBlockProps> = ({
   response,
   errorMessage,
   unknownErrorText,
@@ -66,5 +66,3 @@ const BottomTabsBlock: ReadonlyFC<BottomTabsBlockProps> = ({
     </>
   );
 };
-
-export default BottomTabsBlock;

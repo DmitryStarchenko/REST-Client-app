@@ -13,7 +13,7 @@ import CodeGenSection from './Codegen';
 import HeadersBlock from './Headers';
 import VariablesSection from './VariablesSection';
 
-const TopSection: ReadonlyFC<TopTabsBlockProps> = ({
+export const RequestSection: ReadonlyFC<TopTabsBlockProps> = ({
   headers,
   setHeaders,
   bodyText,
@@ -74,5 +74,3 @@ const TopSection: ReadonlyFC<TopTabsBlockProps> = ({
     </>
   );
 };
-
-export default TopSection;

@@ -2,7 +2,7 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import React from 'react';
 
-import BottomTabsBlock from '@/components/client/BottomSection';
+import BottomTabsBlock from '@/components/client/ResponseSection';
 import { ApiResponse } from '@/types';
 
 vi.mock('@/components/client/BottomSection/Response', () => ({

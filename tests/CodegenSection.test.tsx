@@ -20,7 +20,7 @@ vi.mock('@/components/client/TopSection/Codegen/LangSelect.tsx', () => ({
   default: () => <select data-testid="lang-select">Select</select>,
 }));
 
-import CodegenSection from '@/components/client/TopSection/Codegen';
+import CodegenSection from '@/components/client/RequestSection/Codegen';
 
 describe('CodegenSection Component - Basic', () => {
   const mockProps = {

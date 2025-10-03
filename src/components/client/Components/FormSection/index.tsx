@@ -9,7 +9,7 @@ import { ReadonlyFC, RequestFormProps } from '@/types';
 import MethodSelect from './MethodSelect';
 import styles from './RequestForm.module.css';
 
-const RequestForm: ReadonlyFC<RequestFormProps> = ({
+export const FormSection: ReadonlyFC<RequestFormProps> = ({
   method,
   setMethod,
   url,
@@ -53,5 +53,3 @@ const RequestForm: ReadonlyFC<RequestFormProps> = ({
     </Paper>
   );
 };
-
-export default RequestForm;

@@ -14,9 +14,9 @@ import { parseRestPath } from '@/utils/parseRestPath';
 import { sendRestRequest } from '@/utils/sendRestRequest';
 import { replaceVariables } from '@/utils/variable';
 
-import BottomTabsBlock from './BottomSection';
-import RequestForm from './EndpointSection';
-import TopTabsBlock from './TopSection';
+import { FormSection } from './FormSection';
+import { RequestSection } from './RequestSection';
+import { ResponseSection } from './ResponseSection';
 
 const RestClient: ReadonlyFC = () => {
   const [variables] = useLocalStorage<IVariable[]>(VARIABLES_KEY, []);
@@ -85,7 +85,7 @@ const RestClient: ReadonlyFC = () => {
         {t('Title')}
       </Typography>
       <form onSubmit={handleSubmit}>
-        <RequestForm
+        <FormSection
           method={method}
           setMethod={setMethod}
           url={url}
@@ -96,7 +96,7 @@ const RestClient: ReadonlyFC = () => {
           variablesObj={variablesObj}
         />
 
-        <TopTabsBlock
+        <RequestSection
           headers={headers}
           setHeaders={setHeaders}
           bodyText={body}
@@ -108,7 +108,7 @@ const RestClient: ReadonlyFC = () => {
         />
       </form>
 
-      <BottomTabsBlock
+      <ResponseSection
         response={response}
         errorMessage={errorMessage}
         unknownErrorText={t('UError')}
