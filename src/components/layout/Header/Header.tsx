@@ -33,22 +33,12 @@ const Header: ReadonlyFC = () => {
   }, []);
 
   useEffect(() => {
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return (): void => {
-      window.removeEventListener('resize', handleResize);
+    const handleScroll = (): void => {
+      setIsCompact(window.scrollY > 50);
     };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  useEffect(() => {
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => {
-      if (rafId.current) {
-        cancelAnimationFrame(rafId.current);
-      }
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [handleScroll]);
 
   return (
     <>
