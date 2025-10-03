@@ -1,9 +1,18 @@
 :root {
+  --gap5: 5px;
   --gap10: 10px;
   --gap15: 15px;
   --gap20: 20px;
+  --margin8: 8px;
   --margin10: 10px;
+  --margin15: 15px;
+  --margin16: 16px;
+  --margin20: 20px;
+  --margin30: 30px;
+  --margin50: 50px;
+  --padding8: 8px;
   --padding10: 10px;
+  --padding15: 15px;
   --padding20: 20px;
   --padding30: 30px;
   --padding40: 40px;

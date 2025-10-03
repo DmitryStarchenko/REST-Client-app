@@ -2,19 +2,7 @@
 
 <p align="center"><img width="300" height="300" src="./public/assets/logoMini.png"></p>
 
-## For users
-
-To make the application work, add the following to the ".env" file in the root of the project:
-
-```
-NEXT_PUBLIC_SUPABASE_URL=https://gseobzrkozgmmygrltlp.supabase.co
-NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=sb_publishable_uXbwrJBdIiOzgKrRTlYDMQ_bN4cUG8Y
-SUPABASE_SECRET_KEY=sb_secret_HQk5Z7KAJzQ2CoyB37PHEg_vxVOsO8V
-```
-
 ## Description
-
-The final project of the React Q3 2025 course from RSSchool.
 
 PUTMAN is a universal testing, development, and REST API platform. It provides a clean interface that replaces disparate tools like Postman, Curl, and the command line, bringing together everything you need to work with an API into one powerful yet simple web application.
 
@@ -51,7 +39,17 @@ cd REST-Client-app
 npm run init
 ```
 
-### 3. Run the Development Server
+### 3. Setting environment variables
+
+To make the application work, add the following to the ".env" file in the root of the project:
+
+```
+NEXT_PUBLIC_SUPABASE_URL=https://gseobzrkozgmmygrltlp.supabase.co
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=sb_publishable_uXbwrJBdIiOzgKrRTlYDMQ_bN4cUG8Y
+SUPABASE_SECRET_KEY=sb_secret_HQk5Z7KAJzQ2CoyB37PHEg_vxVOsO8V
+```
+
+### 4. Run the Development Server
 
 Start the development server:
 
@@ -61,7 +59,7 @@ npm run dev
 
 This will start the project on localhost:3000 for development.
 
-### 4. Run the Development Server
+### 5. Run the Development Server
 
 Start the development server:
 
@@ -71,7 +69,7 @@ npm run build
 
 This will output the bundled files in the dist directory.
 
-### 5. Run Tests
+### 6. Run Tests
 
 To run the unit tests:
 

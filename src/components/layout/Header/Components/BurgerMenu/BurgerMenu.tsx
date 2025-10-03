@@ -1,21 +1,19 @@
 import { useAtomValue } from 'jotai';
-import { useTranslations } from 'next-intl';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { Dispatch, SetStateAction, useCallback, useEffect, useRef } from 'react';
 
-import LangSwitcher from '@/components/layout/LangSwitcher/LangSwitcher';
-import ButtonsNavPage from '@/components/layout/Main/components/ButtonNavPage/ButtonsNavPage';
-import ThemeToggler from '@/components/layout/ThemeToggler/ThemeToggler';
-import { Link } from '@/i18n';
-import supabaseClient from '@/lib/supabase/client';
 import { authAtom } from '@/store/authAtom';
 import { ReadonlyFC } from '@/types';
 
 import styles from './BurgerMenu.module.css';
+import ButtonNavigation from '../ButtonNavigation/ButtonNavigation';
 import ButtonsSignInUp from '../ButtonsSignInUp/ButtonsSignInUp';
 
-const BurgerMenu: ReadonlyFC = () => {
-  const [isNavigationOpen, setIsNavigationOpen] = useState(false);
-  const translationNav = useTranslations('Navigation');
+interface Props {
+  isNavigationOpen: boolean;
+  setIsNavigationOpen: Dispatch<SetStateAction<boolean>>;
+}
+
+const BurgerMenu: ReadonlyFC<Props> = ({ isNavigationOpen, setIsNavigationOpen }: Props) => {
   const auth = useAtomValue(authAtom);
 
   const navigationMenuRef = useRef<HTMLDivElement>(null);
@@ -23,11 +21,11 @@ const BurgerMenu: ReadonlyFC = () => {
 
   const toggleNavigationMenu = useCallback((): void => {
     setIsNavigationOpen((prev) => !prev);
-  }, []);
+  }, [setIsNavigationOpen]);
 
   const closeNavigationMenu = useCallback((): void => {
     setIsNavigationOpen(false);
-  }, []);
+  }, [setIsNavigationOpen]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent): void => {
@@ -44,11 +42,6 @@ const BurgerMenu: ReadonlyFC = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [closeNavigationMenu]);
 
-  const handleClickSignOut = (): void => {
-    supabaseClient.auth.signOut();
-    closeNavigationMenu();
-  };
-
   return (
     <div className={styles.burgerMenu} ref={navigationMenuRef}>
       <button
@@ -62,27 +55,15 @@ const BurgerMenu: ReadonlyFC = () => {
         <span></span>
         <span></span>
       </button>
-
       {isNavigationOpen && (
         <div className={styles.dropdownMenu}>
           <div className={styles.menuContent}>
-            <div className={styles.menuTitle}>Menu</div>
             <nav className={styles.navigation}>
               {auth ? (
-                <>
-                  <Link className={styles.navButton} href="/" onClick={closeNavigationMenu}>
-                    {translationNav('main')}
-                  </Link>
-                  <ButtonsNavPage closeNavigationMenu={closeNavigationMenu} />
-                  <Link className={styles.navButton} href="/" onClick={handleClickSignOut}>
-                    {translationNav('signOut')}
-                  </Link>
-                </>
+                <ButtonNavigation closeNavigationMenu={closeNavigationMenu} />
               ) : (
                 <ButtonsSignInUp closeNavigationMenu={closeNavigationMenu} />
               )}
-              <LangSwitcher />
-              <ThemeToggler />
             </nav>
           </div>
         </div>

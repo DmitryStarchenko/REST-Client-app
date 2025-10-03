@@ -3,7 +3,7 @@
   flex-direction: column;
   gap: var(--gap15);
   align-items: center;
-  width: 70%;
+  width: 60%;
   padding: var(--padding40) 0 var(--padding30);
 }
 
@@ -13,9 +13,7 @@
   gap: var(--gap15);
 }
 
-.project,
-.rs,
-.authors {
+.project {
   display: flex;
   flex-direction: column;
   gap: var(--gap15);
@@ -24,14 +22,11 @@
   border-top: 2px solid var(--mui-palette-primary-main);
 }
 
-.project > p,
-.rs > p {
+.project > p {
   text-indent: 3rem;
 }
 
-.logoProject,
-.logoRS,
-.logoAuthors {
+.logoProject {
   width: 40px;
   height: 40px;
   background-image: url('/assets/logoMini.png');
@@ -39,38 +34,4 @@
   background-size: contain;
   background-repeat: no-repeat;
   border-radius: var(--border-radius);
-}
-
-.logoRS {
-  background-image: url('/assets/logoRS.png');
-}
-
-.logoAuthors {
-  background-image: url('/assets/team.png');
-}
-
-.leadContainer {
-  display: flex;
-  gap: var(--gap10);
-}
-
-.lead {
-  width: 20px;
-  height: 20px;
-  background-image: url('/assets/lead.png');
-  background-position: center;
-  background-size: contain;
-  background-repeat: no-repeat;
-}
-
-.author {
-  display: flex;
-  flex-direction: column;
-  gap: var(--gap10);
-}
-
-@media screen and (width <= 900px) {
-  .about {
-    width: 90%;
-  }
 }

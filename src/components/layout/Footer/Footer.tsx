@@ -1,29 +1,25 @@
-import { Typography } from '@mui/material';
-import Link from 'next/link';
+import { Container, Typography } from '@mui/material';
+import { useTranslations } from 'next-intl';
 import React from 'react';
 
+import { Link } from '@/i18n';
 import { ReadonlyFC } from '@/types/readonly.types';
 
 import styles from './Footer.module.css';
 
 const Footer: ReadonlyFC = () => {
+  const translationFooter = useTranslations('Footer');
+
   return (
     <footer className={styles.footer}>
-      <Link className={styles.logoRS} href={'https://rs.school/courses/reactjs'}></Link>
-      <div className={styles.authors}>
-        <Link className={styles.author} href={'https://github.com/DmitryStarchenko'}>
-          <div className={styles.logoGH}></div>
-          Dmitry Starchenko
+      <Container className={styles.links}>
+        <Link className={styles.navButton} href={'/about'}>
+          {translationFooter('About')}
         </Link>
-        <Link className={styles.author} href={'https://github.com/husanGuru'}>
-          <div className={styles.logoGH}></div>
-          Husan Abdigafurov
+        <Link className={styles.navButton} href={'/contacts'}>
+          {translationFooter('Contacts')}
         </Link>
-        <Link className={styles.author} href={'https://github.com/Bubnov-Roma'}>
-          <div className={styles.logoGH}></div>
-          Bubnov Roma
-        </Link>
-      </div>
+      </Container>
       <Typography className={styles.year}>© 2025 PUTMAN</Typography>
     </footer>
   );
