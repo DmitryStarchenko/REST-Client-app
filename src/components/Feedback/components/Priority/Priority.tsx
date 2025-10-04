@@ -2,7 +2,7 @@ import { FormControl, RadioGroup, FormControlLabel, Radio, Typography } from '@m
 import { useTranslations } from 'next-intl';
 import { ChangeEvent } from 'react';
 
-import { priorityOptions } from '@/constants/feedback';
+import { PRIORITY_OPTIONS } from '@/constants/feedback';
 import { ReadonlyFC } from '@/types';
 import { FeedbackFormData } from '@/types/feedback';
 
@@ -26,7 +26,7 @@ const Priority: ReadonlyFC<Props> = ({ handleInputChange, formData }: Props) => 
         row
         sx={{ gap: 2 }}
       >
-        {priorityOptions.map((option) => (
+        {PRIORITY_OPTIONS.map((option) => (
           <FormControlLabel
             key={option.value}
             value={option.value}

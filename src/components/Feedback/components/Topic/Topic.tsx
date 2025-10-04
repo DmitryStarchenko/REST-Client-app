@@ -2,7 +2,7 @@ import { FormControl, Select, MenuItem, SelectChangeEvent, Typography } from '@m
 import { useTranslations } from 'next-intl';
 import { ChangeEvent } from 'react';
 
-import { topicOptions } from '@/constants/feedback';
+import { TOPIC_OPTIONS } from '@/constants/feedback';
 import { ReadonlyFC } from '@/types';
 import { FeedbackFormData } from '@/types/feedback';
 
@@ -24,7 +24,7 @@ const Topic: ReadonlyFC<Props> = ({ handleInputChange, formData }: Props) => {
     <FormControl fullWidth required>
       <Typography>{translationTopic('Topic')}</Typography>
       <Select name="topic" value={formData.topic} onChange={handleInputChange('topic')}>
-        {topicOptions.map((option) => (
+        {TOPIC_OPTIONS.map((option) => (
           <MenuItem key={option.value} value={option.value}>
             {translationTopic(option.label)}
           </MenuItem>

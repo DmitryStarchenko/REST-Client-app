@@ -1,6 +1,6 @@
 import { FeedbackFormData, FeedbackTopic, PriorityLevel } from '@/types/feedback';
 
-export const topicOptions: { value: FeedbackTopic; label: string }[] = [
+export const TOPIC_OPTIONS: { value: FeedbackTopic; label: string }[] = [
   { value: 'bug-report', label: 'bugReport' },
   { value: 'feature-request', label: 'featureRequest' },
   { value: 'how-to-question', label: 'howToQuestion' },
@@ -9,14 +9,14 @@ export const topicOptions: { value: FeedbackTopic; label: string }[] = [
   { value: 'other', label: 'other' },
 ];
 
-export const priorityOptions: { value: PriorityLevel; label: string }[] = [
+export const PRIORITY_OPTIONS: { value: PriorityLevel; label: string }[] = [
   { value: 'low', label: 'low' },
   { value: 'medium', label: 'medium' },
   { value: 'high', label: 'high' },
   { value: 'critical', label: 'critical' },
 ];
 
-export const initialFormData: FeedbackFormData = {
+export const INITIAL_FORM_DATA: FeedbackFormData = {
   email: '',
   topic: 'bug-report',
   description: '',

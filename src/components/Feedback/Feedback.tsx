@@ -4,7 +4,7 @@ import { Box, Typography, Button, Alert, Paper, Container, SelectChangeEvent } f
 import { useTranslations } from 'next-intl';
 import { useState, useCallback, ChangeEvent, FormEvent } from 'react';
 
-import { initialFormData } from '@/constants/feedback';
+import { INITIAL_FORM_DATA } from '@/constants/feedback';
 import { ReadonlyFC } from '@/types';
 import { FeedbackFormData } from '@/types/feedback';
 
@@ -16,7 +16,7 @@ import styles from './Feedback.module.css';
 import { service } from './services/service';
 
 const Feedback: ReadonlyFC = () => {
-  const [formData, setFormData] = useState<FeedbackFormData>(initialFormData);
+  const [formData, setFormData] = useState<FeedbackFormData>(INITIAL_FORM_DATA);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string>('');
   const [submitSuccess, setSubmitSuccess] = useState(false);
@@ -46,7 +46,7 @@ const Feedback: ReadonlyFC = () => {
     try {
       await service(formData);
       setSubmitSuccess(true);
-      setFormData(initialFormData);
+      setFormData(INITIAL_FORM_DATA);
     } catch (error) {
       setSubmitError(error instanceof Error ? error.message : translationFeedback('ErrorMessage'));
     } finally {
