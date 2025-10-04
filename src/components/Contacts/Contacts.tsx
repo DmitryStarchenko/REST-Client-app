@@ -1,4 +1,4 @@
-import { Typography } from '@mui/material';
+import { Box, Container, Typography } from '@mui/material';
 import { useTranslations } from 'next-intl';
 
 import { Link } from '@/i18n';
@@ -49,6 +49,17 @@ const Contacts: ReadonlyFC = () => {
         </Link>
       </div>
       <Link className={styles.logoRS} href={'https://rs.school/courses/reactjs'}></Link>
+      <Container className={styles.socialMedia}>
+        <Link className={`${styles.socialLink} ${styles.x}`} href={'https://x.com/'}></Link>
+        <Link
+          className={`${styles.socialLink} ${styles.inst}`}
+          href={'https://www.instagram.com/'}
+        ></Link>
+        <Link
+          className={`${styles.socialLink} ${styles.tel}`}
+          href={'https://web.telegram.org/'}
+        ></Link>
+      </Container>
     </main>
   );
 };
