@@ -4,10 +4,14 @@ import React from 'react';
 import { ReadonlyFC, ResponseBlockProps } from '@/types';
 
 import { CodeEditor } from '../../Shared';
-import styles from '../ResponseBlock.module.css';
+import styles from '../ResponseSection.module.css';
 
-const Response: ReadonlyFC<ResponseBlockProps> = ({ response, errorMessage, unknownErrorText }) => {
-  const t = useTranslations('ResponseBlock');
+const ResponseBlock: ReadonlyFC<ResponseBlockProps> = ({
+  response,
+  errorMessage,
+  unknownErrorText,
+}) => {
+  const t = useTranslations('RestClient');
 
   const getResponseContent = (): string => {
     if (errorMessage) return errorMessage;
@@ -40,4 +44,4 @@ const Response: ReadonlyFC<ResponseBlockProps> = ({ response, errorMessage, unkn
   );
 };
 
-export default Response;
+export default ResponseBlock;

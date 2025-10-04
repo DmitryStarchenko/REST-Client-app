@@ -4,10 +4,12 @@ import { Box, Stack } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import React from 'react';
 
-import { HeaderRowProps, ReadonlyFC } from '@/types';
+import { HeaderRowProps } from '@/components/client/types';
+import { ReadonlyFC } from '@/types';
 
 import DeleteButton from './DeleteButton';
 import HeaderField from './HeaderField';
+import styles from './HeadersBlock.module.css';
 
 const HeaderRow: ReadonlyFC<HeaderRowProps> = ({
   header,
@@ -16,7 +18,7 @@ const HeaderRow: ReadonlyFC<HeaderRowProps> = ({
   onUpdate,
   onRemove,
 }) => {
-  const t = useTranslations('HeadersBlock');
+  const t = useTranslations('RestClient');
 
   const isLast = index === totalHeaders - 1;
   const isEmpty = header.key === '' && header.value === '';
@@ -32,31 +34,29 @@ const HeaderRow: ReadonlyFC<HeaderRowProps> = ({
   };
 
   return (
-    <Box
-      sx={{
-        position: 'relative',
-        '&:hover .delete-btn': { opacity: 0.5 },
-        gap: '2',
-      }}
-    >
-      <Stack direction="row" spacing={1}>
+    <Box className={styles.container}>
+      <Stack className={styles.row}>
         <HeaderField
           value={header.key}
           onChange={handleKeyChange}
           placeholder={t('Key')}
           incomplete={incomplete}
           tooltipText={t('Tooltip')}
-          flex={1}
+          className={styles.keyField}
         />
         <HeaderField
           value={header.value}
           onChange={handleValueChange}
           placeholder={t('Value')}
-          flex={2}
+          className={styles.valueField}
         />
       </Stack>
       {(!isLast || !isEmpty) && (
-        <DeleteButton onRemove={() => onRemove(header.id)} tooltipText={t('Delete')} />
+        <DeleteButton
+          onRemove={() => onRemove(header.id)}
+          tooltipText={t('Delete')}
+          className={styles.deleteBtn}
+        />
       )}
     </Box>
   );

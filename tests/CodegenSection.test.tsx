@@ -16,7 +16,7 @@ vi.mock('@/components/client/Shared/index.tsx', () => ({
   CodeEditor: () => <div data-testid="code-editor">Editor</div>,
 }));
 
-vi.mock('@/components/client/TopSection/Codegen/LangSelect.tsx', () => ({
+vi.mock('@/components/client/RequestSection/Codegen/LangSelect.tsx', () => ({
   default: () => <select data-testid="lang-select">Select</select>,
 }));
 

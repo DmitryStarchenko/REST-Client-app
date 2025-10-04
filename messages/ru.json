@@ -59,11 +59,10 @@
     "IError": "Внутренняя Ошибка",
     "Title": "REST Клиент",
     "Variables": "Переменные",
-    "No variables defined": "Переменные не определены"
-  },
-  "ResponseBlock": {
+    "No variables defined": "Переменные не определены",
     "No response yet": "Еще нет данных",
     "Response": "Ответ",
+    "Request": "Запрос",
     "Timestamp": "Время",
     "Status": "Статус",
     "StatusText": "Текст",
@@ -71,31 +70,23 @@
     "Duration": "Продолжительность",
     "ms": "мс",
     "bytes": "байт",
-    "Headers": "Заголовки"
-  },
-  "RequestForm": {
-    "Send": "Отправить",
-    "Endpoint URL": "URL-адрес конечной точки"
-  },
-  "HeadersBlock": {
     "Headers": "Заголовки",
-    "Key": "Ключ",
-    "Tooltip": "Чтобы использовать этот заголовок в запросе, необходимо заполнить оба поля",
-    "Value": "Значение",
-    "Delete": "Удалить"
-  },
-  "BodyBlock": {
+    "Statistic": "Статистика",
     "Body": "Тело",
     "Copy base64": "Копия BASE 64",
     "Invalid JSON": "Некорректный JSON",
-    "Prettify JSON": "Распарсить JSON"
-  },
-
-  "CodegenSection": {
+    "Prettify JSON": "Красивый JSON",
     "Error generating code": "Ошибка генерации кода",
     "Generated code": "Генератор кода",
     "No languages available": "Нет доступных языков",
-    "Generating": "Генерация..."
+    "Generating": "Генерация...",
+    "Key": "Ключ",
+    "Tooltip": "Чтобы использовать этот заголовок в запросе, необходимо заполнить оба поля",
+    "Value": "Значение",
+    "Delete": "Удалить",
+    "Codegen": "Кодгенератор",
+    "Send": "Отправить",
+    "Endpoint URL": "URL-адрес конечной точки"
   },
   "History": {
     "title": "История запросов",
@@ -112,17 +103,6 @@
   },
   "CopyButton": {
     "Copy content": "Копировать содержимое блока"
-  },
-  "TopSection": {
-    "Request Headers": "Заголовки Запроса",
-    "Request Body": "Тело Запроса",
-    "Codegen": "Генератор Кода",
-    "Variables": "Переменные"
-  },
-  "BottomTabsBlock": {
-    "Response": "Ответ",
-    "Response Headers": "Заголовки Ответа",
-    "Statistic Fields": "Статистические Данные"
   },
   "MultipleInputs": {
     "Save": "Сохранить",

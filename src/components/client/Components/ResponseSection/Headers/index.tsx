@@ -7,7 +7,7 @@ import { ReadonlyFC, ResponseHeadersSectionProps } from '@/types';
 
 import { CodeEditor } from '../../Shared';
 import ResponseBlock from '../Response';
-import styles from '../ResponseBlock.module.css';
+import styles from '../ResponseSection.module.css';
 
 const ResponseHeaders: ReadonlyFC<ResponseHeadersSectionProps> = ({
   response,

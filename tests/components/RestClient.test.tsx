@@ -48,7 +48,7 @@ vi.mock('@/components/client/EndpointSection', () => ({
   default: () => <div>Endpoint Section</div>,
 }));
 
-vi.mock('@/components/client/TopSection', () => ({
+vi.mock('@/components/client/RequestSection', () => ({
   default: () => <div>Top Section</div>,
 }));
 

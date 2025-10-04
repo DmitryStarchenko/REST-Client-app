@@ -8,11 +8,11 @@ import { languageMap } from '@/constants';
 import { BodyBlockProps, ReadonlyFC } from '@/types';
 import { encodeBase64 } from '@/utils';
 
+import styles from './BodyBlock.module.css';
 import { CodeEditor } from '../../Shared';
-import styles from '../TopSection.module.css';
 
 const BodyBlock: ReadonlyFC<BodyBlockProps> = ({ bodyText, setBodyText }) => {
-  const t = useTranslations('BodyBlock');
+  const t = useTranslations('RestClient');
   const [bodyType, setBodyType] = useState<keyof typeof languageMap>('JSON');
   const [jsonError, setJsonError] = useState<string | null>(null);
 
@@ -54,7 +54,7 @@ const BodyBlock: ReadonlyFC<BodyBlockProps> = ({ bodyText, setBodyText }) => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.topBox}>
-        <Box gap={1} display={'flex'}>
+        <Box className={styles.buttonGroup}>
           <Button
             data-testid="copy-base-button"
             className={styles.copyButton}
@@ -62,14 +62,6 @@ const BodyBlock: ReadonlyFC<BodyBlockProps> = ({ bodyText, setBodyText }) => {
             size="small"
             variant="outlined"
             disabled={!!jsonError || !bodyText}
-            sx={{
-              color: 'inherit',
-              opacity: bodyText ? '0.6' : '0.3',
-              '&:hover': {
-                opacity: bodyText ? 0.8 : 0.3,
-              },
-              minWidth: 180,
-            }}
           >
             {t(`Copy base64`)}
           </Button>
@@ -80,25 +72,13 @@ const BodyBlock: ReadonlyFC<BodyBlockProps> = ({ bodyText, setBodyText }) => {
             size="small"
             variant="outlined"
             disabled={!canPrettify}
-            sx={{
-              color: 'inherit',
-              opacity: canPrettify ? '0.6' : '0.3',
-              '&:hover': {
-                opacity: canPrettify ? 0.8 : 0.3,
-              },
-              minWidth: 180,
-            }}
           >
             {t('Prettify JSON')}
           </Button>
         </Box>
-        <Stack
-          direction="row"
-          spacing={1}
-          sx={{ justifyContent: 'flex-end', alignItems: 'center', width: '100%' }}
-        >
+        <Stack className={styles.selectorContainer}>
           {jsonError && (
-            <Typography variant="caption" color="warning" className={styles.errorText}>
+            <Typography variant="caption" className={styles.errorText}>
               {t('Invalid JSON')}: {jsonError}
             </Typography>
           )}
@@ -106,13 +86,6 @@ const BodyBlock: ReadonlyFC<BodyBlockProps> = ({ bodyText, setBodyText }) => {
             data-testid="select-body-type"
             className={styles.selector}
             size="small"
-            sx={{
-              opacity: 0.6,
-              '&:hover': {
-                opacity: 0.8,
-              },
-              minWidth: 180,
-            }}
             value={bodyType}
             onChange={(e) => setBodyType(e.target.value as keyof typeof languageMap)}
           >

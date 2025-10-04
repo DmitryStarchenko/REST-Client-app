@@ -3,30 +3,25 @@
 import DeleteIcon from '@mui/icons-material/Delete';
 import React from 'react';
 
+import { DeleteButtonProps } from '@/components/client/types';
 import TooltipButton from '@/components/shared/TooltipButton/TooltipButton';
-import { DeleteButtonProps, ReadonlyFC } from '@/types';
+import { ReadonlyFC } from '@/types';
 
-const DeleteButton: ReadonlyFC<DeleteButtonProps> = ({ onRemove, tooltipText }) => {
+import styles from './HeadersBlock.module.css';
+
+const DeleteButton: ReadonlyFC<DeleteButtonProps> = ({ onRemove, tooltipText, className }) => {
   const handleClick = (event: React.MouseEvent): void => {
     event.preventDefault();
     onRemove();
   };
+  const buttonClass = `${styles.deleteButton} ${className || ''}`.trim();
 
   return (
     <TooltipButton
       tooltipText={tooltipText}
-      className="delete-btn"
       onClick={handleClick}
       size="small"
-      sx={{
-        position: 'absolute',
-        right: 5,
-        top: '50%',
-        transform: 'translateY(-50%)',
-        opacity: 0,
-        zIndex: 10,
-        pointerEvents: 'auto',
-      }}
+      className={buttonClass}
     >
       <DeleteIcon fontSize="small" />
     </TooltipButton>

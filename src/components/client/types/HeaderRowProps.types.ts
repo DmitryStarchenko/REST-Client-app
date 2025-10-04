@@ -1,4 +1,4 @@
-import { Header } from './header.types';
+import { Header } from '@/types';
 
 export interface HeaderRowProps {
   header: Header;

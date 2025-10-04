@@ -1,0 +1,54 @@
+.fab {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 1000;
+}
+
+.navigationContainer {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin: 16px 0;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.dot:hover {
+  transform: scale(1.2);
+}
+
+.dotActive {
+  background-color: var(--mui-palette-secondary-light);
+}
+
+.dotActive:hover {
+  background-color: var(--mui-palette-secondary-light);
+}
+
+.dotInactive {
+  background-color: var(--mui-palette-secondary-dark);
+}
+
+.dotInactive:hover {
+  background-color: var(--mui-palette-secondary-light);
+}
+
+.container {
+  position: relative;
+  height: 500px;
+  margin-top: 16px;
+  overflow: hidden;
+}
+
+.section {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}

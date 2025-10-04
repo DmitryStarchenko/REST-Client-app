@@ -5,7 +5,7 @@ import React from 'react';
 
 import { LangSelectProps, ReadonlyFC } from '@/types';
 
-import styles from '../TopSection.module.css';
+import styles from '../RequestSection.module.css';
 
 const LangSelect: ReadonlyFC<LangSelectProps> = ({ langs, selectedLang, onSelect }) => {
   return (
@@ -18,7 +18,7 @@ const LangSelect: ReadonlyFC<LangSelectProps> = ({ langs, selectedLang, onSelect
       sx={{
         opacity: 0.6,
         '&:hover': {
-          opacity: 0.8,
+          opacity: 1,
         },
         minWidth: 180,
       }}

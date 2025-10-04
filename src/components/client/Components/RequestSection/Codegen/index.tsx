@@ -8,7 +8,7 @@ import { useCodegen } from '@/hooks';
 import { CodegenSectionProps, ReadonlyFC } from '@/types';
 import { replaceVariables } from '@/utils/';
 
-import styles from '../TopSection.module.css';
+import styles from '../RequestSection.module.css';
 import LangSelect from './LangSelect';
 import { CodeEditor } from '../../Shared';
 
@@ -21,7 +21,7 @@ const CodegenSection: ReadonlyFC<CodegenSectionProps> = ({
   setCodeLang,
   variablesObj,
 }) => {
-  const t = useTranslations('CodegenSection');
+  const t = useTranslations('RestClient');
   const langs = useMemo(() => Object.keys(LANG_MAP), []);
   const [cache, setCache] = useState<Record<string, string>>({});
 

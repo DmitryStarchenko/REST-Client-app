@@ -1,7 +1,6 @@
 'use client';
 
-import { ExpandLess, ExpandMore } from '@mui/icons-material';
-import { Box, Tab, Tabs, IconButton, Stack } from '@mui/material';
+import { Box, Tab, Tabs, Stack } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import React from 'react';
@@ -18,16 +17,12 @@ export const ResponseSection: ReadonlyFC<BottomTabsBlockProps> = ({
   unknownErrorText,
   internalErrorText,
 }) => {
-  const t = useTranslations('BottomTabsBlock');
+  const t = useTranslations('RestClient');
   const [bottomTab, setBottomTab] = useState(0);
-  const [open, setOpen] = useState(true);
 
   return (
     <>
       <Stack direction="row" alignItems="center" spacing={1} mt={2}>
-        <IconButton onClick={() => setOpen((prev) => !prev)} size="small">
-          {open ? <ExpandLess /> : <ExpandMore />}
-        </IconButton>
         <Tabs
           value={bottomTab}
           onChange={(_, newTab) => setBottomTab(newTab)}
@@ -37,32 +32,29 @@ export const ResponseSection: ReadonlyFC<BottomTabsBlockProps> = ({
           variant="fullWidth"
         >
           <Tab label={t('Response')} />
-          <Tab label={t('Response Headers')} />
-          <Tab label={t('Statistic Fields')} />
+          <Tab label={t('Headers')} />
+          <Tab label={t('Statistic')} />
         </Tabs>
       </Stack>
-
-      {open && (
-        <Box>
-          {bottomTab === 0 && (
-            <ResponseBlock
-              response={response}
-              errorMessage={errorMessage}
-              unknownErrorText={unknownErrorText}
-              internalErrorText={internalErrorText}
-            />
-          )}
-          {bottomTab === 1 && (
-            <ResponseHeaders
-              response={response}
-              errorMessage={errorMessage}
-              unknownErrorText={unknownErrorText}
-              internalErrorText={internalErrorText}
-            />
-          )}
-          {bottomTab === 2 && <Statistic response={response} errorMessage={errorMessage} />}
-        </Box>
-      )}
+      <Box>
+        {bottomTab === 0 && (
+          <ResponseBlock
+            response={response}
+            errorMessage={errorMessage}
+            unknownErrorText={unknownErrorText}
+            internalErrorText={internalErrorText}
+          />
+        )}
+        {bottomTab === 1 && (
+          <ResponseHeaders
+            response={response}
+            errorMessage={errorMessage}
+            unknownErrorText={unknownErrorText}
+            internalErrorText={internalErrorText}
+          />
+        )}
+        {bottomTab === 2 && <Statistic response={response} errorMessage={errorMessage} />}
+      </Box>
     </>
   );
 };

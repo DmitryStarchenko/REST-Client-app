@@ -7,10 +7,10 @@ import React from 'react';
 
 import { ReadonlyFC, StatisticProps } from '@/types';
 
-import styles from '../ResponseBlock.module.css';
+import styles from '../ResponseSection.module.css';
 
 const Statistic: ReadonlyFC<StatisticProps> = ({ response, errorMessage }) => {
-  const t = useTranslations('ResponseBlock');
+  const t = useTranslations('RestClient');
   const renderContent = (): JSX.Element => {
     if (errorMessage) {
       return (
@@ -61,17 +61,7 @@ const Statistic: ReadonlyFC<StatisticProps> = ({ response, errorMessage }) => {
     <div className={styles.wrapper}>
       <div className={styles.topBox}>
         <div className={styles.editorBox}>
-          <Stack
-            spacing={2}
-            sx={{
-              alignItems: 'flex-start',
-              flexWrap: 'wrap',
-              width: '100%',
-              minHeight: '340px',
-            }}
-          >
-            {renderContent()}
-          </Stack>
+          <Stack className={styles.stack}>{renderContent()}</Stack>
         </div>
       </div>
     </div>

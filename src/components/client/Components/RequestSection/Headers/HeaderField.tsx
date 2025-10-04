@@ -4,8 +4,11 @@ import { TextField } from '@mui/material';
 import React from 'react';
 
 import WithVariables from '@/components/client/Components/WithVariables';
+import { HeaderFieldProps } from '@/components/client/types';
 import InfoTooltip from '@/components/shared/InfoTooltip/InfoTooltip';
-import { HeaderFieldProps, ReadonlyFC } from '@/types';
+import { ReadonlyFC } from '@/types';
+
+import styles from './HeadersBlock.module.css';
 
 const HeaderField: ReadonlyFC<HeaderFieldProps> = ({
   value,
@@ -13,7 +16,7 @@ const HeaderField: ReadonlyFC<HeaderFieldProps> = ({
   placeholder,
   incomplete = false,
   tooltipText = '',
-  flex = 1,
+  className = '',
 }) => {
   return (
     <WithVariables value={value} onChange={onChange} showHighlight={true}>
@@ -21,14 +24,7 @@ const HeaderField: ReadonlyFC<HeaderFieldProps> = ({
         fullWidth
         placeholder={placeholder}
         size="small"
-        sx={{
-          flex,
-          '& .MuiInputBase-input': {
-            position: 'relative',
-            zIndex: 2,
-            backgroundColor: 'transparent',
-          },
-        }}
+        className={`${styles.input} ${className}`}
         slotProps={{
           input: {
             endAdornment: incomplete ? <InfoTooltip tooltipText={tooltipText} /> : null,

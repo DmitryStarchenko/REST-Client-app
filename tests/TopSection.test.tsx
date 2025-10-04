@@ -2,10 +2,10 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import React from 'react';
 
-import TopSection from '@/components/client/RequestSection';
+import RequestSection from '@/components/client/RequestSection';
 import { Header } from '@/types';
 
-vi.mock('@/components/client/TopSection/Headers', () => ({
+vi.mock('@/components/client/RequestSection/Headers', () => ({
   default: vi.fn(({ headers, setHeaders }) => (
     <div data-testid="headers-block">
       <div data-testid="headers-count">{headers.length}</div>
@@ -19,7 +19,7 @@ vi.mock('@/components/client/TopSection/Headers', () => ({
   )),
 }));
 
-vi.mock('@/components/client/TopSection/Body', () => ({
+vi.mock('@/components/client/RequestSection/Body', () => ({
   default: vi.fn(({ bodyText, setBodyText }) => (
     <div data-testid="body-block">
       <textarea
@@ -31,7 +31,7 @@ vi.mock('@/components/client/TopSection/Body', () => ({
   )),
 }));
 
-vi.mock('@/components/client/TopSection/Codegen', () => ({
+vi.mock('@/components/client/RequestSection/Codegen', () => ({
   default: vi.fn(({ method, url, headers, body, codeLang, setCodeLang }) => (
     <div data-testid="codegen-block">
       <div data-testid="method">{method}</div>
@@ -54,9 +54,9 @@ vi.mock('@mui/icons-material', () => ({
 vi.mock('next-intl', () => ({
   useTranslations: () => (key: string) => {
     const translations: Record<string, string> = {
-      'TopSection.Request Headers': 'Request Headers',
-      'TopSection.Request Body': 'Request Body',
-      'TopSection.Codegen': 'Codegen',
+      'RequestSection.Request Headers': 'Request Headers',
+      'RequestSection.Request Body': 'Request Body',
+      'RequestSection.Codegen': 'Codegen',
     };
     return translations[key] || key;
   },
@@ -66,7 +66,7 @@ vi.mock('@/utils', () => ({
   uid: vi.fn(() => 'mock-id'),
 }));
 
-describe('TopSection Component', () => {
+describe('RequestSection Component', () => {
   const mockHeaders: Header[] = [
     { id: '1', key: 'Content-Type', value: 'application/json' },
     { id: '2', key: 'Authorization', value: 'Bearer token' },
@@ -86,7 +86,7 @@ describe('TopSection Component', () => {
   });
 
   test('renders all tabs and collapse/expand button', () => {
-    render(<TopSection {...defaultProps} />);
+    render(<RequestSection {...defaultProps} />);
 
     expect(screen.getByText('Request Headers')).toBeInTheDocument();
     expect(screen.getByText('Request Body')).toBeInTheDocument();
@@ -95,7 +95,7 @@ describe('TopSection Component', () => {
   });
 
   test('shows Request Headers tab by default', () => {
-    render(<TopSection {...defaultProps} />);
+    render(<RequestSection {...defaultProps} />);
 
     expect(screen.getByTestId('headers-block')).toBeInTheDocument();
     expect(screen.queryByTestId('body-block')).not.toBeInTheDocument();
@@ -103,7 +103,7 @@ describe('TopSection Component', () => {
   });
 
   test('switches to Request Body tab when clicked', () => {
-    render(<TopSection {...defaultProps} />);
+    render(<RequestSection {...defaultProps} />);
 
     const bodyTab = screen.getByText('Request Body');
     fireEvent.click(bodyTab);
@@ -114,7 +114,7 @@ describe('TopSection Component', () => {
   });
 
   test('switches to Codegen tab when clicked', () => {
-    render(<TopSection {...defaultProps} />);
+    render(<RequestSection {...defaultProps} />);
 
     const codegenTab = screen.getByText('Codegen');
     fireEvent.click(codegenTab);
@@ -125,7 +125,7 @@ describe('TopSection Component', () => {
   });
 
   test('can switch back to Request Headers tab from other tabs', () => {
-    render(<TopSection {...defaultProps} />);
+    render(<RequestSection {...defaultProps} />);
 
     const codegenTab = screen.getByText('Codegen');
     fireEvent.click(codegenTab);
@@ -138,7 +138,7 @@ describe('TopSection Component', () => {
   });
 
   test('collapses and expands content when button is clicked', () => {
-    render(<TopSection {...defaultProps} />);
+    render(<RequestSection {...defaultProps} />);
 
     expect(screen.getByTestId('headers-block')).toBeInTheDocument();
 
@@ -156,7 +156,7 @@ describe('TopSection Component', () => {
   });
 
   test('passes correct props to Headers component', () => {
-    render(<TopSection {...defaultProps} />);
+    render(<RequestSection {...defaultProps} />);
 
     const headersBlock = screen.getByTestId('headers-block');
     expect(headersBlock).toBeInTheDocument();
@@ -164,7 +164,7 @@ describe('TopSection Component', () => {
   });
 
   test('passes correct props to Body component', () => {
-    render(<TopSection {...defaultProps} />);
+    render(<RequestSection {...defaultProps} />);
 
     const bodyTab = screen.getByText('Request Body');
     fireEvent.click(bodyTab);
@@ -174,7 +174,7 @@ describe('TopSection Component', () => {
   });
 
   test('passes correct props to Codegen component', () => {
-    render(<TopSection {...defaultProps} />);
+    render(<RequestSection {...defaultProps} />);
 
     const codegenTab = screen.getByText('Codegen');
     fireEvent.click(codegenTab);
@@ -191,7 +191,7 @@ describe('TopSection Component', () => {
       headers: [],
     };
 
-    render(<TopSection {...propsWithEmptyHeaders} />);
+    render(<RequestSection {...propsWithEmptyHeaders} />);
 
     const headersBlock = screen.getByTestId('headers-block');
     expect(headersBlock).toBeInTheDocument();
@@ -199,7 +199,7 @@ describe('TopSection Component', () => {
   });
 
   test('maintains tab state when collapsing and expanding', () => {
-    render(<TopSection {...defaultProps} />);
+    render(<RequestSection {...defaultProps} />);
 
     const codegenTab = screen.getByText('Codegen');
     fireEvent.click(codegenTab);
@@ -221,7 +221,7 @@ describe('TopSection Component', () => {
       setHeaders: setHeadersMock,
     };
 
-    render(<TopSection {...props} />);
+    render(<RequestSection {...props} />);
 
     const addButton = screen.getByTestId('add-header');
     fireEvent.click(addButton);
@@ -239,7 +239,7 @@ describe('TopSection Component', () => {
       setBodyText: setBodyTextMock,
     };
 
-    render(<TopSection {...props} />);
+    render(<RequestSection {...props} />);
 
     const bodyTab = screen.getByText('Request Body');
     fireEvent.click(bodyTab);
@@ -251,7 +251,7 @@ describe('TopSection Component', () => {
   });
 
   test('applies correct styles to active tab', () => {
-    render(<TopSection {...defaultProps} />);
+    render(<RequestSection {...defaultProps} />);
 
     const headersTab = screen.getByText('Request Headers');
     expect(headersTab).toHaveAttribute('aria-selected', 'true');
@@ -261,7 +261,7 @@ describe('TopSection Component', () => {
   });
 
   test('handles code language changes from Codegen component', () => {
-    render(<TopSection {...defaultProps} />);
+    render(<RequestSection {...defaultProps} />);
 
     const codegenTab = screen.getByText('Codegen');
     fireEvent.click(codegenTab);

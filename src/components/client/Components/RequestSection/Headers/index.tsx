@@ -3,11 +3,12 @@
 import { Stack } from '@mui/material';
 import React from 'react';
 
+import { HeadersBlockProps } from '@/components/client/types';
 import { useHeaders } from '@/hooks/useHeaders';
-import { HeadersBlockProps, ReadonlyFC } from '@/types';
+import { ReadonlyFC } from '@/types';
 
 import HeaderRow from './HeaderRow';
-import styles from '../TopSection.module.css';
+import styles from './HeadersBlock.module.css';
 
 const HeadersBlock: ReadonlyFC<HeadersBlockProps> = ({ headers, setHeaders }) => {
   const { handleHeaderChange, handleHeaderRemove } = useHeaders(headers, setHeaders);
@@ -15,7 +16,7 @@ const HeadersBlock: ReadonlyFC<HeadersBlockProps> = ({ headers, setHeaders }) =>
   return (
     <div className={styles.wrapper}>
       <div className={styles.topBox}>
-        <Stack spacing={1} sx={{ width: '100%', minHeight: '348px' }}>
+        <Stack className={styles.headersStack}>
           {headers.map((header, index) => (
             <HeaderRow
               key={header.id}

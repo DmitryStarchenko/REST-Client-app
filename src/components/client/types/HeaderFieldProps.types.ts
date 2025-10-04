@@ -4,5 +4,5 @@ export interface HeaderFieldProps {
   placeholder: string;
   incomplete?: boolean;
   tooltipText?: string;
-  flex?: number;
+  className?: string;
 }
