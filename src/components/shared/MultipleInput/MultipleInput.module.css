@@ -1,0 +1,36 @@
+.fields {
+  gap: var(--gap10);
+}
+
+.buttons {
+  align-items: center;
+  justify-content: center;
+  margin-top: var(--margin30);
+}
+
+.saveButton {
+  margin-bottom: var(--margin20);
+}
+
+.removeIconButton {
+  min-width: 40px;
+  max-height: 40px;
+}
+
+.message {
+  margin-top: 0;
+  margin-bottom: var(--margin30);
+  color: orange;
+}
+
+.addButton {
+  margin-bottom: var(--margin10);
+}
+
+.addButton:hover,
+.removeIconButton:hover {
+  .icon,
+  .removeIcon {
+    color: var(--mui-palette-primary-main);
+  }
+}

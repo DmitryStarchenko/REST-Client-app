@@ -1,0 +1,30 @@
+.main {
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding-top: var(--padding30);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap20);
+}
+
+.mainNav {
+  display: flex;
+  gap: var(--gap20);
+  justify-content: center;
+  width: 100%;
+}
+
+.welcomeText {
+  font-size: 45px;
+  text-align: center;
+}
+
+@media screen and (width <= 430px) {
+  .welcomeText {
+    font-size: 30px;
+  }
+}

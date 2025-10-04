@@ -1,0 +1,46 @@
+.container {
+  max-width: 50%;
+  margin: 30px 0;
+}
+
+.content {
+  padding: 30px;
+  border-radius: 10px;
+}
+
+.title {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.error {
+  margin-top: 0.25rem;
+}
+
+.success {
+  margin-top: 2.5rem;
+  padding: 2.5rem;
+  text-align: center;
+}
+
+@media screen and (width <= 1200px) {
+  .container {
+    max-width: 90%;
+  }
+}
+
+@media screen and (width <= 500px) {
+  .container {
+    max-width: 100%;
+  }
+
+  .content {
+    padding: 10px;
+  }
+}

@@ -1,0 +1,80 @@
+.burgerMenu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: var(--margin15);
+}
+
+.burgerButton {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 21px;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.burgerButton span {
+  display: block;
+  width: 100%;
+  height: 3px;
+  background-color: var(--mui-palette-primary-main);
+  border-radius: 3px;
+  transition: all 0.3s ease;
+}
+
+.burgerButton:hover span {
+  background-color: var(--mui-palette-secondary-main);
+}
+
+.burgerButtonActive span:nth-child(1) {
+  transform: rotate(45deg) translate(6.5px, 6px);
+}
+
+.burgerButtonActive span:nth-child(2) {
+  opacity: 0;
+}
+
+.burgerButtonActive span:nth-child(3) {
+  transform: rotate(-45deg) translate(6.5px, -6px);
+}
+
+.dropdownMenu {
+  position: absolute;
+  top: 95%;
+  right: 15px;
+  z-index: 6;
+  min-width: 200px;
+  margin-top: var(--margin10);
+  background: var(--mui-palette-background-default);
+  border-radius: 5px;
+  box-shadow: 0 4px 12px var(--mui-palette-text-primary);
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+.menuContent {
+  padding: var(--padding15);
+}
+
+.navigation {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap15);
+  align-items: center;
+}
+
+.navButton {
+  padding: var(--padding10);
+  font-size: 14px;
+  background-color: #0000;
+  border: none;
+  border-bottom: 4px solid var(--mui-palette-primary-main);
+
+  &:hover {
+    border-color: var(--mui-palette-secondary-main);
+  }
+}

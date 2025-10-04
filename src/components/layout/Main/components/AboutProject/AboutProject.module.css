@@ -1,0 +1,37 @@
+.about {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap15);
+  align-items: center;
+  width: 60%;
+  padding: var(--padding40) 0 var(--padding30);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap15);
+}
+
+.project {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap15);
+  align-items: center;
+  padding: var(--padding20) var(--padding10);
+  border-top: 2px solid var(--mui-palette-primary-main);
+}
+
+.project > p {
+  text-indent: 3rem;
+}
+
+.logoProject {
+  width: 40px;
+  height: 40px;
+  background-image: url('/assets/logoMini.png');
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  border-radius: var(--border-radius);
+}

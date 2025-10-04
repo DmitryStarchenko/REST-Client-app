@@ -1,0 +1,176 @@
+{
+  "Main": {
+    "welcome": "Welcome!!!",
+    "welcomeBack": "Welcome back",
+    "client": "REST CLIENT",
+    "variables": "VARIABLES",
+    "history": "HISTORY"
+  },
+  "Navigation": {
+    "signIn": "SIGN IN",
+    "signUp": "SIGN UP",
+    "signOut": "SIGN OUT",
+    "main": "MAIN"
+  },
+  "NotFoundPage": {
+    "title": "Not Found!",
+    "message": "Could not find resource!"
+  },
+  "ErrorPage": {
+    "title": "Something went wrong",
+    "message": "Error Page",
+    "Try again": "Try again"
+  },
+  "Auth": {
+    "login": "login",
+    "name": "name",
+    "email": "email",
+    "password": "password",
+    "confirm password": "confirm password",
+    "Submit": "Submit",
+    "Registration": "Registration",
+    "Enter name": "Enter name",
+    "Enter valid email": "Enter valid email",
+    "Password must be at least 8 characters long": "Password must be at least 8 characters long",
+    "Password must contain at least one number": "Password must contain at least one number",
+    "Password must contain at least one uppercase letter": "Password must contain at least one uppercase letter",
+    "Password must contain at least one lowercase letter": "Password must contain at least one lowercase letter",
+    "Password must contain at least one special character": "Password must contain at least one special character",
+    "Passwords do not match": "Passwords do not match",
+    "Invalid login credentials": "Invalid login credentials"
+  },
+  "About": {
+    "about": "About",
+    "aboutProject": "About project",
+    "project1": "PUTMAN is a universal testing, development, and REST API platform. It provides a clean interface that replaces disparate tools like Postman, Curl, and the command line, bringing together everything you need to work with an API into one powerful yet simple web application.",
+    "project2": "PUTMAN is positioned as a 'Swiss knife' for backend developers, QA engineers and API designers. Unlike heavy desktop applications, PUTMAN works directly in the browser, without requiring installation, and offers a modern, minimalist UI.",
+    "project3": "The key idea is not just to send requests, but to manage the entire life cycle of interaction with the API: from writing and debugging individual requests to organizing collections, automated testing, documentation and monitoring the health (health check) of your services.",
+    "rs_1": "The project was completed as part of the final assignment for the React Q3 2025 course from RSSchool.",
+    "rs_2": "We would like to express our gratitude to RS school and all its staff for giving us the opportunity to try something new and interesting. Thank you for your time. Special thanks to our mentors who helped and motivated us on this long, difficult, but incredibly exciting path.",
+    "author1Name": "Dmitry Starchenko",
+    "author1Description": "Hello, my name is Dima, I am 33 years old, I am from Gomel (Belarus). My first attempts to create a website were in my school years. I abandoned this idea and did something else. And now, many years later, I decided to make my dream come true...",
+    "author2Name": "Roma Bubnov",
+    "author2Description": "Hello. My name is Roma. My first programming language was Java, but I quickly discovered that JavaScript resonated with me more. I think it has to do with the dynamic nature of language and its universality.  Our team decided to write the final project in Next js! This is a very interesting framework that is especially attractive to me because it allows create fullstack applications.",
+    "author3Name": "Husan Abdigafurov",
+    "author3Description": "Hello, my name is Husan. I am interested in frontend and backend, I like to understand the architecture of applications and learn new things. I am always open to new knowledge and experiments."
+  },
+  "RestClient": {
+    "UError": "Unknown Error",
+    "IError": "Internal Error",
+    "Title": "REST Client",
+    "Variables": "Variables",
+    "No variables defined": "No variables defined"
+  },
+  "ResponseBlock": {
+    "No response yet": "No data yet",
+    "Response": "Response",
+    "Timestamp": "Timestamp",
+    "Status": "Status",
+    "StatusText": "StatusText",
+    "Success": "Success",
+    "Duration": "Duration",
+    "ms": "ms",
+    "bytes": "bytes",
+    "Headers": "Headers"
+  },
+  "RequestForm": {
+    "Send": "Send",
+    "Endpoint URL": "Endpoint URL"
+  },
+  "HeadersBlock": {
+    "Headers": "Headers",
+    "Key": "Key",
+    "Tooltip": "To use this header in a request, both fields must be filled in",
+    "Value": "Value",
+    "Delete": "Delete"
+  },
+  "BodyBlock": {
+    "Body": "Body",
+    "Copy base64": "Copy Base 64",
+    "Invalid JSON": "Invalid JSON"
+  },
+  "CodegenSection": {
+    "Error generating code": "Error generating code",
+    "Generated code": "Generated code",
+    "No languages available": "No languages available",
+    "Generating": "Generating..."
+  },
+  "History": {
+    "title": "History Requests",
+    "error": "Error:",
+    "text": "You haven't executed any requests",
+    "timestamp": "Timestamp",
+    "method": "Method",
+    "status": "Status",
+    "url": "Endpoint/URL",
+    "requestSize": "Request size (b)",
+    "responseSize": "Response size (b)",
+    "duration": "Duration (ms)",
+    "error_text": "Error"
+  },
+  "CopyButton": {
+    "Copy content": "Copy content this block"
+  },
+  "TopSection": {
+    "Request Headers": "Request Headers",
+    "Request Body": "Request Body",
+    "Codegen": "Codegen",
+    "Variables": "Variables"
+  },
+  "BottomTabsBlock": {
+    "Response": "Response",
+    "Response Headers": "Response Headers",
+    "Statistic Fields": "Statistic Data"
+  },
+  "MultipleInputs": {
+    "Save": "Save",
+    "Saved": "Saved",
+    "Message": "There are unsaved changes.",
+    "Variables": "Variables",
+    "Key": "Key",
+    "Value": "Value",
+    "Variable key is required": "Key is required",
+    "Spaces are not allowed": "Spaces are not allowed",
+    "Invalid key": "Invalid key",
+    "Variable key should be unique!": "Key should be unique!",
+    "": ""
+  },
+  "Footer": {
+    "About": "About",
+    "Contacts": "Contacts"
+  },
+  "Contacts": {
+    "Contacts": "Contacts",
+    "textFeedback1": "If you have any suggestions for improving the application, or if any problems arise, please fill out ",
+    "linkFeedback": "feedback form",
+    "textFeedback2": " or contact us:",
+    "Authors": "Authors",
+    "linkSupport": " - to solve problems and questions",
+    "linkPartners": " - to discuss corporate rates and partnerships"
+  },
+  "Feedback": {
+    "ErrorMessage": "There was an error sending",
+    "submitSuccess1": "Thank you for your feedback!",
+    "submitSuccess2": "We have received your message and will contact you shortly.",
+    "submitSuccess3": "Submit a new request",
+    "Title": "Feedback",
+    "ButtonLoad": "Sending...",
+    "Button": "Send",
+    "Description": "Description",
+    "DescPlaceholder": "Please describe your problem or suggestion in detail...",
+    "EmailLoad": "Loading email...",
+    "EmailPlaceholder": "Enter your email or sign in to your account",
+    "Priority": "Priority",
+    "low": "Low",
+    "medium": "Medium",
+    "high": "High",
+    "critical": "Critical",
+    "Topic": "Subject of the request",
+    "bugReport": "Bug Report",
+    "featureRequest": "Feature Request",
+    "howToQuestion": "How-to Question",
+    "accountIssue": "Account Issue",
+    "businessInquiry": "Business Inquiry",
+    "other": "Other"
+  }
+}
