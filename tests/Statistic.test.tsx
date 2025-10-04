@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import React from 'react';
 
-import Statistic from '@/components/client/BottomSection/Statistic';
+import Statistic from '@/components/client/ResponseSection/Statistic';
 import { ApiResponse } from '@/types';
 
 vi.mock('next-intl', () => ({

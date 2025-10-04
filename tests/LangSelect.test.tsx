@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 import React from 'react';
 import '@testing-library/jest-dom';
 
-import LangSelect from '@/components/client/TopSection/Codegen/LangSelect';
+import LangSelect from '@/components/client/RequestSection/Codegen/LangSelect';
 
 vi.mock('next-intl', () => ({
   useTranslations: () => (key: string) => key,

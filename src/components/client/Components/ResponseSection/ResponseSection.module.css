@@ -1,0 +1,43 @@
+.selector {
+  margin-left: auto;
+}
+
+.copyButton {
+  min-width: 180px;
+  margin-top: var(--margin16);
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: var(--padding8);
+  background-color: var(--mui-palette-background-paper);
+  border: none;
+  overflow: hidden;
+}
+
+.topBox {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+  padding: var(--padding8);
+  background-color: var(--mui-palette-background-paper);
+  border: 1px;
+  border-radius: 6px;
+}
+
+.editorBox {
+  flex-grow: 1;
+  box-sizing: border-box;
+}
+
+.stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  align-items: flex-start;
+  width: 100%;
+  min-height: 340px;
+}

@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import React from 'react';
 import { describe, it, expect, vi } from 'vitest';
 
-import RestClient from '@/components/client/RestClient';
+import RestClient from '@/components/client/Components';
 
 vi.mock('next-intl', () => ({
   useTranslations: () => (key: string) => key,
@@ -48,7 +48,7 @@ vi.mock('@/components/client/EndpointSection', () => ({
   default: () => <div>Endpoint Section</div>,
 }));
 
-vi.mock('@/components/client/TopSection', () => ({
+vi.mock('@/components/client/RequestSection', () => ({
   default: () => <div>Top Section</div>,
 }));
 

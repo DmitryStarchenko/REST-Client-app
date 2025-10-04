@@ -1,5 +1,3 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
-
 const mockPush = vi.hoisted(() => vi.fn());
 
 vi.mock('../src/i18n/navigation.ts', () => ({
@@ -86,6 +84,7 @@ import { QueryClientProvider } from '@tanstack/react-query';
 import { render, screen } from '@testing-library/react';
 import { createStore, Provider as JotaiProvider } from 'jotai';
 import React from 'react';
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 
 import { authAtom } from '@/store';
 import getQueryClient from '@/utils/get-query-client';

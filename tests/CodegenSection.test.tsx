@@ -16,11 +16,11 @@ vi.mock('@/components/client/Shared/index.tsx', () => ({
   CodeEditor: () => <div data-testid="code-editor">Editor</div>,
 }));
 
-vi.mock('@/components/client/TopSection/Codegen/LangSelect.tsx', () => ({
+vi.mock('@/components/client/RequestSection/Codegen/LangSelect.tsx', () => ({
   default: () => <select data-testid="lang-select">Select</select>,
 }));
 
-import CodegenSection from '@/components/client/TopSection/Codegen';
+import CodegenSection from '@/components/client/RequestSection/Codegen';
 
 describe('CodegenSection Component - Basic', () => {
   const mockProps = {

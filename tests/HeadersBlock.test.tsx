@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 import React from 'react';
 import { describe, it, vi } from 'vitest';
 
-import HeadersBlock from '@/components/client/TopSection/Headers';
+import HeadersBlock from '@/components/client/RequestSection/Headers';
 
 vi.mock('next-intl', () => ({
   useTranslations: () => (key: string) => key,

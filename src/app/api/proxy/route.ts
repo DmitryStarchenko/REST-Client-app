@@ -79,7 +79,7 @@ export async function POST(req: NextRequest): Promise<NextResponse<ApiResponse>>
     }
 
     try {
-      const supabaseResult = await supabaseAdmin.from('request_history').insert({
+      const _supabaseResult = await supabaseAdmin.from('request_history').insert({
         user_id: userId,
         method,
         url,

@@ -2,7 +2,7 @@ import { render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import React from 'react';
 
-import BodyBlock from '@/components/client/TopSection/Body';
+import BodyBlock from '@/components/client/RequestSection/Body';
 
 vi.mock('next-intl', () => ({
   useTranslations: () => (key: string) => {

@@ -1,0 +1,80 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: var(--padding8);
+  background-color: var(--mui-palette-background-paper);
+  border: none;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.topBox {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+  padding: var(--padding8);
+  background-color: var(--mui-palette-background-paper);
+  border: 1px;
+  border-radius: 6px;
+}
+
+.editorBox {
+  flex-grow: 1;
+  box-sizing: border-box;
+}
+
+.selectorContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.selector {
+  min-width: 150px;
+  opacity: 0.6;
+}
+
+.selector:hover {
+  opacity: 1;
+}
+
+.errorText {
+  width: 100%;
+  margin-right: var(--margin8);
+  text-align: center;
+  color: var(--mui-palette-warning-main);
+  opacity: 0.6;
+  overflow-wrap: break-word;
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 8px;
+}
+
+.copyButton,
+.prettifyButton {
+  min-width: 150px;
+  height: 40px;
+  color: inherit;
+}
+
+.copyButton:disabled,
+.prettifyButton:disabled {
+  opacity: 0.3;
+}
+
+.copyButton:not(:disabled),
+.prettifyButton:not(:disabled) {
+  opacity: 0.6;
+}
+
+.copyButton:hover:not(:disabled),
+.prettifyButton:hover:not(:disabled) {
+  opacity: 1;
+}
