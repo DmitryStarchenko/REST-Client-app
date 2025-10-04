@@ -140,6 +140,37 @@
     "Contacts": "Contacts"
   },
   "Contacts": {
-    "Contacts": "Contacts"
+    "Contacts": "Contacts",
+    "textFeedback1": "If you have any suggestions for improving the application, or if any problems arise, please fill out ",
+    "linkFeedback": "feedback form",
+    "textFeedback2": " or contact us:",
+    "Authors": "Authors",
+    "linkSupport": " - to solve problems and questions",
+    "linkPartners": " - to discuss corporate rates and partnerships"
+  },
+  "Feedback": {
+    "ErrorMessage": "There was an error sending",
+    "submitSuccess1": "Thank you for your feedback!",
+    "submitSuccess2": "We have received your message and will contact you shortly.",
+    "submitSuccess3": "Submit a new request",
+    "Title": "Feedback",
+    "ButtonLoad": "Sending...",
+    "Button": "Send",
+    "Description": "Description",
+    "DescPlaceholder": "Please describe your problem or suggestion in detail...",
+    "EmailLoad": "Loading email...",
+    "EmailPlaceholder": "Enter your email or sign in to your account",
+    "Priority": "Priority",
+    "low": "Low",
+    "medium": "Medium",
+    "high": "High",
+    "critical": "Critical",
+    "Topic": "Subject of the request",
+    "bugReport": "Bug Report",
+    "featureRequest": "Feature Request",
+    "howToQuestion": "How-to Question",
+    "accountIssue": "Account Issue",
+    "businessInquiry": "Business Inquiry",
+    "other": "Other"
   }
 }

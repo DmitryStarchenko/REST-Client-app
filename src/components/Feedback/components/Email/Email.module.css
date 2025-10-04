@@ -1,0 +1,5 @@
+.email {
+  padding: 1rem;
+  border: 1px solid var(--mui-palette-custom-border);
+  border-radius: 0.3rem;
+}

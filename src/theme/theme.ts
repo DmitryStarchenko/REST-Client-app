@@ -9,6 +9,7 @@ const colors = {
   textSecondary: '#555555',
   bgHeader: '#f5f5f599',
   bgBurgerMenu: '#ffffffcc',
+  borderFeedback: '#b9b9b9ff',
 };
 
 const colorsDark = {
@@ -20,6 +21,7 @@ const colorsDark = {
   textSecondary: '#aaaaaa',
   bgHeader: '#12121299',
   bgBurgerMenu: '#121212cc',
+  borderFeedback: '#5e5e5eff',
 };
 
 export const theme = createTheme({
@@ -30,7 +32,11 @@ export const theme = createTheme({
         secondary: { main: colors.secondaryMain },
         background: { default: colors.bgDefault, paper: colors.bgPaper },
         text: { primary: colors.textPrimary, secondary: colors.textSecondary },
-        custom: { header: colors.bgHeader, burger: colors.bgBurgerMenu },
+        custom: {
+          header: colors.bgHeader,
+          burger: colors.bgBurgerMenu,
+          border: colors.borderFeedback,
+        },
       },
     },
     dark: {
@@ -39,7 +45,11 @@ export const theme = createTheme({
         secondary: { main: colorsDark.secondaryMain },
         background: { default: colorsDark.bgDefault, paper: colorsDark.bgPaper },
         text: { primary: colorsDark.textPrimary, secondary: colorsDark.textSecondary },
-        custom: { header: colorsDark.bgHeader, burger: colorsDark.bgBurgerMenu },
+        custom: {
+          header: colorsDark.bgHeader,
+          burger: colorsDark.bgBurgerMenu,
+          border: colorsDark.borderFeedback,
+        },
       },
     },
   },
@@ -53,12 +63,14 @@ declare module '@mui/material/styles' {
     custom: {
       header: string;
       burger: string;
+      border: string;
     };
   }
   interface PaletteOptions {
     custom: {
       header: string;
       burger: string;
+      border: string;
     };
   }
 }
