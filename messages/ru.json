@@ -86,7 +86,8 @@
     "Delete": "Удалить",
     "Codegen": "Кодгенератор",
     "Send": "Отправить",
-    "Endpoint URL": "URL-адрес конечной точки"
+    "Endpoint URL": "URL-адрес конечной точки",
+    "Toggle request/response": "Переключатель запрос / ответ"
   },
   "History": {
     "title": "История запросов",

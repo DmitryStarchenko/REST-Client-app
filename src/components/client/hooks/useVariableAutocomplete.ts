@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
 
-import { UseVariableAutocompleteReturn } from '@/types';
+import { UseVariableAutocompleteReturn } from '../types';
 
 export const useVariableAutocomplete = (): UseVariableAutocompleteReturn => {
   const [showAutocomplete, setShowAutocomplete] = useState(false);

@@ -86,7 +86,8 @@
     "Delete": "Delete",
     "Codegen": "Codegen",
     "Send": "Send",
-    "Endpoint URL": "Endpoint URL"
+    "Endpoint URL": "Endpoint URL",
+    "Toggle request/response": "Toggle request / response"
   },
   "History": {
     "title": "History Requests",

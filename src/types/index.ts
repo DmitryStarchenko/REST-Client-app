@@ -18,7 +18,6 @@ export * from './StatisticProps.types';
 export * from './BottomTabsBlockProps.types';
 export * from './VariableAutocompleteProps.types';
 export * from './WithVariablesProps.types';
-export * from './UseVariableAutocompleteReturn';
 export * from './UseHeadersReturn.types';
 export * from './WithVariablesProps.types';
 export * from './TooltipButtonProps.types';

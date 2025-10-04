@@ -67,7 +67,7 @@ const VariableAutocomplete: ReadonlyFC<VariableAutocompleteProps> = ({
       onClose();
 
       Promise.resolve().then(() => {
-        const newCursorPos = lastOpenBrace + `{{${variable.key}}}`.length;
+        const newCursorPos = lastOpenBrace + `{${variable.key}}}`.length;
         target.setSelectionRange(newCursorPos, newCursorPos);
         target.focus();
       });

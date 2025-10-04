@@ -8,10 +8,7 @@ import { VARIABLES_KEY, VARIABLES_SEARCH_REGEX } from '@/constants';
 import { IVariable, ReadonlyFC } from '@/types';
 
 import styles from './HighlightedText.module.css';
-
-interface HighlightedTextProps {
-  text: string;
-}
+import { HighlightedTextProps } from '../../types';
 
 const HighlightedText: ReadonlyFC<HighlightedTextProps> = ({ text }) => {
   const [variables] = useLocalStorage<IVariable[]>(VARIABLES_KEY, []);
