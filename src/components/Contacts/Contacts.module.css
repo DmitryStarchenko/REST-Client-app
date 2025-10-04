@@ -21,6 +21,7 @@
   display: flex;
   flex-direction: column;
   gap: var(--gap20);
+  align-items: center;
   margin-bottom: var(--margin50);
 }
 
@@ -67,4 +68,20 @@
   100% {
     transform: rotate(360deg);
   }
+}
+
+.text {
+  width: 60%;
+  text-align: center;
+}
+
+.link {
+  color: var(--mui-palette-primary-main);
+}
+
+.email {
+  padding: var(--padding8);
+  color: var(--mui-palette-primary-main);
+  border: 1px solid var(--mui-palette-custom-border);
+  border-radius: 10px;
 }

@@ -11,10 +11,30 @@ const Contacts: ReadonlyFC = () => {
 
   return (
     <main className={styles.main}>
-      <Typography mb={10} variant="h4">
+      <Typography mb={10} variant="h3">
         {translationContacts('Contacts')}
       </Typography>
+      <Typography fontSize={22} className={styles.text} mb={3}>
+        {translationContacts('textFeedback1')}
+        <Link className={styles.link} href={'/contacts/feedback'}>
+          {translationContacts('linkFeedback')}
+        </Link>
+        {translationContacts('textFeedback2')}
+      </Typography>
+      <Typography fontSize={22} className={styles.text} mb={3}>
+        <Link className={styles.email} href={'mailto:support@putman.com'}>
+          support@putman.com
+        </Link>
+        {translationContacts('linkSupport')}
+      </Typography>
+      <Typography fontSize={22} className={styles.text} mb={10}>
+        <Link className={styles.email} href={'mailto:partners@putman.com'}>
+          partners@putman.com
+        </Link>
+        {translationContacts('linkPartners')}
+      </Typography>
       <div className={styles.authors}>
+        <Typography variant="h4">{translationContacts('Authors')}</Typography>
         <Link className={styles.author} href={'https://github.com/DmitryStarchenko'}>
           <div className={styles.logoGH}></div>
           Dmitry Starchenko

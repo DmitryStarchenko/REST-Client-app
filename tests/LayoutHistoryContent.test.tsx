@@ -3,7 +3,7 @@ import { getTranslations } from 'next-intl/server';
 import React from 'react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import LayoutHistoryContent from '@/components/layout/History/LayoutHistoryContent';
+import LayoutHistoryContent from '@/components/History/LayoutHistoryContent';
 import { createClient } from '@/lib/supabase/server';
 
 vi.mock('next-intl/server', () => ({
