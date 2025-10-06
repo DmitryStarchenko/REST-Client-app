@@ -6,7 +6,7 @@ import { vi, describe, it, expect } from 'vitest';
 import { METHODS } from '@/constants';
 
 import messages from '../messages/en.json';
-import RequestForm from '../src/components/client/EndpointSection';
+import RequestForm from '../src/components/client/Components/FormSection';
 
 describe('RequestForm', () => {
   it('renders correctly and interacts with fields', async () => {

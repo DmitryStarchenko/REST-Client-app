@@ -3,7 +3,7 @@ import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 
-import { CopyButton } from '@/components/client/Shared/CopyButton';
+import { CopyButton } from '@/components/client/Components/Shared/CopyButton';
 
 vi.mock('next-intl', () => ({
   useTranslations: () => (key: string) => {

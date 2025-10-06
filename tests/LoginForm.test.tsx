@@ -104,8 +104,8 @@ describe('LoginForm', () => {
       ref: vi.fn(),
     }));
 
-    mockHandleSubmit.mockImplementation((callback: () => void) => (e: Event) => {
-      e.preventDefault();
+    mockHandleSubmit.mockImplementation((callback: () => void) => (event: Event) => {
+      event.preventDefault();
       callback();
     });
 
@@ -130,8 +130,8 @@ describe('LoginForm', () => {
       password: 'ValidPass123!',
     };
     mockHandleSubmit.mockImplementation(
-      (callback: (data: typeof testData) => void) => (e: Event) => {
-        e.preventDefault();
+      (callback: (data: typeof testData) => void) => (event: Event) => {
+        event.preventDefault();
         callback(testData);
       },
     );
@@ -153,8 +153,8 @@ describe('LoginForm', () => {
       password: 'ValidPass123!',
     };
     mockHandleSubmit.mockImplementation(
-      (callback: (data: typeof testData) => void) => (e: Event) => {
-        e.preventDefault();
+      (callback: (data: typeof testData) => void) => (event: Event) => {
+        event.preventDefault();
         callback(testData);
       },
     );
@@ -175,8 +175,8 @@ describe('LoginForm', () => {
     };
     mockSupabaseClient.auth.signInWithPassword.mockRejectedValue(testError);
     mockHandleSubmit.mockImplementation(
-      (callback: (data: typeof testData) => void) => (e: Event) => {
-        e.preventDefault();
+      (callback: (data: typeof testData) => void) => (event: Event) => {
+        event.preventDefault();
         callback(testData);
       },
     );

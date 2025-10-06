@@ -1,4 +1,4 @@
-import { Box, Container, Typography } from '@mui/material';
+import { Container, Typography } from '@mui/material';
 import { useTranslations } from 'next-intl';
 
 import { Link } from '@/i18n';

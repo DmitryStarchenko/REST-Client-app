@@ -59,11 +59,10 @@
     "IError": "Internal Error",
     "Title": "REST Client",
     "Variables": "Variables",
-    "No variables defined": "No variables defined"
-  },
-  "ResponseBlock": {
+    "No variables defined": "No variables defined",
     "No response yet": "No data yet",
     "Response": "Response",
+    "Request": "Request",
     "Timestamp": "Timestamp",
     "Status": "Status",
     "StatusText": "StatusText",
@@ -71,29 +70,24 @@
     "Duration": "Duration",
     "ms": "ms",
     "bytes": "bytes",
-    "Headers": "Headers"
-  },
-  "RequestForm": {
-    "Send": "Send",
-    "Endpoint URL": "Endpoint URL"
-  },
-  "HeadersBlock": {
     "Headers": "Headers",
-    "Key": "Key",
-    "Tooltip": "To use this header in a request, both fields must be filled in",
-    "Value": "Value",
-    "Delete": "Delete"
-  },
-  "BodyBlock": {
+    "Statistic": "Statistic",
     "Body": "Body",
-    "Copy base64": "Copy Base 64",
-    "Invalid JSON": "Invalid JSON"
-  },
-  "CodegenSection": {
+    "Copy base64": "Copy BASE 64",
+    "Invalid JSON": "Invalid JSON",
+    "Prettify JSON": "Prettify JSON",
     "Error generating code": "Error generating code",
     "Generated code": "Generated code",
     "No languages available": "No languages available",
-    "Generating": "Generating..."
+    "Generating": "Generating...",
+    "Key": "Key",
+    "Tooltip": "To use this header in a request, both fields must be filled in",
+    "Value": "Value",
+    "Delete": "Delete",
+    "Codegen": "Codegen",
+    "Send": "Send",
+    "Endpoint URL": "Endpoint URL",
+    "Toggle request/response": "Toggle request / response"
   },
   "History": {
     "title": "History Requests",
@@ -110,17 +104,6 @@
   },
   "CopyButton": {
     "Copy content": "Copy content this block"
-  },
-  "TopSection": {
-    "Request Headers": "Request Headers",
-    "Request Body": "Request Body",
-    "Codegen": "Codegen",
-    "Variables": "Variables"
-  },
-  "BottomTabsBlock": {
-    "Response": "Response",
-    "Response Headers": "Response Headers",
-    "Statistic Fields": "Statistic Data"
   },
   "MultipleInputs": {
     "Save": "Save",

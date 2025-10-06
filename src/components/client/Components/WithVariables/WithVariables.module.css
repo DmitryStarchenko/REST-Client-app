@@ -1,0 +1,46 @@
+.container {
+  position: relative;
+  width: 100%;
+}
+
+.highlightContainer {
+  position: absolute;
+  top: 50%;
+  right: 14px;
+  left: 14px;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  width: calc(100% - 28px);
+  height: 1.4375em;
+  line-height: 1.4375em;
+  overflow: auto hidden;
+  -ms-overflow-style: none;
+  pointer-events: none;
+  scrollbar-width: none;
+  transform: translateY(-50%);
+  white-space: nowrap;
+}
+
+.highlightContainer::-webkit-scrollbar {
+  display: none;
+}
+
+.highlightFocused {
+  opacity: 0.3;
+}
+
+.highlightNormal {
+  opacity: 0.6;
+}
+
+.inputBase {
+  -ms-overflow-style: none;
+  overflow-x: auto;
+  scrollbar-width: none;
+  white-space: nowrap;
+}
+
+.inputBase::-webkit-scrollbar {
+  display: none;
+}
