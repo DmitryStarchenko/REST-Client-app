@@ -80,7 +80,7 @@ export const useWithVariables = ({
     () => ({
       value: value,
       onChange: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
-        handleInputChange(event, value, onChange),
+        handleInputChange(event, onChange),
       onFocus: enhancedHandleFocus,
       onBlur: enhancedHandleBlur,
       sx: {

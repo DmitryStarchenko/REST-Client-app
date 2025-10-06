@@ -11,7 +11,6 @@ export const useVariableAutocomplete = (): UseVariableAutocompleteReturn => {
   const handleInputChange = useCallback(
     (
       event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-      currentValue: string,
       onChange: (value: string) => void,
     ) => {
       const value = event.target.value;
