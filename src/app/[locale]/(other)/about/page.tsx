@@ -1,6 +1,6 @@
 import React from 'react';
 
-import About from '@/components/layout/About/About';
+import About from '@/components/About/About';
 import { ReadonlyFC } from '@/types/readonly.types';
 
 const AboutPage: ReadonlyFC = () => {
