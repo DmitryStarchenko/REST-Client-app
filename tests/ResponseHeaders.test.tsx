@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import React from 'react';
 
-import ResponseHeaders from '@/components/client/ResponseSection/Headers';
+import ResponseHeaders from '@/components/client/Components/ResponseSection/Headers';
 import { ApiResponse } from '@/types';
 
 vi.mock('@/components/client/Shared', () => ({

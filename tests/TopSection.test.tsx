@@ -2,7 +2,7 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import React from 'react';
 
-import RequestSection from '@/components/client/RequestSection';
+import { RequestSection } from '@/components/client/Components/RequestSection';
 import { Header } from '@/types';
 
 vi.mock('@/components/client/RequestSection/Headers', () => ({
