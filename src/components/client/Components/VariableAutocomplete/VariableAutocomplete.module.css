@@ -1,6 +1,6 @@
 .autocompleteContainer {
   position: absolute;
-  top: calc(100% + 4px);
+  top: 100%;
   z-index: 5;
   width: auto;
 }

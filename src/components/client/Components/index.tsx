@@ -4,6 +4,8 @@ import { Box, Typography } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import React from 'react';
 
+import { ReadonlyFC } from '@/types';
+
 import { FormSection } from './FormSection';
 import { RequestSection } from './RequestSection';
 import { ResponseSection } from './ResponseSection';
@@ -13,7 +15,7 @@ import { ActiveSection } from '../types';
 import { AnimatedSection } from './SectionNavigator/AnimatedSection';
 import { SectionNavigator } from './SectionNavigator/SectionNavigator';
 
-const RestClient: React.FC = () => {
+const RestClient: ReadonlyFC = () => {
   const t = useTranslations('RestClient');
   const {
     method,

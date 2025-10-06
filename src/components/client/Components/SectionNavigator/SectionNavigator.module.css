@@ -14,7 +14,7 @@
 .container {
   position: relative;
   height: 500px;
-  margin-top: 16px;
+  margin-top: var(--margin16);
   overflow: hidden;
 }
 
@@ -28,5 +28,5 @@
   display: flex;
   justify-content: center;
   width: fit-content;
-  margin: 16px 0;
+  margin: var(--margin16) 0;
 }
