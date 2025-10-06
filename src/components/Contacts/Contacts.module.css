@@ -1,0 +1,115 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.logoRS,
+.logoGH {
+  width: 80px;
+  height: 80px;
+  margin: var(--margin30);
+  background-image: url('/assets/logoRS.png');
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  border-radius: var(--border-radius);
+}
+
+.authors {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap20);
+  align-items: center;
+  margin-bottom: var(--margin50);
+}
+
+.author {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--padding15);
+  font-size: 22px;
+  border-bottom: 2px solid var(--mui-palette-primary-main);
+}
+
+.logoGH {
+  width: 50px;
+  height: 50px;
+  margin: var(--margin10);
+  background-image: url('/assets/logoGH.png');
+}
+
+.author:hover {
+  color: var(--mui-palette-primary-main);
+
+  .logoGH {
+    background-color: var(--mui-palette-primary-main);
+  }
+}
+
+@media screen and (width <= 430px) {
+  .authors {
+    flex-direction: column;
+    gap: 0;
+  }
+}
+
+.logoRS:hover {
+  animation: logo 3s linear infinite;
+}
+
+@keyframes logo {
+  0% {
+    transform: rotate(-360deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.text {
+  width: 60%;
+  text-align: center;
+}
+
+.link {
+  color: var(--mui-palette-primary-main);
+}
+
+.email {
+  padding: var(--padding8);
+  color: var(--mui-palette-primary-main);
+  border: 1px solid var(--mui-palette-custom-border);
+  border-radius: 10px;
+}
+
+.socialMedia {
+  display: flex;
+  gap: var(--gap50);
+  justify-content: center;
+  padding: var(--padding15);
+  border-top: 2px solid var(--mui-palette-primary-main);
+}
+
+.socialLink {
+  width: 50px;
+  height: 50px;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.x {
+  background-image: url('/assets/X.png');
+}
+
+.inst {
+  background-image: url('/assets/instagram.png');
+}
+
+.tel {
+  background-image: url('/assets/telegram.png');
+}

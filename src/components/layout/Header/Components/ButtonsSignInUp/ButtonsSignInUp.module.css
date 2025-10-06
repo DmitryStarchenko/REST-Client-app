@@ -1,0 +1,11 @@
+.navButton {
+  padding: var(--padding10);
+  font-size: 14px;
+  background-color: #0000;
+  border: none;
+  border-bottom: 4px solid var(--mui-palette-primary-main);
+
+  &:hover {
+    border-color: var(--mui-palette-secondary-main);
+  }
+}
